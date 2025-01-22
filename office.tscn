@@ -2,6 +2,76 @@
 
 [ext_resource type="PackedScene" uid="uid://dakh2qglf4p1v" path="res://office.glb" id="1_y44h1"]
 
-[node name="Node3D" type="Node3D"]
+[node name="Map" instance=ExtResource("1_y44h1")]
 
-[node name="Map" parent="." instance=ExtResource("1_y44h1")]
+[node name="RIG_Foxy_Clean_mo_041" parent="FoxyPlush/Skeleton3D" index="0"]
+transform = Transform3D(0.801831, 0.752971, -0.147726, -0.732844, 0.814804, 0.175375, 0.22744, -0.0291587, 1.08588, 3.58361, 8.4426, -0.858864)
+
+[node name="RIG_Foxy_Clean_mo_009" parent="FoxyPlush/Skeleton3D" index="1"]
+transform = Transform3D(0.801831, 0.752971, -0.147726, -0.732844, 0.814804, 0.175374, 0.22744, -0.0291582, 1.08588, 4.01018, 8.97195, -0.796819)
+
+[node name="RIG_Foxy_Clean_mo_004" parent="FoxyPlush/Skeleton3D" index="2"]
+transform = Transform3D(1.09941, -0.0345486, -0.147726, 0.0579547, 1.09435, 0.175377, 0.140206, -0.181445, 1.08588, 0.816884, -28.3741, 6.63167)
+
+[node name="RIG_Foxy_Clean_mo_005" parent="FoxyPlush/Skeleton3D" index="3"]
+transform = Transform3D(1.09941, -0.0345489, -0.147726, 0.0579546, 1.09435, 0.175375, 0.140206, -0.181443, 1.08588, 0.798009, 7.26258, 0.759258)
+
+[node name="RIG_Foxy_Clean_mo_010" parent="FoxyPlush/Skeleton3D" index="4"]
+transform = Transform3D(1.09941, -0.0345492, -0.147726, 0.0579549, 1.09435, 0.175374, 0.140206, -0.181442, 1.08588, -1.28413, 7.19299, 0.486326)
+
+[node name="RIG_Foxy_Clean_mo_003" parent="FoxyPlush/Skeleton3D" index="5"]
+transform = Transform3D(1.09932, -0.049714, -0.144068, 0.0514913, 1.10859, 0.0103634, 0.143443, -0.0169495, 1.10039, -0.234012, 4.08593, 2.13684)
+
+[node name="RIG_Foxy_Clean_mo_013" parent="FoxyPlush/Skeleton3D" index="6"]
+transform = Transform3D(0.142749, -0.00645547, -0.0187076, 0.00668627, 0.143952, 0.00134571, 0.0186263, -0.00220093, 0.142888, 1.03985, -24.0603, 1.98908)
+
+[node name="Icosphere" parent="FoxyPlush/Skeleton3D" index="7"]
+transform = Transform3D(1.36508, -0.118801, -0.327972, 0.102897, 1.40291, -0.0798972, 0.333304, 0.0534574, 1.36791, 1.11579, 5.64936, 1.02986)
+
+[node name="Cube" parent="FoxyPlush/Skeleton3D" index="8"]
+transform = Transform3D(1.09941, -0.0345487, -0.147725, 0.0579547, 1.09435, 0.175377, 0.140206, -0.181445, 1.08588, -0.234714, 5.52411, 1.47166)
+
+[node name="Icosphere_005" parent="FoxyPlush/Skeleton3D" index="9"]
+transform = Transform3D(1.09941, -0.0345487, -0.147725, 0.0579547, 1.09435, 0.175377, 0.140206, -0.181445, 1.08588, -2.07284, 4.33164, 4.1936)
+
+[node name="RIG_Foxy_Clean_mo_002" parent="FoxyPlush/Skeleton3D" index="10"]
+transform = Transform3D(1.09941, -0.0345487, -0.147725, 0.0579547, 1.09435, 0.175377, 0.140206, -0.181445, 1.08588, -0.188725, 5.63394, 1.03623)
+
+[node name="RIG_Foxy_Clean_mo_006" parent="FoxyPlush/Skeleton3D" index="11"]
+transform = Transform3D(1.09941, -0.0345487, -0.147725, 0.0579547, 1.09435, 0.175377, 0.140206, -0.181445, 1.08588, 0.863052, -28.3554, 6.62814)
+
+[node name="RIG_Foxy_Clean_mo_008" parent="FoxyPlush/Skeleton3D" index="12"]
+transform = Transform3D(1.15048, -0.0361519, -0.154587, 0.0606448, 1.14519, 0.183521, 0.146719, -0.18987, 1.13632, -1.63503, 5.62756, 1.31015)
+
+[node name="RIG_Foxy_Clean_mo_011" parent="FoxyPlush/Skeleton3D" index="13"]
+transform = Transform3D(0.157405, -0.0049464, -0.0211502, 0.00829751, 0.156681, 0.0251092, 0.0200736, -0.0259779, 0.155469, 0.886892, -28.2754, 6.61846)
+
+[node name="Sphere" parent="FoxyPlush/Skeleton3D" index="14"]
+transform = Transform3D(1.09447, -0.178124, 0.0209403, 0.17839, 1.09454, -0.0132784, -0.0185337, 0.0164716, 1.10879, 2.22027, -10.2837, 0.67411)
+
+[node name="Sphere_001" parent="FoxyPlush/Skeleton3D" index="15"]
+transform = Transform3D(1.09447, -0.178124, 0.0209403, 0.17839, 1.09454, -0.0132784, -0.0185337, 0.0164716, 1.10879, 2.22027, -10.2837, 0.67411)
+
+[node name="Sphere_006" parent="FoxyPlush/Skeleton3D" index="16"]
+transform = Transform3D(1.07579, 0, 2.42171e-08, -8.9407e-08, 1.07579, 1.57768e-08, 7.88238e-09, -3.13319e-10, 1.07579, 0.401863, -10.0031, 0.447798)
+
+[node name="Sphere_007" parent="FoxyPlush/Skeleton3D" index="17"]
+transform = Transform3D(1.07579, 0, 2.42171e-08, -8.9407e-08, 1.07579, 1.57768e-08, 7.88238e-09, -3.13319e-10, 1.07579, 0.401863, -10.0031, 0.447798)
+
+[node name="Sphere_004" parent="FoxyPlush/Skeleton3D" index="18"]
+transform = Transform3D(1.15363, -0.00602651, -0.119073, 0.012532, 1.15801, 0.0628063, 0.118565, -0.0637602, 1.15194, 0.243017, -10.7697, 0.807442)
+
+[node name="Sphere_005" parent="FoxyPlush/Skeleton3D" index="19"]
+transform = Transform3D(1.15363, -0.00602651, -0.119073, 0.012532, 1.15801, 0.0628063, 0.118565, -0.0637602, 1.15194, 0.243017, -10.7697, 0.807442)
+
+[node name="Sphere_002" parent="FoxyPlush/Skeleton3D" index="20"]
+transform = Transform3D(1.15134, -0.0299722, -0.182512, 0.0266909, 1.16557, -0.0230359, 0.18302, 0.0185667, 1.1515, 0.728007, -10.8934, 0.439047)
+
+[node name="Sphere_003" parent="FoxyPlush/Skeleton3D" index="21"]
+transform = Transform3D(1.15134, -0.0299722, -0.182512, 0.0266909, 1.16557, -0.0230359, 0.18302, 0.0185667, 1.1515, 0.728007, -10.8934, 0.439047)
+
+[node name="Cube_001" parent="FoxyPlush/Skeleton3D" index="22"]
+transform = Transform3D(1.07268, 6.34535e-09, 2.81934e-08, -7.35791e-09, 1.07268, -7.45058e-09, -2.815e-08, 7.45058e-09, 1.07268, 0.164512, -9.98026, 0.589923)
+
+[node name="Cube_002" parent="FoxyPlush/Skeleton3D" index="23"]
+transform = Transform3D(1.05603, 2.55049e-09, 6.88083e-08, -3.81447e-09, 1.05603, -3.72529e-09, -6.86423e-08, 1.11759e-08, 1.05603, 0.117329, -9.81239, 0.620732)
