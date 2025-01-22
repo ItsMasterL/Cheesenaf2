@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://kfokhb3cioir"]
+
+[ext_resource type="PackedScene" uid="uid://dakh2qglf4p1v" path="res://office.glb" id="1_y44h1"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Map" parent="." instance=ExtResource("1_y44h1")]
