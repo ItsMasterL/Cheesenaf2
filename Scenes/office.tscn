@@ -493,7 +493,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.4
 transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, -0.25642, -0.491635)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Player/Head/Camera3D"]
-transform = Transform3D(0.999722, 0, 0.0235598, 0.00126423, 0.998559, -0.0536456, -0.0235258, 0.0536605, 0.998282, 0.182565, -0.171149, 0)
+transform = Transform3D(0.999722, 0, 0.0235598, 0.00126423, 0.998559, -0.0536456, -0.0235258, 0.0536605, 0.998282, 0.175257, -0.154509, -0.309658)
 visible = false
 light_energy = 3.0
 shadow_enabled = true
@@ -503,7 +503,7 @@ spot_angle = 20.4784
 [node name="SpotLight3D" type="SpotLight3D" parent="Player/Head/Camera3D/SpotLight3D"]
 light_energy = 0.1
 spot_range = 11.8432
-spot_angle = 28.5501
+spot_angle = 36.1641
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Player/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94943, 0)
@@ -512,10 +512,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94943, 0)
 
 [node name="SubViewport" type="SubViewport" parent="Cameras"]
 use_hdr_2d = true
-size = Vector2i(401, 256)
+size = Vector2i(1280, 800)
 
 [node name="Camera1" type="Camera3D" parent="Cameras/SubViewport"]
-transform = Transform3D(-0.367654, -0.540177, 0.756993, 0, 0.814004, 0.580859, -0.929963, 0.213555, -0.299272, 5.83918, 3.88859, -0.679953)
+transform = Transform3D(-0.367654, -0.540177, 0.756994, 0, 0.814004, 0.580859, -0.929963, 0.213555, -0.299272, 5.83918, 3.88859, -0.679953)
 
 [node name="Map" parent="." instance=ExtResource("13_3pria")]
 
@@ -524,6 +524,7 @@ transform = Transform3D(1, 0, 0, 0, -0.685463, 0.728108, 0, -0.728108, -0.685463
 light_color = Color(1, 1, 0.847059, 1)
 light_energy = 3.0
 light_bake_mode = 1
+shadow_enabled = true
 spot_range = 19.2464
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Map/SpotLight3D"]
@@ -535,6 +536,7 @@ transform = Transform3D(1, 0, 0, 0, 0.727773, 0.685818, 0, -0.685818, 0.727773, 
 light_color = Color(1, 1, 0.847059, 1)
 light_energy = 3.0
 light_bake_mode = 1
+shadow_enabled = true
 spot_range = 19.2464
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Map/SpotLight3D2"]

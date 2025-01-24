@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://btukc7f48afi2"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(1280, 800)
