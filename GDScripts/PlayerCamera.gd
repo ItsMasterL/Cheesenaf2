@@ -1,10 +1,15 @@
 extends CharacterBody3D
 @onready var head := $Head
 @onready var camera := $Head/Camera3D
+@onready var flashlight := $Head/Camera3D/SpotLight3D
 const RAY_LENGTH = 1000.0
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
+	if event.is_action_pressed("Flashlight"):
+		flashlight.visible = true
+	if event.is_action_released("Flashlight"):
+		flashlight.visible = false
+	if event.is_action_pressed("LeftClick"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	elif event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

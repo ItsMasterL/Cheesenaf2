@@ -13,6 +13,7 @@ func _raycast_event() -> void:
 	if stand == tempparent:
 		hold.add_child(tablet)
 		anim.play("flipup",-1,1,false)
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	else:
 		stand.add_child(tablet)
 	var audio := tablet.get_child(1) as AudioStreamPlayer3D
