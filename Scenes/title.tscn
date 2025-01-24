@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/title.gd" id="1_3f131"]
 [ext_resource type="Texture2D" uid="uid://b1my2w4jmvnbv" path="res://Textures/static.png" id="1_7gfe5"]
 [ext_resource type="Script" path="res://background.gd" id="2_jc731"]
-[ext_resource type="PackedScene" uid="uid://d1ffrbutvy4e" path="res://Scenes/title_menu.tscn" id="3_xhvqt"]
+[ext_resource type="PackedScene" path="res://Scenes/title_menu.tscn" id="3_xhvqt"]
 [ext_resource type="AudioStream" uid="uid://b8itxrejv1wji" path="res://Sounds/Music/Echoes of Time.mp3" id="4_w6ovr"]
 
 [node name="Title" type="Node2D"]

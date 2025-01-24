@@ -1743,7 +1743,7 @@ bones/36/rotation = Quaternion(-0.0215121, -0.000220947, 0.0102717, 0.999716)
 bones/36/scale = Vector3(1.05603, 1.05603, 1.05603)
 
 [node name="RIG_Foxy_Clean_mo_041" type="BoneAttachment3D" parent="FoxyPlush/Skeleton3D"]
-transform = Transform3D(0.80183, 0.752973, -0.147726, -0.732843, 0.814805, 0.175374, 0.227439, -0.0291583, 1.08589, 3.58361, 8.4426, -0.858862)
+transform = Transform3D(0.80183, 0.752972, -0.147724, -0.732844, 0.814804, 0.175373, 0.227437, -0.0291583, 1.08588, 3.58361, 8.4426, -0.858863)
 bone_name = "RIG_Foxy_Clean.mo.041"
 bone_idx = 3
 
@@ -1752,7 +1752,7 @@ mesh = SubResource("ArrayMesh_hohif")
 skeleton = NodePath("")
 
 [node name="RIG_Foxy_Clean_mo_009" type="BoneAttachment3D" parent="FoxyPlush/Skeleton3D"]
-transform = Transform3D(0.801827, 0.752969, -0.147726, -0.73284, 0.8148, 0.175376, 0.227439, -0.029159, 1.08589, 4.01017, 8.97195, -0.796814)
+transform = Transform3D(0.801824, 0.752972, -0.147725, -0.732837, 0.814804, 0.175377, 0.227438, -0.0291607, 1.08588, 4.01017, 8.97196, -0.796816)
 bone_name = "RIG_Foxy_Clean.mo.009"
 bone_idx = 5
 
@@ -1761,7 +1761,7 @@ mesh = SubResource("ArrayMesh_srb0o")
 skeleton = NodePath("")
 
 [node name="RIG_Foxy_Clean_mo_004" type="BoneAttachment3D" parent="FoxyPlush/Skeleton3D"]
-transform = Transform3D(1.09941, -0.0345491, -0.147726, 0.0579553, 1.09435, 0.175377, 0.140206, -0.181444, 1.08588, 0.816899, -28.374, 6.63166)
+transform = Transform3D(1.09941, -0.0345491, -0.147726, 0.0579552, 1.09435, 0.175377, 0.140206, -0.181445, 1.08588, 0.816895, -28.374, 6.63168)
 bone_name = "RIG_Foxy_Clean.mo.004"
 bone_idx = 7
 
@@ -1770,7 +1770,7 @@ mesh = SubResource("ArrayMesh_qh1xs")
 skeleton = NodePath("")
 
 [node name="RIG_Foxy_Clean_mo_005" type="BoneAttachment3D" parent="FoxyPlush/Skeleton3D"]
-transform = Transform3D(1.09941, -0.0345494, -0.147726, 0.0579552, 1.09435, 0.175374, 0.140207, -0.181443, 1.08588, 0.798004, 7.26257, 0.759257)
+transform = Transform3D(1.09941, -0.0345493, -0.147726, 0.0579552, 1.09435, 0.175375, 0.140206, -0.181443, 1.08588, 0.798004, 7.26258, 0.759257)
 bone_name = "RIG_Foxy_Clean.mo.005"
 bone_idx = 9
 
@@ -1779,7 +1779,7 @@ mesh = SubResource("ArrayMesh_wiohe")
 skeleton = NodePath("")
 
 [node name="RIG_Foxy_Clean_mo_010" type="BoneAttachment3D" parent="FoxyPlush/Skeleton3D"]
-transform = Transform3D(1.09941, -0.0345499, -0.147726, 0.0579555, 1.09435, 0.175373, 0.140207, -0.181442, 1.08588, -1.28414, 7.193, 0.486326)
+transform = Transform3D(1.09941, -0.0345497, -0.147726, 0.0579554, 1.09435, 0.175374, 0.140206, -0.181442, 1.08588, -1.28414, 7.193, 0.486326)
 bone_name = "RIG_Foxy_Clean.mo.010"
 bone_idx = 11
 
@@ -1788,7 +1788,7 @@ mesh = SubResource("ArrayMesh_cr50p")
 skeleton = NodePath("")
 
 [node name="RIG_Foxy_Clean_mo_003" type="BoneAttachment3D" parent="FoxyPlush/Skeleton3D"]
-transform = Transform3D(1.09932, -0.0497149, -0.144069, 0.0514918, 1.10859, 0.0103617, 0.143443, -0.0169476, 1.10039, -0.234011, 4.08593, 2.13683)
+transform = Transform3D(1.09932, -0.0497145, -0.144068, 0.0514918, 1.10859, 0.0103626, 0.143443, -0.0169487, 1.10039, -0.234011, 4.08593, 2.13684)
 bone_name = "RIG_Foxy_Clean.mo.003"
 bone_idx = 13
 
@@ -1797,7 +1797,7 @@ mesh = SubResource("ArrayMesh_f38py")
 skeleton = NodePath("")
 
 [node name="RIG_Foxy_Clean_mo_013" type="BoneAttachment3D" parent="FoxyPlush/Skeleton3D"]
-transform = Transform3D(0.142749, -0.0064555, -0.0187075, 0.00668632, 0.143952, 0.00134576, 0.0186263, -0.00220094, 0.142888, 1.03986, -24.0603, 1.98906)
+transform = Transform3D(0.142749, -0.0064555, -0.0187076, 0.00668633, 0.143952, 0.0013456, 0.0186263, -0.00220081, 0.142888, 1.03986, -24.0603, 1.98907)
 bone_name = "RIG_Foxy_Clean.mo.013"
 bone_idx = 14
 
@@ -1806,7 +1806,7 @@ mesh = SubResource("ArrayMesh_fjcvp")
 skeleton = NodePath("")
 
 [node name="Icosphere" type="BoneAttachment3D" parent="FoxyPlush/Skeleton3D"]
-transform = Transform3D(1.36508, -0.118801, -0.327972, 0.102897, 1.40291, -0.0798983, 0.333303, 0.0534585, 1.36791, 1.11579, 5.64936, 1.02986)
+transform = Transform3D(1.36508, -0.1188, -0.327973, 0.102897, 1.4029, -0.0798984, 0.333304, 0.0534584, 1.36791, 1.11579, 5.64937, 1.02986)
 bone_name = "Icosphere"
 bone_idx = 16
 
@@ -1815,7 +1815,7 @@ mesh = SubResource("ArrayMesh_qahr5")
 skeleton = NodePath("")
 
 [node name="Cube" type="BoneAttachment3D" parent="FoxyPlush/Skeleton3D"]
-transform = Transform3D(1.09941, -0.0345492, -0.147725, 0.0579554, 1.09435, 0.175377, 0.140206, -0.181445, 1.08588, -0.234715, 5.52412, 1.47166)
+transform = Transform3D(1.09941, -0.0345492, -0.147726, 0.0579553, 1.09435, 0.175377, 0.140206, -0.181445, 1.08588, -0.234715, 5.52412, 1.47166)
 bone_name = "Cube"
 bone_idx = 17
 
@@ -1824,7 +1824,7 @@ mesh = SubResource("ArrayMesh_u6ech")
 skeleton = NodePath("")
 
 [node name="Icosphere_005" type="BoneAttachment3D" parent="FoxyPlush/Skeleton3D"]
-transform = Transform3D(1.09941, -0.0345492, -0.147725, 0.0579554, 1.09435, 0.175377, 0.140206, -0.181445, 1.08588, -2.07284, 4.33164, 4.19359)
+transform = Transform3D(1.09941, -0.0345492, -0.147726, 0.0579553, 1.09435, 0.175377, 0.140206, -0.181445, 1.08588, -2.07284, 4.33164, 4.19359)
 bone_name = "Icosphere.005"
 bone_idx = 18
 
@@ -1833,7 +1833,7 @@ mesh = SubResource("ArrayMesh_5l68w")
 skeleton = NodePath("")
 
 [node name="RIG_Foxy_Clean_mo_002" type="BoneAttachment3D" parent="FoxyPlush/Skeleton3D"]
-transform = Transform3D(1.09941, -0.0345492, -0.147725, 0.0579554, 1.09435, 0.175377, 0.140206, -0.181445, 1.08588, -0.188725, 5.63394, 1.03623)
+transform = Transform3D(1.09941, -0.0345492, -0.147726, 0.0579553, 1.09435, 0.175377, 0.140206, -0.181445, 1.08588, -0.188725, 5.63394, 1.03623)
 bone_name = "RIG_Foxy_Clean.mo.002"
 bone_idx = 19
 
@@ -1854,7 +1854,7 @@ stream = ExtResource("21_1i5bh")
 volume_db = -16.027
 
 [node name="RIG_Foxy_Clean_mo_006" type="BoneAttachment3D" parent="FoxyPlush/Skeleton3D"]
-transform = Transform3D(1.09941, -0.0345492, -0.147725, 0.0579554, 1.09435, 0.175377, 0.140206, -0.181445, 1.08588, 0.863062, -28.3554, 6.62813)
+transform = Transform3D(1.09941, -0.0345492, -0.147726, 0.0579553, 1.09435, 0.175377, 0.140206, -0.181445, 1.08588, 0.863062, -28.3554, 6.62814)
 bone_name = "RIG_Foxy_Clean.mo.006"
 bone_idx = 20
 
@@ -1863,7 +1863,7 @@ mesh = SubResource("ArrayMesh_q8etf")
 skeleton = NodePath("")
 
 [node name="RIG_Foxy_Clean_mo_008" type="BoneAttachment3D" parent="FoxyPlush/Skeleton3D"]
-transform = Transform3D(1.15048, -0.0361526, -0.154587, 0.0606449, 1.14519, 0.183519, 0.146718, -0.189869, 1.13632, -1.63503, 5.62756, 1.31015)
+transform = Transform3D(1.15048, -0.0361527, -0.154587, 0.060645, 1.14519, 0.183519, 0.146718, -0.18987, 1.13632, -1.63503, 5.62756, 1.31015)
 bone_name = "RIG_Foxy_Clean.mo.008"
 bone_idx = 21
 
@@ -1872,7 +1872,7 @@ mesh = SubResource("ArrayMesh_vdrp6")
 skeleton = NodePath("")
 
 [node name="RIG_Foxy_Clean_mo_011" type="BoneAttachment3D" parent="FoxyPlush/Skeleton3D"]
-transform = Transform3D(0.157405, -0.00494647, -0.0211502, 0.00829753, 0.156681, 0.025109, 0.0200736, -0.0259779, 0.155468, 0.886901, -28.2754, 6.61847)
+transform = Transform3D(0.157405, -0.00494647, -0.0211502, 0.00829757, 0.156681, 0.0251092, 0.0200736, -0.025978, 0.155469, 0.886901, -28.2754, 6.61848)
 bone_name = "RIG_Foxy_Clean.mo.011"
 bone_idx = 22
 
@@ -1881,7 +1881,7 @@ mesh = SubResource("ArrayMesh_gd506")
 skeleton = NodePath("")
 
 [node name="Sphere" type="BoneAttachment3D" parent="FoxyPlush/Skeleton3D"]
-transform = Transform3D(1.09447, -0.178124, 0.0209406, 0.17839, 1.09454, -0.0132783, -0.0185339, 0.0164717, 1.10879, 2.22027, -10.2837, 0.674107)
+transform = Transform3D(1.09447, -0.178124, 0.0209421, 0.178391, 1.09455, -0.01328, -0.0185353, 0.0164735, 1.10879, 2.22027, -10.2837, 0.674105)
 bone_name = "Sphere"
 bone_idx = 24
 
@@ -1890,7 +1890,7 @@ mesh = SubResource("ArrayMesh_8ucdr")
 skeleton = NodePath("")
 
 [node name="Sphere_001" type="BoneAttachment3D" parent="FoxyPlush/Skeleton3D"]
-transform = Transform3D(1.09447, -0.178124, 0.0209406, 0.17839, 1.09454, -0.0132783, -0.0185339, 0.0164717, 1.10879, 2.22027, -10.2837, 0.674107)
+transform = Transform3D(1.09447, -0.178124, 0.0209421, 0.178391, 1.09455, -0.01328, -0.0185353, 0.0164735, 1.10879, 2.22027, -10.2837, 0.674105)
 bone_name = "Sphere.001"
 bone_idx = 25
 
@@ -1899,7 +1899,7 @@ mesh = SubResource("ArrayMesh_5hxaa")
 skeleton = NodePath("")
 
 [node name="Sphere_006" type="BoneAttachment3D" parent="FoxyPlush/Skeleton3D"]
-transform = Transform3D(1.07579, 2.68221e-07, -9.66865e-08, -5.96046e-08, 1.07579, 1.90844e-08, 4.29975e-08, -8.35793e-08, 1.07579, 0.401865, -10.0031, 0.447797)
+transform = Transform3D(1.07579, -2.98023e-08, -9.66715e-07, 2.08616e-07, 1.07579, -7.49427e-07, 1.05118e-06, 6.89447e-07, 1.07579, 0.401872, -10.0031, 0.447793)
 bone_name = "Sphere.006"
 bone_idx = 27
 
@@ -1908,7 +1908,7 @@ mesh = SubResource("ArrayMesh_t0lqj")
 skeleton = NodePath("")
 
 [node name="Sphere_007" type="BoneAttachment3D" parent="FoxyPlush/Skeleton3D"]
-transform = Transform3D(1.07579, 2.68221e-07, -9.66865e-08, -5.96046e-08, 1.07579, 1.90844e-08, 4.29975e-08, -8.35793e-08, 1.07579, 0.401865, -10.0031, 0.447797)
+transform = Transform3D(1.07579, -2.98023e-08, -9.66715e-07, 2.08616e-07, 1.07579, -7.49427e-07, 1.05118e-06, 6.89447e-07, 1.07579, 0.401872, -10.0031, 0.447793)
 bone_name = "Sphere.007"
 bone_idx = 28
 
@@ -1917,7 +1917,7 @@ mesh = SubResource("ArrayMesh_tkjvp")
 skeleton = NodePath("")
 
 [node name="Sphere_004" type="BoneAttachment3D" parent="FoxyPlush/Skeleton3D"]
-transform = Transform3D(1.15363, -0.00602656, -0.119072, 0.012532, 1.158, 0.0628066, 0.118564, -0.0637605, 1.15194, 0.243019, -10.7697, 0.807443)
+transform = Transform3D(1.15364, -0.0060268, -0.119073, 0.0125323, 1.15801, 0.0628065, 0.118565, -0.0637604, 1.15194, 0.243029, -10.7697, 0.807437)
 bone_name = "Sphere.004"
 bone_idx = 30
 
@@ -1926,7 +1926,7 @@ mesh = SubResource("ArrayMesh_n7ktf")
 skeleton = NodePath("")
 
 [node name="Sphere_005" type="BoneAttachment3D" parent="FoxyPlush/Skeleton3D"]
-transform = Transform3D(1.15363, -0.00602656, -0.119072, 0.012532, 1.158, 0.0628066, 0.118564, -0.0637605, 1.15194, 0.243019, -10.7697, 0.807443)
+transform = Transform3D(1.15364, -0.0060268, -0.119073, 0.0125323, 1.15801, 0.0628065, 0.118565, -0.0637604, 1.15194, 0.243029, -10.7697, 0.807437)
 bone_name = "Sphere.005"
 bone_idx = 31
 
@@ -1935,7 +1935,7 @@ mesh = SubResource("ArrayMesh_2gea3")
 skeleton = NodePath("")
 
 [node name="Sphere_002" type="BoneAttachment3D" parent="FoxyPlush/Skeleton3D"]
-transform = Transform3D(1.15134, -0.0299723, -0.182512, 0.0266909, 1.16557, -0.0230361, 0.18302, 0.0185669, 1.1515, 0.72801, -10.8933, 0.439049)
+transform = Transform3D(1.15134, -0.0299724, -0.182512, 0.0266912, 1.16558, -0.0230339, 0.183019, 0.0185647, 1.15151, 0.728013, -10.8933, 0.439058)
 bone_name = "Sphere.002"
 bone_idx = 33
 
@@ -1944,7 +1944,7 @@ mesh = SubResource("ArrayMesh_kt4h7")
 skeleton = NodePath("")
 
 [node name="Sphere_003" type="BoneAttachment3D" parent="FoxyPlush/Skeleton3D"]
-transform = Transform3D(1.15134, -0.0299723, -0.182512, 0.0266909, 1.16557, -0.0230361, 0.18302, 0.0185669, 1.1515, 0.72801, -10.8933, 0.439049)
+transform = Transform3D(1.15134, -0.0299724, -0.182512, 0.0266912, 1.16558, -0.0230339, 0.183019, 0.0185647, 1.15151, 0.728013, -10.8933, 0.439058)
 bone_name = "Sphere.003"
 bone_idx = 34
 
@@ -1953,7 +1953,7 @@ mesh = SubResource("ArrayMesh_eh6bw")
 skeleton = NodePath("")
 
 [node name="Cube_001" type="BoneAttachment3D" parent="FoxyPlush/Skeleton3D"]
-transform = Transform3D(1.07268, -1.04171e-08, 2.75224e-08, -1.48072e-08, 1.07268, -1.04308e-07, -2.85884e-08, 9.68575e-08, 1.07267, 0.164512, -9.98026, 0.589919)
+transform = Transform3D(1.07268, -1.19521e-09, 2.78391e-08, 1.36646e-12, 1.07268, -2.16067e-07, -2.77174e-08, 2.16067e-07, 1.07267, 0.164512, -9.98026, 0.589919)
 bone_name = "Cube.001"
 bone_idx = 35
 
@@ -1962,7 +1962,7 @@ mesh = SubResource("ArrayMesh_4wxrk")
 skeleton = NodePath("")
 
 [node name="Cube_002" type="BoneAttachment3D" parent="FoxyPlush/Skeleton3D"]
-transform = Transform3D(1.05603, 1.14311e-07, 7.34927e-08, -1.342e-07, 1.05603, -2.6077e-08, -7.44635e-08, 2.23517e-08, 1.05603, 0.117329, -9.81238, 0.620729)
+transform = Transform3D(1.05603, 5.99271e-10, 7.19133e-08, 1.82503e-09, 1.05603, 0, -7.17025e-08, 7.45058e-09, 1.05603, 0.11733, -9.81239, 0.620729)
 bone_name = "Cube.002"
 bone_idx = 36
 
