@@ -4,7 +4,7 @@ var jumpscare = false
 var chance = 250
 @onready var sound := get_parent_node_3d().get_node("AudioStreamPlayer3D") as AudioStreamPlayer3D
 
-func _raycast_event() -> void:
+func _raycast_event():
 	var anim = get_parent_node_3d().get_parent_node_3d().get_parent_node_3d().get_parent_node_3d().get_node("AnimationPlayer") as AnimationPlayer
 	if jumpscare == false:
 		if rng.randi_range(0,chance) == 1 && sound.playing == true:
@@ -35,7 +35,8 @@ func _raycast_event() -> void:
 		if jumpscare == true:
 			anim.play("stare")
 
-func _process(delta: float) -> void:
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
 	if jumpscare == true && sound.playing == false:
 		var anim = get_parent_node_3d().get_parent_node_3d().get_parent_node_3d().get_parent_node_3d().get_node("AnimationPlayer") as AnimationPlayer
 		sound.stream = load("res://Sounds/boop.wav")

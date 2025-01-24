@@ -4,7 +4,7 @@ extends CharacterBody3D
 @onready var flashlight := $Head/Camera3D/SpotLight3D
 const RAY_LENGTH = 1000.0
 
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(event):
 	if event.is_action_pressed("Flashlight"):
 		flashlight.visible = true
 	if event.is_action_released("Flashlight"):

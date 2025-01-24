@@ -2,10 +2,10 @@ extends StaticBody3D
 @onready var stand := get_parent_node_3d().get_parent_node_3d()
 @onready var hold := get_node("../../../Player/Head/Camera3D/CupHolder")
 
-func _ready() -> void:
+func _ready():
 	print(stand, ", ", hold)
 
-func _raycast_event() -> void:
+func _raycast_event():
 	var tablet = get_parent_node_3d()
 	var tempparent = tablet.get_parent_node_3d()
 	if stand == tempparent:
@@ -16,7 +16,7 @@ func _raycast_event() -> void:
 		audio.play(0)
 		anim.play("cup_drink")
 
-func _end_drink() -> void:
+func _end_drink():
 	var tablet = get_parent_node_3d()
 	var tempparent = tablet.get_parent_node_3d()
 	tempparent.remove_child(tablet)
