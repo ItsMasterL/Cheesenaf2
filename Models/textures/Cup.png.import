@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bi3vtwctdv5ub"
-path.s3tc="res://.godot/imported/Cup.png-e71d6c831cd1bc67ac3b3db21a594b19.s3tc.ctex"
+path.s3tc="res://.godot/imported/Cup.png-f11f754cc4e983e26ed4798ee450e21e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Models/textures/Cup.png"
-dest_files=["res://.godot/imported/Cup.png-e71d6c831cd1bc67ac3b3db21a594b19.s3tc.ctex"]
+source_file="res://models/textures/Cup.png"
+dest_files=["res://.godot/imported/Cup.png-f11f754cc4e983e26ed4798ee450e21e.s3tc.ctex"]
 
 [params]
 

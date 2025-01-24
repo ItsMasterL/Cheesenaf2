@@ -5,13 +5,13 @@ extends CharacterBody3D
 const RAY_LENGTH = 1000.0
 
 func _unhandled_input(event):
-	if event.is_action_pressed("Flashlight"):
+	if event.is_action_pressed(&"Flashlight"):
 		flashlight.visible = true
-	if event.is_action_released("Flashlight"):
+	if event.is_action_released(&"Flashlight"):
 		flashlight.visible = false
-	if event.is_action_pressed("LeftClick"):
+	if event.is_action_pressed(&"LeftClick"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	elif event.is_action_pressed("ui_cancel"):
+	elif event.is_action_pressed(&"ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:

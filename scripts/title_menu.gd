@@ -19,4 +19,4 @@ func _on_button_unhover(sender: int):
 	button.text = ""
 
 func _on_button_pressed():
-	emit_signal(&"start_game")
+	start_game.emit()

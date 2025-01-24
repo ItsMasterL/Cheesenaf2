@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c3su1po70v7f7"
-path="res://.godot/imported/camera toggle.wav-4d965edf03bbe1f2bf2e0eb93443b913.sample"
+path="res://.godot/imported/camera toggle.wav-6337a4d69c8a70e76bea6077e2857965.sample"
 
 [deps]
 
-source_file="res://Sounds/camera toggle.wav"
-dest_files=["res://.godot/imported/camera toggle.wav-4d965edf03bbe1f2bf2e0eb93443b913.sample"]
+source_file="res://sounds/camera toggle.wav"
+dest_files=["res://.godot/imported/camera toggle.wav-6337a4d69c8a70e76bea6077e2857965.sample"]
 
 [params]
 

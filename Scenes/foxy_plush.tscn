@@ -1,11 +1,12 @@
-[gd_scene load_steps=68 format=4 uid="uid://bs378s4kwr2ux"]
+[gd_scene load_steps=69 format=4 uid="uid://bs378s4kwr2ux"]
 
-[ext_resource type="Texture2D" uid="uid://2k0rjdeshagi" path="res://Textures/fnaf1foxy.png" id="1_17iic"]
-[ext_resource type="Texture2D" uid="uid://d4i447g3vnp3u" path="res://Textures/Foxy3.png" id="2_l43gq"]
-[ext_resource type="Texture2D" uid="uid://bmgnj3578tfru" path="res://Models/textures/unknown (1).png" id="3_oyg7j"]
-[ext_resource type="Texture2D" uid="uid://baek1bfvyge65" path="res://Textures/suitlight1new1.png" id="4_bfjvg"]
-[ext_resource type="Script" path="res://GDScripts/boop.gd" id="5_m41ug"]
-[ext_resource type="AudioStream" uid="uid://c76mwiei7xlra" path="res://Sounds/boop.wav" id="6_l5wv4"]
+[ext_resource type="Texture2D" uid="uid://2k0rjdeshagi" path="res://textures/fnaf1foxy.png" id="1_17iic"]
+[ext_resource type="Script" path="res://scenes/foxy_plush.gd" id="1_d2iuj"]
+[ext_resource type="Texture2D" uid="uid://d4i447g3vnp3u" path="res://textures/Foxy3.png" id="2_l43gq"]
+[ext_resource type="Texture2D" uid="uid://bmgnj3578tfru" path="res://models/textures/unknown (1).png" id="3_oyg7j"]
+[ext_resource type="Texture2D" uid="uid://baek1bfvyge65" path="res://textures/suitlight1new1.png" id="4_bfjvg"]
+[ext_resource type="Script" path="res://scenes/foxy_plush_nose.gd" id="6_iym3n"]
+[ext_resource type="AudioStream" uid="uid://c76mwiei7xlra" path="res://sounds/boop.wav" id="6_l5wv4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_86tdt"]
 resource_name = "Suit1"
@@ -1094,6 +1095,7 @@ _data = {
 
 [node name="FoxyPlush" type="Node3D"]
 transform = Transform3D(0.020184, 2.27804e-05, 0.0223854, -1.75446e-12, 0.0301413, -3.06732e-05, -0.0223854, 2.05402e-05, 0.020184, -1.26133, 1.12854, -1.20353)
+script = ExtResource("1_d2iuj")
 
 [node name="Skeleton3D" type="Skeleton3D" parent="."]
 bones/0/name = "Bone"
@@ -1420,7 +1422,7 @@ mesh = SubResource("ArrayMesh_fjcvp")
 skeleton = NodePath("")
 
 [node name="Icosphere" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(1.36508, -0.118801, -0.327972, 0.102897, 1.4029, -0.0798983, 0.333305, 0.0534584, 1.36791, 1.11579, 5.64937, 1.02986)
+transform = Transform3D(1.36508, -0.1188, -0.327973, 0.102897, 1.4029, -0.0798984, 0.333304, 0.0534584, 1.36791, 1.11579, 5.64937, 1.02986)
 bone_name = "Icosphere"
 bone_idx = 16
 
@@ -1457,7 +1459,7 @@ skeleton = NodePath("")
 
 [node name="FoxyPlushNose" type="StaticBody3D" parent="Skeleton3D/RIG_Foxy_Clean_mo_002/RIG_Foxy_Clean_mo_002"]
 transform = Transform3D(1, 3.72529e-09, -2.98023e-08, -3.72529e-09, 1, -7.45058e-09, 0, -7.45058e-09, 1, 0.0389906, -1.25003, 3.94121)
-script = ExtResource("5_m41ug")
+script = ExtResource("6_iym3n")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Skeleton3D/RIG_Foxy_Clean_mo_002/RIG_Foxy_Clean_mo_002/FoxyPlushNose"]
 transform = Transform3D(1, 3.72529e-09, -2.98023e-08, -3.72529e-09, 1, 0, -2.98023e-08, -1.49012e-08, 1, -0.0915604, -0.00882721, 0.0858231)
@@ -1588,3 +1590,5 @@ skeleton = NodePath("")
 libraries = {
 "": SubResource("AnimationLibrary_2ev82")
 }
+
+[connection signal="booped" from="Skeleton3D/RIG_Foxy_Clean_mo_002/RIG_Foxy_Clean_mo_002/FoxyPlushNose" to="." method="_on_foxy_plush_nose_booped"]

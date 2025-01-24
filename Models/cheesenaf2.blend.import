@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dpn03nj1u7ol3"
-path="res://.godot/imported/cheesenaf2.blend-e3c0dc12aaaaa67be67ca78f4dafeaac.scn"
+path="res://.godot/imported/cheesenaf2.blend-f7adee2539bea6226d60a3794bfd2686.scn"
 
 [deps]
 
-source_file="res://Models/cheesenaf2.blend"
-dest_files=["res://.godot/imported/cheesenaf2.blend-e3c0dc12aaaaa67be67ca78f4dafeaac.scn"]
+source_file="res://models/cheesenaf2.blend"
+dest_files=["res://.godot/imported/cheesenaf2.blend-f7adee2539bea6226d60a3794bfd2686.scn"]
 
 [params]
 
