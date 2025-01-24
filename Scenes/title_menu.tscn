@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/title_menu.gd" id="1_ads83"]
 [ext_resource type="FontFile" uid="uid://cm76e8ykj27f8" path="res://consolas.ttf" id="2_aik6n"]
-[ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://sounds/changecam.wav" id="4_cl3hh"]
+[ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://sounds/change_cam.wav" id="4_cl3hh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ptv6"]
 

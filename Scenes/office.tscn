@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://bip471h5exvnx" path="res://sounds/slurp.wav" id="26_plhk0"]
 [ext_resource type="AudioStream" uid="uid://btoctqew2mccg" path="res://sounds/fan.wav" id="28_cfwgc"]
 [ext_resource type="Script" path="res://scripts/toggle_tablet.gd" id="29_wa4as"]
-[ext_resource type="AudioStream" uid="uid://c3su1po70v7f7" path="res://sounds/camera toggle.wav" id="30_d1od8"]
+[ext_resource type="AudioStream" uid="uid://c3su1po70v7f7" path="res://sounds/camera_toggle.wav" id="30_d1od8"]
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="31_63unw"]
 [ext_resource type="Script" path="res://scripts/player_raycast.gd" id="32_5ed2l"]
 
