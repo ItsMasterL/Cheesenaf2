@@ -1,0 +1,186 @@
+[gd_scene load_steps=28 format=3 uid="uid://d1ffrbutvy4e"]
+
+[ext_resource type="Script" path="res://GDScripts/title_menu.gd" id="1_ads83"]
+[ext_resource type="FontFile" uid="uid://cm76e8ykj27f8" path="res://Consolas.ttf" id="2_aik6n"]
+[ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://Sounds/changecam.wav" id="4_cl3hh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ptv6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_27atk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5pxcu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8w5np"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hjsyr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rsbhx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2agt2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_43sp0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_skvns"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2fhuo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eatid"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r1ktc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hm4gd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_md2i8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_56xdr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u1y7x"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_omwbc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p6uil"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8peow"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ud1d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_krr73"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gmwrq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ve4ch"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1pwwm"]
+
+[node name="TitleMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ads83")
+metadata/_edit_group_ = true
+
+[node name="Title" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 184.0
+offset_right = 325.0
+offset_bottom = 217.0
+theme_override_fonts/normal_font = ExtResource("2_aik6n")
+theme_override_font_sizes/normal_font_size = 30
+text = "Cheesenaf 2"
+
+[node name="NewGame" type="Button" parent="."]
+layout_mode = 0
+offset_left = 97.0
+offset_top = 396.0
+offset_right = 326.0
+offset_bottom = 425.0
+theme_override_fonts/font = ExtResource("2_aik6n")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2ptv6")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_27atk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5pxcu")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_8w5np")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_hjsyr")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rsbhx")
+alignment = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="NewGame"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 5.0
+offset_right = 197.0
+offset_bottom = 26.0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_aik6n")
+theme_override_font_sizes/normal_font_size = 20
+text = "New Game"
+
+[node name="Continue" type="Button" parent="."]
+layout_mode = 0
+offset_left = 97.0
+offset_top = 425.0
+offset_right = 326.0
+offset_bottom = 454.0
+theme_override_fonts/font = ExtResource("2_aik6n")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2agt2")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_43sp0")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_skvns")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_2fhuo")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_eatid")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_r1ktc")
+alignment = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Continue"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 5.0
+offset_right = 197.0
+offset_bottom = 26.0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_aik6n")
+theme_override_font_sizes/normal_font_size = 20
+text = "Continue"
+
+[node name="CustomNight" type="Button" parent="."]
+layout_mode = 0
+offset_left = 97.0
+offset_top = 455.0
+offset_right = 326.0
+offset_bottom = 484.0
+theme_override_fonts/font = ExtResource("2_aik6n")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hm4gd")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_md2i8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_56xdr")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_u1y7x")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_omwbc")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_p6uil")
+alignment = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CustomNight"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 5.0
+offset_right = 197.0
+offset_bottom = 26.0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_aik6n")
+theme_override_font_sizes/normal_font_size = 20
+text = "Custom Night"
+
+[node name="Extras" type="Button" parent="."]
+layout_mode = 0
+offset_left = 97.0
+offset_top = 485.0
+offset_right = 326.0
+offset_bottom = 514.0
+theme_override_fonts/font = ExtResource("2_aik6n")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8peow")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_2ud1d")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_krr73")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_gmwrq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ve4ch")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1pwwm")
+alignment = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Extras"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 5.0
+offset_right = 197.0
+offset_bottom = 26.0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_aik6n")
+theme_override_font_sizes/normal_font_size = 20
+text = "Extras
+"
+
+[node name="HoverSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_cl3hh")
+panning_strength = 0.0

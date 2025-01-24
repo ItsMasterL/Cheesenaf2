@@ -1,74 +1,24 @@
-[gd_scene load_steps=13 format=3 uid="uid://lbjqjlv5clj6"]
+[gd_scene load_steps=6 format=3 uid="uid://lbjqjlv5clj6"]
 
+[ext_resource type="Script" path="res://Scenes/title.gd" id="1_3f131"]
 [ext_resource type="Texture2D" uid="uid://b1my2w4jmvnbv" path="res://Textures/static.png" id="1_7gfe5"]
-[ext_resource type="FontFile" uid="uid://cm76e8ykj27f8" path="res://Consolas.ttf" id="1_758bu"]
-[ext_resource type="Script" path="res://GDScripts/staticanim.gd" id="2_7jhij"]
-[ext_resource type="Script" path="res://GDScripts/MenuOption.gd" id="4_6b53s"]
+[ext_resource type="Script" path="res://background.gd" id="2_jc731"]
+[ext_resource type="PackedScene" uid="uid://d1ffrbutvy4e" path="res://Scenes/title_menu.tscn" id="3_xhvqt"]
 [ext_resource type="AudioStream" uid="uid://b8itxrejv1wji" path="res://Sounds/Music/Echoes of Time.mp3" id="4_w6ovr"]
-[ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://Sounds/changecam.wav" id="5_0tlkn"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xqvl5"]
+[node name="Title" type="Node2D"]
+script = ExtResource("1_3f131")
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4mvhb"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wk33b"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wcm3p"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6jmb1"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_giep3"]
-
-[node name="Node2D" type="Node2D"]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="."]
 modulate = Color(0.29219, 0.29219, 0.29219, 1)
 z_index = -1
 position = Vector2(576.078, 328.25)
 scale = Vector2(0.998316, 1.04086)
 texture = ExtResource("1_7gfe5")
 vframes = 8
-script = ExtResource("2_7jhij")
+script = ExtResource("2_jc731")
 
-[node name="Title" type="RichTextLabel" parent="."]
-offset_left = 130.0
-offset_top = 184.0
-offset_right = 325.0
-offset_bottom = 217.0
-theme_override_fonts/normal_font = ExtResource("1_758bu")
-theme_override_font_sizes/normal_font_size = 30
-text = "Cheesenaf 2"
-
-[node name="NewGame" type="Button" parent="."]
-offset_left = 97.0
-offset_top = 396.0
-offset_right = 326.0
-offset_bottom = 425.0
-theme_override_fonts/font = ExtResource("1_758bu")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/focus = SubResource("StyleBoxEmpty_xqvl5")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_4mvhb")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_wk33b")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_wcm3p")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_6jmb1")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_giep3")
-text = ">>"
-alignment = 0
-script = ExtResource("4_6b53s")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="NewGame"]
-stream = ExtResource("5_0tlkn")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="NewGame"]
-layout_mode = 0
-offset_left = 33.0
-offset_top = 5.0
-offset_right = 197.0
-offset_bottom = 26.0
-mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("1_758bu")
-theme_override_font_sizes/normal_font_size = 20
-text = "New Game"
+[node name="TitleMenu" parent="." instance=ExtResource("3_xhvqt")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 330)
@@ -79,96 +29,4 @@ position = Vector2(576, 330)
 stream = ExtResource("4_w6ovr")
 autoplay = true
 
-[node name="Continue" type="Button" parent="."]
-offset_left = 97.0
-offset_top = 425.0
-offset_right = 326.0
-offset_bottom = 454.0
-theme_override_fonts/font = ExtResource("1_758bu")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/focus = SubResource("StyleBoxEmpty_xqvl5")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_4mvhb")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_wk33b")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_wcm3p")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_6jmb1")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_giep3")
-text = ">>"
-alignment = 0
-script = ExtResource("4_6b53s")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Continue"]
-stream = ExtResource("5_0tlkn")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Continue"]
-layout_mode = 0
-offset_left = 33.0
-offset_top = 5.0
-offset_right = 197.0
-offset_bottom = 26.0
-mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("1_758bu")
-theme_override_font_sizes/normal_font_size = 20
-text = "Continue"
-
-[node name="CustomNight" type="Button" parent="."]
-offset_left = 97.0
-offset_top = 455.0
-offset_right = 326.0
-offset_bottom = 484.0
-theme_override_fonts/font = ExtResource("1_758bu")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/focus = SubResource("StyleBoxEmpty_xqvl5")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_4mvhb")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_wk33b")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_wcm3p")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_6jmb1")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_giep3")
-text = ">>"
-alignment = 0
-script = ExtResource("4_6b53s")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CustomNight"]
-stream = ExtResource("5_0tlkn")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="CustomNight"]
-layout_mode = 0
-offset_left = 33.0
-offset_top = 5.0
-offset_right = 197.0
-offset_bottom = 26.0
-mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("1_758bu")
-theme_override_font_sizes/normal_font_size = 20
-text = "Custom Night"
-
-[node name="Extras" type="Button" parent="."]
-offset_left = 97.0
-offset_top = 485.0
-offset_right = 326.0
-offset_bottom = 514.0
-theme_override_fonts/font = ExtResource("1_758bu")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/focus = SubResource("StyleBoxEmpty_xqvl5")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_4mvhb")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_wk33b")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_wcm3p")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_6jmb1")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_giep3")
-text = ">>"
-alignment = 0
-script = ExtResource("4_6b53s")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Extras"]
-stream = ExtResource("5_0tlkn")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Extras"]
-layout_mode = 0
-offset_left = 33.0
-offset_top = 5.0
-offset_right = 197.0
-offset_bottom = 26.0
-mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("1_758bu")
-theme_override_font_sizes/normal_font_size = 20
-text = "Extras
-"
+[connection signal="start_game" from="TitleMenu" to="." method="_on_title_menu_start_game"]
