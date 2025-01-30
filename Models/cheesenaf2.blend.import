@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dpn03nj1u7ol3"
-path="res://.godot/imported/cheesenaf2.blend-f7adee2539bea6226d60a3794bfd2686.scn"
+path="res://.godot/imported/cheesenaf2.blend-e3c0dc12aaaaa67be67ca78f4dafeaac.scn"
 
 [deps]
 
-source_file="res://models/cheesenaf2.blend"
-dest_files=["res://.godot/imported/cheesenaf2.blend-f7adee2539bea6226d60a3794bfd2686.scn"]
+source_file="res://Models/cheesenaf2.blend"
+dest_files=["res://.godot/imported/cheesenaf2.blend-e3c0dc12aaaaa67be67ca78f4dafeaac.scn"]
 
 [params]
 
@@ -33,45 +33,17 @@ animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
 "materials": {
-"ChairCloth": {
-"use_external/enabled": false,
-"use_external/path": "res://Models/ChairCloth.tres"
-},
-"ChairCloth.001": {
-"use_external/enabled": false,
-"use_external/path": "res://Models/ChairCloth.001.tres"
-},
-"Darkwood": {
-"use_external/enabled": false,
-"use_external/path": "res://Models/Darkwood.tres"
-},
 "Eyes": {
 "use_external/enabled": false,
 "use_external/path": "res://Models/Eyes.tres"
-},
-"Floor": {
-"use_external/enabled": false,
-"use_external/path": "res://Models/Floor.tres"
 },
 "Gold.001": {
 "use_external/enabled": false,
 "use_external/path": "res://Models/Gold.001.tres"
 },
-"LightDome": {
-"use_external/enabled": false,
-"use_external/path": "res://Models/LightDome.tres"
-},
-"LightDome.001": {
-"use_external/enabled": false,
-"use_external/path": "res://Models/LightDome.001.tres"
-},
 "LightPole": {
 "use_external/enabled": false,
 "use_external/path": "res://Models/LightPole.tres"
-},
-"LightPole.001": {
-"use_external/enabled": false,
-"use_external/path": "res://Models/LightPole.001.tres"
 },
 "LightPole.002": {
 "use_external/enabled": false,
@@ -114,18 +86,6 @@ _subresources={
 "Teeth": {
 "use_external/enabled": false,
 "use_external/path": "res://Models/Teeth.tres"
-},
-"Vent": {
-"use_external/enabled": false,
-"use_external/path": "res://Models/Vent.tres"
-},
-"Walls": {
-"use_external/enabled": false,
-"use_external/path": "res://Materials/walls.tres"
-},
-"Wood": {
-"use_external/enabled": false,
-"use_external/path": "res://Models/Wood.tres"
 },
 "cup": {
 "use_external/path": "res://Models/cup.tres"

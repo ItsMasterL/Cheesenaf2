@@ -1,14 +1,15 @@
 [gd_scene load_steps=41 format=4 uid="uid://kfokhb3cioir"]
 
-[ext_resource type="PackedScene" uid="uid://bs378s4kwr2ux" path="res://scenes/foxy_plush.tscn" id="1_gqipk"]
-[ext_resource type="Texture2D" uid="uid://bi3vtwctdv5ub" path="res://models/textures/Cup.png" id="7_3jvyr"]
-[ext_resource type="Texture2D" uid="uid://c6v23n3ihlgyw" path="res://models/textures/ENV_TEX_Desk_Fan_BaseColor.png" id="10_gkukb"]
-[ext_resource type="PackedScene" uid="uid://dpn03nj1u7ol3" path="res://models/cheesenaf2.blend" id="13_3pria"]
+[ext_resource type="PackedScene" uid="uid://bs378s4kwr2ux" path="res://Scenes/foxy_plush.tscn" id="1_gqipk"]
+[ext_resource type="Texture2D" uid="uid://bi3vtwctdv5ub" path="res://Models/textures/Cup.png" id="7_3jvyr"]
+[ext_resource type="PackedScene" uid="uid://bxpmp04xt6u6q" path="res://Scenes/tablet_os.tscn" id="9_l1dhy"]
+[ext_resource type="Texture2D" uid="uid://c6v23n3ihlgyw" path="res://Models/textures/ENV_TEX_Desk_Fan_BaseColor.png" id="10_gkukb"]
+[ext_resource type="PackedScene" uid="uid://dpn03nj1u7ol3" path="res://Models/cheesenaf2.blend" id="13_3pria"]
 [ext_resource type="Script" path="res://scripts/toggle_cup.gd" id="25_hni3l"]
-[ext_resource type="AudioStream" uid="uid://bip471h5exvnx" path="res://sounds/slurp.wav" id="26_plhk0"]
-[ext_resource type="AudioStream" uid="uid://btoctqew2mccg" path="res://sounds/fan.wav" id="28_cfwgc"]
+[ext_resource type="AudioStream" uid="uid://bip471h5exvnx" path="res://Sounds/slurp.wav" id="26_plhk0"]
+[ext_resource type="AudioStream" uid="uid://btoctqew2mccg" path="res://Sounds/fan.wav" id="28_cfwgc"]
 [ext_resource type="Script" path="res://scripts/toggle_tablet.gd" id="29_wa4as"]
-[ext_resource type="AudioStream" uid="uid://c3su1po70v7f7" path="res://sounds/camera_toggle.wav" id="30_d1od8"]
+[ext_resource type="AudioStream" uid="uid://c3su1po70v7f7" path="res://Sounds/camera_toggle.wav" id="30_d1od8"]
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="31_63unw"]
 [ext_resource type="Script" path="res://scripts/player_raycast.gd" id="32_5ed2l"]
 
@@ -233,22 +234,18 @@ resource_name = "Tablet"
 cull_mode = 2
 roughness = 0.862205
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_r2lin"]
-viewport_path = NodePath("Cameras/SubViewport")
-
 [sub_resource type="ViewportTexture" id="ViewportTexture_8e1bu"]
-viewport_path = NodePath("Cameras/SubViewport")
+viewport_path = NodePath("TabletOnDesk/Tablet/TabletScreen")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h4p0u"]
 resource_local_to_scene = true
 resource_name = "Screen"
 cull_mode = 2
-albedo_texture = SubResource("ViewportTexture_r2lin")
+albedo_color = Color(0, 0, 0, 1)
 albedo_texture_force_srgb = true
 roughness = 0.255906
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 6.95
 emission_operator = 1
 emission_texture = SubResource("ViewportTexture_8e1bu")
 
@@ -461,6 +458,13 @@ libraries = {
 "": SubResource("AnimationLibrary_0lqxg")
 }
 
+[node name="TabletScreen" type="SubViewport" parent="TabletOnDesk/Tablet"]
+disable_3d = true
+audio_listener_enable_2d = true
+size = Vector2i(1280, 800)
+
+[node name="TabletOS" parent="TabletOnDesk/Tablet/TabletScreen" instance=ExtResource("9_l1dhy")]
+
 [node name="Player" type="CharacterBody3D" parent="."]
 script = ExtResource("31_63unw")
 
@@ -473,6 +477,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Player/Head"]
 keep_aspect = 0
+cull_mask = 1048571
 environment = SubResource("Environment_7ndti")
 current = true
 
@@ -497,7 +502,7 @@ transform = Transform3D(0.999722, 0, 0.0235598, 0.00126423, 0.998559, -0.0536456
 visible = false
 light_energy = 3.0
 shadow_enabled = true
-spot_range = 12.7387
+spot_range = 23.6456
 spot_angle = 20.4784
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Player/Head/Camera3D/SpotLight3D"]
@@ -510,12 +515,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94943, 0)
 
 [node name="Cameras" type="Node3D" parent="."]
 
-[node name="SubViewport" type="SubViewport" parent="Cameras"]
-use_hdr_2d = true
-size = Vector2i(1280, 800)
+[node name="Camera1" type="Camera3D" parent="Cameras"]
+transform = Transform3D(-0.367654, -0.540177, 0.756994, 0, 0.814004, 0.580859, -0.929963, 0.213555, -0.299272, 29.6849, 3.88859, -5.52595)
 
-[node name="Camera1" type="Camera3D" parent="Cameras/SubViewport"]
-transform = Transform3D(-0.367654, -0.540177, 0.756994, 0, 0.814004, 0.580859, -0.929963, 0.213555, -0.299272, 5.83918, 3.88859, -0.679953)
+[node name="SpotLight3D" type="SpotLight3D" parent="Cameras/Camera1"]
+layers = 4
+light_energy = 0.25
+spot_range = 21.7278
+spot_angle = 31.463
 
 [node name="Map" parent="." instance=ExtResource("13_3pria")]
 

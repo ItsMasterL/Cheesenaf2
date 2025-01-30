@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d4i447g3vnp3u"
-path.s3tc="res://.godot/imported/Foxy3.png-58fce633221a6fec28d7f5d505fb1fa0.s3tc.ctex"
+path.s3tc="res://.godot/imported/Foxy3.png-eb406748f0e12d829dcc9dc4ef2bf18b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/Foxy3.png"
-dest_files=["res://.godot/imported/Foxy3.png-58fce633221a6fec28d7f5d505fb1fa0.s3tc.ctex"]
+source_file="res://Textures/Foxy3.png"
+dest_files=["res://.godot/imported/Foxy3.png-eb406748f0e12d829dcc9dc4ef2bf18b.s3tc.ctex"]
 
 [params]
 

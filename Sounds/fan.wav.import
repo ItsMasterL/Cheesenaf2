@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://btoctqew2mccg"
-path="res://.godot/imported/fan.wav-dd800905c3b864435258bffc00abfe53.sample"
+path="res://.godot/imported/fan.wav-975c0ed2721f73ed76003c648a3621e5.sample"
 
 [deps]
 
-source_file="res://sounds/fan.wav"
-dest_files=["res://.godot/imported/fan.wav-dd800905c3b864435258bffc00abfe53.sample"]
+source_file="res://Sounds/fan.wav"
+dest_files=["res://.godot/imported/fan.wav-975c0ed2721f73ed76003c648a3621e5.sample"]
 
 [params]
 
