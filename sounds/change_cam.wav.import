@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c0p4ukecy1cjj"
-path="res://.godot/imported/change_cam.wav-f6d1d340c2512a554f3453244810fc7d.sample"
+path="res://.godot/imported/change_cam.wav-da930dab7cbfb02600868d16f5a20f49.sample"
 
 [deps]
 
-source_file="res://Sounds/change_cam.wav"
-dest_files=["res://.godot/imported/change_cam.wav-f6d1d340c2512a554f3453244810fc7d.sample"]
+source_file="res://sounds/change_cam.wav"
+dest_files=["res://.godot/imported/change_cam.wav-da930dab7cbfb02600868d16f5a20f49.sample"]
 
 [params]
 

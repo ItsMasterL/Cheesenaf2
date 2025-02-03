@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bqd8cxa5xcuvn"
-path="res://.godot/imported/OfficeCeiling001_1K-JPG_Metalness.jpg-b5041e67f7020f4a109ba58c15520f59.ctex"
+path="res://.godot/imported/OfficeCeiling001_1K-JPG_Metalness.jpg-0c90e33ad2cec55aea0f6c597712eaef.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Models/textures/OfficeCeiling001_1K-JPG_Metalness.jpg"
-dest_files=["res://.godot/imported/OfficeCeiling001_1K-JPG_Metalness.jpg-b5041e67f7020f4a109ba58c15520f59.ctex"]
+source_file="res://models/textures/OfficeCeiling001_1K-JPG_Metalness.jpg"
+dest_files=["res://.godot/imported/OfficeCeiling001_1K-JPG_Metalness.jpg-0c90e33ad2cec55aea0f6c597712eaef.ctex"]
 
 [params]
 

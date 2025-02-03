@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c70vi1sqw8vjc"
-path="res://.godot/imported/andre-ouellet-b1bgPw5sLus-unsplash.jpg-0c477b92a75468511f676ab686c4dad0.ctex"
+path="res://.godot/imported/andre-ouellet-b1bgPw5sLus-unsplash.jpg-daaa1aabf95eea81c7636f8632290f6e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/andre-ouellet-b1bgPw5sLus-unsplash.jpg"
-dest_files=["res://.godot/imported/andre-ouellet-b1bgPw5sLus-unsplash.jpg-0c477b92a75468511f676ab686c4dad0.ctex"]
+source_file="res://textures/andre-ouellet-b1bgPw5sLus-unsplash.jpg"
+dest_files=["res://.godot/imported/andre-ouellet-b1bgPw5sLus-unsplash.jpg-daaa1aabf95eea81c7636f8632290f6e.ctex"]
 
 [params]
 

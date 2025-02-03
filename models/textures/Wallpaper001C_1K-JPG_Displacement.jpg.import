@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dgrei8atg1xdb"
-path="res://.godot/imported/Wallpaper001C_1K-JPG_Displacement.jpg-766368815429937460d405d1591ad8ef.ctex"
+path="res://.godot/imported/Wallpaper001C_1K-JPG_Displacement.jpg-027f8fd7357f006f1b2fc14ae6ee58e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Models/textures/Wallpaper001C_1K-JPG_Displacement.jpg"
-dest_files=["res://.godot/imported/Wallpaper001C_1K-JPG_Displacement.jpg-766368815429937460d405d1591ad8ef.ctex"]
+source_file="res://models/textures/Wallpaper001C_1K-JPG_Displacement.jpg"
+dest_files=["res://.godot/imported/Wallpaper001C_1K-JPG_Displacement.jpg-027f8fd7357f006f1b2fc14ae6ee58e2.ctex"]
 
 [params]
 

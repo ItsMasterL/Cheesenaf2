@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c5qeb6obchjwr"
-path.s3tc="res://.godot/imported/Wallpaper001C_1K-JPG_Roughness.jpg-0d3f0c449c12902989c2f216d9fb7d24.s3tc.ctex"
+path.s3tc="res://.godot/imported/Wallpaper001C_1K-JPG_Roughness.jpg-48406bdc8cadfb1f91ec6406e5063b25.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Models/textures/Wallpaper001C_1K-JPG_Roughness.jpg"
-dest_files=["res://.godot/imported/Wallpaper001C_1K-JPG_Roughness.jpg-0d3f0c449c12902989c2f216d9fb7d24.s3tc.ctex"]
+source_file="res://models/textures/Wallpaper001C_1K-JPG_Roughness.jpg"
+dest_files=["res://.godot/imported/Wallpaper001C_1K-JPG_Roughness.jpg-48406bdc8cadfb1f91ec6406e5063b25.s3tc.ctex"]
 
 [params]
 

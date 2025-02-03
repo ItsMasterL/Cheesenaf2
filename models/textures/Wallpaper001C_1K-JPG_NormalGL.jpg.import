@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://pvv43wjq4cuu"
-path.s3tc="res://.godot/imported/Wallpaper001C_1K-JPG_NormalGL.jpg-ebb53ab6b489de00ade903610ce3cd8f.s3tc.ctex"
+path.s3tc="res://.godot/imported/Wallpaper001C_1K-JPG_NormalGL.jpg-45cb0a0800f7bbb1778b9914cbe7b98a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Models/textures/Wallpaper001C_1K-JPG_NormalGL.jpg"
-dest_files=["res://.godot/imported/Wallpaper001C_1K-JPG_NormalGL.jpg-ebb53ab6b489de00ade903610ce3cd8f.s3tc.ctex"]
+source_file="res://models/textures/Wallpaper001C_1K-JPG_NormalGL.jpg"
+dest_files=["res://.godot/imported/Wallpaper001C_1K-JPG_NormalGL.jpg-45cb0a0800f7bbb1778b9914cbe7b98a.s3tc.ctex"]
 
 [params]
 

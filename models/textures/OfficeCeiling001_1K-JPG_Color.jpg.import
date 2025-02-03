@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bwdjn2bh2ietb"
-path.s3tc="res://.godot/imported/OfficeCeiling001_1K-JPG_Color.jpg-eafab7fc639a65ac8090f9d2e67d871c.s3tc.ctex"
+path.s3tc="res://.godot/imported/OfficeCeiling001_1K-JPG_Color.jpg-f77b88ac243f84f85bf63d33607db1bd.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Models/textures/OfficeCeiling001_1K-JPG_Color.jpg"
-dest_files=["res://.godot/imported/OfficeCeiling001_1K-JPG_Color.jpg-eafab7fc639a65ac8090f9d2e67d871c.s3tc.ctex"]
+source_file="res://models/textures/OfficeCeiling001_1K-JPG_Color.jpg"
+dest_files=["res://.godot/imported/OfficeCeiling001_1K-JPG_Color.jpg-f77b88ac243f84f85bf63d33607db1bd.s3tc.ctex"]
 
 [params]
 

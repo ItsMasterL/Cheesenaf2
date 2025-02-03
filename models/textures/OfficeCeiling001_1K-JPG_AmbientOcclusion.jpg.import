@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cyguuegg0y5jb"
-path="res://.godot/imported/OfficeCeiling001_1K-JPG_AmbientOcclusion.jpg-554deee00852ee8d82300e4f5db44cbe.ctex"
+path="res://.godot/imported/OfficeCeiling001_1K-JPG_AmbientOcclusion.jpg-51f80ea73b3d9de747cf57c74ec0aa52.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Models/textures/OfficeCeiling001_1K-JPG_AmbientOcclusion.jpg"
-dest_files=["res://.godot/imported/OfficeCeiling001_1K-JPG_AmbientOcclusion.jpg-554deee00852ee8d82300e4f5db44cbe.ctex"]
+source_file="res://models/textures/OfficeCeiling001_1K-JPG_AmbientOcclusion.jpg"
+dest_files=["res://.godot/imported/OfficeCeiling001_1K-JPG_AmbientOcclusion.jpg-51f80ea73b3d9de747cf57c74ec0aa52.ctex"]
 
 [params]
 

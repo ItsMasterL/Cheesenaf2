@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://duvbu0ep0tb3l"
-path="res://.godot/imported/cheesenaf 2 tablet home.png-3fe16d7f02d87b7add0c1fb30afe28de.ctex"
+path="res://.godot/imported/cheesenaf 2 tablet home.png-fef6009644ccb7e4b2733bc6b29821a2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/cheesenaf 2 tablet home.png"
-dest_files=["res://.godot/imported/cheesenaf 2 tablet home.png-3fe16d7f02d87b7add0c1fb30afe28de.ctex"]
+source_file="res://textures/cheesenaf 2 tablet home.png"
+dest_files=["res://.godot/imported/cheesenaf 2 tablet home.png-fef6009644ccb7e4b2733bc6b29821a2.ctex"]
 
 [params]
 

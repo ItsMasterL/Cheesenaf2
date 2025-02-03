@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dfcmqafki8op5"
-path="res://.godot/imported/sting7.wav-22804a8fdb59893cc508f39fa57b914a.sample"
+path="res://.godot/imported/sting7.wav-ce5b3c209522fb2f2c42b7f6b9a42389.sample"
 
 [deps]
 
-source_file="res://Sounds/sting7.wav"
-dest_files=["res://.godot/imported/sting7.wav-22804a8fdb59893cc508f39fa57b914a.sample"]
+source_file="res://sounds/sting7.wav"
+dest_files=["res://.godot/imported/sting7.wav-ce5b3c209522fb2f2c42b7f6b9a42389.sample"]
 
 [params]
 

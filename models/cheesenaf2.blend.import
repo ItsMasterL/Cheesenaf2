@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dpn03nj1u7ol3"
-path="res://.godot/imported/cheesenaf2.blend-e3c0dc12aaaaa67be67ca78f4dafeaac.scn"
+path="res://.godot/imported/cheesenaf2.blend-f7adee2539bea6226d60a3794bfd2686.scn"
 
 [deps]
 
-source_file="res://Models/cheesenaf2.blend"
-dest_files=["res://.godot/imported/cheesenaf2.blend-e3c0dc12aaaaa67be67ca78f4dafeaac.scn"]
+source_file="res://models/cheesenaf2.blend"
+dest_files=["res://.godot/imported/cheesenaf2.blend-f7adee2539bea6226d60a3794bfd2686.scn"]
 
 [params]
 
@@ -35,66 +35,67 @@ _subresources={
 "materials": {
 "Eyes": {
 "use_external/enabled": false,
-"use_external/path": "res://Models/Eyes.tres"
+"use_external/path": "res://models/Eyes.tres"
 },
 "Gold.001": {
 "use_external/enabled": false,
-"use_external/path": "res://Models/Gold.001.tres"
+"use_external/path": "res://models/Gold.001.tres"
 },
 "LightPole": {
 "use_external/enabled": false,
-"use_external/path": "res://Models/LightPole.tres"
+"use_external/path": "res://models/LightPole.tres"
 },
 "LightPole.002": {
 "use_external/enabled": false,
-"use_external/path": "res://Models/LightPole.002.tres"
+"use_external/path": "res://models/LightPole.002.tres"
 },
 "M_OfficeModern_BulletinBoard": {
 "use_external/enabled": false,
-"use_external/path": "res://Models/M_OfficeModern_BulletinBoard.tres"
+"use_external/path": "res://models/M_OfficeModern_BulletinBoard.tres"
 },
 "Mouth": {
 "use_external/enabled": false,
-"use_external/path": "res://Models/Mouth.tres"
+"use_external/path": "res://models/Mouth.tres"
 },
 "Nose": {
 "use_external/enabled": false,
-"use_external/path": "res://Models/Nose.tres"
+"use_external/path": "res://models/Nose.tres"
 },
 "Screen": {
-"use_external/path": "res://Models/Screen.tres"
+"use_external/path": "res://models/Screen.tres"
 },
 "Suit1": {
 "use_external/enabled": false,
-"use_external/path": "res://Models/Suit1.tres"
+"use_external/path": "res://models/Suit1.tres"
 },
 "Suit2": {
 "use_external/enabled": false,
-"use_external/path": "res://Models/Suit2.tres"
+"use_external/path": "res://models/Suit2.tres"
 },
 "Suit3": {
 "use_external/enabled": false,
-"use_external/path": "res://Models/Suit3.tres"
+"use_external/path": "res://models/Suit3.tres"
 },
 "Suit4": {
 "use_external/enabled": false,
-"use_external/path": "res://Models/Suit4.tres"
+"use_external/path": "res://models/Suit4.tres"
 },
 "Tablet": {
-"use_external/path": "res://Models/Tablet.tres"
+"use_external/path": "res://models/Tablet.tres"
 },
 "Teeth": {
 "use_external/enabled": false,
-"use_external/path": "res://Models/Teeth.tres"
+"use_external/path": "res://models/Teeth.tres"
 },
 "cup": {
-"use_external/path": "res://Models/cup.tres"
+"use_external/enabled": false,
+"use_external/path": "res://models/cup.tres"
 },
 "pskmat0.003": {
-"use_external/path": "res://Models/pskmat0.003.tres"
+"use_external/path": "res://models/pskmat0.003.tres"
 },
 "pskmat0.005": {
-"use_external/path": "res://Models/pskmat0.005.tres"
+"use_external/path": "res://models/pskmat0.005.tres"
 }
 },
 "nodes": {

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://pavx4refjeg2"
-path="res://.godot/imported/Wood051_1K-JPG_Displacement.jpg-feb0c4966514b24dbd33a99e6b90760c.ctex"
+path="res://.godot/imported/Wood051_1K-JPG_Displacement.jpg-3e6a8b16c57e9894c3752f6120693084.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Models/textures/Wood051_1K-JPG_Displacement.jpg"
-dest_files=["res://.godot/imported/Wood051_1K-JPG_Displacement.jpg-feb0c4966514b24dbd33a99e6b90760c.ctex"]
+source_file="res://models/textures/Wood051_1K-JPG_Displacement.jpg"
+dest_files=["res://.godot/imported/Wood051_1K-JPG_Displacement.jpg-3e6a8b16c57e9894c3752f6120693084.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bxpmp04xt6u6q"]
 
-[ext_resource type="Texture2D" uid="uid://c70vi1sqw8vjc" path="res://Textures/andre-ouellet-b1bgPw5sLus-unsplash.jpg" id="1_3v8y3"]
-[ext_resource type="Texture2D" uid="uid://duvbu0ep0tb3l" path="res://Textures/cheesenaf 2 tablet home.png" id="2_pge4p"]
+[ext_resource type="Texture2D" uid="uid://c70vi1sqw8vjc" path="res://textures/andre-ouellet-b1bgPw5sLus-unsplash.jpg" id="1_3v8y3"]
+[ext_resource type="Texture2D" uid="uid://duvbu0ep0tb3l" path="res://textures/cheesenaf 2 tablet home.png" id="2_pge4p"]
 
 [node name="Node2D" type="Node2D"]
 

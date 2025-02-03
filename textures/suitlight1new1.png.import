@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://baek1bfvyge65"
-path.s3tc="res://.godot/imported/suitlight1new1.png-849ca67cccf4e10585853e72ab5f5f2b.s3tc.ctex"
+path.s3tc="res://.godot/imported/suitlight1new1.png-d7f734ce5806986375d007e155676c69.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Textures/suitlight1new1.png"
-dest_files=["res://.godot/imported/suitlight1new1.png-849ca67cccf4e10585853e72ab5f5f2b.s3tc.ctex"]
+source_file="res://textures/suitlight1new1.png"
+dest_files=["res://.godot/imported/suitlight1new1.png-d7f734ce5806986375d007e155676c69.s3tc.ctex"]
 
 [params]
 

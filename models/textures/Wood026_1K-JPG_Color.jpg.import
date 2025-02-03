@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dudgr8b4fdm4e"
-path.s3tc="res://.godot/imported/Wood026_1K-JPG_Color.jpg-6666e8f79d1dacb1a02cfa2b35b163c7.s3tc.ctex"
+uid="uid://dewwpermxqstd"
+path.s3tc="res://.godot/imported/Wood026_1K-JPG_Color.jpg-78a9647915d2e83d7a517eff83bc2db8.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Models/textures/Wood026_1K-JPG_Color.jpg"
-dest_files=["res://.godot/imported/Wood026_1K-JPG_Color.jpg-6666e8f79d1dacb1a02cfa2b35b163c7.s3tc.ctex"]
+source_file="res://models/textures/Wood026_1K-JPG_Color.jpg"
+dest_files=["res://.godot/imported/Wood026_1K-JPG_Color.jpg-78a9647915d2e83d7a517eff83bc2db8.s3tc.ctex"]
 
 [params]
 

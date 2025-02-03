@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://5vcsuclgi541"
-path.s3tc="res://.godot/imported/Fabric042_1K-JPG_Roughness.jpg-59c8cb0d1a46521ccfc02bc620989ecd.s3tc.ctex"
+path.s3tc="res://.godot/imported/Fabric042_1K-JPG_Roughness.jpg-cea190dd6520bd583ea4fde5d02aa82b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Models/textures/Fabric042_1K-JPG_Roughness.jpg"
-dest_files=["res://.godot/imported/Fabric042_1K-JPG_Roughness.jpg-59c8cb0d1a46521ccfc02bc620989ecd.s3tc.ctex"]
+source_file="res://models/textures/Fabric042_1K-JPG_Roughness.jpg"
+dest_files=["res://.godot/imported/Fabric042_1K-JPG_Roughness.jpg-cea190dd6520bd583ea4fde5d02aa82b.s3tc.ctex"]
 
 [params]
 

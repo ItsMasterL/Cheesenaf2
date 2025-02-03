@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dj1trd4sg3ax4"
-path="res://.godot/imported/Fabric042_1K-JPG_Displacement.jpg-8f554a0c5ba6e9dce92073392ac6da38.ctex"
+path="res://.godot/imported/Fabric042_1K-JPG_Displacement.jpg-00206c48a6515cc927ef7f17cf62b163.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Models/textures/Fabric042_1K-JPG_Displacement.jpg"
-dest_files=["res://.godot/imported/Fabric042_1K-JPG_Displacement.jpg-8f554a0c5ba6e9dce92073392ac6da38.ctex"]
+source_file="res://models/textures/Fabric042_1K-JPG_Displacement.jpg"
+dest_files=["res://.godot/imported/Fabric042_1K-JPG_Displacement.jpg-00206c48a6515cc927ef7f17cf62b163.ctex"]
 
 [params]
 

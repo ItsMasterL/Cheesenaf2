@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://2yabuv2f170c"
-path="res://.godot/imported/OfficeCeiling001_1K-JPG_Displacement.jpg-71507be823f517f96bdfe077dcae9d3b.ctex"
+path="res://.godot/imported/OfficeCeiling001_1K-JPG_Displacement.jpg-32749dd26f2df310cdf250000b0e2ab6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Models/textures/OfficeCeiling001_1K-JPG_Displacement.jpg"
-dest_files=["res://.godot/imported/OfficeCeiling001_1K-JPG_Displacement.jpg-71507be823f517f96bdfe077dcae9d3b.ctex"]
+source_file="res://models/textures/OfficeCeiling001_1K-JPG_Displacement.jpg"
+dest_files=["res://.godot/imported/OfficeCeiling001_1K-JPG_Displacement.jpg-32749dd26f2df310cdf250000b0e2ab6.ctex"]
 
 [params]
 

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bwcaw456vq303"
-path.s3tc="res://.godot/imported/Wood051_1K-JPG_Roughness.jpg-908d79909afcdb51ae579ed1998fb3b8.s3tc.ctex"
+path.s3tc="res://.godot/imported/Wood051_1K-JPG_Roughness.jpg-582664e9359dec341322946acc0147d7.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Models/textures/Wood051_1K-JPG_Roughness.jpg"
-dest_files=["res://.godot/imported/Wood051_1K-JPG_Roughness.jpg-908d79909afcdb51ae579ed1998fb3b8.s3tc.ctex"]
+source_file="res://models/textures/Wood051_1K-JPG_Roughness.jpg"
+dest_files=["res://.godot/imported/Wood051_1K-JPG_Roughness.jpg-582664e9359dec341322946acc0147d7.s3tc.ctex"]
 
 [params]
 
