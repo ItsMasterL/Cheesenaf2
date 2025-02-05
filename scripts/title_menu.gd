@@ -20,3 +20,4 @@ func _on_button_unhover(sender: int):
 
 func _on_button_pressed():
 	start_game.emit()
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

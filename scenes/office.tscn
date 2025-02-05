@@ -1,7 +1,8 @@
-[gd_scene load_steps=41 format=4 uid="uid://kfokhb3cioir"]
+[gd_scene load_steps=42 format=4 uid="uid://kfokhb3cioir"]
 
 [ext_resource type="PackedScene" uid="uid://bs378s4kwr2ux" path="res://scenes/foxy_plush.tscn" id="1_gqipk"]
 [ext_resource type="Texture2D" uid="uid://bi3vtwctdv5ub" path="res://models/textures/Cup.png" id="7_3jvyr"]
+[ext_resource type="Script" path="res://scripts/tablet_screen.gd" id="7_g7jux"]
 [ext_resource type="PackedScene" uid="uid://bxpmp04xt6u6q" path="res://scenes/tablet_os.tscn" id="9_l1dhy"]
 [ext_resource type="Texture2D" uid="uid://c6v23n3ihlgyw" path="res://models/textures/ENV_TEX_Desk_Fan_BaseColor.png" id="10_gkukb"]
 [ext_resource type="PackedScene" uid="uid://dpn03nj1u7ol3" path="res://models/cheesenaf2.blend" id="13_3pria"]
@@ -437,9 +438,11 @@ skeleton = NodePath("")
 transform = Transform3D(0.958323, 0, -0.285688, 0, 1, 0, 0.285688, 0, 0.958323, 0.765, 1.048, -0.739)
 
 [node name="Tablet" type="MeshInstance3D" parent="TabletOnDesk"]
-transform = Transform3D(0.145326, 0, 0, 0, 0.145326, 0, 0, 0, 0.145326, 0, 0, 0)
+transform = Transform3D(0.145326, 0, 0, 0, -5.26079e-07, 0.145326, 0, -0.145326, -5.26079e-07, -0.000300169, -0.116019, -0.000180776)
 mesh = SubResource("ArrayMesh_4f65m")
 skeleton = NodePath("")
+surface_material_override/1 = SubResource("StandardMaterial3D_h4p0u")
+script = ExtResource("7_g7jux")
 
 [node name="TabletBody" type="StaticBody3D" parent="TabletOnDesk/Tablet"]
 script = ExtResource("29_wa4as")
@@ -461,6 +464,7 @@ libraries = {
 [node name="TabletScreen" type="SubViewport" parent="TabletOnDesk/Tablet"]
 disable_3d = true
 audio_listener_enable_2d = true
+physics_object_picking = true
 size = Vector2i(1280, 800)
 
 [node name="TabletOS" parent="TabletOnDesk/Tablet/TabletScreen" instance=ExtResource("9_l1dhy")]

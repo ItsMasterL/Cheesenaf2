@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxpmp04xt6u6q"]
+[gd_scene load_steps=5 format=3 uid="uid://bxpmp04xt6u6q"]
 
 [ext_resource type="Texture2D" uid="uid://c70vi1sqw8vjc" path="res://textures/andre-ouellet-b1bgPw5sLus-unsplash.jpg" id="1_3v8y3"]
 [ext_resource type="Texture2D" uid="uid://duvbu0ep0tb3l" path="res://textures/cheesenaf 2 tablet home.png" id="2_pge4p"]
+[ext_resource type="AudioStream" uid="uid://c76mwiei7xlra" path="res://sounds/boop.wav" id="3_5dd13"]
+[ext_resource type="Script" path="res://scripts/tablet_test.gd" id="4_31wx5"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -38,3 +40,17 @@ offset_right = 952.0
 offset_bottom = 30.0
 mouse_filter = 1
 text = "12:00 AM"
+
+[node name="FoxButton" type="Button" parent="ViewportBorder/TabletBorder"]
+layout_mode = 0
+offset_left = 199.0
+offset_top = 195.0
+offset_right = 344.0
+offset_bottom = 257.0
+text = "Boopa the snoota"
+
+[node name="FoxBoop" type="AudioStreamPlayer2D" parent="ViewportBorder/TabletBorder"]
+stream = ExtResource("3_5dd13")
+script = ExtResource("4_31wx5")
+
+[connection signal="pressed" from="ViewportBorder/TabletBorder/FoxButton" to="ViewportBorder/TabletBorder/FoxBoop" method="_boop_fox"]

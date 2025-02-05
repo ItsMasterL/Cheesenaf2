@@ -9,9 +9,7 @@ func _unhandled_input(event):
 		flashlight.visible = true
 	if event.is_action_released(&"Flashlight"):
 		flashlight.visible = false
-	if event.is_action_pressed(&"LeftClick"):
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	elif event.is_action_pressed(&"ui_cancel"):
+	if event.is_action_pressed(&"ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
