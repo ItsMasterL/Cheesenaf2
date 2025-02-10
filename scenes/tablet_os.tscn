@@ -14,43 +14,39 @@ anchors_preset = 0
 offset_right = 1281.0
 offset_bottom = 800.0
 
-[node name="TabletBorder" type="Control" parent="ViewportBorder"]
-clip_contents = true
-anchors_preset = 0
-offset_left = 164.0
-offset_top = 104.0
-offset_right = 1116.0
-offset_bottom = 697.0
-
-[node name="Background" type="Sprite2D" parent="ViewportBorder/TabletBorder"]
-position = Vector2(-259, -176)
+[node name="Background" type="Sprite2D" parent="ViewportBorder"]
+z_index = -1
+position = Vector2(-95, -72)
 scale = Vector2(0.427, 0.4)
 texture = ExtResource("1_3v8y3")
 centered = false
 
-[node name="Cheesenaf2TabletHome" type="Sprite2D" parent="ViewportBorder/TabletBorder"]
-scale = Vector2(0.74375, 0.74125)
+[node name="Cheesenaf2TabletHome" type="Sprite2D" parent="ViewportBorder"]
+position = Vector2(-2.96115, 0)
+scale = Vector2(0.928876, 0.92125)
 texture = ExtResource("2_pge4p")
 centered = false
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ViewportBorder/TabletBorder"]
+[node name="RichTextLabel" type="RichTextLabel" parent="ViewportBorder"]
 layout_mode = 0
-offset_left = 864.0
-offset_right = 952.0
-offset_bottom = 30.0
+offset_left = 1079.0
+offset_top = 7.0
+offset_right = 1167.0
+offset_bottom = 37.0
 mouse_filter = 1
 text = "12:00 AM"
 
-[node name="FoxButton" type="Button" parent="ViewportBorder/TabletBorder"]
+[node name="FoxButton" type="Button" parent="ViewportBorder"]
 layout_mode = 0
-offset_left = 199.0
-offset_top = 195.0
-offset_right = 344.0
-offset_bottom = 257.0
+offset_left = 363.0
+offset_top = 299.0
+offset_right = 508.0
+offset_bottom = 361.0
 text = "Boopa the snoota"
 
-[node name="FoxBoop" type="AudioStreamPlayer2D" parent="ViewportBorder/TabletBorder"]
+[node name="FoxBoop" type="AudioStreamPlayer2D" parent="ViewportBorder"]
+position = Vector2(164, 104)
 stream = ExtResource("3_5dd13")
 script = ExtResource("4_31wx5")
 
-[connection signal="pressed" from="ViewportBorder/TabletBorder/FoxButton" to="ViewportBorder/TabletBorder/FoxBoop" method="_boop_fox"]
+[connection signal="pressed" from="ViewportBorder/FoxButton" to="ViewportBorder/FoxBoop" method="_boop_fox"]

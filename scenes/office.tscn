@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://kfokhb3cioir"]
+[gd_scene load_steps=44 format=4 uid="uid://kfokhb3cioir"]
 
 [ext_resource type="PackedScene" uid="uid://bs378s4kwr2ux" path="res://scenes/foxy_plush.tscn" id="1_gqipk"]
 [ext_resource type="Texture2D" uid="uid://bi3vtwctdv5ub" path="res://models/textures/Cup.png" id="7_3jvyr"]
@@ -236,7 +236,7 @@ cull_mode = 2
 roughness = 0.862205
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_8e1bu"]
-viewport_path = NodePath("TabletOnDesk/Tablet/TabletScreen")
+viewport_path = NodePath("TabletOnDesk/Tablet/ScreenQuad/TabletScreen")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h4p0u"]
 resource_local_to_scene = true
@@ -373,6 +373,11 @@ _data = {
 "flipup": SubResource("Animation_elb40")
 }
 
+[sub_resource type="QuadMesh" id="QuadMesh_xv7s7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j1onk"]
+size = Vector3(1, 1, 0.0298462)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_a413t"]
 size = Vector3(1, 2.37891, 1)
 
@@ -461,13 +466,26 @@ libraries = {
 "": SubResource("AnimationLibrary_0lqxg")
 }
 
-[node name="TabletScreen" type="SubViewport" parent="TabletOnDesk/Tablet"]
+[node name="ScreenQuad" type="MeshInstance3D" parent="TabletOnDesk/Tablet"]
+transform = Transform3D(1.96, 0, 0, 0, -6.14145e-08, 1.405, 0, -1.405, -6.14145e-08, 0, 0.0805327, -3.52019e-09)
+mesh = SubResource("QuadMesh_xv7s7")
+surface_material_override/0 = SubResource("StandardMaterial3D_h4p0u")
+
+[node name="Area3D" type="Area3D" parent="TabletOnDesk/Tablet/ScreenQuad"]
+collision_layer = 2
+input_capture_on_drag = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TabletOnDesk/Tablet/ScreenQuad/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.93889e-18, 2.77556e-17, 0.0017248)
+shape = SubResource("BoxShape3D_j1onk")
+
+[node name="TabletScreen" type="SubViewport" parent="TabletOnDesk/Tablet/ScreenQuad"]
 disable_3d = true
 audio_listener_enable_2d = true
-physics_object_picking = true
-size = Vector2i(1280, 800)
+gui_embed_subwindows = true
+size = Vector2i(1185, 730)
 
-[node name="TabletOS" parent="TabletOnDesk/Tablet/TabletScreen" instance=ExtResource("9_l1dhy")]
+[node name="TabletOS" parent="TabletOnDesk/Tablet/ScreenQuad/TabletScreen" instance=ExtResource("9_l1dhy")]
 
 [node name="Player" type="CharacterBody3D" parent="."]
 script = ExtResource("31_63unw")

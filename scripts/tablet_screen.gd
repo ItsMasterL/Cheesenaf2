@@ -7,9 +7,9 @@ var last_event_pos2D = null
 # The time of the last event in seconds since engine start.
 var last_event_time: float = -1.0
 
-@onready var node_viewport = $TabletScreen
-@onready var node_quad = self
-@onready var node_area = $TabletBody
+@onready var node_viewport = $ScreenQuad/TabletScreen
+@onready var node_quad = $ScreenQuad
+@onready var node_area = $ScreenQuad/Area3D
 
 func _ready():
 	node_area.mouse_entered.connect(_mouse_entered_area)
@@ -17,7 +17,7 @@ func _ready():
 	node_area.input_event.connect(_mouse_input_event)
 
 	# If the material is NOT set to use billboard settings, then avoid running billboard specific code
-	if node_quad.get_surface_override_material(1).billboard_mode == BaseMaterial3D.BillboardMode.BILLBOARD_DISABLED:
+	if node_quad.get_surface_override_material(0).billboard_mode == BaseMaterial3D.BillboardMode.BILLBOARD_DISABLED:
 		set_process(false)
 
 
@@ -46,7 +46,7 @@ func _unhandled_input(event):
 
 func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Vector3, _normal: Vector3, _shape_idx: int):
 	# Get mesh size to detect edges and make conversions. This code only support PlaneMesh and QuadMesh.
-	var quad_mesh_size = node_quad.get_aabb() as AABB
+	var quad_mesh_size = node_quad.mesh.size
 
 	# Event position in Area3D in world coordinate space.
 	var event_pos3D = event_position
@@ -68,9 +68,8 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 
 		# Right now the event position's range is the following: (-quad_size/2) -> (quad_size/2)
 		# We need to convert it into the following range: -0.5 -> 0.5
-		# TODO: Fix this to work properly
-		event_pos2D.x = event_pos2D.x / quad_mesh_size.size.x
-		event_pos2D.y = event_pos2D.y / quad_mesh_size.size.z
+		event_pos2D.x = event_pos2D.x / quad_mesh_size.x
+		event_pos2D.y = event_pos2D.y / quad_mesh_size.y
 		# Then we need to convert it into the following range: 0 -> 1
 		event_pos2D.x += 0.5
 		event_pos2D.y += 0.5
@@ -111,7 +110,7 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 
 
 func rotate_area_to_billboard():
-	var billboard_mode = node_quad.get_surface_override_material(1).params_billboard_mode
+	var billboard_mode = node_quad.get_surface_override_material(0).params_billboard_mode
 
 	# Try to match the area with the material's billboard setting, if enabled.
 	if billboard_mode > 0:
