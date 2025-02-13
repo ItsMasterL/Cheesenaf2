@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://cspw07uddh3kt"]
+
+[ext_resource type="PackedScene" uid="uid://cpr1ouwmch86j" path="res://scenes/cameras.tscn" id="1_6hi0q"]
+[ext_resource type="Texture2D" uid="uid://b1my2w4jmvnbv" path="res://textures/static.png" id="3_iubtw"]
+[ext_resource type="Script" path="res://scripts/background.gd" id="4_xeoj4"]
+[ext_resource type="AudioStream" uid="uid://dfcjo407ov85k" path="res://sounds/cam ambience.wav" id="5_5dae5"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_q747j"]
+viewport_path = NodePath("Background/SubViewport")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_urmdi"]
+blend_mode = 1
+light_mode = 1
+
+[node name="CamsPlus" type="Control"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1185.0
+offset_bottom = 734.0
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-2, -1)
+scale = Vector2(1.00422, 1.0137)
+texture = SubResource("ViewportTexture_q747j")
+centered = false
+
+[node name="SubViewport" type="SubViewport" parent="Background"]
+size = Vector2i(1185, 730)
+
+[node name="Cameras" parent="Background/SubViewport" instance=ExtResource("1_6hi0q")]
+
+[node name="Static" type="Sprite2D" parent="."]
+modulate = Color(0.29219, 0.29219, 0.29219, 1)
+z_index = -1
+material = SubResource("CanvasItemMaterial_urmdi")
+position = Vector2(584, 368)
+scale = Vector2(0.998316, 1.04086)
+texture = ExtResource("3_iubtw")
+vframes = 8
+script = ExtResource("4_xeoj4")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_5dae5")
+autoplay = true

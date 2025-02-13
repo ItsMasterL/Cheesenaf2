@@ -1,34 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxpmp04xt6u6q"]
+[gd_scene load_steps=4 format=3 uid="uid://bxpmp04xt6u6q"]
 
+[ext_resource type="Script" path="res://scripts/tablet_manager.gd" id="1_0wb5n"]
 [ext_resource type="Texture2D" uid="uid://c70vi1sqw8vjc" path="res://textures/andre-ouellet-b1bgPw5sLus-unsplash.jpg" id="1_3v8y3"]
 [ext_resource type="Texture2D" uid="uid://duvbu0ep0tb3l" path="res://textures/cheesenaf 2 tablet home.png" id="2_pge4p"]
-[ext_resource type="AudioStream" uid="uid://c76mwiei7xlra" path="res://sounds/boop.wav" id="3_5dd13"]
-[ext_resource type="Script" path="res://scripts/tablet_test.gd" id="4_31wx5"]
 
-[node name="Node2D" type="Node2D"]
+[node name="TabletOS" type="Node2D"]
+script = ExtResource("1_0wb5n")
 
-[node name="ViewportBorder" type="Control" parent="."]
+[node name="TimeUI" type="Control" parent="."]
 clip_contents = true
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1281.0
 offset_bottom = 800.0
 
-[node name="Background" type="Sprite2D" parent="ViewportBorder"]
-z_index = -1
-position = Vector2(-95, -72)
-scale = Vector2(0.427, 0.4)
-texture = ExtResource("1_3v8y3")
-centered = false
-
-[node name="Cheesenaf2TabletHome" type="Sprite2D" parent="ViewportBorder"]
-position = Vector2(-2.96115, 0)
-scale = Vector2(0.928876, 0.92125)
-texture = ExtResource("2_pge4p")
-centered = false
-
-[node name="RichTextLabel" type="RichTextLabel" parent="ViewportBorder"]
-layout_mode = 0
+[node name="Clock" type="RichTextLabel" parent="TimeUI"]
+z_index = 5
 offset_left = 1079.0
 offset_top = 7.0
 offset_right = 1167.0
@@ -36,17 +23,36 @@ offset_bottom = 37.0
 mouse_filter = 1
 text = "12:00 AM"
 
-[node name="FoxButton" type="Button" parent="ViewportBorder"]
+[node name="Cheesenaf2TabletHome" type="Sprite2D" parent="TimeUI"]
+z_index = 4
+position = Vector2(-2.96115, 0)
+scale = Vector2(0.928876, 0.92125)
+texture = ExtResource("2_pge4p")
+centered = false
+
+[node name="Home" type="Control" parent="."]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1281.0
+offset_bottom = 800.0
+
+[node name="Background" type="Sprite2D" parent="Home"]
+z_index = -1
+position = Vector2(-95, -72)
+scale = Vector2(0.427, 0.4)
+texture = ExtResource("1_3v8y3")
+centered = false
+
+[node name="CamsPlus" type="Button" parent="Home"]
 layout_mode = 0
-offset_left = 363.0
-offset_top = 299.0
-offset_right = 508.0
-offset_bottom = 361.0
-text = "Boopa the snoota"
+offset_left = 66.0
+offset_top = 98.0
+offset_right = 137.0
+offset_bottom = 160.0
+text = "CAMS
+PLUS"
 
-[node name="FoxBoop" type="AudioStreamPlayer2D" parent="ViewportBorder"]
-position = Vector2(164, 104)
-stream = ExtResource("3_5dd13")
-script = ExtResource("4_31wx5")
+[node name="Application" type="Node2D" parent="."]
 
-[connection signal="pressed" from="ViewportBorder/FoxButton" to="ViewportBorder/FoxBoop" method="_boop_fox"]
+[connection signal="pressed" from="Home/CamsPlus" to="." method="_load_application" binds= ["cams_plus"]]

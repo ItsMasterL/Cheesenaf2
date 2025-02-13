@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://cpr1ouwmch86j"]
+
+[node name="Cameras" type="Node3D"]
+
+[node name="Camera1" type="Camera3D" parent="."]
+transform = Transform3D(-0.367654, -0.540177, 0.756994, 0, 0.814004, 0.580859, -0.929963, 0.213555, -0.299272, 29.6849, 3.88859, -5.52595)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera1"]
+layers = 4
+light_energy = 0.25
+spot_range = 21.7278
+spot_angle = 31.463
+
+[node name="Camera2" type="Camera3D" parent="."]
+transform = Transform3D(-0.516774, 0.250593, -0.818625, -0.0109202, 0.954195, 0.298987, 0.856052, 0.163448, -0.490367, 12.4875, 3.84412, -24.5948)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera2"]
+layers = 4
+light_energy = 0.25
+spot_range = 21.7278
+spot_angle = 31.463
+
+[node name="Camera3" type="Camera3D" parent="."]
+transform = Transform3D(0.617811, 0.291952, -0.730119, -0.013329, 0.932274, 0.361508, 0.786214, -0.213612, 0.57986, 6.45412, 3.67305, 25.706)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3"]
+layers = 4
+light_energy = 0.25
+spot_range = 21.7278
+spot_angle = 31.463

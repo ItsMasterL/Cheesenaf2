@@ -1,10 +1,12 @@
-[gd_scene load_steps=44 format=4 uid="uid://kfokhb3cioir"]
+[gd_scene load_steps=47 format=4 uid="uid://kfokhb3cioir"]
 
+[ext_resource type="Script" path="res://scripts/office.gd" id="1_a3xfx"]
 [ext_resource type="PackedScene" uid="uid://bs378s4kwr2ux" path="res://scenes/foxy_plush.tscn" id="1_gqipk"]
 [ext_resource type="Texture2D" uid="uid://bi3vtwctdv5ub" path="res://models/textures/Cup.png" id="7_3jvyr"]
 [ext_resource type="Script" path="res://scripts/tablet_screen.gd" id="7_g7jux"]
 [ext_resource type="PackedScene" uid="uid://bxpmp04xt6u6q" path="res://scenes/tablet_os.tscn" id="9_l1dhy"]
 [ext_resource type="Texture2D" uid="uid://c6v23n3ihlgyw" path="res://models/textures/ENV_TEX_Desk_Fan_BaseColor.png" id="10_gkukb"]
+[ext_resource type="Script" path="res://scripts/home_button.gd" id="11_xnjbl"]
 [ext_resource type="PackedScene" uid="uid://dpn03nj1u7ol3" path="res://models/cheesenaf2.blend" id="13_3pria"]
 [ext_resource type="Script" path="res://scripts/toggle_cup.gd" id="25_hni3l"]
 [ext_resource type="AudioStream" uid="uid://bip471h5exvnx" path="res://sounds/slurp.wav" id="26_plhk0"]
@@ -378,6 +380,9 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_j1onk"]
 size = Vector3(1, 1, 0.0298462)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_tb4yn"]
+size = Vector3(0.189941, 0.0945435, 0.0710754)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_a413t"]
 size = Vector3(1, 2.37891, 1)
 
@@ -390,6 +395,7 @@ sky = SubResource("Sky_cp7t4")
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_onvth"]
 
 [node name="Map" type="Node3D"]
+script = ExtResource("1_a3xfx")
 
 [node name="FoxyPlush" parent="." instance=ExtResource("1_gqipk")]
 
@@ -487,6 +493,15 @@ size = Vector2i(1185, 730)
 
 [node name="TabletOS" parent="TabletOnDesk/Tablet/ScreenQuad/TabletScreen" instance=ExtResource("9_l1dhy")]
 
+[node name="HomeButton" type="Area3D" parent="TabletOnDesk/Tablet"]
+collision_layer = 2
+input_capture_on_drag = true
+script = ExtResource("11_xnjbl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TabletOnDesk/Tablet/HomeButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000736237, 0.0742461, 0.745842)
+shape = SubResource("BoxShape3D_tb4yn")
+
 [node name="Player" type="CharacterBody3D" parent="."]
 script = ExtResource("31_63unw")
 
@@ -509,7 +524,7 @@ target_position = Vector3(0, -2, 0)
 collide_with_areas = true
 script = ExtResource("32_5ed2l")
 
-[node name="Sprite3D" type="Sprite3D" parent="Player/Head/Camera3D"]
+[node name="Cursor" type="Sprite3D" parent="Player/Head/Camera3D"]
 transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0, 0, -0.077)
 texture = SubResource("PlaceholderTexture2D_onvth")
 
@@ -534,17 +549,6 @@ spot_angle = 36.1641
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Player/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94943, 0)
-
-[node name="Cameras" type="Node3D" parent="."]
-
-[node name="Camera1" type="Camera3D" parent="Cameras"]
-transform = Transform3D(-0.367654, -0.540177, 0.756994, 0, 0.814004, 0.580859, -0.929963, 0.213555, -0.299272, 29.6849, 3.88859, -5.52595)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Cameras/Camera1"]
-layers = 4
-light_energy = 0.25
-spot_range = 21.7278
-spot_angle = 31.463
 
 [node name="Map" parent="." instance=ExtResource("13_3pria")]
 
@@ -571,3 +575,6 @@ spot_range = 19.2464
 [node name="OmniLight3D" type="OmniLight3D" parent="Map/SpotLight3D2"]
 light_bake_mode = 1
 shadow_enabled = true
+
+[connection signal="mouse_entered" from="TabletOnDesk/Tablet/HomeButton" to="TabletOnDesk/Tablet/HomeButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="TabletOnDesk/Tablet/HomeButton" to="TabletOnDesk/Tablet/HomeButton" method="_on_mouse_exited"]
