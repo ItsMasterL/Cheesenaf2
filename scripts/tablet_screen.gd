@@ -53,7 +53,7 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 	# NOTE: affine_inverse accounts for the Area3D node's scale, rotation, and position in the scene!
 	event_pos3D = node_quad.global_transform.affine_inverse() * event_pos3D
 
-	# TODO: Adapt to bilboard mode or avoid completely.
+	# TODO: Adapt to billboard mode or avoid completely.
 
 	var event_pos2D: Vector2 = Vector2()
 

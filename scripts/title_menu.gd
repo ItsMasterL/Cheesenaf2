@@ -16,7 +16,7 @@ func _on_button_hover(sender: int):
 
 func _on_button_unhover(sender: int):
 	var button = get_child(sender)
-	button.text = ""
+	button.text = String()
 
 func _on_button_pressed():
 	start_game.emit()
