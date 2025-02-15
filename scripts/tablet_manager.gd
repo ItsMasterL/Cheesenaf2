@@ -8,14 +8,14 @@ var current_process
 
 func _process(_delta):
 	if root.hour == 0:
-		time.text = "12:" + str(root.minute).pad_zeros(2) + " AM"
+		time.text = "12:%02d AM" % [root.minute]
 	else:
-		time.text = str(root.hour).pad_zeros(2) + ":" + str(root.minute).pad_zeros(2) + " AM"
+		time.text = "%02d:%02d AM" % [root.hour, root.minute]
 
 func _load_application(appscene: String):
 	if app_home.get_child_count() > 0:
 		app_home.get_child(0).queue_free()
-	current_process = load("res://scenes/" + appscene + ".tscn")
+	current_process = load("res://scenes/%s.tscn" % [appscene])
 	var instance = current_process.instantiate()
 	app_home.add_child(instance)
 	home.hide()
