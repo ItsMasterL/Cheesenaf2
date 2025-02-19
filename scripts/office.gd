@@ -5,6 +5,7 @@ var hour = 0
 var minute = 0
 var fun_multiplier = 1 #Set by minigames in singleplayer to make time go by faster
 var time_to_hour = 90
+var using_tablet = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

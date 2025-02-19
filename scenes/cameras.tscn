@@ -5,26 +5,221 @@
 [node name="Camera1" type="Camera3D" parent="."]
 transform = Transform3D(-0.367654, -0.540177, 0.756994, 0, 0.814004, 0.580859, -0.929963, 0.213555, -0.299272, 29.6849, 3.88859, -5.52595)
 
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera1"]
+layers = 4
+light_energy = 0.04
+light_indirect_energy = 0.0
+light_bake_mode = 1
+omni_range = 48.9831
+
 [node name="SpotLight3D" type="SpotLight3D" parent="Camera1"]
+visible = false
 layers = 4
 light_energy = 0.25
-spot_range = 21.7278
-spot_angle = 31.463
+spot_range = 37.0843
+spot_attenuation = 0.0
 
 [node name="Camera2" type="Camera3D" parent="."]
 transform = Transform3D(-0.516774, 0.250593, -0.818625, -0.0109202, 0.954195, 0.298987, 0.856052, 0.163448, -0.490367, 12.4875, 3.84412, -24.5948)
 
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera2"]
+layers = 4
+light_energy = 0.04
+light_indirect_energy = 0.0
+light_bake_mode = 1
+omni_range = 48.9831
+
 [node name="SpotLight3D" type="SpotLight3D" parent="Camera2"]
+visible = false
 layers = 4
 light_energy = 0.25
-spot_range = 21.7278
-spot_angle = 31.463
+spot_range = 37.0843
+spot_attenuation = 0.0
 
 [node name="Camera3" type="Camera3D" parent="."]
 transform = Transform3D(0.617811, 0.291952, -0.730119, -0.013329, 0.932274, 0.361508, 0.786214, -0.213612, 0.57986, 6.45412, 3.67305, 25.706)
 
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera3"]
+layers = 4
+light_energy = 0.04
+light_indirect_energy = 0.0
+light_bake_mode = 1
+omni_range = 48.9831
+
 [node name="SpotLight3D" type="SpotLight3D" parent="Camera3"]
+visible = false
 layers = 4
 light_energy = 0.25
-spot_range = 21.7278
-spot_angle = 31.463
+spot_range = 37.0843
+spot_attenuation = 0.0
+
+[node name="Camera4" type="Camera3D" parent="."]
+transform = Transform3D(0.17614, 0.28705, -0.941582, 0, 0.956537, 0.291609, 0.984365, -0.051364, 0.168484, 61.4875, 4.91985, 7.43324)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera4"]
+layers = 4
+light_energy = 0.04
+light_indirect_energy = 0.0
+light_bake_mode = 1
+omni_range = 48.9831
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera4"]
+visible = false
+layers = 4
+light_energy = 0.25
+spot_range = 37.0843
+spot_attenuation = 0.0
+
+[node name="Camera5" type="Camera3D" parent="."]
+transform = Transform3D(0.889664, -0.271312, 0.36727, 0, 0.804331, 0.594181, -0.456616, -0.528622, 0.715585, 70.7713, 6.90395, 37.7792)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera5"]
+layers = 4
+light_energy = 0.04
+light_indirect_energy = 0.0
+light_bake_mode = 1
+omni_range = 48.9831
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera5"]
+visible = false
+layers = 4
+light_energy = 0.25
+spot_range = 37.0843
+spot_attenuation = 0.0
+
+[node name="Camera6" type="Camera3D" parent="."]
+transform = Transform3D(0.89041, -0.100807, -0.443857, 0, 0.975166, -0.221475, 0.45516, 0.197204, 0.868297, -22.3352, 0.210539, 36.6136)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera6"]
+layers = 4
+light_energy = 0.04
+light_indirect_energy = 0.0
+light_bake_mode = 1
+omni_range = 48.9831
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera6"]
+visible = false
+layers = 4
+light_energy = 0.25
+spot_range = 37.0843
+spot_attenuation = 0.0
+
+[node name="Camera7" type="Camera3D" parent="."]
+transform = Transform3D(-0.66483, -0.257988, 0.70103, 0, 0.938468, 0.345368, -0.746995, 0.229611, -0.623922, 87.6194, 4.37317, -16.8963)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera7"]
+layers = 4
+light_energy = 0.04
+light_indirect_energy = 0.0
+light_bake_mode = 1
+omni_range = 48.9831
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera7"]
+visible = false
+layers = 4
+light_energy = 0.25
+spot_range = 37.0843
+spot_attenuation = 0.0
+
+[node name="Camera8" type="Camera3D" parent="."]
+transform = Transform3D(0.512475, -0.144745, 0.846415, 0, 0.985691, 0.168563, -0.858702, -0.0863841, 0.505142, 70.0769, 1.84786, -18.5467)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera8"]
+layers = 4
+light_energy = 0.04
+light_indirect_energy = 0.0
+light_bake_mode = 1
+omni_range = 48.9831
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera8"]
+visible = false
+layers = 4
+light_energy = 0.25
+spot_range = 37.0843
+spot_attenuation = 0.0
+
+[node name="Camera9" type="Camera3D" parent="."]
+transform = Transform3D(-0.975062, -0.0201308, 0.22102, 0, 0.995878, 0.0907063, -0.221934, 0.0884442, -0.971042, 50.1808, 3.52633, -25.6435)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera9"]
+layers = 4
+light_energy = 0.04
+light_indirect_energy = 0.0
+light_bake_mode = 1
+omni_range = 48.9831
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera9"]
+visible = false
+layers = 4
+light_energy = 0.25
+spot_range = 37.0843
+spot_attenuation = 0.0
+
+[node name="Camera10" type="Camera3D" parent="."]
+transform = Transform3D(0.971651, -0.051993, 0.230632, 0, 0.975519, 0.219918, -0.23642, -0.213684, 0.947863, 50.0484, 3.74012, 25.3143)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera10"]
+layers = 4
+light_energy = 0.04
+light_indirect_energy = 0.0
+light_bake_mode = 1
+omni_range = 48.9831
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera10"]
+visible = false
+layers = 4
+light_energy = 0.25
+spot_range = 37.0843
+spot_attenuation = 0.0
+
+[node name="Camera11" type="Camera3D" parent="."]
+transform = Transform3D(-0.0336388, -0.328752, 0.943817, 0, 0.944352, 0.328938, -0.999434, 0.0110651, -0.0317669, -8.74608, 3.01873, 0.162656)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera11"]
+layers = 4
+light_energy = 0.04
+light_indirect_energy = 0.0
+light_bake_mode = 1
+omni_range = 48.9831
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera11"]
+visible = false
+layers = 4
+light_energy = 0.25
+spot_range = 37.0843
+spot_attenuation = 0.0
+
+[node name="Camera12" type="Camera3D" parent="."]
+transform = Transform3D(-0.756969, -0.223004, 0.61422, 0, 0.939965, 0.341272, -0.65345, 0.258332, -0.711524, 6.93806, 4.13986, -7.01005)
+fov = 34.8673
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera12"]
+layers = 4
+light_energy = 0.04
+light_indirect_energy = 0.0
+light_bake_mode = 1
+omni_range = 48.9831
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera12"]
+visible = false
+layers = 5
+light_energy = 0.25
+spot_range = 37.0843
+spot_attenuation = 0.0
+
+[node name="VentCamera1" type="Camera3D" parent="."]
+transform = Transform3D(-0.809397, 0.308627, -0.499626, 0, 0.850772, 0.525535, 0.587262, 0.425366, -0.688612, 49.1405, 6.04362, -0.381561)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="VentCamera1"]
+layers = 4
+light_energy = 0.04
+light_indirect_energy = 0.0
+light_bake_mode = 1
+omni_range = 48.9831
+
+[node name="SpotLight3D" type="SpotLight3D" parent="VentCamera1"]
+visible = false
+layers = 4
+light_energy = 0.25
+spot_range = 37.0843
+spot_attenuation = 0.0

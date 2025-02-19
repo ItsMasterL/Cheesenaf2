@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://c6v23n3ihlgyw" path="res://models/textures/ENV_TEX_Desk_Fan_BaseColor.png" id="10_gkukb"]
 [ext_resource type="Script" path="res://scripts/home_button.gd" id="11_xnjbl"]
 [ext_resource type="PackedScene" uid="uid://dpn03nj1u7ol3" path="res://models/cheesenaf2.blend" id="13_3pria"]
+[ext_resource type="AudioStream" uid="uid://c03hwdkcsbb7s" path="res://sounds/flashlight.wav" id="15_8e4mc"]
+[ext_resource type="Texture2D" uid="uid://bvte0l0l1kuts" path="res://textures/adam.png" id="15_batyp"]
 [ext_resource type="Script" path="res://scripts/toggle_cup.gd" id="25_hni3l"]
 [ext_resource type="AudioStream" uid="uid://bip471h5exvnx" path="res://sounds/slurp.wav" id="26_plhk0"]
 [ext_resource type="AudioStream" uid="uid://btoctqew2mccg" path="res://sounds/fan.wav" id="28_cfwgc"]
@@ -386,12 +388,6 @@ size = Vector3(0.189941, 0.0945435, 0.0710754)
 [sub_resource type="BoxShape3D" id="BoxShape3D_a413t"]
 size = Vector3(1, 2.37891, 1)
 
-[sub_resource type="Sky" id="Sky_cp7t4"]
-
-[sub_resource type="Environment" id="Environment_7ndti"]
-background_mode = 2
-sky = SubResource("Sky_cp7t4")
-
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_onvth"]
 
 [node name="Map" type="Node3D"]
@@ -515,7 +511,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68, 0)
 [node name="Camera3D" type="Camera3D" parent="Player/Head"]
 keep_aspect = 0
 cull_mask = 1048571
-environment = SubResource("Environment_7ndti")
 current = true
 
 [node name="RayCast3D" type="RayCast3D" parent="Player/Head/Camera3D"]
@@ -547,8 +542,16 @@ light_energy = 0.1
 spot_range = 11.8432
 spot_angle = 36.1641
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Player/Head/Camera3D/SpotLight3D"]
+stream = ExtResource("15_8e4mc")
+
 [node name="AudioListener3D" type="AudioListener3D" parent="Player/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94943, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="Player/Head"]
+transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, -0.374982, 0)
+layers = 4
+texture = ExtResource("15_batyp")
 
 [node name="Map" parent="." instance=ExtResource("13_3pria")]
 
@@ -574,6 +577,12 @@ spot_range = 19.2464
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Map/SpotLight3D2"]
 light_bake_mode = 1
+shadow_enabled = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
+transform = Transform3D(0.77288, 0.0557739, 0.632096, -0.634551, 0.0700509, 0.7697, -0.00134968, -0.995983, 0.0895323, 69.6845, 8.16925, 35.1654)
+light_color = Color(0.761397, 0.841342, 1, 1)
+light_energy = 0.371
 shadow_enabled = true
 
 [connection signal="mouse_entered" from="TabletOnDesk/Tablet/HomeButton" to="TabletOnDesk/Tablet/HomeButton" method="_on_mouse_entered"]
