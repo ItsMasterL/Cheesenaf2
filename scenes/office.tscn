@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bxpmp04xt6u6q" path="res://scenes/tablet_os.tscn" id="9_l1dhy"]
 [ext_resource type="Texture2D" uid="uid://c6v23n3ihlgyw" path="res://models/textures/ENV_TEX_Desk_Fan_BaseColor.png" id="10_gkukb"]
 [ext_resource type="Script" path="res://scripts/home_button.gd" id="11_xnjbl"]
+[ext_resource type="AudioStream" uid="uid://c3su1po70v7f7" path="res://sounds/camera_toggle.wav" id="12_4d1sb"]
 [ext_resource type="PackedScene" uid="uid://dpn03nj1u7ol3" path="res://models/cheesenaf2.blend" id="13_3pria"]
 [ext_resource type="AudioStream" uid="uid://c03hwdkcsbb7s" path="res://sounds/flashlight.wav" id="15_8e4mc"]
 [ext_resource type="Texture2D" uid="uid://bvte0l0l1kuts" path="res://textures/adam.png" id="15_batyp"]
@@ -18,7 +19,6 @@
 [ext_resource type="Script" path="res://scripts/toggle_cup.gd" id="25_hni3l"]
 [ext_resource type="AudioStream" uid="uid://bip471h5exvnx" path="res://sounds/slurp.wav" id="26_plhk0"]
 [ext_resource type="Script" path="res://scripts/toggle_tablet.gd" id="29_wa4as"]
-[ext_resource type="AudioStream" uid="uid://c3su1po70v7f7" path="res://sounds/camera_toggle.wav" id="30_d1od8"]
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="31_63unw"]
 [ext_resource type="Script" path="res://scripts/player_raycast.gd" id="32_5ed2l"]
 
@@ -180,6 +180,21 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_1fgev")
 
+[sub_resource type="Animation" id="Animation_1esxr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5708, -2.48393, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_f2wmk"]
 resource_name = "spin"
 length = 0.1
@@ -195,21 +210,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(1.5708, -2.48393, 0), Vector3(-1.5708, -2.48393, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_1esxr"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1.5708, -2.48393, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oid2a"]
@@ -418,6 +418,33 @@ size = Vector3(1, 2.37891, 1)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_onvth"]
 
+[sub_resource type="Animation" id="Animation_fcbw6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_1arho"]
 resource_name = "desk_hide"
 tracks/0/type = "value"
@@ -466,33 +493,6 @@ tracks/2/keys = {
 "args": [],
 "method": &"_breathe"
 }]
-}
-
-[sub_resource type="Animation" id="Animation_fcbw6"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3b2wx"]
@@ -562,7 +562,7 @@ libraries = {
 movie_quit_on_finish = true
 
 [node name="ENV_MOD_Desk_Fan_Fanblade_ENV_MOD_Desk_Fan_Fanblade_001" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.00728012, -0.00562293, 2.45786e-10, 0, -4.02091e-10, -0.00919877, 0.00562292, -0.00728012, 3.18224e-10, 1.52256, 1.33496, -1.0458)
+transform = Transform3D(-0.00728012, -0.00562292, 2.03549e-08, 0, -3.32995e-08, -0.00919877, 0.00562292, -0.00728013, 2.6354e-08, 1.52256, 1.33496, -1.0458)
 mesh = SubResource("ArrayMesh_lcrka")
 skeleton = NodePath("")
 
@@ -610,7 +610,7 @@ transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0.005411
 shape = SubResource("BoxShape3D_8yfxk")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="TabletOnDesk/Tablet"]
-stream = ExtResource("30_d1od8")
+stream = ExtResource("12_4d1sb")
 volume_db = -12.5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TabletOnDesk/Tablet"]
@@ -650,7 +650,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000736237, 0.0742461, 0.745
 shape = SubResource("BoxShape3D_tb4yn")
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("31_63unw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]

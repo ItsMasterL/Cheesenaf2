@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://scripts/cams_plus.gd" id="1_cfdmu"]
 [ext_resource type="Texture2D" uid="uid://b1my2w4jmvnbv" path="res://textures/static.png" id="3_iubtw"]
 [ext_resource type="Script" path="res://scripts/background.gd" id="4_xeoj4"]
-[ext_resource type="AudioStream" uid="uid://dfcjo407ov85k" path="res://sounds/cam ambience.wav" id="5_5dae5"]
 [ext_resource type="FontFile" uid="uid://uc7mo5eme0if" path="res://minecraft_font.ttf" id="5_cc4t8"]
+[ext_resource type="AudioStream" uid="uid://cfjuniaismcph" path="res://sounds/cam_ambience.mp3" id="5_enhw5"]
 [ext_resource type="Texture2D" uid="uid://dxuc3sch65x4o" path="res://textures/cheesenaf 2 map.png" id="7_3v212"]
 [ext_resource type="AudioStream" uid="uid://c7h6lkgdo12dj" path="res://sounds/buzzlight.wav" id="7_8233h"]
 [ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://sounds/change_cam.wav" id="7_hest6"]
@@ -48,7 +48,7 @@ vframes = 8
 script = ExtResource("4_xeoj4")
 
 [node name="Ambience" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_5dae5")
+stream = ExtResource("5_enhw5")
 volume_db = -12.0
 autoplay = true
 panning_strength = 0.0
