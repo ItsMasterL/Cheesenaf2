@@ -204,6 +204,7 @@ omni_range = 48.9831
 visible = false
 layers = 5
 light_energy = 0.25
+shadow_enabled = true
 spot_range = 37.0843
 spot_attenuation = 0.0
 

@@ -11,8 +11,8 @@ func _raycast_event():
 	if stand == temp_parent:
 		temp_parent.remove_child(tablet)
 		hold.add_child(tablet)
-		var audio := tablet.get_child(1) as AudioStreamPlayer3D
-		var anim := tablet.get_child(2) as AnimationPlayer
+		var audio := tablet.get_child(1)
+		var anim := tablet.get_child(2)
 		audio.play()
 		anim.play(&"cup_drink")
 

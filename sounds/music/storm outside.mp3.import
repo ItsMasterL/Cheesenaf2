@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://couxcp7krb1i6"
+path="res://.godot/imported/storm outside.mp3-0771b7767a5e1e62759ec0757200272e.mp3str"
+
+[deps]
+
+source_file="res://sounds/music/storm outside.mp3"
+dest_files=["res://.godot/imported/storm outside.mp3-0771b7767a5e1e62759ec0757200272e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
