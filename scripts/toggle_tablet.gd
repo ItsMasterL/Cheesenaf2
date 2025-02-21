@@ -3,16 +3,16 @@ extends StaticBody3D
 @onready var hold := $"../../../Player/Head/Camera3D/TabletHolder"
 @onready var tablet = $".."
 @onready var home_button = $"../HomeButton"
-@onready var audio := $"../AudioStreamPlayer3D"
+@onready var audio := $"../AudioStreamPlayer"
 @onready var cursor := $"../../../Player/Head/Camera3D/Cursor"
 @onready var root = $"../../.."
+@onready var anim := $"../AnimationPlayer"
 
 func _ready():
 	print(stand, ", ", hold)
 
 func _raycast_event():
 	var temp_parent = tablet.get_parent_node_3d()
-	var anim := tablet.get_child(2) as AnimationPlayer
 	if root.using_tablet == false:
 		temp_parent.remove_child(tablet)
 		hold.add_child(tablet)
