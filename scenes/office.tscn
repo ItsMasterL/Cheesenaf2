@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=4 uid="uid://kfokhb3cioir"]
+[gd_scene load_steps=62 format=4 uid="uid://kfokhb3cioir"]
 
 [ext_resource type="Script" path="res://scripts/office.gd" id="1_a3xfx"]
 [ext_resource type="PackedScene" uid="uid://bs378s4kwr2ux" path="res://scenes/foxy_plush.tscn" id="1_gqipk"]
@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://c5db7xn31angv" path="res://sounds/breathing.wav" id="17_eaqhx"]
 [ext_resource type="AudioStream" uid="uid://6a8wpxqhxldr" path="res://sounds/shifting.wav" id="18_jcvyf"]
 [ext_resource type="AudioStream" uid="uid://couxcp7krb1i6" path="res://sounds/music/storm outside.mp3" id="21_h77es"]
+[ext_resource type="PackedScene" uid="uid://sr5bhwimbn6q" path="res://scenes/bonnie.tscn" id="22_fo68b"]
 [ext_resource type="Script" path="res://scripts/toggle_cup.gd" id="25_hni3l"]
 [ext_resource type="AudioStream" uid="uid://bip471h5exvnx" path="res://sounds/slurp.wav" id="26_plhk0"]
 [ext_resource type="Script" path="res://scripts/toggle_tablet.gd" id="29_wa4as"]
@@ -501,9 +502,6 @@ _data = {
 "desk_hide": SubResource("Animation_1arho")
 }
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_7ogb0"]
-size = Vector3(3.05475, 0.0235596, 1.17133)
-
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_48d6p"]
 emission_shape_offset = Vector3(0, 5, 0)
 emission_shape = 3
@@ -530,6 +528,9 @@ material = SubResource("StandardMaterial3D_5wy1g")
 sections = 2
 section_length = 0.005
 curve = SubResource("Curve_203xy")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7ogb0"]
+size = Vector3(3.05475, 0.0235596, 1.17133)
 
 [node name="Map" type="Node3D"]
 script = ExtResource("1_a3xfx")
@@ -751,18 +752,12 @@ light_color = Color(0.761397, 0.841342, 1, 1)
 light_energy = 0.371
 shadow_enabled = true
 
-[node name="DeskRaycastBlock" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DeskRaycastBlock"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.15527e-05, 0.970041, -1.04616)
-shape = SubResource("BoxShape3D_7ogb0")
-
-[node name="Ambience" type="AudioStreamPlayer" parent="."]
+[node name="Ambience" type="AudioStreamPlayer" parent="Map"]
 stream = ExtResource("21_h77es")
 volume_db = -20.0
 autoplay = true
 
-[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.2918, 4.57161, 34.101)
 amount = 128
 lifetime = 2.0
@@ -773,7 +768,7 @@ trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_48d6p")
 draw_pass_1 = SubResource("RibbonTrailMesh_4fnyf")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.9641, 5.17486, 34.0412)
 amount = 128
 lifetime = 2.0
@@ -783,6 +778,34 @@ visibility_aabb = AABB(-4, -4, -4, 8, 8, 5.325)
 trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_48d6p")
 draw_pass_1 = SubResource("RibbonTrailMesh_4fnyf")
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Map"]
+transform = Transform3D(-0.525368, -0.486277, -0.698229, 0, 0.820601, -0.571501, 0.850875, -0.300248, -0.431117, 67.0498, 1.21163, 1.6226)
+light_color = Color(1, 1, 0.784314, 1)
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 38.9278
+spot_angle = 29.2107
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Map"]
+transform = Transform3D(0.0693552, 0.733702, -0.675922, 0.0336236, 0.67545, 0.736639, 0.997025, -0.0738166, 0.0221763, 66.7537, 4.99896, 2.44166)
+light_color = Color(1, 1, 0.784314, 1)
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 38.9278
+spot_angle = 29.2107
+
+[node name="DeskRaycastBlock" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DeskRaycastBlock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.15527e-05, 0.970041, -1.04616)
+shape = SubResource("BoxShape3D_7ogb0")
+
+[node name="Animatronics" type="Node3D" parent="."]
+
+[node name="Edam Bonnie" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("22_fo68b")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.719059, -1.0015)
+root = NodePath("../..")
 
 [connection signal="mouse_entered" from="TabletOnDesk/Tablet/HomeButton" to="TabletOnDesk/Tablet/HomeButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="TabletOnDesk/Tablet/HomeButton" to="TabletOnDesk/Tablet/HomeButton" method="_on_mouse_exited"]
