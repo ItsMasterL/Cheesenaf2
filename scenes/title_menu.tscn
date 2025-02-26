@@ -89,15 +89,23 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_rsbhx")
 alignment = 0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="NewGame"]
-layout_mode = 0
-offset_left = 33.0
-offset_top = 5.0
-offset_right = 197.0
-offset_bottom = 26.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -9.5
+offset_right = 82.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_aik6n")
 theme_override_font_sizes/normal_font_size = 20
 text = "New Game"
+scroll_active = false
 
 [node name="Continue" type="Button" parent="."]
 layout_mode = 0
@@ -116,15 +124,23 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_r1ktc")
 alignment = 0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Continue"]
-layout_mode = 0
-offset_left = 33.0
-offset_top = 5.0
-offset_right = 197.0
-offset_bottom = 26.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -9.0
+offset_right = 82.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_aik6n")
 theme_override_font_sizes/normal_font_size = 20
 text = "Continue"
+scroll_active = false
 
 [node name="CustomNight" type="Button" parent="."]
 layout_mode = 0
@@ -143,15 +159,23 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_p6uil")
 alignment = 0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CustomNight"]
-layout_mode = 0
-offset_left = 33.0
-offset_top = 5.0
-offset_right = 197.0
-offset_bottom = 26.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -10.0
+offset_right = 82.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_aik6n")
 theme_override_font_sizes/normal_font_size = 20
 text = "Custom Night"
+scroll_active = false
 
 [node name="Extras" type="Button" parent="."]
 layout_mode = 0
@@ -170,17 +194,25 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_1pwwm")
 alignment = 0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Extras"]
-layout_mode = 0
-offset_left = 33.0
-offset_top = 5.0
-offset_right = 197.0
-offset_bottom = 26.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -9.5
+offset_right = 82.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_aik6n")
 theme_override_font_sizes/normal_font_size = 20
 text = "Extras
 "
+scroll_active = false
 
-[node name="HoverSound" type="AudioStreamPlayer2D" parent="."]
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_cl3hh")
-panning_strength = 0.0
+volume_db = -10.0

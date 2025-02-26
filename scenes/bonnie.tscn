@@ -13,7 +13,7 @@
 script = ExtResource("2_81imh")
 position = Vector3(68.629, 1.121, 2.956)
 rotation = Vector3(0, -180, 0)
-scale = Vector3(1, 1, 0)
+scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([1, 2, 7, 11, 12])
 is_vent = false
 animation_id = "Stage"
@@ -105,7 +105,7 @@ office_animatronic_limit = 0
 search_under_desk = false
 flashlight_weakness = false
 entrance = 3
-fail_position_index = 4
+fail_position_index = 7
 
 [sub_resource type="Resource" id="Resource_53aci"]
 script = ExtResource("2_81imh")
@@ -5244,6 +5244,8 @@ script = ExtResource("1_vu3bh")
 animatronic = "edam_bonnie"
 positions = Array[ExtResource("2_81imh")]([SubResource("Resource_mwarj"), SubResource("Resource_43rgw"), SubResource("Resource_6gk7j"), SubResource("Resource_a1qxy"), SubResource("Resource_5xhsv"), SubResource("Resource_onaa2"), SubResource("Resource_a2ugv"), SubResource("Resource_2l30j"), SubResource("Resource_esfhx"), SubResource("Resource_53aci"), SubResource("Resource_p1jf2"), SubResource("Resource_ga6x2"), SubResource("Resource_not8c")])
 check_frequency = 3.5
+is_edam_animatronic = true
+vent_checker = true
 
 [node name="Edam Endo" type="Node3D" parent="."]
 transform = Transform3D(1.78814e-07, 0, 1, 0, 1, 0, -1, 0, 1.78814e-07, 0, 0, 0)
@@ -5748,5 +5750,6 @@ volume_db = -30.0
 unit_size = 100.0
 max_db = -10.0
 
-[node name="Warning" type="AudioStreamPlayer3D" parent="."]
+[node name="Warning" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_es4hq")
+volume_db = -5.0

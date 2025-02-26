@@ -3,6 +3,7 @@ extends StaticBody3D
 @onready var fananim := $"../../ENV_MOD_Desk_Fan_Fanblade_ENV_MOD_Desk_Fan_Fanblade_001/AnimationPlayer"
 @onready var fansound := $"../../ENV_MOD_Desk_Fan_Fanblade_ENV_MOD_Desk_Fan_Fanblade_001/AudioStreamPlayer3D"
 @onready var clicksound := $"../../ENV_MOD_Desk_Fan_Fanblade_ENV_MOD_Desk_Fan_Fanblade_001/FanClick"
+@onready var root = $"../.."
 var power = true
 var speed = 1
 
@@ -14,6 +15,7 @@ func _raycast_event():
 	if fansound.playing == false:
 		fansound.play()
 	clicksound.play()
+	root.fan_powered = power
 
 func _process(delta):
 	if power:

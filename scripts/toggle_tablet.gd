@@ -1,10 +1,10 @@
 extends StaticBody3D
 @onready var stand := $"../.."
-@onready var hold := $"../../../Player/Head/Camera3D/TabletHolder"
+@onready var hold := $"../../../Player/Head/Eyes/TabletHolder"
 @onready var tablet = $".."
 @onready var home_button = $"../HomeButton"
 @onready var audio := $"../AudioStreamPlayer"
-@onready var cursor := $"../../../Player/Head/Camera3D/Cursor"
+@onready var cursor := $"../../../Player/Head/Eyes/Cursor"
 @onready var root = $"../../.."
 @onready var anim := $"../AnimationPlayer"
 

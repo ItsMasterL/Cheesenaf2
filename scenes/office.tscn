@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=4 uid="uid://kfokhb3cioir"]
+[gd_scene load_steps=67 format=4 uid="uid://kfokhb3cioir"]
 
 [ext_resource type="Script" path="res://scripts/office.gd" id="1_a3xfx"]
 [ext_resource type="PackedScene" uid="uid://bs378s4kwr2ux" path="res://scenes/foxy_plush.tscn" id="1_gqipk"]
@@ -13,10 +13,12 @@
 [ext_resource type="PackedScene" uid="uid://dpn03nj1u7ol3" path="res://models/cheesenaf2.blend" id="13_3pria"]
 [ext_resource type="AudioStream" uid="uid://c03hwdkcsbb7s" path="res://sounds/flashlight.wav" id="15_8e4mc"]
 [ext_resource type="Texture2D" uid="uid://bvte0l0l1kuts" path="res://textures/adam.png" id="15_batyp"]
+[ext_resource type="Animation" uid="uid://ds0rscx8wtpac" path="res://models/animation/camera.res" id="17_7bi74"]
 [ext_resource type="AudioStream" uid="uid://c5db7xn31angv" path="res://sounds/breathing.wav" id="17_eaqhx"]
 [ext_resource type="AudioStream" uid="uid://6a8wpxqhxldr" path="res://sounds/shifting.wav" id="18_jcvyf"]
 [ext_resource type="AudioStream" uid="uid://couxcp7krb1i6" path="res://sounds/music/storm outside.mp3" id="21_h77es"]
 [ext_resource type="PackedScene" uid="uid://sr5bhwimbn6q" path="res://scenes/bonnie.tscn" id="22_fo68b"]
+[ext_resource type="Shader" path="res://shaders/blur.gdshader" id="23_h042j"]
 [ext_resource type="Script" path="res://scripts/toggle_cup.gd" id="25_hni3l"]
 [ext_resource type="AudioStream" uid="uid://bip471h5exvnx" path="res://sounds/slurp.wav" id="26_plhk0"]
 [ext_resource type="Script" path="res://scripts/toggle_tablet.gd" id="29_wa4as"]
@@ -419,6 +421,39 @@ size = Vector3(1, 2.37891, 1)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_onvth"]
 
+[sub_resource type="Animation" id="Animation_tnqve"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ny178"]
+_data = {
+"CameraAction_003": ExtResource("17_7bi74"),
+"RESET": SubResource("Animation_tnqve")
+}
+
 [sub_resource type="Animation" id="Animation_fcbw6"]
 length = 0.001
 tracks/0/type = "value"
@@ -531,6 +566,12 @@ curve = SubResource("Curve_203xy")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7ogb0"]
 size = Vector3(3.05475, 0.0235596, 1.17133)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jp53q"]
+shader = ExtResource("23_h042j")
+shader_parameter/blur_amount = 5.0
+shader_parameter/mix_amount = 0.0
+shader_parameter/color_over = Color(0, 0, 0, 1)
 
 [node name="Map" type="Node3D"]
 script = ExtResource("1_a3xfx")
@@ -660,28 +701,29 @@ shape = SubResource("BoxShape3D_a413t")
 [node name="Head" type="Node3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Player/Head"]
+[node name="Eyes" type="Camera3D" parent="Player/Head"]
 keep_aspect = 0
 cull_mask = 1048571
 current = true
 
-[node name="RayCast3D" type="RayCast3D" parent="Player/Head/Camera3D"]
+[node name="RayCast3D" type="RayCast3D" parent="Player/Head/Eyes"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 target_position = Vector3(0, -2, 0)
 collide_with_areas = true
 script = ExtResource("32_5ed2l")
 
-[node name="Cursor" type="Sprite3D" parent="Player/Head/Camera3D"]
+[node name="Cursor" type="Sprite3D" parent="Player/Head/Eyes"]
 transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0, 0, -0.077)
+layers = 2
 texture = SubResource("PlaceholderTexture2D_onvth")
 
-[node name="TabletHolder" type="Node3D" parent="Player/Head/Camera3D"]
+[node name="TabletHolder" type="Node3D" parent="Player/Head/Eyes"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.4916e-09, -0.283598)
 
-[node name="CupHolder" type="Node3D" parent="Player/Head/Camera3D"]
+[node name="CupHolder" type="Node3D" parent="Player/Head/Eyes"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, -0.25642, -0.491635)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Player/Head/Camera3D"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Player/Head/Eyes"]
 transform = Transform3D(0.999722, 0, 0.0235598, 0.00126423, 0.998559, -0.0536456, -0.0235258, 0.0536605, 0.998282, 0.175257, -0.154509, -0.309658)
 visible = false
 light_energy = 3.0
@@ -689,20 +731,25 @@ shadow_enabled = true
 spot_range = 23.6456
 spot_angle = 20.4784
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Player/Head/Camera3D/SpotLight3D"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Player/Head/Eyes/SpotLight3D"]
 light_energy = 0.1
 spot_range = 11.8432
 spot_angle = 36.1641
 
-[node name="FlashlightClick" type="AudioStreamPlayer" parent="Player/Head/Camera3D/SpotLight3D"]
+[node name="FlashlightClick" type="AudioStreamPlayer" parent="Player/Head/Eyes/SpotLight3D"]
 stream = ExtResource("15_8e4mc")
 volume_db = -20.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Head/Eyes"]
+libraries = {
+"": SubResource("AnimationLibrary_ny178")
+}
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Player/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94943, 0)
 current = true
 
-[node name="Sprite3D" type="Sprite3D" parent="Player/Head"]
+[node name="AdamSandler" type="Sprite3D" parent="Player/Head"]
 transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, -0.374982, 0)
 layers = 4
 texture = ExtResource("15_batyp")
@@ -804,8 +851,20 @@ shape = SubResource("BoxShape3D_7ogb0")
 [node name="Animatronics" type="Node3D" parent="."]
 
 [node name="Edam Bonnie" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("22_fo68b")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.719059, -1.0015)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.719059, -1.46909)
 root = NodePath("../..")
+
+[node name="BlurShader" type="CanvasLayer" parent="."]
+process_mode = 4
+physics_interpolation_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="BlurShader"]
+material = SubResource("ShaderMaterial_jp53q")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="mouse_entered" from="TabletOnDesk/Tablet/HomeButton" to="TabletOnDesk/Tablet/HomeButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="TabletOnDesk/Tablet/HomeButton" to="TabletOnDesk/Tablet/HomeButton" method="_on_mouse_exited"]

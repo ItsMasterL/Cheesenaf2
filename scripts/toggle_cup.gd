@@ -1,6 +1,6 @@
 extends StaticBody3D
 @onready var stand := $"../.."
-@onready var hold := $"../../../Player/Head/Camera3D/CupHolder"
+@onready var hold := $"../../../Player/Head/Eyes/CupHolder"
 @onready var root = $"../../.."
 
 func _ready():

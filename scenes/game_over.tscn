@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqmpka1m3af6"]
+
+[ext_resource type="Script" path="res://scripts/game_over.gd" id="1_v6fyd"]
+[ext_resource type="Texture2D" uid="uid://b1my2w4jmvnbv" path="res://textures/static.png" id="2_8i6ey"]
+[ext_resource type="Script" path="res://scripts/background.gd" id="3_w1kre"]
+[ext_resource type="AudioStream" uid="uid://diuc1swirg8ps" path="res://sounds/static.wav" id="4_uryl7"]
+
+[node name="Gameover" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v6fyd")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(576.078, 328.25)
+scale = Vector2(0.998316, 1.04086)
+texture = ExtResource("2_8i6ey")
+vframes = 8
+script = ExtResource("3_w1kre")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 330)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_uryl7")
+volume_db = -10.0
+autoplay = true

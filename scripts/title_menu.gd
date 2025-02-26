@@ -12,7 +12,10 @@ func _ready():
 func _on_button_hover(sender: int):
 	var button = get_child(sender)
 	$HoverSound.play()
-	button.text = ">>"
+	if button.name == "Continue":
+		button.text = ">>           5"
+	else:
+		button.text = ">>"
 
 func _on_button_unhover(sender: int):
 	var button = get_child(sender)

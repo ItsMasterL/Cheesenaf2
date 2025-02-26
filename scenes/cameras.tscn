@@ -38,6 +38,7 @@ spot_attenuation = 0.0
 
 [node name="Camera3" type="Camera3D" parent="."]
 transform = Transform3D(0.617811, 0.291952, -0.730119, -0.013329, 0.932274, 0.361508, 0.786214, -0.213612, 0.57986, 6.45412, 3.67305, 25.706)
+current = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Camera3"]
 layers = 4
@@ -55,6 +56,7 @@ spot_attenuation = 0.0
 
 [node name="Camera4" type="Camera3D" parent="."]
 transform = Transform3D(0.17614, 0.28705, -0.941582, 0, 0.956537, 0.291609, 0.984365, -0.051364, 0.168484, 61.4875, 4.91985, 7.43324)
+current = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Camera4"]
 layers = 4

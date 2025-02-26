@@ -4,7 +4,7 @@ var rng = RandomNumberGenerator.new()
 var jumpscare = false
 var chance = 250
 
-@onready var sound := $Skeleton3D/RIG_Foxy_Clean_mo_002/RIG_Foxy_Clean_mo_002/AudioStreamPlayer3D
+@onready var sound := $Skeleton3D/RIG_Foxy_Clean_mo_002/RIG_Foxy_Clean_mo_002/AudioStreamPlayer
 @onready var anim := $AnimationPlayer
 
 func _on_foxy_plush_nose_booped():

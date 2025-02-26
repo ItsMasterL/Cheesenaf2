@@ -1,8 +1,8 @@
 extends CharacterBody3D
 @onready var head := $Head
-@onready var camera := $Head/Camera3D
-@onready var flashlight := $Head/Camera3D/SpotLight3D
-@onready var flashlightsound := $Head/Camera3D/SpotLight3D/FlashlightClick
+@onready var camera := $Head/Eyes
+@onready var flashlight := $Head/Eyes/SpotLight3D
+@onready var flashlightsound := $Head/Eyes/SpotLight3D/FlashlightClick
 @onready var root = $".."
 @onready var anim := $AnimationPlayer
 @onready var breathing := $Head/Breathing

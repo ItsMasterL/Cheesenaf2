@@ -30,6 +30,8 @@ extends Node3D
 @export var is_edam_animatronic : bool
 ## If true, the animatronic will warn of other animatronics entering the office vents when friendly, and will be killed on night 2 in singleplayer/co-op.
 @export var vent_checker : bool
+## Set by combo of is_edam_animatronic and office's edams_friendly. Can be set in the editor. These animatronics will never jumpscare the player.
+@export var is_friendly : bool
 
 
 var current_position = 0
@@ -44,59 +46,73 @@ func _ready() -> void:
 	rotation = positions[0].rotation
 	scale = positions[0].scale
 	print("New transform: " + str(get_transform()))
+	if is_friendly == false: # In case someone wants an always friendly animatronic.
+		is_friendly = is_edam_animatronic && root.edams_friendly
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if timer > 0:
-		timer -= delta
+		#Make it easier on lower levels when they're in the office
+		if level <= 5 && positions[current_position].office_entrance != null:
+			timer -= delta / 3
+		elif level <= 10 && positions[current_position].office_entrance != null:
+			timer -= delta / 2
+		else:
+			timer -= delta
 	else:
-		_movement_check()
 		timer = check_frequency
+		# After, so check_frequency can be changed by edam bonnie
+		_movement_check()
 
 func _movement_check():
-	#AI check
-	if randi_range(1, 20) <= level:
-		# If the animatronic is in the office (Any doorway or vent)
-		if positions[current_position].office_entrance != null:
-			#Fail if entryway is blocked
-			if root.closed_entrances.has(positions[current_position].office_entrance.entrance):
-				current_position = positions[current_position].office_entrance.fail_position_index
-				_move_animatronic(current_position)
-				return
-			#If friendly edams
-			if is_edam_animatronic && root.edams_friendly:
-				#If bonnie is in the office, play the warning and TODO: teleport Withered Bonnie to the vent
-				if vent_checker && root.night == 2:
-					var warning := $Warning
-					warning.play()
-				#If chica is in the office, refill the drink
-				elif drink_sensitive:
-					root.cup_fill = 1
-					current_position = positions[current_position].office_entrance.fail_position_index
-					_move_animatronic(current_position)
-				#If foxy is in the office, ask if he can watch you play games (If you have games)
-				elif game_sensitive:
-					pass #TODO: Foxy mechanics
-				else:
-					current_position = positions[current_position].office_entrance.fail_position_index
-					_move_animatronic(current_position)
-			# If the animatronic is not a friendly edam and checks for your drink
+	# If the animatronic is in the office (Any doorway or vent), always act
+	if positions[current_position].office_entrance != null:
+		#Fail if entryway is blocked
+		if root.closed_entrances.has(positions[current_position].office_entrance.entrance):
+			_fail_attack()
+			return
+		#If friendly edams
+		if is_edam_animatronic && is_friendly:
+			#If bonnie is in the office, play the warning and TODO: teleport Withered Bonnie to the vent
+			if vent_checker && root.night == 2:
+				var warning := $Warning
+				warning.play()
+				timer = check_frequency * 2 #Wait 2 checks before repeating
+			#If chica is in the office, refill the drink
 			elif drink_sensitive:
-				if root.cup_fill > 0.1:
-					root._jumpscare(self)
-				else:
-					root.cup_fill = 1
-					current_position = positions[current_position].office_entrance.fail_position_index
-					_move_animatronic(current_position)
-					return
-			#All jumpscare exceptions/defenses are down. game over :3
+				root.cup_fill = 1
+				_fail_attack()
+			#If foxy is in the office, ask if he can watch you play games (If you have games)
+			elif game_sensitive:
+				pass #TODO: Foxy mechanics
 			else:
+				_fail_attack()
+		# If the animatronic is not a friendly edam and checks for your drink
+		elif drink_sensitive:
+			if root.cup_fill > 0.1:
 				root._jumpscare(self)
-		elif positions[current_position].next_position_indexes.is_empty() == false:
+			else:
+				root.cup_fill = 1
+				_fail_attack()
+				return
+		# Desk hiding
+		elif positions[current_position].office_entrance.search_under_desk == false && root.p1_safety_time > 0 && root.under_desk:
+				_fail_attack()
+		#All jumpscare exceptions/defenses are down. game over :3
+		else:
+			root._jumpscare(self)
+	
+	#AI check
+	elif randi_range(1, 20) <= level:
+		# Move to one of the next spaces if it exists
+		if positions[current_position].next_position_indexes.is_empty() == false:
+			# If the next space is an office space, but the office limit is reached, wait
 			if positions[current_position].office_entrance != null && root.animatronics_in_office >= positions[current_position].office_entrance.office_animatronic_limit:
 				return
+			# Move to the next space
 			current_position = positions[current_position].next_position_indexes.pick_random()
-			if positions[current_position].office_entrance != null:
+			# If it's an office space, register as such NOTE: Friendly animatronics do not count, nor does Edam Foxy while he's hanging out with you
+			if positions[current_position].office_entrance != null && is_friendly == false:
 				root.animatronics_in_office += 1
 			_move_animatronic(current_position)
 
@@ -111,3 +127,10 @@ func _move_animatronic(pos: int):
 		stepsound.stream = load("res://sounds/walk" + str(randi_range(1,5)) + ".wav")
 	stepsound.play()
 	print(str(animatronic) + " moved to " + str(current_position))
+
+func _fail_attack():
+	# Friendly animatronics don't count towards this as they cannot harm you
+	if is_friendly == false:
+		root.animatronics_in_office -= 1
+	current_position = positions[current_position].office_entrance.fail_position_index
+	_move_animatronic(current_position)
