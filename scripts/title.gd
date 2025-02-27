@@ -1,4 +1,13 @@
 extends Control
 
-func _on_title_menu_start_game():
-	get_tree().change_scene_to_file("res://scenes/office.tscn")
+@onready var menu = $Menu
+@onready var loadedmenu = $Menu/TitleMenu
+
+func _load_title_screen(screen: String):
+	loadedmenu.queue_free()
+	var loaded = load("res://scenes/%s.tscn" % [screen])
+	loadedmenu = loaded.instantiate()
+	menu.add_child(loadedmenu)
+
+func _mute_music():
+	$AudioStreamPlayer2D.stop()

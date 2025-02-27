@@ -16,6 +16,8 @@ func _load_application(appscene: String):
 	if app_home.get_child_count() > 0:
 		app_home.get_child(0).queue_free()
 	current_process = load("res://scenes/%s.tscn" % [appscene])
+	if appscene == "cams_plus":
+		root.in_cams = true
 	var instance = current_process.instantiate()
 	app_home.add_child(instance)
 	home.hide()
@@ -24,3 +26,4 @@ func _home():
 	if app_home.get_child_count() > 0:
 		app_home.get_child(0).queue_free()
 	home.show()
+	root.in_cams = false

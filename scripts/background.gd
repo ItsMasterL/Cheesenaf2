@@ -1,13 +1,15 @@
 extends Sprite2D
 
 
-func _ready():
-	_animate()
+var wait_time = 0.015
 
-func _animate():
-	if frame + 1 < vframes:
-		frame += 1
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	if wait_time > 0:
+		wait_time -= delta
 	else:
-		frame = 0
-	await get_tree().create_timer(0.025).timeout
-	_animate()
+		if frame + 1 < vframes:
+			frame += 1
+		else:
+			frame = 0
+		wait_time = 0.015

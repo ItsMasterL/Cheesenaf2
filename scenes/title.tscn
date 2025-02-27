@@ -1,13 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://lbjqjlv5clj6"]
+[gd_scene load_steps=6 format=3 uid="uid://lbjqjlv5clj6"]
 
 [ext_resource type="Script" path="res://scripts/title.gd" id="1_3f131"]
 [ext_resource type="Texture2D" uid="uid://b1my2w4jmvnbv" path="res://textures/static.png" id="1_7gfe5"]
 [ext_resource type="Script" path="res://scripts/background.gd" id="2_jc731"]
 [ext_resource type="PackedScene" uid="uid://d1ffrbutvy4e" path="res://scenes/title_menu.tscn" id="3_xhvqt"]
 [ext_resource type="AudioStream" uid="uid://b8itxrejv1wji" path="res://sounds/music/echoes_of_time.mp3" id="4_w6ovr"]
-[ext_resource type="Texture2D" uid="uid://cl7ngqp6v450t" path="res://textures/cheese.png" id="6_y7kdu"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w7mla"]
 
 [node name="Title" type="Control"]
 layout_mode = 3
@@ -27,8 +24,9 @@ texture = ExtResource("1_7gfe5")
 vframes = 8
 script = ExtResource("2_jc731")
 
-[node name="TitleMenu" parent="." instance=ExtResource("3_xhvqt")]
-layout_mode = 1
+[node name="Menu" type="Node" parent="."]
+
+[node name="TitleMenu" parent="Menu" instance=ExtResource("3_xhvqt")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 330)
@@ -44,11 +42,3 @@ offset_top = 335.0
 offset_right = -265.0
 offset_bottom = 375.0
 text = "It's cheese"
-
-[node name="Cheese" type="Sprite2D" parent="."]
-z_index = -2
-material = SubResource("CanvasItemMaterial_w7mla")
-position = Vector2(583, 328)
-texture = ExtResource("6_y7kdu")
-
-[connection signal="start_game" from="TitleMenu" to="." method="_on_title_menu_start_game"]

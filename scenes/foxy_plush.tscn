@@ -1422,7 +1422,7 @@ mesh = SubResource("ArrayMesh_fjcvp")
 skeleton = NodePath("")
 
 [node name="Icosphere" type="BoneAttachment3D" parent="Skeleton3D"]
-transform = Transform3D(1.36508, -0.1188, -0.327973, 0.102897, 1.4029, -0.0798984, 0.333304, 0.0534584, 1.36791, 1.11579, 5.64937, 1.02986)
+transform = Transform3D(1.36508, -0.1188, -0.327972, 0.102897, 1.4029, -0.0798981, 0.333303, 0.0534582, 1.36791, 1.11579, 5.64937, 1.02986)
 bone_name = "Icosphere"
 bone_idx = 16
 

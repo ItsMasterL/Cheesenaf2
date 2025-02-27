@@ -1,8 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://d1ffrbutvy4e"]
+[gd_scene load_steps=30 format=3 uid="uid://d1ffrbutvy4e"]
 
 [ext_resource type="Script" path="res://scripts/title_menu.gd" id="1_ads83"]
 [ext_resource type="FontFile" uid="uid://cm76e8ykj27f8" path="res://consolas.ttf" id="2_aik6n"]
 [ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://sounds/change_cam.wav" id="4_cl3hh"]
+[ext_resource type="Texture2D" uid="uid://cl7ngqp6v450t" path="res://textures/cheese.png" id="4_t4b52"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ptv6"]
 
@@ -51,6 +52,8 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ve4ch"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1pwwm"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_j144y"]
 
 [node name="TitleMenu" type="Control"]
 layout_mode = 3
@@ -216,3 +219,14 @@ scroll_active = false
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_cl3hh")
 volume_db = -10.0
+autoplay = true
+
+[node name="Cheese" type="Sprite2D" parent="."]
+z_index = -2
+material = SubResource("CanvasItemMaterial_j144y")
+position = Vector2(583, 328)
+texture = ExtResource("4_t4b52")
+
+[connection signal="pressed" from="NewGame" to="." method="_start_singleplayer"]
+[connection signal="pressed" from="Continue" to="." method="_start_singleplayer" binds= [true]]
+[connection signal="pressed" from="CustomNight" to="." method="_change_menu" binds= ["customnight"]]

@@ -35,36 +35,57 @@ extends Node3D
 
 
 var current_position = 0
+# Usually used to disable movement checks during jumpscares
+var can_move = true
+var camera_cooldown = 0
 @onready var timer = check_frequency
 @onready var level = root._get_ai(animatronic)
 @onready var stepsound := $Step
 @onready var anim := $AnimationPlayer
 
 func _ready() -> void:
-	print("Initial transform: " + str(get_transform()))
 	position = positions[0].position
-	rotation = positions[0].rotation
+	rotation_degrees = positions[0].rotation
 	scale = positions[0].scale
-	print("New transform: " + str(get_transform()))
+	anim.play(positions[0].animation_id)
 	if is_friendly == false: # In case someone wants an always friendly animatronic.
 		is_friendly = is_edam_animatronic && root.edams_friendly
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	# Camera sensitivity
+	if root.in_cams && root.using_tablet && camera_sensitive:
+		camera_cooldown = randf_range(0,21 - level)
+	if camera_cooldown > 0 && camera_sensitive:
+		camera_cooldown -= delta
+		can_move = false
+	# If not in the office
+	elif camera_sensitive && positions[current_position].office_entrance == null:
+		can_move = true
+	#Music Box
+	if music_box_sensitive && root.is_winding == false:
+		root.musicbox = clamp(root.musicbox - (level * delta) * root.fun_multiplier, 0, 2000)
+	
 	if timer > 0:
 		#Make it easier on lower levels when they're in the office
 		if level <= 5 && positions[current_position].office_entrance != null:
-			timer -= delta / 3
+			timer -= (delta / 3) * root.fun_multiplier
 		elif level <= 10 && positions[current_position].office_entrance != null:
-			timer -= delta / 2
+			timer -= (delta / 2) * root.fun_multiplier
 		else:
-			timer -= delta
+			timer -= delta * root.fun_multiplier
 	else:
 		timer = check_frequency
 		# After, so check_frequency can be changed by edam bonnie
 		_movement_check()
 
 func _movement_check():
+	# If the animatronic can't move, don't move.
+	if can_move == false:
+		return
+	# Don't let music box characters roam until the music box has run out
+	if music_box_sensitive && root.musicbox_ran_out == false:
+		return
 	# If the animatronic is in the office (Any doorway or vent), always act
 	if positions[current_position].office_entrance != null:
 		#Fail if entryway is blocked
@@ -89,7 +110,8 @@ func _movement_check():
 				_fail_attack()
 		# If the animatronic is not a friendly edam and checks for your drink
 		elif drink_sensitive:
-			if root.cup_fill > 0.1:
+			if root.cup_fill > 0.25:
+				can_move = false
 				root._jumpscare(self)
 			else:
 				root.cup_fill = 1
@@ -100,14 +122,15 @@ func _movement_check():
 				_fail_attack()
 		#All jumpscare exceptions/defenses are down. game over :3
 		else:
+			can_move = false
 			root._jumpscare(self)
 	
 	#AI check
 	elif randi_range(1, 20) <= level:
 		# Move to one of the next spaces if it exists
 		if positions[current_position].next_position_indexes.is_empty() == false:
-			# If the next space is an office space, but the office limit is reached, wait
-			if positions[current_position].office_entrance != null && root.animatronics_in_office >= positions[current_position].office_entrance.office_animatronic_limit:
+			# If the next space is an office space, but the office limit is reached, wait if not friendly
+			if positions[current_position].office_entrance != null && root.animatronics_in_office >= positions[current_position].office_entrance.office_animatronic_limit && is_friendly == false:
 				return
 			# Move to the next space
 			current_position = positions[current_position].next_position_indexes.pick_random()

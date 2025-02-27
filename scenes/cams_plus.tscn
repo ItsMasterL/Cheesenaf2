@@ -9,13 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://dxuc3sch65x4o" path="res://textures/cheesenaf 2 map.png" id="7_3v212"]
 [ext_resource type="AudioStream" uid="uid://c7h6lkgdo12dj" path="res://sounds/buzzlight.wav" id="7_8233h"]
 [ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://sounds/change_cam.wav" id="7_hest6"]
+[ext_resource type="AudioStream" uid="uid://xbj7alhjn3i1" path="res://sounds/windup2.wav" id="8_87mr5"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_q747j"]
 viewport_path = NodePath("Background/SubViewport")
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_urmdi"]
-blend_mode = 1
-light_mode = 1
 
 [node name="CamsPlus" type="Control"]
 clip_contents = true
@@ -38,11 +35,10 @@ size = Vector2i(1185, 730)
 [node name="Cameras" parent="Background/SubViewport" instance=ExtResource("1_6hi0q")]
 
 [node name="Static" type="Sprite2D" parent="."]
-modulate = Color(0.29219, 0.29219, 0.29219, 1)
+modulate = Color(1, 1, 1, 0.219608)
 z_index = -1
-material = SubResource("CanvasItemMaterial_urmdi")
-position = Vector2(584, 368)
-scale = Vector2(0.998316, 1.04086)
+position = Vector2(594.5, 368)
+scale = Vector2(0.935156, 1.04086)
 texture = ExtResource("3_iubtw")
 vframes = 8
 script = ExtResource("4_xeoj4")
@@ -61,6 +57,12 @@ panning_strength = 0.0
 stream = ExtResource("7_8233h")
 volume_db = -2.0
 panning_strength = 0.0
+
+[node name="Wind" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_87mr5")
+
+[node name="Musicbox" type="AudioStreamPlayer2D" parent="."]
+volume_db = -15.0
 
 [node name="Cheesenaf2Map" type="Sprite2D" parent="."]
 position = Vector2(960.985, 567)
@@ -263,6 +265,29 @@ theme_override_fonts/font = ExtResource("5_cc4t8")
 theme_override_font_sizes/font_size = 10
 text = "CAM10"
 
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 997.0
+offset_top = 376.0
+offset_right = 1172.0
+offset_bottom = 444.0
+theme_override_fonts/font = ExtResource("5_cc4t8")
+text = "WIND MUSIC BOX
+ 
+ "
+
+[node name="ProgressBar" type="ProgressBar" parent="Button"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 33.0
+offset_right = 171.0
+offset_bottom = 56.0
+mouse_filter = 2
+max_value = 2000.0
+step = 50.0
+value = 2000.0
+show_percentage = false
+
 [connection signal="pressed" from="Cam1" to="." method="_change_camera" binds= [0]]
 [connection signal="pressed" from="Cam2" to="." method="_change_camera" binds= [1]]
 [connection signal="pressed" from="Cam3" to="." method="_change_camera" binds= [2]]
@@ -276,3 +301,6 @@ text = "CAM10"
 [connection signal="pressed" from="Cam11" to="." method="_change_camera" binds= [10]]
 [connection signal="pressed" from="Cam12" to="." method="_change_camera" binds= [11]]
 [connection signal="pressed" from="Cam13" to="." method="_change_camera" binds= [12]]
+[connection signal="button_down" from="Button" to="." method="_wind_musicbox" binds= [true]]
+[connection signal="button_up" from="Button" to="." method="_wind_musicbox" binds= [false]]
+[connection signal="mouse_exited" from="Button" to="." method="_wind_musicbox" binds= [false]]

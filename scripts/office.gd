@@ -2,13 +2,14 @@ extends Node3D
 
 @onready var blur := $BlurShader/ColorRect
 
-var night = 1
+var night = Globals.night
 var time = 0 as float
 var hour = 0
 var minute = 0
-var fun_multiplier = 1 #Set by minigames in singleplayer to make time go by faster
-var time_to_hour = 90
+var fun_multiplier = 50 #Set by minigames in singleplayer to make time go by faster
+const time_to_hour = 90
 var using_tablet = false
+var in_cams = false
 var under_desk = false
 var animatronics_in_office = 0
 var closed_entrances : Array[int]
@@ -16,21 +17,25 @@ var cup_fill = 1
 var fan_powered = true
 var p1_thirst = 0
 var p1_heat = 0
+var musicbox = 2000
+var is_winding = false
+var musicbox_ran_out = false
 # Animatronic AI levels; Animatronics will handle their own paths, timers, etc
-var edams_friendly = false
-var edam_freddy = 0
-var edam_bonnie = 15
-var edam_chica = 0
-var edam_foxy = 0
-var wither_freddy = 0
-var wither_bonnie = 0
-var wither_chica = 0
-var wither_foxy = 0
-var cheesestick = 0
+var edams_friendly = Globals.edams_friendly
+var edam_freddy = Globals.edam_freddy
+var edam_bonnie = Globals.edam_bonnie
+var edam_chica = Globals.edam_chica
+var edam_foxy = Globals.edam_foxy
+var wither_freddy = Globals.wither_freddy
+var wither_bonnie = Globals.wither_bonnie
+var wither_chica = Globals.wither_chica
+var wither_foxy = Globals.wither_foxy
+var cheesestick = Globals.cheesestick
 #Changed per night, how long the player has to hide under the desk when an animatronic gets in
-var safety_time = 2.5
+var safety_time = Globals.safety_time
 var p1_safety_time = safety_time
 # Etc
+var p1_last_cam
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -61,6 +66,17 @@ func _process(delta):
 	else:
 		p1_heat = clamp(p1_heat + (delta * 0.025), 0, 5)
 	blur.material.set("shader_parameter/blur_amount", p1_heat)
+	# Music box running out
+	if musicbox == 0:
+		musicbox_ran_out = true
+	
+	# 6 AM
+	if hour == 6:
+		night = clamp(night + 1, 1, 6)
+		Globals.save_night = night
+		Globals._save()
+		#TODO: Save backbuffer for a fade transition like fnaf
+		get_tree().change_scene_to_file("res://scenes/victory.tscn")
 
 func _get_ai(animatronic: String) -> int:
 	match animatronic:
