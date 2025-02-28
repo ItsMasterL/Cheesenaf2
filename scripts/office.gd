@@ -6,7 +6,7 @@ var night = Globals.night
 var time = 0 as float
 var hour = 0
 var minute = 0
-var fun_multiplier = 50 #Set by minigames in singleplayer to make time go by faster
+var fun_multiplier = 1 #Set by minigames in singleplayer to make time go by faster
 const time_to_hour = 90
 var using_tablet = false
 var in_cams = false
@@ -72,9 +72,10 @@ func _process(delta):
 	
 	# 6 AM
 	if hour == 6:
-		night = clamp(night + 1, 1, 6)
-		Globals.save_night = night
-		Globals._save()
+		if night < 7:
+			night = clamp(night + 1, 1, 6)
+			Globals.save_night = night
+			Globals._save()
 		#TODO: Save backbuffer for a fade transition like fnaf
 		get_tree().change_scene_to_file("res://scenes/victory.tscn")
 

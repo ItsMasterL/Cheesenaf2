@@ -5244,8 +5244,8 @@ script = ExtResource("1_vu3bh")
 animatronic = "edam_bonnie"
 positions = Array[ExtResource("2_81imh")]([SubResource("Resource_mwarj"), SubResource("Resource_43rgw"), SubResource("Resource_6gk7j"), SubResource("Resource_a1qxy"), SubResource("Resource_5xhsv"), SubResource("Resource_onaa2"), SubResource("Resource_a2ugv"), SubResource("Resource_2l30j"), SubResource("Resource_esfhx"), SubResource("Resource_53aci"), SubResource("Resource_p1jf2"), SubResource("Resource_ga6x2"), SubResource("Resource_not8c")])
 check_frequency = 3.5
-music_box_sensitive = true
 is_edam_animatronic = true
+vent_checker = true
 
 [node name="Edam Endo" type="Node3D" parent="."]
 transform = Transform3D(1.78814e-07, 0, 1, 0, 1, 0, -1, 0, 1.78814e-07, 0, 0, 0)
