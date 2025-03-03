@@ -881,6 +881,7 @@ theme_override_font_sizes/font_size = 40
 text = "+"
 
 [node name="Start" type="Button" parent="."]
+layout_mode = 0
 offset_left = 839.0
 offset_top = 598.0
 offset_right = 1125.0
@@ -915,6 +916,7 @@ text = "Start Custom Night"
 scroll_active = false
 
 [node name="Night1" type="Button" parent="."]
+layout_mode = 0
 offset_left = 92.0
 offset_top = 49.0
 offset_right = 282.0
@@ -948,6 +950,7 @@ text = "Start Night 1"
 scroll_active = false
 
 [node name="Night2" type="Button" parent="."]
+layout_mode = 0
 offset_left = 468.0
 offset_top = 49.0
 offset_right = 658.0
@@ -981,6 +984,7 @@ text = "Start Night 2"
 scroll_active = false
 
 [node name="Night3" type="Button" parent="."]
+layout_mode = 0
 offset_left = 816.0
 offset_top = 49.0
 offset_right = 1006.0
@@ -1014,6 +1018,7 @@ text = "Start Night 3"
 scroll_active = false
 
 [node name="Night4" type="Button" parent="."]
+layout_mode = 0
 offset_left = 92.0
 offset_top = 102.0
 offset_right = 282.0
@@ -1047,6 +1052,7 @@ text = "Start Night 4"
 scroll_active = false
 
 [node name="Night5" type="Button" parent="."]
+layout_mode = 0
 offset_left = 468.0
 offset_top = 102.0
 offset_right = 658.0
@@ -1080,6 +1086,7 @@ text = "Start Night 5"
 scroll_active = false
 
 [node name="Night6" type="Button" parent="."]
+layout_mode = 0
 offset_left = 815.0
 offset_top = 102.0
 offset_right = 1005.0

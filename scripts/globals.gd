@@ -18,6 +18,24 @@ var safety_time = 2.5
 var save_night = 1
 var purchased_app_ids : Array[int]
 
+func _ready():
+	match randi_range(0,3):
+		0:
+			if OS.get_name() == "Windows":
+				DisplayServer.set_native_icon("res://textures/icons/edam bonnie.ico")
+			else:
+				DisplayServer.set_icon(load("res://textures/icons/edam bonnie.png"))
+		1:
+			if OS.get_name() == "Windows":
+				DisplayServer.set_native_icon("res://textures/icons/edam chica.ico")
+			else:
+				DisplayServer.set_icon(load("res://textures/icons/edam chica.png"))
+		2:
+			if OS.get_name() == "Windows":
+				DisplayServer.set_native_icon("res://textures/icons/edam foxy.ico")
+			else:
+				DisplayServer.set_icon(load("res://textures/icons/edam foxy.png"))
+
 func _save():
 #TODO: If updating Cheesenaf 1 before publishing alongside Cheesenaf 2 on gamejolt/itch, add a BBGSim mod easter egg in Cheesenaf 2 save data
 	var data = {

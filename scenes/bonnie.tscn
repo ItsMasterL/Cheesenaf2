@@ -1,6 +1,6 @@
 [gd_scene load_steps=45 format=4 uid="uid://sr5bhwimbn6q"]
 
-[ext_resource type="Texture2D" uid="uid://bi4rcqniywlwg" path="res://models/bonnie_Untitled.png" id="1_bnf7w"]
+[ext_resource type="Texture2D" uid="uid://bi4rcqniywlwg" path="res://models/edam_bonnie_tex.png" id="1_bnf7w"]
 [ext_resource type="Script" path="res://scripts/animatronic.gd" id="1_vu3bh"]
 [ext_resource type="Script" path="res://scripts/animatronic_position.gd" id="2_81imh"]
 [ext_resource type="Texture2D" uid="uid://vv2w0no184pt" path="res://models/bonnie_Char_Tex_Bonnie_BaseColor.png" id="2_fkkuw"]
