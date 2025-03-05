@@ -157,3 +157,9 @@ func _fail_attack():
 		root.animatronics_in_office -= 1
 	current_position = positions[current_position].office_entrance.fail_position_index
 	_move_animatronic(current_position)
+
+func _change_dance(count : int, id : int = 0):
+	if always_random_dance || music_box_dances.size() < count:
+		anim.play(music_box_dances.pick_random())
+	else:
+		anim.play(music_box_dances[id])

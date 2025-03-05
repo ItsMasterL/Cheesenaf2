@@ -8,10 +8,18 @@ extends Control
 @onready var musicprogress := $Button/ProgressBar
 @onready var windsound := $Wind
 @onready var musicbox := $Musicbox
+var songcount = 10
+
+signal change_dance
 
 func _ready():
 	if root.p1_last_cam != null:
 		_change_camera(root.p1_last_cam, false)
+	# Should be "Animatronics" in office.tscn
+	for animatronic in root.get_child(8).get_children():
+		if animatronic.music_box_sensitive:
+			change_dance.connect(animatronic._change_dance)
+	
 
 func _change_camera(cam: int, sound: bool = true):
 	current_cam = cams.get_child(cam)
@@ -48,7 +56,9 @@ func _process(delta):
 		musicbox.stop()
 	elif musicbox.playing == false:
 		if randi_range(0,4) >= 2:
-			musicbox.stream = load("res://sounds/music/musicbox%s.mp3" % [randi_range(1,9)])
+			var id = randi_range(1,songcount)
+			musicbox.stream = load("res://sounds/music/musicbox%s.mp3" % [id])
+			change_dance.emit(songcount, id)
 		musicbox.play()
 
 func _wind_musicbox(input: bool):
