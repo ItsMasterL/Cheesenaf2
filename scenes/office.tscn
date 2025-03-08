@@ -679,7 +679,7 @@ shape = SubResource("BoxShape3D_j1onk")
 disable_3d = true
 audio_listener_enable_2d = true
 gui_embed_subwindows = true
-size = Vector2i(1185, 730)
+size = Vector2i(1280, 800)
 
 [node name="TabletOS" parent="TabletOnDesk/Tablet/ScreenQuad/TabletScreen" instance=ExtResource("9_l1dhy")]
 

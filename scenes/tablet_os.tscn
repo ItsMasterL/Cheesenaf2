@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxpmp04xt6u6q"]
+[gd_scene load_steps=6 format=3 uid="uid://bxpmp04xt6u6q"]
 
 [ext_resource type="Script" path="res://scripts/tablet_manager.gd" id="1_0wb5n"]
 [ext_resource type="Texture2D" uid="uid://c70vi1sqw8vjc" path="res://textures/andre-ouellet-b1bgPw5sLus-unsplash.jpg" id="1_3v8y3"]
 [ext_resource type="Texture2D" uid="uid://duvbu0ep0tb3l" path="res://textures/cheesenaf 2 tablet home.png" id="2_pge4p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kpga"]
+atlas = ExtResource("2_pge4p")
+region = Rect2(0, 0, 1280, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82o56"]
+atlas = ExtResource("2_pge4p")
+region = Rect2(0, 40, 1280, 760)
 
 [node name="TabletOS" type="Node2D"]
 script = ExtResource("1_0wb5n")
@@ -11,49 +19,56 @@ script = ExtResource("1_0wb5n")
 clip_contents = true
 layout_mode = 3
 anchors_preset = 0
-offset_right = 1281.0
+offset_right = 1280.0
 offset_bottom = 800.0
 
-[node name="Clock" type="RichTextLabel" parent="TimeUI"]
-z_index = 5
-layout_mode = 0
-offset_left = 1079.0
-offset_top = 7.0
-offset_right = 1167.0
-offset_bottom = 37.0
-mouse_filter = 1
-text = "12:00 AM"
-
-[node name="Cheesenaf2TabletHome" type="Sprite2D" parent="TimeUI"]
-z_index = 4
-position = Vector2(-2.96115, 0)
-scale = Vector2(0.928876, 0.92125)
-texture = ExtResource("2_pge4p")
+[node name="TopBarBackground" type="Sprite2D" parent="TimeUI"]
+texture = SubResource("AtlasTexture_3kpga")
 centered = false
+
+[node name="Clock" type="Label" parent="TimeUI"]
+offset_left = 1192.0
+offset_top = 8.0
+offset_right = 1272.0
+offset_bottom = 32.0
+text = "12:00 AM"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Home" type="Control" parent="."]
 clip_contents = true
 layout_mode = 3
 anchors_preset = 0
-offset_right = 1281.0
+offset_right = 1280.0
 offset_bottom = 800.0
 
 [node name="Background" type="Sprite2D" parent="Home"]
 z_index = -1
-position = Vector2(-95, -72)
-scale = Vector2(0.427, 0.4)
+position = Vector2(0, -53)
 texture = ExtResource("1_3v8y3")
 centered = false
 
-[node name="CamsPlus" type="Button" parent="Home"]
+[node name="Shadow" type="Sprite2D" parent="Home"]
+position = Vector2(0, 40)
+texture = SubResource("AtlasTexture_82o56")
+centered = false
+
+[node name="GridContainer" type="GridContainer" parent="Home"]
 layout_mode = 0
-offset_left = 66.0
-offset_top = 98.0
-offset_right = 137.0
-offset_bottom = 160.0
+offset_left = 80.0
+offset_top = 96.0
+offset_right = 1200.0
+offset_bottom = 744.0
+theme_override_constants/h_separation = 80
+theme_override_constants/v_separation = 56
+columns = 6
+
+[node name="CamsPlus" type="Button" parent="Home/GridContainer"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
 text = "CAMS
 PLUS"
 
 [node name="Application" type="Node2D" parent="."]
 
-[connection signal="pressed" from="Home/CamsPlus" to="." method="_load_application" binds= ["cams_plus"]]
+[connection signal="pressed" from="Home/GridContainer/CamsPlus" to="." method="_load_application" binds= ["cams_plus"]]
