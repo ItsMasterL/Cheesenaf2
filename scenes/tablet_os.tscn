@@ -27,6 +27,7 @@ texture = SubResource("AtlasTexture_3kpga")
 centered = false
 
 [node name="Clock" type="Label" parent="TimeUI"]
+layout_mode = 0
 offset_left = 1192.0
 offset_top = 8.0
 offset_right = 1272.0

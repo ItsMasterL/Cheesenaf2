@@ -5,9 +5,10 @@ extends Control
 @onready var lightsound := $Light
 @onready var camsound := $ChangeCam
 @onready var root = get_tree().get_root().get_node("Map")
-@onready var musicprogress := $Button/ProgressBar
+@onready var musicprogress := $Buttons/Button/ProgressBar
 @onready var windsound := $Wind
 @onready var musicbox := $Musicbox
+@onready var cambuttons = $Buttons
 var songcount = 10
 
 signal change_dance
@@ -19,10 +20,13 @@ func _ready():
 	for animatronic in root.get_child(8).get_children():
 		if animatronic.music_box_sensitive:
 			change_dance.connect(animatronic._change_dance)
+	for button in cambuttons.get_children() as Array[Button]:
+		if button.name.contains("Cam"):
+			button.pressed.connect(_change_camera.bind(button.name.trim_prefix("Cam").to_int()))
 	
 
 func _change_camera(cam: int, sound: bool = true):
-	current_cam = cams.get_child(cam)
+	current_cam = cams.get_child(cam - 1)
 	var lighttemp = light.visible
 	light.visible = false
 	light = current_cam.get_child(1)
@@ -46,7 +50,6 @@ func _unhandled_input(event):
 
 func _process(delta):
 	if root.is_winding:
-		root.musicbox = clamp(root.musicbox + 1, 0, 2000)
 		if windsound.playing == false:
 			windsound.play()
 	musicprogress.value = root.musicbox

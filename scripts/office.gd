@@ -69,6 +69,9 @@ func _process(delta):
 	# Music box running out
 	if musicbox == 0:
 		musicbox_ran_out = true
+	# Music box winding - Degredation is handled by each music box sensitive animatronic
+	if is_winding:
+		musicbox = clamp(musicbox + 200 * delta, 0, 2000)
 	
 	# 6 AM
 	if hour == 6:
