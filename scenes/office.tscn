@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=4 uid="uid://kfokhb3cioir"]
+[gd_scene load_steps=70 format=4 uid="uid://kfokhb3cioir"]
 
 [ext_resource type="Script" path="res://scripts/office.gd" id="1_a3xfx"]
 [ext_resource type="PackedScene" uid="uid://bs378s4kwr2ux" path="res://scenes/foxy_plush.tscn" id="1_gqipk"]
@@ -21,7 +21,9 @@
 [ext_resource type="PackedScene" uid="uid://bx7i4uyvysowi" path="res://scenes/freddy.tscn" id="23_d180k"]
 [ext_resource type="Shader" path="res://shaders/blur.gdshader" id="23_h042j"]
 [ext_resource type="Script" path="res://scripts/toggle_cup.gd" id="25_hni3l"]
+[ext_resource type="PackedScene" uid="uid://cuiite2xlb70y" path="res://scenes/chica.tscn" id="25_m5hqu"]
 [ext_resource type="AudioStream" uid="uid://bip471h5exvnx" path="res://sounds/slurp.wav" id="26_plhk0"]
+[ext_resource type="PackedScene" uid="uid://ctk8vkg2rvilm" path="res://scenes/foxy.tscn" id="26_xrtv4"]
 [ext_resource type="Script" path="res://scripts/toggle_tablet.gd" id="29_wa4as"]
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="31_63unw"]
 [ext_resource type="Script" path="res://scripts/player_raycast.gd" id="32_5ed2l"]
@@ -827,22 +829,6 @@ trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_48d6p")
 draw_pass_1 = SubResource("RibbonTrailMesh_4fnyf")
 
-[node name="SpotLight3D3" type="SpotLight3D" parent="Map"]
-transform = Transform3D(-0.525368, -0.486277, -0.698229, 0, 0.820601, -0.571501, 0.850875, -0.300248, -0.431117, 67.0498, 1.21163, 1.6226)
-light_color = Color(1, 1, 0.784314, 1)
-light_bake_mode = 1
-shadow_enabled = true
-spot_range = 38.9278
-spot_angle = 29.2107
-
-[node name="SpotLight3D4" type="SpotLight3D" parent="Map"]
-transform = Transform3D(0.0693552, 0.733702, -0.675922, 0.0336236, 0.67545, 0.736639, 0.997025, -0.0738166, 0.0221763, 66.7537, 4.99896, 2.44166)
-light_color = Color(1, 1, 0.784314, 1)
-light_bake_mode = 1
-shadow_enabled = true
-spot_range = 38.9278
-spot_angle = 29.2107
-
 [node name="DeskRaycastBlock" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DeskRaycastBlock"]
@@ -856,7 +842,15 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 68.541
 root = NodePath("../..")
 
 [node name="Edam Bonnie" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("22_fo68b")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.719059, -1.46909)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 69.0382, 1.00494, 3.66721)
+root = NodePath("../..")
+
+[node name="Edam Chica" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("25_m5hqu")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.173698, -0.0622949, -13.115)
+root = NodePath("../..")
+
+[node name="Edam Foxy" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("26_xrtv4")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.06042, -0.031324, 1.21204)
 root = NodePath("../..")
 
 [node name="BlurShader" type="CanvasLayer" parent="."]

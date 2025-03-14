@@ -234,7 +234,7 @@ _data = {
 "Markiplier": ExtResource("6_8unms")
 }
 
-[node name="Animatronics" instance=ExtResource("1_qyyjk")]
+[node name="Edam Freddy" instance=ExtResource("1_qyyjk")]
 script = ExtResource("1_u4dqd")
 animatronic = "edam_freddy"
 positions = Array[ExtResource("2_qge1l")]([SubResource("Resource_qbims")])

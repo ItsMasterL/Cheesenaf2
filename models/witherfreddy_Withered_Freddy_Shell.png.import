@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dfm8thvodiexw"
+path.s3tc="res://.godot/imported/witherfreddy_Withered_Freddy_Shell.png-84177d2b3a7e207c35e883780cb897cd.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "025ad6ecec7ed7cbcd12d4023e387524"
+}
+
+[deps]
+
+source_file="res://models/witherfreddy_Withered_Freddy_Shell.png"
+dest_files=["res://.godot/imported/witherfreddy_Withered_Freddy_Shell.png-84177d2b3a7e207c35e883780cb897cd.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

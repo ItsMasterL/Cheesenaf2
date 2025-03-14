@@ -20,6 +20,8 @@ var p1_heat = 0
 var musicbox = 2000
 var is_winding = false
 var musicbox_ran_out = false
+var gamer_in_office = false # This is for Edam Foxy. I just thought it'd be a fun variable name
+var p1_has_tablet = true
 # Animatronic AI levels; Animatronics will handle their own paths, timers, etc
 var edams_friendly = Globals.edams_friendly
 var edam_freddy = Globals.edam_freddy
@@ -36,6 +38,7 @@ var safety_time = Globals.safety_time
 var p1_safety_time = safety_time
 # Etc
 var p1_last_cam
+var game_sensitive : Array[Node3D]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -105,6 +108,13 @@ func _get_ai(animatronic: String) -> int:
 	return 0
 
 func _jumpscare(animatronic: Node3D, short: bool = true):
+	if gamer_in_office && animatronic.name != "wither_freddy":
+		animatronic._fail_attack()
+		for gamer in game_sensitive:
+			if gamer.guarding == true: # Only is set to this when in the office
+				_jumpscare_save(gamer)
+				return
+	animatronic.can_move = false
 	animatronic.position = Vector3(0, -0.719, -2.25)
 	animatronic.rotation_degrees = Vector3(0, -90, 0)
 	var anim : AnimationPlayer = animatronic.get_child(1)
@@ -127,3 +137,45 @@ func _jumpscare(animatronic: Node3D, short: bool = true):
 	await get_tree().create_timer(animatronic.jumpscare_length).timeout
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
+
+func _jumpscare_save(animatronic: Node3D):
+	animatronic.position = Vector3(0, -0.719, -2.25)
+	animatronic.rotation_degrees = Vector3(0, -90, 0)
+	var anim : AnimationPlayer = animatronic.get_child(1)
+	var sound : AudioStreamPlayer = animatronic.get_child(2)
+	var warning : AudioStreamPlayer = animatronic.get_child(4)
+	warning.stream = load("res://sounds/edamfoxy-save%s.wav" % [randi_range(1,7)])
+	anim.play(animatronic.save_animation_id)
+	sound.play()
+	var playercamanim := $Player/Head/Eyes/AnimationPlayer
+	var playerhead = $Player/Head
+	var playeranim := $Player/AnimationPlayer
+	var tablet = $Player/Head/Eyes/TabletHolder
+	var cup = $Player/Head/Eyes/CupHolder
+	tablet.visible = false
+	cup.visible = false
+	p1_heat = -2
+	playerhead.rotation_degrees = Vector3.ZERO
+	playeranim.play("RESET")
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+	playercamanim.play("CameraAction_003")
+	if animatronic.save_voiceline_delay < animatronic.save_player_free: # Most likely
+		await get_tree().create_timer(animatronic.save_voiceline_delay).timeout
+		warning.play()
+		await get_tree().create_timer(animatronic.save_player_free - animatronic.save_voiceline_delay).timeout
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		tablet.visible = true
+		cup.visible = true
+	elif animatronic.save_voiceline_delay > animatronic.save_player_free: # Less likely
+		await get_tree().create_timer(animatronic.save_player_free).timeout
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		tablet.visible = true
+		cup.visible = true
+		await get_tree().create_timer(animatronic.save_voiceline_delay - animatronic.save_player_free).timeout
+		warning.play()
+	else: # Least likely
+		await get_tree().create_timer(animatronic.save_voiceline_delay).timeout
+		warning.play()
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		tablet.visible = true
+		cup.visible = true

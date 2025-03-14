@@ -43,6 +43,11 @@ func _start_singleplayer_custom(night: int = 7):
 func _change_menu(screen: String):
 	$"../../"._load_title_screen("title_" + screen)
 
+func _toggle_edams(friendly : bool):
+	Globals.edams_friendly = friendly
+	$ClickSound.play()
+	_update_customnight_displays()
+
 func _change_level(animatronic: String, change: int):
 	match animatronic:
 		"edam_freddy":
@@ -73,3 +78,4 @@ func _update_customnight_displays():
 	$wither_bonnie/Level.text = "%02d" % [Globals.wither_bonnie]
 	$wither_chica/Level.text = "%02d" % [Globals.wither_chica]
 	$wither_foxy/Level.text = "%02d" % [Globals.wither_foxy]
+	$FriendlyEdams/CheckBox.button_pressed = Globals.edams_friendly

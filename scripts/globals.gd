@@ -15,8 +15,10 @@ var cheesestick = 0
 var safety_time = 2.5
 
 # Save Data
-var save_night = 1
-var purchased_app_ids : Array[int]
+var save_night : int = 1
+var purchased_apps : int = 0
+var money : int = 0
+var saw_foxy_night_1 : bool = false
 
 func _ready():
 	match randi_range(0,3):
@@ -40,7 +42,9 @@ func _save():
 #TODO: If updating Cheesenaf 1 before publishing alongside Cheesenaf 2 on gamejolt/itch, add a BBGSim mod easter egg in Cheesenaf 2 save data
 	var data = {
 		"night" = save_night,
-		"apps" = purchased_app_ids
+		"apps" = purchased_apps,
+		"money" = money,
+		"foxy" = saw_foxy_night_1
 	}
 	var file = FileAccess.open("user://data.json", FileAccess.WRITE)
 	var json_string = JSON.stringify(data)
@@ -63,8 +67,14 @@ func _load():
 
 		# Get the data from the JSON object.
 			var data = json.data
-			save_night = data["night"]
-			#purchased_app_ids = data["apps"]
+			if "night" in data && typeof(data["night"]) == TYPE_INT:
+				save_night = data["night"]
+			if "money" in data && typeof(data["money"]) == TYPE_INT:
+				money = data["money"]
+			if "foxy" in data && typeof(data["foxy"]) == TYPE_BOOL:
+				saw_foxy_night_1 = data["foxy"]
+			if "apps" in data && typeof(data["apps"]) == TYPE_INT:
+				purchased_apps = data["apps"]
 
 func _set_night(night: int):
 	match night:

@@ -16,8 +16,14 @@ extends Node3D
 @export var camera_sensitive : bool
 ## If true, the animatronic will only succeed a jumpscare attempt if the player's cup isn't empty. Otherwise, they will refill the drink and leave.
 @export var drink_sensitive : bool
+@export_subgroup("Game sensitive")
 ## If true, the animatronic will only succeed a jumpscare attempt if the player does not have the tablet, has no installed games, or shakes their head no to the animatronic's voice line requesting to watch you play. It will stay in the last index of it's position array until either a hidden timer expires (1-2 in game hours) or until another animatronic attempts to jumpscare the player, in which case the animatronic will jumpscare the player itself, play an apology voice line, then return to position index 0 for the rest of the night
 @export var game_sensitive : bool
+@export var save_animation_id : String
+## How long in seconds before a voiceline plays
+@export var save_voiceline_delay : float
+## How long in seconds before the player regains control
+@export var save_player_free : float
 @export_subgroup("Music Box")
 ## If true, the animatronic will not move until the music box has run out. Restarting the music box afterwards will not reset them. This animatronic's AI level will affect the music box's winding down speed.
 @export var music_box_sensitive : bool
@@ -37,6 +43,8 @@ extends Node3D
 var current_position = 0
 # Usually used to disable movement checks during jumpscares
 var can_move = true
+# Used only for game sensitive animatronics
+var guarding = false
 var camera_cooldown = 0
 @onready var timer = check_frequency
 @onready var level = root._get_ai(animatronic)
@@ -50,6 +58,8 @@ func _ready() -> void:
 	anim.play(positions[0].animation_id)
 	if is_friendly == false: # In case someone wants an always friendly animatronic.
 		is_friendly = is_edam_animatronic && root.edams_friendly
+	if game_sensitive:
+		root.game_sensitive.append(self)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -103,26 +113,40 @@ func _movement_check():
 			elif drink_sensitive:
 				root.cup_fill = 1
 				_fail_attack()
-			#If foxy is in the office, ask if he can watch you play games (If you have games)
-			elif game_sensitive:
-				pass #TODO: Foxy mechanics
 			else:
 				_fail_attack()
 		# If the animatronic is not a friendly edam and checks for your drink
 		elif drink_sensitive:
 			if root.cup_fill > 0.25:
-				can_move = false
+				# Waits for you to exit the desk, unless it can search under desks
+				if root.under_desk && positions[current_position].office_entrance.search_under_desk == false:
+					return
 				root._jumpscare(self)
 			else:
 				root.cup_fill = 1
 				_fail_attack()
 				return
+		#If foxy is in the office, ask if he can watch you play games (If you have games)
+		elif game_sensitive:
+			if root.p1_has_tablet: #TODO:  && Globals.purchased_apps > 0
+				root.gamer_in_office = true
+				current_position = positions[current_position].next_position_indexes.pick_random()
+				_move_animatronic(current_position)
+				if is_friendly == false: # If Foxy is mad, but still a chill guy
+					root.animatronics_in_office -= 1
+				guarding = true
+				can_move = false
+			# If no games, Foxy is sad
+			elif is_friendly == true:
+				_fail_attack()
+			# If no games, Foxy is mad
+			else:
+				root._jumpscare(self)
 		# Desk hiding
 		elif positions[current_position].office_entrance.search_under_desk == false && root.p1_safety_time > 0 && root.under_desk:
 				_fail_attack()
 		#All jumpscare exceptions/defenses are down. game over :3
 		else:
-			can_move = false
 			root._jumpscare(self)
 	
 	#AI check
@@ -137,6 +161,7 @@ func _movement_check():
 			# If it's an office space, register as such NOTE: Friendly animatronics do not count, nor does Edam Foxy while he's hanging out with you
 			if positions[current_position].office_entrance != null && is_friendly == false:
 				root.animatronics_in_office += 1
+				#TODO: Play Voiceline for game sensitive animatronics
 			_move_animatronic(current_position)
 
 func _move_animatronic(pos: int):
