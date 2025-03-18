@@ -12,6 +12,8 @@ func _ready():
 	print(stand, ", ", hold)
 
 func _raycast_event():
+	if root.p1_has_tablet == false:
+		return
 	var temp_parent = tablet.get_parent_node_3d()
 	if root.using_tablet == false:
 		temp_parent.remove_child(tablet)

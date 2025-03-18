@@ -39,10 +39,20 @@ var p1_safety_time = safety_time
 # Etc
 var p1_last_cam
 var game_sensitive : Array[Node3D]
+var can_jumpscare = true # If a game sensitive animatronic is saving you
+var p1_can_action = true # False if in a jumpscare
+var paranormal_attacking = false # Why is it here?
+var paranormal_attacker : Node3D # What even is it?
+var paranormal_primed = false # What is it doing?
+signal music_box_ran_out
+@export var tablet : MeshInstance3D
+@export var animatronics : Node3D #Just for debug; TODO: Remove
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	for animatronic in get_child(8).get_children():
+		if animatronic.music_box_sensitive:
+			music_box_ran_out.connect(animatronic._stop_dance)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -54,12 +64,8 @@ func _process(delta):
 	# Desk safety
 	if animatronics_in_office > 0 && under_desk == false:
 		p1_safety_time = clamp(p1_safety_time - delta, 0, safety_time)
-		if p1_safety_time > 0:
-			print(p1_safety_time)
 	elif animatronics_in_office == 0:
 		p1_safety_time = clamp(p1_safety_time + delta, 0, safety_time)
-		if p1_safety_time < safety_time:
-			print(p1_safety_time)
 	# Fan heat
 	if fan_powered:
 		if under_desk:
@@ -76,6 +82,15 @@ func _process(delta):
 	if is_winding:
 		musicbox = clamp(musicbox + 200 * delta, 0, 2000)
 	
+	# ????????
+	if paranormal_attacking:
+		if in_cams && using_tablet:
+			paranormal_primed = true
+		elif paranormal_primed:
+			paranormal_attacker._move_animatronic(paranormal_attacker.current_position)
+			paranormal_attacker.timer = 8 - night
+			paranormal_primed = false
+	
 	# 6 AM
 	if hour == 6:
 		if night < 7:
@@ -84,6 +99,10 @@ func _process(delta):
 			Globals._save()
 		#TODO: Save backbuffer for a fade transition like fnaf
 		get_tree().change_scene_to_file("res://scenes/victory.tscn")
+	
+	if OS.is_debug_build():
+		if Input.is_key_pressed(KEY_F1):
+			_jumpscare(animatronics.get_child(8))
 
 func _get_ai(animatronic: String) -> int:
 	match animatronic:
@@ -107,26 +126,47 @@ func _get_ai(animatronic: String) -> int:
 			return cheesestick
 	return 0
 
+func _take_tablet():
+	if using_tablet:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	using_tablet = false
+	in_cams = false
+	p1_has_tablet = false
+	$Player/Head/Eyes/Cursor.visible = true
+	tablet.queue_free() # You ain't getting that back lmao
+	$Player/Head/LoseTablet.play()
+
 func _jumpscare(animatronic: Node3D, short: bool = true):
-	if gamer_in_office && animatronic.name != "wither_freddy":
+	while can_jumpscare == false:
+		pass
+	p1_can_action = false
+	if gamer_in_office:
 		animatronic._fail_attack()
 		for gamer in game_sensitive:
 			if gamer.guarding == true: # Only is set to this when in the office
-				_jumpscare_save(gamer)
-				return
+				if animatronic.ignore_save == true && animatronic.save_jumpscare_id != animatronic.jumpscare_animation_id:
+					gamer.anim.play(animatronic.save_jumpscare_id)
+					pass
+				else:
+					_jumpscare_save(gamer)
+					return
+	under_desk = false
 	animatronic.can_move = false
-	animatronic.position = Vector3(0, -0.719, -2.25)
+	animatronic.position = animatronic.jumpscare_position
 	animatronic.rotation_degrees = Vector3(0, -90, 0)
 	var anim : AnimationPlayer = animatronic.get_child(1)
 	var sound : AudioStreamPlayer = animatronic.get_child(2)
-	anim.play(animatronic.jumpscare_animation_id)
+	if animatronic.ignore_save == true && animatronic.save_jumpscare_id != animatronic.jumpscare_animation_id:
+		anim.play(animatronic.save_jumpscare_id)
+	else:
+		anim.play(animatronic.jumpscare_animation_id)
 	sound.play()
 	var playercamanim := $Player/Head/Eyes/AnimationPlayer
 	var playerhead = $Player/Head
 	var playeranim := $Player/AnimationPlayer
-	var tablet = $Player/Head/Eyes/TabletHolder
 	var cup = $Player/Head/Eyes/CupHolder
-	tablet.visible = false
+	if tablet != null:
+		tablet.visible = false
 	cup.visible = false
 	p1_heat = -2
 	playerhead.rotation_degrees = Vector3.ZERO
@@ -139,6 +179,8 @@ func _jumpscare(animatronic: Node3D, short: bool = true):
 	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
 
 func _jumpscare_save(animatronic: Node3D):
+	can_jumpscare = false
+	under_desk = false
 	animatronic.position = Vector3(0, -0.719, -2.25)
 	animatronic.rotation_degrees = Vector3(0, -90, 0)
 	var anim : AnimationPlayer = animatronic.get_child(1)
@@ -150,9 +192,9 @@ func _jumpscare_save(animatronic: Node3D):
 	var playercamanim := $Player/Head/Eyes/AnimationPlayer
 	var playerhead = $Player/Head
 	var playeranim := $Player/AnimationPlayer
-	var tablet = $Player/Head/Eyes/TabletHolder
 	var cup = $Player/Head/Eyes/CupHolder
-	tablet.visible = false
+	if tablet != null:
+		tablet.visible = false
 	cup.visible = false
 	p1_heat = -2
 	playerhead.rotation_degrees = Vector3.ZERO
@@ -164,18 +206,26 @@ func _jumpscare_save(animatronic: Node3D):
 		warning.play()
 		await get_tree().create_timer(animatronic.save_player_free - animatronic.save_voiceline_delay).timeout
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		tablet.visible = true
+		if tablet != null:
+			tablet.visible = true
 		cup.visible = true
+		p1_can_action = true
 	elif animatronic.save_voiceline_delay > animatronic.save_player_free: # Less likely
 		await get_tree().create_timer(animatronic.save_player_free).timeout
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		tablet.visible = true
+		if tablet != null:
+			tablet.visible = true
 		cup.visible = true
+		p1_can_action = true
 		await get_tree().create_timer(animatronic.save_voiceline_delay - animatronic.save_player_free).timeout
 		warning.play()
 	else: # Least likely
 		await get_tree().create_timer(animatronic.save_voiceline_delay).timeout
 		warning.play()
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		tablet.visible = true
+		if tablet != null:
+			tablet.visible = true
 		cup.visible = true
+		p1_can_action = true
+	animatronic.guarding = false
+	can_jumpscare = true

@@ -12,6 +12,7 @@ extends Control
 var songcount = 10
 
 signal change_dance
+signal paranormal_dance
 
 func _ready():
 	if root.p1_last_cam != null:
@@ -20,6 +21,9 @@ func _ready():
 	for animatronic in root.get_child(8).get_children():
 		if animatronic.music_box_sensitive:
 			change_dance.connect(animatronic._change_dance)
+			paranormal_dance.connect(animatronic._paranormal_dance)
+		if animatronic.paranormal:
+			animatronic.paranormal_song.connect(_reset_musicbox)
 	for button in cambuttons.get_children() as Array[Button]:
 		if button.name.contains("Cam"):
 			button.pressed.connect(_change_camera.bind(button.name.trim_prefix("Cam").to_int()))
@@ -58,11 +62,19 @@ func _process(delta):
 	if root.musicbox == 0:
 		musicbox.stop()
 	elif musicbox.playing == false:
-		if randi_range(0,4) >= 2:
-			var id = randi_range(1,songcount)
-			musicbox.stream = load("res://sounds/music/musicbox%s.mp3" % [id])
-			change_dance.emit(songcount, id)
+		if root.paranormal_attacking == false:
+			if randi_range(0,4) >= 2:
+				var id = randi_range(1,songcount)
+				musicbox.stream = load("res://sounds/music/musicbox%s.mp3" % [id])
+				if root.musicbox_ran_out == false:
+					change_dance.emit(songcount, id)
+		else:
+			musicbox.stream = load("res://sounds/music/cheesestick.mp3")
+			paranormal_dance.emit()
 		musicbox.play()
 
 func _wind_musicbox(input: bool):
 	root.is_winding = input
+
+func _reset_musicbox():
+	musicbox.stop()

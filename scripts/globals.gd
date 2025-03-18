@@ -129,7 +129,7 @@ func _set_night(night: int):
 			Globals.wither_chica = 5
 			Globals.wither_foxy = 6
 			Globals.cheesestick = 0
-			Globals.safety_time = 2.5
+			Globals.safety_time = 2.8
 		5:
 			Globals.night = 5
 			Globals.edams_friendly = false

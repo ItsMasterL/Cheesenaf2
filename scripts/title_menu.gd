@@ -38,6 +38,8 @@ func _start_singleplayer_custom(night: int = 7):
 		_change_menu("loadoffice")
 	else:
 		Globals.night = 7
+		Globals.safety_time = _calculate_safety()
+		Globals.cheesestick = randi_range(0, 5)
 		_change_menu("loadoffice")
 
 func _change_menu(screen: String):
@@ -79,3 +81,7 @@ func _update_customnight_displays():
 	$wither_chica/Level.text = "%02d" % [Globals.wither_chica]
 	$wither_foxy/Level.text = "%02d" % [Globals.wither_foxy]
 	$FriendlyEdams/CheckBox.button_pressed = Globals.edams_friendly
+
+func _calculate_safety() -> float:
+	var value = (Globals.edam_freddy / 20) + (Globals.edam_bonnie / 20) + (Globals.edam_chica / 20) + (Globals.edam_foxy / 20) + (Globals.wither_freddy / 20) + (Globals.wither_bonnie / 20) + (Globals.wither_chica / 20) + (Globals.wither_foxy / 20) / 8
+	return 3.8 - 3 * value # This gets a value that aligns very closely with at least night 6's levels

@@ -11,11 +11,19 @@ extends Node3D
 ## The time in seconds for this animatronic to play its jumpscare. Animations can be longer than this time, mainly useful if `game_sensitive` below is enabled for an apology animation.
 @export var jumpscare_length : float = 0.6667
 @export var jumpscare_animation_id : String = "Jumpscare"
+@export var jumpscare_position : Vector3 = Vector3(0, -0.719, -2.25)
 @export_category("Special Animatronics")
 ## If true, the animatronic will be stunned if the cameras are looked at.
 @export var camera_sensitive : bool
 ## If true, the animatronic will only succeed a jumpscare attempt if the player's cup isn't empty. Otherwise, they will refill the drink and leave.
 @export var drink_sensitive : bool
+## If true, the animatronic doesn't make any footstep sounds, and affects the music box song
+@export var paranormal : bool
+@export_subgroup("Save ignore")
+## If true, the jumpscare will overwrite a game sensitive animatronic's save
+@export var ignore_save : bool
+## The animation ID to play on a save ignore. This plays on both this and the saving animatronic, so make sure they both have the animation and are synced. However, if it is the same as the jumpscare animation ID, it only plays on this animatronic.
+@export var save_jumpscare_id : String = "SaveInterrupt"
 @export_subgroup("Game sensitive")
 ## If true, the animatronic will only succeed a jumpscare attempt if the player does not have the tablet, has no installed games, or shakes their head no to the animatronic's voice line requesting to watch you play. It will stay in the last index of it's position array until either a hidden timer expires (1-2 in game hours) or until another animatronic attempts to jumpscare the player, in which case the animatronic will jumpscare the player itself, play an apology voice line, then return to position index 0 for the rest of the night
 @export var game_sensitive : bool
@@ -39,7 +47,6 @@ extends Node3D
 ## Set by combo of is_edam_animatronic and office's edams_friendly. Can be set in the editor. These animatronics will never jumpscare the player.
 @export var is_friendly : bool
 
-
 var current_position = 0
 # Usually used to disable movement checks during jumpscares
 var can_move = true
@@ -50,6 +57,8 @@ var camera_cooldown = 0
 @onready var level = root._get_ai(animatronic)
 @onready var stepsound := $Step
 @onready var anim := $AnimationPlayer
+
+signal paranormal_song
 
 func _ready() -> void:
 	position = positions[0].position
@@ -142,6 +151,10 @@ func _movement_check():
 			# If no games, Foxy is mad
 			else:
 				root._jumpscare(self)
+		# Tablet taking
+		elif music_box_sensitive && root.p1_has_tablet:
+			root._take_tablet()
+			_fail_attack()
 		# Desk hiding
 		elif positions[current_position].office_entrance.search_under_desk == false && root.p1_safety_time > 0 && root.under_desk:
 				_fail_attack()
@@ -154,7 +167,15 @@ func _movement_check():
 		# Move to one of the next spaces if it exists
 		if positions[current_position].next_position_indexes.is_empty() == false:
 			# If the next space is an office space, but the office limit is reached, wait if not friendly
-			if positions[current_position].office_entrance != null && root.animatronics_in_office >= positions[current_position].office_entrance.office_animatronic_limit && is_friendly == false:
+			if positions[current_position].office_entrance != null && root.animatronics_in_office >= positions[current_position].office_entrance.office_animatronic_limit && is_friendly == false && positions[current_position].office_entrance.office_animatronic_limit > 0:
+				return
+			# Queue movement for camera use if paranormal
+			if paranormal:
+				root.paranormal_attacking = true
+				root.paranormal_attacker = self
+				paranormal_song.emit()
+				timer = 99
+				current_position = positions[current_position].next_position_indexes.pick_random()
 				return
 			# Move to the next space
 			current_position = positions[current_position].next_position_indexes.pick_random()
@@ -169,17 +190,20 @@ func _move_animatronic(pos: int):
 	rotation_degrees = positions[current_position].rotation
 	scale = positions[current_position].scale
 	anim.play(positions[current_position].animation_id)
-	if positions[current_position].is_vent:
-		stepsound.stream = load("res://sounds/ventwalk" + str(randi_range(1,2)) + ".wav")
-	else:
-		stepsound.stream = load("res://sounds/walk" + str(randi_range(1,5)) + ".wav")
-	stepsound.play()
+	if paranormal == false:
+		if positions[current_position].is_vent:
+			stepsound.stream = load("res://sounds/ventwalk" + str(randi_range(1,2)) + ".wav")
+		else:
+			stepsound.stream = load("res://sounds/walk" + str(randi_range(1,5)) + ".wav")
+		stepsound.play()
 	print(str(animatronic) + " moved to " + str(current_position))
 
 func _fail_attack():
 	# Friendly animatronics don't count towards this as they cannot harm you
 	if is_friendly == false:
 		root.animatronics_in_office -= 1
+	if paranormal:
+		paranormal_song.emit()
 	current_position = positions[current_position].office_entrance.fail_position_index
 	_move_animatronic(current_position)
 
@@ -188,3 +212,10 @@ func _change_dance(count : int, id : int = 0):
 		anim.play(music_box_dances.pick_random())
 	else:
 		anim.play(music_box_dances[id])
+
+func _paranormal_dance():
+	anim.play("Cheesestick")
+
+func _stop_dance():
+	anim.stop()
+	anim.play(positions[current_position].animation_id)

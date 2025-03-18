@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwhn6aeiuwg7x"]
+
+[ext_resource type="PackedScene" uid="uid://bclyw4a1la5s5" path="res://models/witherfreddy.glb" id="1_qsbdi"]
+[ext_resource type="Script" path="res://scripts/animatronic.gd" id="2_gsmfg"]
+[ext_resource type="AudioStream" uid="uid://jb2c0ep1vqdm" path="res://sounds/jumpscare_withered.wav" id="3_q7pj4"]
+[ext_resource type="Script" path="res://scripts/animatronic_position.gd" id="3_q83rb"]
+
+[sub_resource type="Resource" id="Resource_h2keo"]
+script = ExtResource("3_q83rb")
+position = Vector3(65.292, 0, -23.328)
+rotation = Vector3(0, 0, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([])
+is_vent = false
+animation_id = "Pose"
+
+[node name="Withered Freddy" instance=ExtResource("1_qsbdi")]
+script = ExtResource("2_gsmfg")
+animatronic = "wither_freddy"
+positions = Array[ExtResource("3_q83rb")]([SubResource("Resource_h2keo")])
+jumpscare_length = 1.217
+ignore_save = true
+save_jumpscare_id = "Jumpscare"
+
+[node name="Jumpscare" type="AudioStreamPlayer" parent="." index="2"]
+stream = ExtResource("3_q7pj4")
+volume_db = -5.0
+
+[node name="Step" type="AudioStreamPlayer3D" parent="." index="3"]
+volume_db = -30.0
+unit_size = 100.0
+max_db = -10.0

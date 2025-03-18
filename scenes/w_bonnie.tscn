@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://e4xdtpwnnrts"]
+
+[ext_resource type="PackedScene" uid="uid://cwmmmphcm55t7" path="res://models/witherbonnie.glb" id="1_vgcyo"]
+[ext_resource type="Script" path="res://scripts/animatronic.gd" id="2_w6tca"]
+[ext_resource type="Script" path="res://scripts/animatronic_position.gd" id="3_028d0"]
+[ext_resource type="AudioStream" uid="uid://jb2c0ep1vqdm" path="res://sounds/jumpscare_withered.wav" id="3_rlb82"]
+
+[sub_resource type="Resource" id="Resource_p1ed8"]
+script = ExtResource("3_028d0")
+position = Vector3(67.292, 0, -23.328)
+rotation = Vector3(0, 0, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([])
+is_vent = false
+animation_id = "Pose"
+
+[node name="Withered Bonnie" instance=ExtResource("1_vgcyo")]
+script = ExtResource("2_w6tca")
+animatronic = "wither_bonnie"
+positions = Array[ExtResource("3_028d0")]([SubResource("Resource_p1ed8")])
+jumpscare_length = 1.217
+
+[node name="Skeleton3D" parent="RIG_Bonnie_ao" index="0"]
+bones/0/position = Vector3(-0.0217551, 1.29885, -0.740393)
+bones/0/rotation = Quaternion(-2.18886e-05, 0.00463962, 0.00463962, 0.999978)
+bones/1/rotation = Quaternion(-0.0393138, 0.0636648, 0.996756, -0.0296483)
+bones/2/rotation = Quaternion(-0.0646394, -0.036727, -0.0365204, 0.996564)
+bones/3/rotation = Quaternion(0.423238, 0.00235941, 0.00112764, 0.906015)
+bones/4/rotation = Quaternion(0.00166944, -0.00129241, 0.999996, -0.00201836)
+bones/7/rotation = Quaternion(0.181809, -0.048526, -0.019275, 0.981947)
+bones/8/rotation = Quaternion(0.0481709, 2.95067e-09, 1.81837e-10, 0.998839)
+bones/9/rotation = Quaternion(-0.245281, 0.0591978, 0.0222314, 0.967387)
+bones/10/rotation = Quaternion(0.350866, -2.32593e-08, -8.42707e-09, 0.936426)
+bones/11/rotation = Quaternion(1.94996e-09, 5.82077e-10, -8.55653e-09, 1)
+bones/12/rotation = Quaternion(-0.0471109, -5.24451e-10, -1.16545e-09, 0.99889)
+bones/13/rotation = Quaternion(0.0247923, 0.00548116, -0.215802, 0.976107)
+bones/14/rotation = Quaternion(0.072287, 1.45314e-07, -2.42646e-07, 0.997384)
+bones/15/rotation = Quaternion(0.433214, -8.41899e-08, 4.87939e-08, 0.901291)
+bones/16/rotation = Quaternion(0.119412, -0.0218645, 0.178778, 0.976371)
+bones/17/rotation = Quaternion(0.302157, -6.23316e-07, -6.01568e-07, 0.953258)
+bones/18/rotation = Quaternion(-0.0884136, 0.736751, -0.0997855, 0.662891)
+bones/19/rotation = Quaternion(0.475431, 0.511531, 0.644487, 0.311347)
+bones/21/rotation = Quaternion(-1.3773e-07, -1.3601e-07, -0.707107, 0.707107)
+bones/24/rotation = Quaternion(-0.404449, 0.820424, 0.387343, -0.115288)
+bones/25/rotation = Quaternion(0.576612, -0.255184, 0.266337, 0.729016)
+bones/26/rotation = Quaternion(-0.160968, -0.119663, -0.107707, 0.97374)
+bones/27/rotation = Quaternion(0.495866, 0.0978932, 0.630317, 0.589265)
+bones/28/rotation = Quaternion(0.0023519, -0.0476037, 0.0401744, 0.998055)
+bones/30/rotation = Quaternion(-0.11425, 0.974983, 0.0140539, 0.190152)
+bones/32/rotation = Quaternion(-0.152293, 0.987643, -1.6636e-05, 0.0369807)
+bones/34/rotation = Quaternion(-0.181592, 0.975396, -0.0543199, 0.112586)
+bones/36/rotation = Quaternion(-0.702126, 0.711984, -0.00974274, -0.00157416)
+bones/38/position = Vector3(0.000719717, 0.191868, 0.03036)
+bones/38/rotation = Quaternion(1.48138e-08, 4.65661e-10, -1.32098e-09, 1)
+bones/41/position = Vector3(0.000243804, -0.501571, 0.0171523)
+bones/41/rotation = Quaternion(0.422076, 2.4108e-06, -1.38635e-06, 0.906561)
+bones/44/rotation = Quaternion(-0.0364153, 0.99674, -0.0621185, -0.0364113)
+
+[node name="Jumpscare" type="AudioStreamPlayer" parent="." index="2"]
+stream = ExtResource("3_rlb82")
+volume_db = -5.0
+
+[node name="Step" type="AudioStreamPlayer3D" parent="." index="3"]
+volume_db = -30.0
+unit_size = 100.0
+max_db = -10.0

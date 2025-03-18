@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=4 uid="uid://kfokhb3cioir"]
+[gd_scene load_steps=76 format=4 uid="uid://kfokhb3cioir"]
 
 [ext_resource type="Script" path="res://scripts/office.gd" id="1_a3xfx"]
 [ext_resource type="PackedScene" uid="uid://bs378s4kwr2ux" path="res://scenes/foxy_plush.tscn" id="1_gqipk"]
@@ -16,6 +16,7 @@
 [ext_resource type="Animation" uid="uid://ds0rscx8wtpac" path="res://models/animation/camera.res" id="17_7bi74"]
 [ext_resource type="AudioStream" uid="uid://c5db7xn31angv" path="res://sounds/breathing.wav" id="17_eaqhx"]
 [ext_resource type="AudioStream" uid="uid://6a8wpxqhxldr" path="res://sounds/shifting.wav" id="18_jcvyf"]
+[ext_resource type="AudioStream" uid="uid://c6wkcq2iy687y" path="res://sounds/swipe.wav" id="21_dvkyg"]
 [ext_resource type="AudioStream" uid="uid://couxcp7krb1i6" path="res://sounds/music/storm outside.mp3" id="21_h77es"]
 [ext_resource type="PackedScene" uid="uid://sr5bhwimbn6q" path="res://scenes/bonnie.tscn" id="22_fo68b"]
 [ext_resource type="PackedScene" uid="uid://bx7i4uyvysowi" path="res://scenes/freddy.tscn" id="23_d180k"]
@@ -24,8 +25,13 @@
 [ext_resource type="PackedScene" uid="uid://cuiite2xlb70y" path="res://scenes/chica.tscn" id="25_m5hqu"]
 [ext_resource type="AudioStream" uid="uid://bip471h5exvnx" path="res://sounds/slurp.wav" id="26_plhk0"]
 [ext_resource type="PackedScene" uid="uid://ctk8vkg2rvilm" path="res://scenes/foxy.tscn" id="26_xrtv4"]
+[ext_resource type="PackedScene" uid="uid://e4xdtpwnnrts" path="res://scenes/w_bonnie.tscn" id="27_nd5pr"]
+[ext_resource type="PackedScene" uid="uid://ddnqh2fwb8i4v" path="res://scenes/w_chica.tscn" id="28_iw35l"]
+[ext_resource type="PackedScene" uid="uid://cgejnvievuxf8" path="res://scenes/w_foxy.tscn" id="29_t0ahk"]
 [ext_resource type="Script" path="res://scripts/toggle_tablet.gd" id="29_wa4as"]
+[ext_resource type="PackedScene" uid="uid://dwhn6aeiuwg7x" path="res://scenes/w_freddy.tscn" id="30_uyssn"]
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="31_63unw"]
+[ext_resource type="PackedScene" uid="uid://b7dpymyvsicjt" path="res://scenes/cheesestick.tscn" id="31_a7pji"]
 [ext_resource type="Script" path="res://scripts/player_raycast.gd" id="32_5ed2l"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0grut"]
@@ -576,8 +582,10 @@ shader_parameter/blur_amount = 5.0
 shader_parameter/mix_amount = 0.0
 shader_parameter/color_over = Color(0, 0, 0, 1)
 
-[node name="Map" type="Node3D"]
+[node name="Map" type="Node3D" node_paths=PackedStringArray("tablet", "animatronics")]
 script = ExtResource("1_a3xfx")
+tablet = NodePath("TabletOnDesk/Tablet")
+animatronics = NodePath("Animatronics")
 
 [node name="FoxyPlush" parent="." instance=ExtResource("1_gqipk")]
 
@@ -765,6 +773,10 @@ volume_db = -5.0
 stream = ExtResource("17_eaqhx")
 volume_db = -10.0
 
+[node name="LoseTablet" type="AudioStreamPlayer" parent="Player/Head"]
+stream = ExtResource("21_dvkyg")
+volume_db = -10.0
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 libraries = {
 "": SubResource("AnimationLibrary_3b2wx")
@@ -844,6 +856,7 @@ root = NodePath("../..")
 [node name="Edam Bonnie" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("22_fo68b")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 69.0382, 1.00494, 3.66721)
 root = NodePath("../..")
+check_frequency = 3.561
 
 [node name="Edam Chica" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("25_m5hqu")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.173698, -0.0622949, -13.115)
@@ -851,6 +864,26 @@ root = NodePath("../..")
 
 [node name="Edam Foxy" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("26_xrtv4")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.06042, -0.031324, 1.21204)
+root = NodePath("../..")
+
+[node name="Withered Bonnie" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("27_nd5pr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.2924, -2.38419e-07, -23.3284)
+root = NodePath("../..")
+
+[node name="Withered Chica" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("28_iw35l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.2775, -2.38419e-07, -23.3284)
+root = NodePath("../..")
+
+[node name="Withered Foxy" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("29_t0ahk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.8437, -2.38419e-07, -23.3284)
+root = NodePath("../..")
+
+[node name="Withered Freddy" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("30_uyssn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.4443, -2.38419e-07, -23.3284)
+root = NodePath("../..")
+
+[node name="Cheesestick" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("31_a7pji")]
+transform = Transform3D(1.29466, 0, -1.39063, 0, 1.9, 0, 1.39063, 0, 1.29466, -2.573, 0, -8.39344)
 root = NodePath("../..")
 
 [node name="BlurShader" type="CanvasLayer" parent="."]
