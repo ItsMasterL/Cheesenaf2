@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ctk8vkg2rvilm"]
+[gd_scene load_steps=15 format=3 uid="uid://ctk8vkg2rvilm"]
 
 [ext_resource type="PackedScene" uid="uid://d1fpt77i3oa5x" path="res://models/foxy.glb" id="1_oyaby"]
 [ext_resource type="Script" path="res://scripts/animatronic.gd" id="2_44u51"]
@@ -18,28 +18,19 @@ animation_id = "Pose"
 
 [sub_resource type="Resource" id="Resource_qxlvi"]
 script = ExtResource("3_lvccg")
-position = Vector3(64.339, -0.031, -8.525)
+position = Vector3(64.339, -0.031, 1.212)
 rotation = Vector3(0, -129.6, 0)
 scale = Vector3(1, 1, 1)
-next_position_indexes = Array[int]([2, 3, 0])
-is_vent = false
-animation_id = "Pose"
-
-[sub_resource type="Resource" id="Resource_cwm35"]
-script = ExtResource("3_lvccg")
-position = Vector3(59.393, -0.031, -23.562)
-rotation = Vector3(0, 0, 0)
-scale = Vector3(1, 1, 1)
-next_position_indexes = Array[int]([1, 3])
+next_position_indexes = Array[int]([2, 0])
 is_vent = false
 animation_id = "Pose"
 
 [sub_resource type="Resource" id="Resource_t34ru"]
 script = ExtResource("3_lvccg")
-position = Vector3(53.896, -0.031, -16.546)
+position = Vector3(61.794, -0.031, -8.741)
 rotation = Vector3(0, -25, 0)
 scale = Vector3(1, 1, 1)
-next_position_indexes = Array[int]([1, 2, 4, 5])
+next_position_indexes = Array[int]([1, 3])
 is_vent = false
 animation_id = "Pose"
 
@@ -48,7 +39,7 @@ script = ExtResource("3_lvccg")
 position = Vector3(34.811, -0.031, -22.398)
 rotation = Vector3(0, -80, 0)
 scale = Vector3(1, 1, 1)
-next_position_indexes = Array[int]([3])
+next_position_indexes = Array[int]([4, 2])
 is_vent = false
 animation_id = "Pose"
 
@@ -57,7 +48,7 @@ script = ExtResource("3_lvccg")
 position = Vector3(13.843, -0.031, -21.102)
 rotation = Vector3(0, -22, 0)
 scale = Vector3(1, 1, 1)
-next_position_indexes = Array[int]([6])
+next_position_indexes = Array[int]([5, 3])
 is_vent = false
 animation_id = "Pose"
 
@@ -67,14 +58,14 @@ office_animatronic_limit = 1
 search_under_desk = false
 flashlight_weakness = false
 entrance = 0
-fail_position_index = 0
+fail_position_index = 4
 
 [sub_resource type="Resource" id="Resource_oacql"]
 script = ExtResource("3_lvccg")
 position = Vector3(0.359, -0.031, -9.107)
 rotation = Vector3(0, 0, 0)
 scale = Vector3(1, 1, 1)
-next_position_indexes = Array[int]([7])
+next_position_indexes = Array[int]([6])
 is_vent = false
 animation_id = "Pose"
 office_entrance = SubResource("Resource_1xllt")
@@ -91,7 +82,7 @@ animation_id = "Pose"
 [node name="Edam Foxy" instance=ExtResource("1_oyaby")]
 script = ExtResource("2_44u51")
 animatronic = "edam_foxy"
-positions = Array[ExtResource("3_lvccg")]([SubResource("Resource_48hc7"), SubResource("Resource_qxlvi"), SubResource("Resource_cwm35"), SubResource("Resource_t34ru"), SubResource("Resource_e4c0a"), SubResource("Resource_op77r"), SubResource("Resource_oacql"), SubResource("Resource_3vlub")])
+positions = Array[ExtResource("3_lvccg")]([SubResource("Resource_48hc7"), SubResource("Resource_qxlvi"), SubResource("Resource_t34ru"), SubResource("Resource_e4c0a"), SubResource("Resource_op77r"), SubResource("Resource_oacql"), SubResource("Resource_3vlub")])
 check_frequency = 5.274
 game_sensitive = true
 save_animation_id = "Save"

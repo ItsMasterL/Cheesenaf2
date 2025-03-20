@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://oly82e6xbd2n"]
+
+[ext_resource type="PackedScene" uid="uid://dru6u3k1udv6w" path="res://models/tablet.glb" id="1_ebr6v"]
+
+[node name="Map" instance=ExtResource("1_ebr6v")]

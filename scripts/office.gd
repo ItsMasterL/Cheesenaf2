@@ -102,7 +102,7 @@ func _process(delta):
 	
 	if OS.is_debug_build():
 		if Input.is_key_pressed(KEY_F1):
-			_jumpscare(animatronics.get_child(8))
+			_jumpscare(animatronics.get_child(4))
 
 func _get_ai(animatronic: String) -> int:
 	match animatronic:
@@ -136,7 +136,7 @@ func _take_tablet():
 	tablet.queue_free() # You ain't getting that back lmao
 	$Player/Head/LoseTablet.play()
 
-func _jumpscare(animatronic: Node3D, short: bool = true):
+func _jumpscare(animatronic: Node3D):
 	while can_jumpscare == false:
 		pass
 	p1_can_action = false
@@ -172,8 +172,10 @@ func _jumpscare(animatronic: Node3D, short: bool = true):
 	playerhead.rotation_degrees = Vector3.ZERO
 	playeranim.play("RESET")
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
-	if short:
-		playercamanim.play("CameraAction_003")
+	if animatronic.jumpscare_length < 0.7:
+		playercamanim.play("Default")
+	else:
+		playercamanim.play("Long")
 	await get_tree().create_timer(animatronic.jumpscare_length).timeout
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
