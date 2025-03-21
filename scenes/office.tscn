@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=4 uid="uid://kfokhb3cioir"]
+[gd_scene load_steps=78 format=4 uid="uid://kfokhb3cioir"]
 
 [ext_resource type="Script" path="res://scripts/office.gd" id="1_a3xfx"]
 [ext_resource type="PackedScene" uid="uid://bs378s4kwr2ux" path="res://scenes/foxy_plush.tscn" id="1_gqipk"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://bvte0l0l1kuts" path="res://textures/adam.png" id="15_batyp"]
 [ext_resource type="Animation" uid="uid://ds0rscx8wtpac" path="res://models/animation/camera.res" id="17_7bi74"]
 [ext_resource type="AudioStream" uid="uid://c5db7xn31angv" path="res://sounds/breathing.wav" id="17_eaqhx"]
+[ext_resource type="Script" path="res://scripts/flashlight_raycast.gd" id="18_gn6u8"]
 [ext_resource type="AudioStream" uid="uid://6a8wpxqhxldr" path="res://sounds/shifting.wav" id="18_jcvyf"]
 [ext_resource type="Animation" uid="uid://b6avorttpy5k5" path="res://models/animation/camerawithered.res" id="19_ookmc"]
 [ext_resource type="AudioStream" uid="uid://c6wkcq2iy687y" path="res://sounds/swipe.wav" id="21_dvkyg"]
@@ -394,6 +395,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ny178"]
 _data = {
@@ -514,6 +527,12 @@ curve = SubResource("Curve_203xy")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7ogb0"]
 size = Vector3(3.05475, 0.0235596, 1.17133)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ekjtp"]
+size = Vector3(7.26953, 1, 56.9973)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wvxuj"]
+size = Vector3(3.39471, 1, 0.212952)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jp53q"]
 shader = ExtResource("23_h042j")
@@ -690,6 +709,13 @@ spot_angle = 36.1641
 stream = ExtResource("15_8e4mc")
 volume_db = -20.0
 
+[node name="RayCast3D" type="RayCast3D" parent="Player/Head/Eyes/SpotLight3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+target_position = Vector3(0, -23, 0)
+collision_mask = 16
+collide_with_areas = true
+script = ExtResource("18_gn6u8")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Head/Eyes"]
 libraries = {
 "": SubResource("AnimationLibrary_ny178")
@@ -780,11 +806,37 @@ trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_48d6p")
 draw_pass_1 = SubResource("RibbonTrailMesh_4fnyf")
 
-[node name="DeskRaycastBlock" type="StaticBody3D" parent="."]
+[node name="DeskRaycastBlock" type="StaticBody3D" parent="Map"]
+collision_layer = 17
+collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DeskRaycastBlock"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/DeskRaycastBlock"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.15527e-05, 0.970041, -1.04616)
 shape = SubResource("BoxShape3D_7ogb0")
+
+[node name="LeftFlashlightBlocker" type="Area3D" parent="Map"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -9.45953, 3.10527, 0)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/LeftFlashlightBlocker"]
+transform = Transform3D(0.999945, 8.7752e-13, 0, -8.7752e-13, 0.999945, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_ekjtp")
+
+[node name="RightFlashlightBlocker" type="Area3D" parent="Map"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 9.46, 3.105, 0)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/RightFlashlightBlocker"]
+transform = Transform3D(0.999945, 8.7752e-13, 0, -8.7752e-13, 0.999945, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_ekjtp")
+
+[node name="DeskFlashlightBlocker" type="Area3D" parent="Map"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/DeskFlashlightBlocker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00558472, 0.493395, -1.49843)
+shape = SubResource("BoxShape3D_wvxuj")
 
 [node name="Animatronics" type="Node3D" parent="."]
 
@@ -793,7 +845,7 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 68.541
 root = NodePath("../..")
 
 [node name="Edam Bonnie" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("22_fo68b")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 69.0382, 1.00494, 3.66721)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 39.35, -0.048, 9.14628)
 root = NodePath("../..")
 check_frequency = 3.561
 
@@ -808,18 +860,17 @@ root = NodePath("../..")
 [node name="Withered Bonnie" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("27_nd5pr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.3599, -2.38419e-07, -21.6839)
 root = NodePath("../..")
-jumpscare_position = Vector3(0, -1.259, -2.75)
 
 [node name="Withered Chica" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("28_iw35l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.2775, -2.38419e-07, -23.3284)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.71789, 5.12223, 0.0355744)
 root = NodePath("../..")
 
 [node name="Withered Foxy" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("29_t0ahk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.8437, -2.38419e-07, -23.3284)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 48.9463, 5.18287, -21.8133)
 root = NodePath("../..")
 
 [node name="Withered Freddy" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("30_uyssn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.4443, -2.38419e-07, -23.3284)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 37.554, 5.263, 0)
 root = NodePath("../..")
 
 [node name="Cheesestick" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("31_a7pji")]

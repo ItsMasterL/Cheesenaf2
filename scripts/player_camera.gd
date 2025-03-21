@@ -29,7 +29,7 @@ func _unhandled_input(event):
 	elif event.is_action_pressed(&"ui_cancel"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		elif Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
+		elif Input.mouse_mode == Input.MOUSE_MODE_VISIBLE && root.using_tablet == false:
 			get_tree().change_scene_to_file("res://scenes/title.tscn")
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:

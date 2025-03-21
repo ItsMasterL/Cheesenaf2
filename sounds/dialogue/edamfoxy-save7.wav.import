@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://ceq8ryu1s58a0"
-path="res://.godot/imported/edamfoxy-save7.wav-074fc42d755c3bc198d5cd4d1996dcdf.sample"
+path="res://.godot/imported/edamfoxy-save7.wav-92eca86c25481b5f7e687ac7126767c6.sample"
 
 [deps]
 
-source_file="res://sounds/edamfoxy-save7.wav"
-dest_files=["res://.godot/imported/edamfoxy-save7.wav-074fc42d755c3bc198d5cd4d1996dcdf.sample"]
+source_file="res://sounds/dialogue/edamfoxy-save7.wav"
+dest_files=["res://.godot/imported/edamfoxy-save7.wav-92eca86c25481b5f7e687ac7126767c6.sample"]
 
 [params]
 

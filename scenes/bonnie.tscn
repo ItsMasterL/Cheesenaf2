@@ -4,10 +4,11 @@
 [ext_resource type="Script" path="res://scripts/animatronic.gd" id="1_vu3bh"]
 [ext_resource type="Script" path="res://scripts/animatronic_position.gd" id="2_81imh"]
 [ext_resource type="Script" path="res://scripts/animatronic_entrance.gd" id="2_mpcjg"]
-[ext_resource type="AudioStream" uid="uid://blj2fpebqrwua" path="res://sounds/bonnie.wav" id="7_es4hq"]
+[ext_resource type="AudioStream" uid="uid://blj2fpebqrwua" path="res://sounds/dialogue/bonnie.wav" id="7_es4hq"]
 [ext_resource type="AudioStream" uid="uid://c3n0lfpxca8e8" path="res://sounds/jumpscare_edam.wav" id="8_qwrtb"]
 
 [sub_resource type="Resource" id="Resource_qvvvx"]
+resource_name = "Stage"
 script = ExtResource("2_81imh")
 position = Vector3(68.629, 1.121, 2.956)
 rotation = Vector3(0, -180, 0)
@@ -17,6 +18,7 @@ is_vent = false
 animation_id = "Stage"
 
 [sub_resource type="Resource" id="Resource_1i3n5"]
+resource_name = "Backstage"
 script = ExtResource("2_81imh")
 position = Vector3(82.859, 1.121, -15.294)
 rotation = Vector3(0, -37.3, 0)
@@ -26,6 +28,7 @@ is_vent = false
 animation_id = "Backstage"
 
 [sub_resource type="Resource" id="Resource_8d38w"]
+resource_name = "Outside A"
 script = ExtResource("2_81imh")
 position = Vector3(68.24, -0.048, 33.087)
 rotation = Vector3(0, 180, 0)
@@ -35,6 +38,7 @@ is_vent = false
 animation_id = "OutsideA"
 
 [sub_resource type="Resource" id="Resource_bpc3w"]
+resource_name = "Outside B"
 script = ExtResource("2_81imh")
 position = Vector3(-21.558, -0.048, 30.365)
 rotation = Vector3(0, 180, 0)
@@ -44,6 +48,7 @@ is_vent = false
 animation_id = "OutsideB"
 
 [sub_resource type="Resource" id="Resource_pmkvk"]
+resource_name = "Playroom"
 script = ExtResource("2_81imh")
 position = Vector3(-11.727, -0.048, 0.517)
 rotation = Vector3(0, -142.1, 0)
@@ -53,6 +58,7 @@ is_vent = false
 animation_id = "Playroom"
 
 [sub_resource type="Resource" id="Resource_hcd7k"]
+resource_name = "Party Room A"
 script = ExtResource("2_81imh")
 position = Vector3(12.645, 1.201, -24.485)
 rotation = Vector3(-0.2, 149, 23.1)
@@ -62,6 +68,7 @@ is_vent = false
 animation_id = "PartyRoomA"
 
 [sub_resource type="Resource" id="Resource_5kc1d"]
+resource_name = "Party Room B"
 script = ExtResource("2_81imh")
 position = Vector3(7.70337, -0.048, 17.1814)
 rotation = Vector3(0, -105.5, 0)
@@ -71,6 +78,7 @@ is_vent = false
 animation_id = "PartyRoomB"
 
 [sub_resource type="Resource" id="Resource_pebfs"]
+resource_name = "Kitchen"
 script = ExtResource("2_81imh")
 position = Vector3(25.2715, -0.0479998, -5.87571)
 rotation = Vector3(0, 180, 0)
@@ -81,13 +89,14 @@ animation_id = "Kitchen"
 
 [sub_resource type="Resource" id="Resource_4wlqh"]
 script = ExtResource("2_mpcjg")
-office_animatronic_limit = 0
+office_animatronic_limit = 3
 search_under_desk = false
 flashlight_weakness = false
 entrance = 2
 fail_position_index = 4
 
 [sub_resource type="Resource" id="Resource_r6c4r"]
+resource_name = "Left Office Vent"
 script = ExtResource("2_81imh")
 position = Vector3(-8, -0.083, 0)
 rotation = Vector3(0, 0, 0)
@@ -99,13 +108,14 @@ office_entrance = SubResource("Resource_4wlqh")
 
 [sub_resource type="Resource" id="Resource_fidsh"]
 script = ExtResource("2_mpcjg")
-office_animatronic_limit = 0
+office_animatronic_limit = 3
 search_under_desk = false
 flashlight_weakness = false
 entrance = 3
 fail_position_index = 7
 
 [sub_resource type="Resource" id="Resource_8r12v"]
+resource_name = "Right Office Vent"
 script = ExtResource("2_81imh")
 position = Vector3(8, -0.083, 0)
 rotation = Vector3(0, 180, 0)
@@ -117,13 +127,14 @@ office_entrance = SubResource("Resource_fidsh")
 
 [sub_resource type="Resource" id="Resource_nkopa"]
 script = ExtResource("2_mpcjg")
-office_animatronic_limit = 0
+office_animatronic_limit = 3
 search_under_desk = false
 flashlight_weakness = false
 entrance = 4
 fail_position_index = 11
 
 [sub_resource type="Resource" id="Resource_sw0je"]
+resource_name = "Office Ceiling Vent"
 script = ExtResource("2_81imh")
 position = Vector3(0.648277, 5.19225, 0)
 rotation = Vector3(0, 180, -90)
@@ -134,6 +145,7 @@ animation_id = "Vent"
 office_entrance = SubResource("Resource_nkopa")
 
 [sub_resource type="Resource" id="Resource_0hntl"]
+resource_name = "Kitchen Ceiling Vent"
 script = ExtResource("2_81imh")
 position = Vector3(50.6663, 5.03601, 0)
 rotation = Vector3(0, 180, 0)
@@ -143,6 +155,7 @@ is_vent = true
 animation_id = "Vent"
 
 [sub_resource type="Resource" id="Resource_wqs7m"]
+resource_name = "Lobby Vent B"
 script = ExtResource("2_81imh")
 position = Vector3(39.35, -0.048, 13.104)
 rotation = Vector3(0, 180, 0)
@@ -156,6 +169,7 @@ script = ExtResource("1_vu3bh")
 animatronic = "edam_bonnie"
 positions = Array[ExtResource("2_81imh")]([SubResource("Resource_qvvvx"), SubResource("Resource_1i3n5"), SubResource("Resource_8d38w"), SubResource("Resource_bpc3w"), SubResource("Resource_pmkvk"), SubResource("Resource_hcd7k"), SubResource("Resource_5kc1d"), SubResource("Resource_pebfs"), SubResource("Resource_r6c4r"), SubResource("Resource_8r12v"), SubResource("Resource_sw0je"), SubResource("Resource_0hntl"), SubResource("Resource_wqs7m")])
 check_frequency = 3.5
+jumpscare_position = Vector3(0, -0.719, 9.146)
 is_edam_animatronic = true
 vent_checker = true
 

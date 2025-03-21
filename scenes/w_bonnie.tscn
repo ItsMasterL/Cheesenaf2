@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/animatronic_entrance.gd" id="4_k5bue"]
 
 [sub_resource type="Resource" id="Resource_p1ed8"]
+resource_name = "Storage"
 script = ExtResource("3_028d0")
 position = Vector3(62.36, 0, -21.684)
 rotation = Vector3(0, 0, 0)
@@ -16,6 +17,7 @@ is_vent = false
 animation_id = "Pose"
 
 [sub_resource type="Resource" id="Resource_wrglt"]
+resource_name = "Storage Vent"
 script = ExtResource("3_028d0")
 position = Vector3(77.629, 0, 21.505)
 rotation = Vector3(0, 0, 0)
@@ -25,6 +27,7 @@ is_vent = true
 animation_id = "Pose"
 
 [sub_resource type="Resource" id="Resource_k1eiu"]
+resource_name = "Backstage"
 script = ExtResource("3_028d0")
 position = Vector3(87.242, 1.096, -11.92)
 rotation = Vector3(0, -122.5, 0)
@@ -34,6 +37,7 @@ is_vent = false
 animation_id = "Pose"
 
 [sub_resource type="Resource" id="Resource_u6v7f"]
+resource_name = "Entrance Vent"
 script = ExtResource("3_028d0")
 position = Vector3(77.629, 0, 21.505)
 rotation = Vector3(0, 0, 0)
@@ -43,6 +47,7 @@ is_vent = true
 animation_id = "Pose"
 
 [sub_resource type="Resource" id="Resource_tc3v3"]
+resource_name = "Entrance"
 script = ExtResource("3_028d0")
 position = Vector3(57.599, 0, 21.432)
 rotation = Vector3(0, 31, 0)
@@ -52,6 +57,7 @@ is_vent = false
 animation_id = "Pose"
 
 [sub_resource type="Resource" id="Resource_633v8"]
+resource_name = "Outside A"
 script = ExtResource("3_028d0")
 position = Vector3(56.963, 0, 31.065)
 rotation = Vector3(0, 0, 0)
@@ -61,6 +67,7 @@ is_vent = false
 animation_id = "Pose"
 
 [sub_resource type="Resource" id="Resource_nnrya"]
+resource_name = "Outside B"
 script = ExtResource("3_028d0")
 position = Vector3(-14.583, 0, 32.166)
 rotation = Vector3(0, -72, 0)
@@ -78,6 +85,7 @@ entrance = 1
 fail_position_index = 8
 
 [sub_resource type="Resource" id="Resource_ydh5a"]
+resource_name = "Back Door"
 script = ExtResource("3_028d0")
 position = Vector3(0.505, 0, 21.875)
 rotation = Vector3(0, -180, 0)
@@ -88,6 +96,7 @@ animation_id = "Pose"
 office_entrance = SubResource("Resource_5tg6x")
 
 [sub_resource type="Resource" id="Resource_iesub"]
+resource_name = "Playroom"
 script = ExtResource("3_028d0")
 position = Vector3(-10.907, 0, 8.802)
 rotation = Vector3(0, 35.5, 0)
@@ -105,25 +114,28 @@ entrance = 2
 fail_position_index = 0
 
 [sub_resource type="Resource" id="Resource_ws1uo"]
+resource_name = "Office Left Vent"
 script = ExtResource("3_028d0")
 position = Vector3(-8.514, 0, 0.141)
 rotation = Vector3(0, 90, 0)
 scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([])
-is_vent = false
+is_vent = true
 animation_id = "Pose"
 office_entrance = SubResource("Resource_3kmxh")
 
 [sub_resource type="Resource" id="Resource_xlram"]
+resource_name = "Backstage Ceiling Vent"
 script = ExtResource("3_028d0")
 position = Vector3(51.932, 5.121, -0.499)
 rotation = Vector3(0, -90, 0)
 scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([11])
-is_vent = false
+is_vent = true
 animation_id = "Pose"
 
 [sub_resource type="Resource" id="Resource_teaug"]
+resource_name = "Kitchen"
 script = ExtResource("3_028d0")
 position = Vector3(21.328, 0, -1.695)
 rotation = Vector3(0, -90, 0)
@@ -141,13 +153,14 @@ entrance = 3
 fail_position_index = 0
 
 [sub_resource type="Resource" id="Resource_88hhu"]
+resource_name = "Office Right Vent"
 script = ExtResource("3_028d0")
 position = Vector3(8.889, 0, 0)
 rotation = Vector3(0, -90, 0)
 scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([])
-is_vent = false
-animation_id = ""
+is_vent = true
+animation_id = "Pose"
 office_entrance = SubResource("Resource_isyl4")
 
 [node name="Withered Bonnie" instance=ExtResource("1_vgcyo")]
@@ -155,6 +168,7 @@ script = ExtResource("2_w6tca")
 animatronic = "wither_bonnie"
 positions = Array[ExtResource("3_028d0")]([SubResource("Resource_p1ed8"), SubResource("Resource_wrglt"), SubResource("Resource_k1eiu"), SubResource("Resource_u6v7f"), SubResource("Resource_tc3v3"), SubResource("Resource_633v8"), SubResource("Resource_nnrya"), SubResource("Resource_ydh5a"), SubResource("Resource_iesub"), SubResource("Resource_ws1uo"), SubResource("Resource_xlram"), SubResource("Resource_teaug"), SubResource("Resource_88hhu")])
 jumpscare_length = 1.217
+jumpscare_position = Vector3(0, -1.259, -2.75)
 
 [node name="Skeleton3D" parent="RIG_Bonnie_ao" index="0"]
 bones/0/position = Vector3(-0.0168605, -0.407826, -0.0413673)

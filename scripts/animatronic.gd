@@ -53,6 +53,8 @@ var can_move = true
 # Used only for game sensitive animatronics
 var guarding = false
 var camera_cooldown = 0
+var flashlight = 0
+
 @onready var timer = check_frequency
 @onready var level = root._get_ai(animatronic)
 @onready var stepsound := $Step
@@ -74,13 +76,16 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# Camera sensitivity
 	if root.in_cams && root.using_tablet && camera_sensitive:
-		camera_cooldown = randf_range(0,21 - level)
+		camera_cooldown = randf_range(2,23 - level)
 	if camera_cooldown > 0 && camera_sensitive:
 		camera_cooldown -= delta
 		can_move = false
 	# If not in the office
 	elif camera_sensitive && positions[current_position].office_entrance == null:
 		can_move = true
+	# Light sensitivity
+	if flashlight > 0:
+		flashlight = clamp(flashlight - delta, 0, 5)
 	#Music Box
 	if music_box_sensitive && root.is_winding == false:
 		root.musicbox = clamp(root.musicbox - (level * delta) * root.fun_multiplier, 0, 2000)
@@ -122,6 +127,9 @@ func _movement_check():
 			elif drink_sensitive:
 				root.cup_fill = 1
 				_fail_attack()
+			#If fox is in the office and player has games, sit him down
+			elif game_sensitive:
+				_game_check()
 			else:
 				_fail_attack()
 		# If the animatronic is not a friendly edam and checks for your drink
@@ -137,27 +145,17 @@ func _movement_check():
 				return
 		#If foxy is in the office, ask if he can watch you play games (If you have games)
 		elif game_sensitive:
-			if root.p1_has_tablet: #TODO:  && Globals.purchased_apps > 0
-				root.gamer_in_office = true
-				current_position = positions[current_position].next_position_indexes.pick_random()
-				_move_animatronic(current_position)
-				if is_friendly == false: # If Foxy is mad, but still a chill guy
-					root.animatronics_in_office -= 1
-				guarding = true
-				can_move = false
-			# If no games, Foxy is sad
-			elif is_friendly == true:
-				_fail_attack()
-			# If no games, Foxy is mad
-			else:
-				root._jumpscare(self)
+			_game_check()
 		# Tablet taking
 		elif music_box_sensitive && root.p1_has_tablet:
 			root._take_tablet()
 			_fail_attack()
 		# Desk hiding
 		elif positions[current_position].office_entrance.search_under_desk == false && root.p1_safety_time > 0 && root.under_desk:
-				_fail_attack()
+			_fail_attack()
+		# Flashlight sensitivity
+		elif positions[current_position].office_entrance.flashlight_weakness && flashlight > 0:
+			_fail_attack()
 		#All jumpscare exceptions/defenses are down. game over :3
 		else:
 			root._jumpscare(self)
@@ -165,9 +163,13 @@ func _movement_check():
 	#AI check
 	elif randi_range(1, 20) <= level:
 		# Move to one of the next spaces if it exists
+		var old_position = current_position
 		if positions[current_position].next_position_indexes.is_empty() == false:
-			# If the next space is an office space, but the office limit is reached, wait if not friendly
-			if positions[current_position].office_entrance != null && root.animatronics_in_office >= positions[current_position].office_entrance.office_animatronic_limit && is_friendly == false && positions[current_position].office_entrance.office_animatronic_limit > 0:
+			# Move to the next space
+			current_position = positions[current_position].next_position_indexes.pick_random()
+			# If the next space is an office space, but the office limit is reached, wait if not friendly. (If 0, office must be empty)
+			if positions[current_position].office_entrance != null && root.animatronics_in_office > positions[current_position].office_entrance.office_animatronic_limit && is_friendly == false:
+				current_position = old_position
 				return
 			# Queue movement for camera use if paranormal
 			if paranormal:
@@ -177,12 +179,17 @@ func _movement_check():
 				timer = 99
 				current_position = positions[current_position].next_position_indexes.pick_random()
 				return
-			# Move to the next space
-			current_position = positions[current_position].next_position_indexes.pick_random()
 			# If it's an office space, register as such NOTE: Friendly animatronics do not count, nor does Edam Foxy while he's hanging out with you
-			if positions[current_position].office_entrance != null && is_friendly == false:
-				root.animatronics_in_office += 1
-				#TODO: Play Voiceline for game sensitive animatronics
+			if positions[current_position].office_entrance != null:
+				if is_friendly == false:
+					root.animatronics_in_office += 1
+				if game_sensitive:
+					var warning := $Warning
+					if Globals.saw_foxy:
+						warning.stream = load("res://sounds/dialogue/edamfoxy-enter%s.wav" % randi_range(1,4))
+					else:
+						warning.stream = load("res://sounds/dialogue/edamfoxy-night1-1.wav")
+					warning.play()
 			_move_animatronic(current_position)
 
 func _move_animatronic(pos: int):
@@ -192,7 +199,12 @@ func _move_animatronic(pos: int):
 	anim.play(positions[current_position].animation_id)
 	if paranormal == false:
 		if positions[current_position].is_vent:
-			stepsound.stream = load("res://sounds/ventwalk" + str(randi_range(1,2)) + ".wav")
+			if check_frequency < 1.5:
+				stepsound.stream = load("res://sounds/ventwalk_run.wav")
+			else:
+				stepsound.stream = load("res://sounds/ventwalk" + str(randi_range(1,2)) + ".wav")
+		elif check_frequency < 1.5:
+			stepsound.stream = load("res://sounds/walk_run.wav")
 		else:
 			stepsound.stream = load("res://sounds/walk" + str(randi_range(1,5)) + ".wav")
 		stepsound.play()
@@ -203,6 +215,9 @@ func _fail_attack():
 	if is_friendly == false:
 		root.animatronics_in_office -= 1
 	if paranormal:
+		root.paranormal_attacking = false
+		root.paranormal_primed = false
+		root.paranormal_attacker = null
 		paranormal_song.emit()
 	current_position = positions[current_position].office_entrance.fail_position_index
 	_move_animatronic(current_position)
@@ -219,3 +234,31 @@ func _paranormal_dance():
 func _stop_dance():
 	anim.stop()
 	anim.play(positions[current_position].animation_id)
+
+func _flash(value : float):
+	flashlight = clamp(flashlight + value, 0, 5)
+
+func _game_check():
+	if root.p1_has_tablet: #TODO:  && Globals.purchased_apps > 0
+		root.gamer_in_office = true
+		current_position = positions[current_position].next_position_indexes.pick_random()
+		_move_animatronic(current_position)
+		if is_friendly == false: # If Foxy is mad, but still a chill guy
+			root.animatronics_in_office -= 1
+		var warning := $Warning
+		if Globals.saw_foxy:
+			warning.stream = load("res://sounds/dialogue/edamfoxy-sit%s.wav" % randi_range(1,4))
+		else:
+			warning.stream = load("res://sounds/dialogue/edamfoxy-night1-2.wav")
+		warning.play()
+		guarding = true
+		can_move = false
+		Globals.saw_foxy = true
+		if root.night == 1:
+			Globals.saw_foxy_night_1 = true
+	# If no games, Foxy is sad
+	elif is_friendly == true:
+		_fail_attack()
+	# If no games, Foxy is mad
+	else:
+		root._jumpscare(self)

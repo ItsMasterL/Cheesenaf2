@@ -46,16 +46,17 @@ var paranormal_attacker : Node3D # What even is it?
 var paranormal_primed = false # What is it doing?
 signal music_box_ran_out
 @export var tablet : MeshInstance3D
-@export var animatronics : Node3D #Just for debug; TODO: Remove
+@export var animatronics : Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for animatronic in get_child(8).get_children():
+	for animatronic in animatronics.get_children():
 		if animatronic.music_box_sensitive:
 			music_box_ran_out.connect(animatronic._stop_dance)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	Globals.game_time += delta
 	time += (delta * fun_multiplier)
 	hour = floor(time / time_to_hour)
 	minute = floor(lerp(hour * 60, hour * 60 + 60, time / time_to_hour)) as int % 60
@@ -73,7 +74,7 @@ func _process(delta):
 		else:
 			p1_heat = clamp(p1_heat - (delta * 0.05), -2, 5)
 	else:
-		p1_heat = clamp(p1_heat + (delta * 0.025), 0, 5)
+		p1_heat = clamp(p1_heat + (delta * 0.015), 0, 5)
 	blur.material.set("shader_parameter/blur_amount", p1_heat)
 	# Music box running out
 	if musicbox == 0:
@@ -102,7 +103,7 @@ func _process(delta):
 	
 	if OS.is_debug_build():
 		if Input.is_key_pressed(KEY_F1):
-			_jumpscare(animatronics.get_child(4))
+			_jumpscare(animatronics.get_child(5))
 
 func _get_ai(animatronic: String) -> int:
 	match animatronic:
@@ -188,7 +189,7 @@ func _jumpscare_save(animatronic: Node3D):
 	var anim : AnimationPlayer = animatronic.get_child(1)
 	var sound : AudioStreamPlayer = animatronic.get_child(2)
 	var warning : AudioStreamPlayer = animatronic.get_child(4)
-	warning.stream = load("res://sounds/edamfoxy-save%s.wav" % [randi_range(1,7)])
+	warning.stream = load("res://sounds/dialogue/edamfoxy-save%s.wav" % [randi_range(1,7)])
 	anim.play(animatronic.save_animation_id)
 	sound.play()
 	var playercamanim := $Player/Head/Eyes/AnimationPlayer

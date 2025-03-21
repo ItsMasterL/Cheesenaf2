@@ -12,9 +12,10 @@
 [ext_resource type="Animation" uid="uid://bpo37o2sc2ir2" path="res://animation/GangnamStyle.anim" id="6_qb2vs"]
 [ext_resource type="AudioStream" uid="uid://c3n0lfpxca8e8" path="res://sounds/jumpscare_edam.wav" id="7_8rhcw"]
 [ext_resource type="Animation" uid="uid://bug1rn3dtv5vg" path="res://animation/GetDown.anim" id="7_y6dsu"]
-[ext_resource type="AudioStream" uid="uid://blj2fpebqrwua" path="res://sounds/bonnie.wav" id="8_nkimh"]
+[ext_resource type="AudioStream" uid="uid://blj2fpebqrwua" path="res://sounds/dialogue/bonnie.wav" id="8_nkimh"]
 
 [sub_resource type="Resource" id="Resource_qbims"]
+resource_name = "Stage"
 script = ExtResource("2_qge1l")
 position = Vector3(68.541, 1.296, 0)
 rotation = Vector3(0, 180, 0)
@@ -24,6 +25,7 @@ is_vent = false
 animation_id = "Pose"
 
 [sub_resource type="Resource" id="Resource_xwm0t"]
+resource_name = "Kitchen"
 script = ExtResource("2_qge1l")
 position = Vector3(22.745, 0.085, 0)
 rotation = Vector3(0, -180, 0)
@@ -33,6 +35,7 @@ is_vent = false
 animation_id = "Pose"
 
 [sub_resource type="Resource" id="Resource_ofp60"]
+resource_name = "Party Room A"
 script = ExtResource("2_qge1l")
 position = Vector3(18.108, 0.085, -20.744)
 rotation = Vector3(0, -180, 0)
@@ -50,6 +53,7 @@ entrance = 0
 fail_position_index = 0
 
 [sub_resource type="Resource" id="Resource_8vys7"]
+resource_name = "Front Door"
 script = ExtResource("2_qge1l")
 position = Vector3(0, 0.085, -18.141)
 rotation = Vector3(0, -90, 0)

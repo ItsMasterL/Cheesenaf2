@@ -5,10 +5,10 @@ extends Control
 @onready var lightsound := $Light
 @onready var camsound := $ChangeCam
 @onready var root = get_tree().get_root().get_node("Map")
-@onready var musicprogress := $Buttons/Button/ProgressBar
+@onready var musicprogress := $RoomCams/Button/ProgressBar
 @onready var windsound := $Wind
 @onready var musicbox := $Musicbox
-@onready var cambuttons = $Buttons
+@onready var cambuttons = $RoomCams
 var songcount = 10
 
 signal change_dance
@@ -18,7 +18,7 @@ func _ready():
 	if root.p1_last_cam != null:
 		_change_camera(root.p1_last_cam, false)
 	# Should be "Animatronics" in office.tscn
-	for animatronic in root.get_child(8).get_children():
+	for animatronic in root.animatronics.get_children():
 		if animatronic.music_box_sensitive:
 			change_dance.connect(animatronic._change_dance)
 			paranormal_dance.connect(animatronic._paranormal_dance)

@@ -1,25 +1,350 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgejnvievuxf8"]
+[gd_scene load_steps=39 format=3 uid="uid://cgejnvievuxf8"]
 
 [ext_resource type="PackedScene" uid="uid://dn18h3r3cb5vl" path="res://models/witherfoxy.glb" id="1_im5kl"]
 [ext_resource type="Script" path="res://scripts/animatronic.gd" id="2_lvs2i"]
 [ext_resource type="Script" path="res://scripts/animatronic_position.gd" id="3_gnh15"]
 [ext_resource type="AudioStream" uid="uid://jb2c0ep1vqdm" path="res://sounds/jumpscare_withered.wav" id="3_ii7cv"]
+[ext_resource type="Script" path="res://scripts/animatronic_entrance.gd" id="4_xywb7"]
 
 [sub_resource type="Resource" id="Resource_jxetc"]
+resource_name = "Storage"
 script = ExtResource("3_gnh15")
 position = Vector3(61.292, 0, -23.328)
 rotation = Vector3(0, 0, 0)
 scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([13, 1, 17])
+is_vent = false
+animation_id = "Pose"
+
+[sub_resource type="Resource" id="Resource_2eefl"]
+resource_name = "Lobby 1"
+script = ExtResource("3_gnh15")
+position = Vector3(66.516, 0, -12.732)
+rotation = Vector3(0, -140.5, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([2, 0, 15])
+is_vent = false
+animation_id = "Pose"
+
+[sub_resource type="Resource" id="Resource_77xik"]
+resource_name = "Lobby 2"
+script = ExtResource("3_gnh15")
+position = Vector3(58.427, 0, 9.269)
+rotation = Vector3(0, -130.5, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([1, 3, 11])
+is_vent = false
+animation_id = "Pose"
+
+[sub_resource type="Resource" id="Resource_p5o58"]
+resource_name = "Entrance"
+script = ExtResource("3_gnh15")
+position = Vector3(63.334, 0, 27.915)
+rotation = Vector3(0, -59.8, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([14, 2, 4])
+is_vent = false
+animation_id = "Pose"
+
+[sub_resource type="Resource" id="Resource_koarc"]
+resource_name = "Outside A"
+script = ExtResource("3_gnh15")
+position = Vector3(53.775, 0, 31.885)
+rotation = Vector3(0, -175.1, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([3, 5])
+is_vent = false
+animation_id = "Pose"
+
+[sub_resource type="Resource" id="Resource_t8umf"]
+resource_name = "Outside B"
+script = ExtResource("3_gnh15")
+position = Vector3(-17.304, 0, 33.696)
+rotation = Vector3(0, -152.3, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([4, 6, 26])
+is_vent = false
+animation_id = "Pose"
+
+[sub_resource type="Resource" id="Resource_0ahgt"]
+resource_name = "Playroom 1"
+script = ExtResource("3_gnh15")
+position = Vector3(-22.105, 0.353, 15.961)
+rotation = Vector3(0, 0, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([5, 7, 23])
+is_vent = false
+animation_id = "Pose"
+
+[sub_resource type="Resource" id="Resource_61oc4"]
+resource_name = "Playroom 2"
+script = ExtResource("3_gnh15")
+position = Vector3(-14.847, 0, -16.927)
+rotation = Vector3(0, 43.7, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([6, 23, 25])
+is_vent = false
+animation_id = "Pose"
+
+[sub_resource type="Resource" id="Resource_vmxrt"]
+resource_name = "Party Room A"
+script = ExtResource("3_gnh15")
+position = Vector3(19.81, 0, -20.082)
+rotation = Vector3(0, -117.1, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([25, 15, 9])
+is_vent = false
+animation_id = "Pose"
+
+[sub_resource type="Resource" id="Resource_n0pjq"]
+resource_name = "Kitchen"
+script = ExtResource("3_gnh15")
+position = Vector3(27.474, 0, 1.642)
+rotation = Vector3(0, 31.3, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([8, 10, 21, 22, 24])
+is_vent = false
+animation_id = "Pose"
+
+[sub_resource type="Resource" id="Resource_sksc0"]
+resource_name = "Party Room B"
+script = ExtResource("3_gnh15")
+position = Vector3(19.129, 0, 13.532)
+rotation = Vector3(0, -90, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([9, 11, 16, 26])
+is_vent = false
+animation_id = "Pose"
+
+[sub_resource type="Resource" id="Resource_d0p40"]
+resource_name = "Restroom B"
+script = ExtResource("3_gnh15")
+position = Vector3(48.315, 0, 21.519)
+rotation = Vector3(0, -139.7, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([10, 2, 19])
+is_vent = false
+animation_id = "Pose"
+
+[sub_resource type="Resource" id="Resource_uu7nn"]
+resource_name = "Backstage"
+script = ExtResource("3_gnh15")
+position = Vector3(80.967, 1.098, 0)
+rotation = Vector3(0, 180, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([13, 14, 18])
+is_vent = false
+animation_id = "Pose"
+
+[sub_resource type="Resource" id="Resource_e686b"]
+resource_name = "Storage Vent"
+script = ExtResource("3_gnh15")
+position = Vector3(72.663, 0, -21.58)
+rotation = Vector3(0, 0, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([0, 12])
+is_vent = true
+animation_id = "Pose"
+
+[sub_resource type="Resource" id="Resource_4d5gq"]
+resource_name = "Entrance Vent"
+script = ExtResource("3_gnh15")
+position = Vector3(72.663, 0, 21.58)
+rotation = Vector3(0, 180, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([3, 12])
+is_vent = true
+animation_id = "Pose"
+
+[sub_resource type="Resource" id="Resource_vlvi8"]
+resource_name = "Lobby Vent A"
+script = ExtResource("3_gnh15")
+position = Vector3(34.849, 0, 8.997)
+rotation = Vector3(0, 180, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([1, 8])
+is_vent = true
+animation_id = "Pose"
+
+[sub_resource type="Resource" id="Resource_iukih"]
+resource_name = "Lobby Vent B"
+script = ExtResource("3_gnh15")
+position = Vector3(34.849, 0, -8.8)
+rotation = Vector3(0, 180, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([2, 10])
+is_vent = true
+animation_id = "Pose"
+
+[sub_resource type="Resource" id="Resource_nprmr"]
+resource_name = "Storage Ceiling Vent"
+script = ExtResource("3_gnh15")
+position = Vector3(48.946, 5.117, -21.813)
+rotation = Vector3(0, -180, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([0, 18])
+is_vent = true
+animation_id = ""
+
+[sub_resource type="Resource" id="Resource_f8afl"]
+resource_name = "Lobby Ceiling Vent 1"
+script = ExtResource("3_gnh15")
+position = Vector3(47.601, 5.117, -3.556)
+rotation = Vector3(0, -90, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([17, 19, 20, 21])
+is_vent = true
+animation_id = ""
+
+[sub_resource type="Resource" id="Resource_o6xbs"]
+resource_name = "Lobby Ceiling Vent 2"
+script = ExtResource("3_gnh15")
+position = Vector3(47.601, 5.117, 4.288)
+rotation = Vector3(0, 90, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([18, 20, 21, 11])
+is_vent = true
+animation_id = ""
+
+[sub_resource type="Resource" id="Resource_3dy1d"]
+resource_name = "Lobby Ceiling Vent 3"
+script = ExtResource("3_gnh15")
+position = Vector3(63.582, 5.117, 0)
+rotation = Vector3(0, 180, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([12, 21, 19, 18])
+is_vent = true
+animation_id = ""
+
+[sub_resource type="Resource" id="Resource_xrsb3"]
+resource_name = "Kitchen Hall Ceiling Vent"
+script = ExtResource("3_gnh15")
+position = Vector3(34.461, 5.117, 0)
+rotation = Vector3(0, 180, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([20, 22, 9, 18, 19])
+is_vent = true
+animation_id = ""
+
+[sub_resource type="Resource" id="Resource_rnsa2"]
+script = ExtResource("4_xywb7")
+office_animatronic_limit = 1
+search_under_desk = true
+flashlight_weakness = true
+entrance = 4
+fail_position_index = 0
+
+[sub_resource type="Resource" id="Resource_3ats0"]
+resource_name = "Office Ceiling Vent"
+script = ExtResource("3_gnh15")
+position = Vector3(0, 5.117, 0)
+rotation = Vector3(0, 0, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([])
+is_vent = true
+animation_id = "Pose"
+office_entrance = SubResource("Resource_rnsa2")
+
+[sub_resource type="Resource" id="Resource_qm8nx"]
+script = ExtResource("4_xywb7")
+office_animatronic_limit = 1
+search_under_desk = true
+flashlight_weakness = true
+entrance = 2
+fail_position_index = 0
+
+[sub_resource type="Resource" id="Resource_881gf"]
+resource_name = "Office Left Vent"
+script = ExtResource("3_gnh15")
+position = Vector3(-7.207, 0, 0)
+rotation = Vector3(0, 0, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([])
+is_vent = true
+animation_id = "Pose"
+office_entrance = SubResource("Resource_qm8nx")
+
+[sub_resource type="Resource" id="Resource_dm8ci"]
+script = ExtResource("4_xywb7")
+office_animatronic_limit = 1
+search_under_desk = true
+flashlight_weakness = true
+entrance = 3
+fail_position_index = 0
+
+[sub_resource type="Resource" id="Resource_5rqb3"]
+resource_name = "Office Right Vent"
+script = ExtResource("3_gnh15")
+position = Vector3(7.207, 0, 0)
+rotation = Vector3(0, 180, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([])
+is_vent = true
+animation_id = "Pose"
+office_entrance = SubResource("Resource_dm8ci")
+
+[sub_resource type="Resource" id="Resource_b5jr3"]
+script = ExtResource("4_xywb7")
+office_animatronic_limit = 1
+search_under_desk = true
+flashlight_weakness = true
+entrance = 0
+fail_position_index = 0
+
+[sub_resource type="Resource" id="Resource_kun70"]
+resource_name = "Front Door"
+script = ExtResource("3_gnh15")
+position = Vector3(0, 0, -12.239)
+rotation = Vector3(0, -90, 0)
+scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([])
 is_vent = false
 animation_id = "Pose"
+office_entrance = SubResource("Resource_b5jr3")
+
+[sub_resource type="Resource" id="Resource_8bmpn"]
+script = ExtResource("4_xywb7")
+office_animatronic_limit = 1
+search_under_desk = true
+flashlight_weakness = true
+entrance = 1
+fail_position_index = 0
+
+[sub_resource type="Resource" id="Resource_62n35"]
+resource_name = "Back Door"
+script = ExtResource("3_gnh15")
+position = Vector3(0, 0, 12.239)
+rotation = Vector3(0, 90, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([])
+is_vent = false
+animation_id = "Pose"
+office_entrance = SubResource("Resource_8bmpn")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_o8aoc"]
+radius = 50.39
 
 [node name="Withered Foxy" instance=ExtResource("1_im5kl")]
 script = ExtResource("2_lvs2i")
 animatronic = "wither_foxy"
-positions = Array[ExtResource("3_gnh15")]([SubResource("Resource_jxetc")])
+positions = Array[ExtResource("3_gnh15")]([SubResource("Resource_jxetc"), SubResource("Resource_2eefl"), SubResource("Resource_77xik"), SubResource("Resource_p5o58"), SubResource("Resource_koarc"), SubResource("Resource_t8umf"), SubResource("Resource_0ahgt"), SubResource("Resource_61oc4"), SubResource("Resource_vmxrt"), SubResource("Resource_n0pjq"), SubResource("Resource_sksc0"), SubResource("Resource_d0p40"), SubResource("Resource_uu7nn"), SubResource("Resource_e686b"), SubResource("Resource_4d5gq"), SubResource("Resource_vlvi8"), SubResource("Resource_iukih"), SubResource("Resource_nprmr"), SubResource("Resource_f8afl"), SubResource("Resource_o6xbs"), SubResource("Resource_3dy1d"), SubResource("Resource_xrsb3"), SubResource("Resource_3ats0"), SubResource("Resource_881gf"), SubResource("Resource_5rqb3"), SubResource("Resource_kun70"), SubResource("Resource_62n35")])
+check_frequency = 1.356
 jumpscare_length = 1.217
+jumpscare_position = Vector3(0, -1.259, -2.75)
 camera_sensitive = true
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="0"]
+transform = Transform3D(1, -3.55271e-14, 0, 0, 0, 1, -3.55271e-14, -1, 0, -0.0598205, 199.713, -15.2843)
+bone_name = "Head"
+bone_idx = 4
+
+[node name="Eyes" type="Area3D" parent="Armature/Skeleton3D/BoneAttachment3D" index="0"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D/Eyes" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.60991)
+shape = SubResource("SphereShape3D_o8aoc")
 
 [node name="Jumpscare" type="AudioStreamPlayer" parent="." index="2"]
 stream = ExtResource("3_ii7cv")

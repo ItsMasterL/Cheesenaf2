@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b7dpymyvsicjt"]
+[gd_scene load_steps=10 format=3 uid="uid://b7dpymyvsicjt"]
 
 [ext_resource type="PackedScene" uid="uid://davygjdeoe7pd" path="res://models/cheesestick.glb" id="1_e4tnk"]
 [ext_resource type="AudioStream" uid="uid://bfjr5ptwvi0b4" path="res://sounds/jumpscare_cheesestick.wav" id="2_8wgq6"]
@@ -32,6 +32,9 @@ next_position_indexes = Array[int]([1])
 is_vent = false
 animation_id = "Pose"
 office_entrance = SubResource("Resource_l73xa")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_iljfn"]
+radius = 32.8989
 
 [node name="Cheesestick" instance=ExtResource("1_e4tnk")]
 script = ExtResource("2_qgvuu")
@@ -81,6 +84,18 @@ bones/97/rotation = Quaternion(9.27863e-16, -0.0252527, -2.02709e-16, 0.999681)
 bones/97/scale = Vector3(1, 1, 1)
 bones/99/rotation = Quaternion(1.05734e-22, -0.034169, 5.55436e-17, 0.999416)
 bones/100/rotation = Quaternion(-1.38783e-17, 0.00872649, 2.66464e-15, 0.999962)
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="cheesestick/Skeleton3D" index="0"]
+transform = Transform3D(0.999848, 1.24302e-14, -0.0174523, 0.0174523, 4.68831e-16, 0.999848, 1.24365e-14, -1, 2.51824e-16, 0.0519244, 246.565, 0.588806)
+bone_name = "Mask_jnt"
+bone_idx = 41
+
+[node name="Area3D" type="Area3D" parent="cheesestick/Skeleton3D/BoneAttachment3D" index="0"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="cheesestick/Skeleton3D/BoneAttachment3D/Area3D" index="0"]
+shape = SubResource("SphereShape3D_iljfn")
 
 [node name="Jumpscare" type="AudioStreamPlayer" parent="." index="2"]
 stream = ExtResource("2_8wgq6")

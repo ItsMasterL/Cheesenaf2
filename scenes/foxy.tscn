@@ -5,9 +5,10 @@
 [ext_resource type="Script" path="res://scripts/animatronic_position.gd" id="3_lvccg"]
 [ext_resource type="AudioStream" uid="uid://c3n0lfpxca8e8" path="res://sounds/jumpscare_edam.wav" id="4_72a7w"]
 [ext_resource type="Script" path="res://scripts/animatronic_entrance.gd" id="4_gx0gv"]
-[ext_resource type="AudioStream" uid="uid://blj2fpebqrwua" path="res://sounds/bonnie.wav" id="5_3kum6"]
+[ext_resource type="AudioStream" uid="uid://blj2fpebqrwua" path="res://sounds/dialogue/bonnie.wav" id="5_3kum6"]
 
 [sub_resource type="Resource" id="Resource_48hc7"]
+resource_name = "Stage"
 script = ExtResource("3_lvccg")
 position = Vector3(69.275, 1.121, 13.54)
 rotation = Vector3(0, -90, 0)
@@ -17,6 +18,7 @@ is_vent = false
 animation_id = "Pose"
 
 [sub_resource type="Resource" id="Resource_qxlvi"]
+resource_name = "Lobby 1"
 script = ExtResource("3_lvccg")
 position = Vector3(64.339, -0.031, 1.212)
 rotation = Vector3(0, -129.6, 0)
@@ -26,6 +28,7 @@ is_vent = false
 animation_id = "Pose"
 
 [sub_resource type="Resource" id="Resource_t34ru"]
+resource_name = "Lobby 2"
 script = ExtResource("3_lvccg")
 position = Vector3(61.794, -0.031, -8.741)
 rotation = Vector3(0, -25, 0)
@@ -35,6 +38,7 @@ is_vent = false
 animation_id = "Pose"
 
 [sub_resource type="Resource" id="Resource_e4c0a"]
+resource_name = "Restroom A"
 script = ExtResource("3_lvccg")
 position = Vector3(34.811, -0.031, -22.398)
 rotation = Vector3(0, -80, 0)
@@ -44,6 +48,7 @@ is_vent = false
 animation_id = "Pose"
 
 [sub_resource type="Resource" id="Resource_op77r"]
+resource_name = "Party Room A"
 script = ExtResource("3_lvccg")
 position = Vector3(13.843, -0.031, -21.102)
 rotation = Vector3(0, -22, 0)
@@ -54,13 +59,14 @@ animation_id = "Pose"
 
 [sub_resource type="Resource" id="Resource_1xllt"]
 script = ExtResource("4_gx0gv")
-office_animatronic_limit = 1
+office_animatronic_limit = 10
 search_under_desk = false
 flashlight_weakness = false
 entrance = 0
-fail_position_index = 4
+fail_position_index = 2
 
 [sub_resource type="Resource" id="Resource_oacql"]
+resource_name = "Front Door"
 script = ExtResource("3_lvccg")
 position = Vector3(0.359, -0.031, -9.107)
 rotation = Vector3(0, 0, 0)
@@ -71,6 +77,7 @@ animation_id = "Pose"
 office_entrance = SubResource("Resource_1xllt")
 
 [sub_resource type="Resource" id="Resource_3vlub"]
+resource_name = "next to my desk :3"
 script = ExtResource("3_lvccg")
 position = Vector3(1.06, -0.031, 1.212)
 rotation = Vector3(0, -180, 0)
@@ -84,6 +91,7 @@ script = ExtResource("2_44u51")
 animatronic = "edam_foxy"
 positions = Array[ExtResource("3_lvccg")]([SubResource("Resource_48hc7"), SubResource("Resource_qxlvi"), SubResource("Resource_t34ru"), SubResource("Resource_e4c0a"), SubResource("Resource_op77r"), SubResource("Resource_oacql"), SubResource("Resource_3vlub")])
 check_frequency = 5.274
+camera_sensitive = true
 game_sensitive = true
 save_animation_id = "Save"
 save_voiceline_delay = 2.35

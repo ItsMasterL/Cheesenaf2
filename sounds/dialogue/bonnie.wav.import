@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://blj2fpebqrwua"
-path="res://.godot/imported/bonnie.wav-d79b905ec4f0bba6aee17e9ccc2f4831.sample"
+path="res://.godot/imported/bonnie.wav-ed901a4766e1d6c9139555b9d1760b62.sample"
 
 [deps]
 
-source_file="res://sounds/bonnie.wav"
-dest_files=["res://.godot/imported/bonnie.wav-d79b905ec4f0bba6aee17e9ccc2f4831.sample"]
+source_file="res://sounds/dialogue/bonnie.wav"
+dest_files=["res://.godot/imported/bonnie.wav-ed901a4766e1d6c9139555b9d1760b62.sample"]
 
 [params]
 

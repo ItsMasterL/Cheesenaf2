@@ -1,26 +1,153 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwhn6aeiuwg7x"]
+[gd_scene load_steps=19 format=3 uid="uid://dwhn6aeiuwg7x"]
 
 [ext_resource type="PackedScene" uid="uid://bclyw4a1la5s5" path="res://models/witherfreddy.glb" id="1_qsbdi"]
 [ext_resource type="Script" path="res://scripts/animatronic.gd" id="2_gsmfg"]
 [ext_resource type="AudioStream" uid="uid://jb2c0ep1vqdm" path="res://sounds/jumpscare_withered.wav" id="3_q7pj4"]
 [ext_resource type="Script" path="res://scripts/animatronic_position.gd" id="3_q83rb"]
+[ext_resource type="Script" path="res://scripts/animatronic_entrance.gd" id="4_0dvod"]
 
 [sub_resource type="Resource" id="Resource_h2keo"]
+resource_name = "Storage"
 script = ExtResource("3_q83rb")
 position = Vector3(65.292, 0, -23.328)
 rotation = Vector3(0, 0, 0)
 scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([1])
+is_vent = false
+animation_id = "Pose"
+
+[sub_resource type="Resource" id="Resource_ivh6o"]
+resource_name = "Storage Ceiling Vent"
+script = ExtResource("3_q83rb")
+position = Vector3(55.567, 5.237, -21.88)
+rotation = Vector3(0, -180, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([2, 8])
+is_vent = true
+animation_id = "Pose"
+
+[sub_resource type="Resource" id="Resource_n2kyc"]
+resource_name = "Restroom A"
+script = ExtResource("3_q83rb")
+position = Vector3(44.382, 0, -21.88)
+rotation = Vector3(0, -51.2, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([3, 1])
+is_vent = false
+animation_id = "Pose"
+
+[sub_resource type="Resource" id="Resource_ggpi1"]
+resource_name = "Party Room A"
+script = ExtResource("3_q83rb")
+position = Vector3(16.59, 0, -15.054)
+rotation = Vector3(0, 156.9, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([2, 4])
+is_vent = false
+animation_id = ""
+
+[sub_resource type="Resource" id="Resource_ynb7p"]
+script = ExtResource("4_0dvod")
+office_animatronic_limit = 2
+search_under_desk = false
+flashlight_weakness = true
+entrance = 0
+fail_position_index = 0
+
+[sub_resource type="Resource" id="Resource_fp53l"]
+resource_name = "Front Door"
+script = ExtResource("3_q83rb")
+position = Vector3(0, 0, -18.665)
+rotation = Vector3(0, -90, 0)
+scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([])
 is_vent = false
 animation_id = "Pose"
+office_entrance = SubResource("Resource_ynb7p")
+
+[sub_resource type="Resource" id="Resource_rj68t"]
+resource_name = "Kitchen"
+script = ExtResource("3_q83rb")
+position = Vector3(14.496, 0, 2.486)
+rotation = Vector3(0, -30.7, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([3, 6])
+is_vent = false
+animation_id = "Pose"
+
+[sub_resource type="Resource" id="Resource_fhw3c"]
+resource_name = "Party Room B"
+script = ExtResource("3_q83rb")
+position = Vector3(9.201, 0, 18.842)
+rotation = Vector3(0, -158.3, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([7])
+is_vent = false
+animation_id = "Pose"
+
+[sub_resource type="Resource" id="Resource_xcx4k"]
+script = ExtResource("4_0dvod")
+office_animatronic_limit = 0
+search_under_desk = true
+flashlight_weakness = true
+entrance = 1
+fail_position_index = 0
+
+[sub_resource type="Resource" id="Resource_bvmsi"]
+resource_name = "Back Door"
+script = ExtResource("3_q83rb")
+position = Vector3(0, 0, 19.157)
+rotation = Vector3(0, 90, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([])
+is_vent = false
+animation_id = "Pose"
+office_entrance = SubResource("Resource_xcx4k")
+
+[sub_resource type="Resource" id="Resource_d2oxh"]
+resource_name = "Lobby Ceiling Vent"
+script = ExtResource("3_q83rb")
+position = Vector3(47.582, 5.263, -11.521)
+rotation = Vector3(0, -90, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([9])
+is_vent = true
+animation_id = "Pose"
+
+[sub_resource type="Resource" id="Resource_xd6uo"]
+resource_name = "Kitchen Hall Ceiling Vent"
+script = ExtResource("3_q83rb")
+position = Vector3(37.554, 5.263, 0)
+rotation = Vector3(0, 180, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([5])
+is_vent = true
+animation_id = "Pose"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6m6pw"]
+radius = 50.3093
 
 [node name="Withered Freddy" instance=ExtResource("1_qsbdi")]
 script = ExtResource("2_gsmfg")
 animatronic = "wither_freddy"
-positions = Array[ExtResource("3_q83rb")]([SubResource("Resource_h2keo")])
+positions = Array[ExtResource("3_q83rb")]([SubResource("Resource_h2keo"), SubResource("Resource_ivh6o"), SubResource("Resource_n2kyc"), SubResource("Resource_ggpi1"), SubResource("Resource_fp53l"), SubResource("Resource_rj68t"), SubResource("Resource_fhw3c"), SubResource("Resource_bvmsi"), SubResource("Resource_d2oxh"), SubResource("Resource_xd6uo")])
 jumpscare_length = 1.217
+jumpscare_position = Vector3(0, -1.259, -2.75)
 ignore_save = true
 save_jumpscare_id = "Jumpscare"
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="RIG_Freddy_ao_001/Skeleton3D" index="0"]
+transform = Transform3D(1, 3.37119e-20, 1.42109e-13, 3.23566e-20, 1, -4.64916e-07, -1.42109e-13, 4.64916e-07, 1, 1.51934e-12, 194.716, -6.71205)
+bone_name = "Head"
+bone_idx = 10
+
+[node name="Eyes" type="Area3D" parent="RIG_Freddy_ao_001/Skeleton3D/BoneAttachment3D" index="0"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RIG_Freddy_ao_001/Skeleton3D/BoneAttachment3D/Eyes" index="0"]
+transform = Transform3D(1, -4.06576e-20, 0, 0, 1, 4.72644e-20, 0, 4.72644e-20, 1, 0, 26.3419, -7.62939e-06)
+shape = SubResource("SphereShape3D_6m6pw")
 
 [node name="Jumpscare" type="AudioStreamPlayer" parent="." index="2"]
 stream = ExtResource("3_q7pj4")

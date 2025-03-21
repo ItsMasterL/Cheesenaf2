@@ -13,11 +13,20 @@ var wither_chica = 0
 var wither_foxy = 0
 var cheesestick = 0
 var safety_time = 2.5
+var office_mode = 0 # 0 - Singleplayer, 1 - Co-op, 2 - 1v1 vs, 3 - 2v2 vs
+var game_time = 0
+
+# Multiplayer #TODO: Actually implement multiplayer
+var local_playername = ""
+var remote_playernames : Array[String]
+var is_host = false
+var host_ip = "127.0.0.1"
 
 # Save Data
 var save_night : int = 1
 var purchased_apps : int = 0
 var money : int = 0
+var saw_foxy : bool = false
 var saw_foxy_night_1 : bool = false
 
 func _ready():
@@ -44,13 +53,15 @@ func _save():
 		"night" = save_night,
 		"apps" = purchased_apps,
 		"money" = money,
-		"foxy" = saw_foxy_night_1
+		"foxy" = saw_foxy,
+		"foxyn1" = saw_foxy_night_1
 	}
 	var file = FileAccess.open("user://data.json", FileAccess.WRITE)
 	var json_string = JSON.stringify(data)
 	file.store_line(json_string)
 
 func _load():
+	print("Loading user data")
 	if FileAccess.file_exists("user://data.json"):
 		var file = FileAccess.open("user://data.json", FileAccess.READ)
 		while file.get_position() < file.get_length():
@@ -67,14 +78,17 @@ func _load():
 
 		# Get the data from the JSON object.
 			var data = json.data
-			if "night" in data && typeof(data["night"]) == TYPE_INT:
+			if "night" in data && (typeof(data["night"]) == TYPE_INT || typeof(data["night"]) == TYPE_FLOAT):
 				save_night = data["night"]
-			if "money" in data && typeof(data["money"]) == TYPE_INT:
+			if "money" in data && (typeof(data["money"]) == TYPE_INT || typeof(data["money"]) == TYPE_FLOAT):
 				money = data["money"]
 			if "foxy" in data && typeof(data["foxy"]) == TYPE_BOOL:
-				saw_foxy_night_1 = data["foxy"]
+				saw_foxy = data["foxy"]
+			if "foxyn1" in data && typeof(data["foxyn1"]) == TYPE_BOOL:
+				saw_foxy_night_1 = data["foxyn1"]
 			if "apps" in data && typeof(data["apps"]) == TYPE_INT:
 				purchased_apps = data["apps"]
+			print(data["night"])
 
 func _set_night(night: int):
 	match night:
