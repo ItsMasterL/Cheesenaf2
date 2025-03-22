@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bxpmp04xt6u6q"]
+[gd_scene load_steps=8 format=3 uid="uid://bxpmp04xt6u6q"]
 
 [ext_resource type="Script" path="res://scripts/tablet_manager.gd" id="1_0wb5n"]
 [ext_resource type="Texture2D" uid="uid://c70vi1sqw8vjc" path="res://textures/andre-ouellet-b1bgPw5sLus-unsplash.jpg" id="1_3v8y3"]
 [ext_resource type="PackedScene" uid="uid://dbeb63a1g0ep4" path="res://scenes/app_button.tscn" id="2_h2de0"]
 [ext_resource type="Texture2D" uid="uid://duvbu0ep0tb3l" path="res://textures/cheesenaf 2 tablet home.png" id="2_pge4p"]
+[ext_resource type="PackedScene" uid="uid://bajdsp8qkrv1l" path="res://scenes/call.tscn" id="5_h5xad"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3kpga"]
 atlas = ExtResource("2_pge4p")
@@ -18,6 +19,7 @@ script = ExtResource("1_0wb5n")
 app_button = ExtResource("2_h2de0")
 
 [node name="TimeUI" type="Control" parent="."]
+z_index = 5
 clip_contents = true
 layout_mode = 3
 anchors_preset = 0
@@ -25,10 +27,12 @@ offset_right = 1280.0
 offset_bottom = 800.0
 
 [node name="TopBarBackground" type="Sprite2D" parent="TimeUI"]
+z_index = 5
 texture = SubResource("AtlasTexture_3kpga")
 centered = false
 
 [node name="Clock" type="Label" parent="TimeUI"]
+z_index = 5
 layout_mode = 0
 offset_left = 1192.0
 offset_top = 8.0
@@ -52,6 +56,7 @@ texture = ExtResource("1_3v8y3")
 centered = false
 
 [node name="Shadow" type="Sprite2D" parent="Home"]
+z_index = -1
 position = Vector2(0, 40)
 texture = SubResource("AtlasTexture_82o56")
 centered = false
@@ -67,3 +72,7 @@ theme_override_constants/v_separation = 56
 columns = 6
 
 [node name="Application" type="Node2D" parent="."]
+
+[node name="CallService" parent="." instance=ExtResource("5_h5xad")]
+offset_right = 1280.0
+offset_bottom = 800.0

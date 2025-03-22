@@ -4,7 +4,7 @@ var current_process
 @onready var home = $Home
 @onready var app_home = $Application
 @onready var time = $TimeUI/Clock
-@onready var root = $"../../../../.."
+@onready var root = get_tree().get_root().get_node("Map")
 @onready var app_container := $Home/GridContainer
 @onready var purchases : int = 0
 

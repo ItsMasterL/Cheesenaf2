@@ -5,7 +5,9 @@ extends Control
 func _ready() -> void:
 	$"5_6/AnimationPlayer".play("default")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	await get_tree().create_timer(13).timeout
+	await get_tree().create_timer(5.5).timeout
+	$Yay.play()
+	await get_tree().create_timer(7.5).timeout
 	if Globals.night < 5:
 		Globals._set_night(Globals.save_night)
 		get_tree().change_scene_to_file("res://scenes/title_loadoffice.tscn")

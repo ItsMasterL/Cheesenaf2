@@ -13,6 +13,7 @@ var in_cams = false
 var under_desk = false
 var animatronics_in_office = 0
 var closed_entrances : Array[int]
+var jammed_entrances : Array[int]
 var cup_fill = 1
 var fan_powered = true
 var p1_thirst = 0
@@ -45,7 +46,9 @@ var p1_can_action = true # False if in a jumpscare
 var paranormal_attacking = false # Why is it here?
 var paranormal_attacker : Node3D # What even is it?
 var paranormal_primed = false # What is it doing?
+
 signal music_box_ran_out
+signal entrance_closing
 
 @export var tablet : MeshInstance3D
 @export var animatronics : Node3D
@@ -56,8 +59,12 @@ func _ready():
 	for animatronic in animatronics.get_children():
 		if animatronic.music_box_sensitive:
 			music_box_ran_out.connect(animatronic._stop_dance)
-	if night > 1:
-		$Player/Head/Eyes/Controls.visible = false
+		if animatronic.vent_checker && night == 2:
+			entrance_closing.connect(animatronic._kill_vent_checker)
+	if night == 1:
+		$Player/Head/Eyes/Controls.visible = true
+		closed_entrances = [1, 4]
+	_set_entrances(closed_entrances)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -151,8 +158,12 @@ func _set_entrances(values: Array[int]):
 		elif values.has(i) == false && closed_entrances.has(i):
 			door.get_child(1).play(&"close", -1, -1, true)
 			door.get_child(2).play()
+		elif values.has(i) == false && closed_entrances.has(i) == false:
+			door.get_child(1).play(&"opened", -1, -1, true)
 		i += 1
 	closed_entrances = values
+	if time > 0.2:
+		entrance_closing.emit()
 
 func _jumpscare(animatronic: Node3D):
 	while can_jumpscare == false:
@@ -168,6 +179,8 @@ func _jumpscare(animatronic: Node3D):
 				else:
 					_jumpscare_save(gamer)
 					return
+	print("Jumpscared by %s" % animatronic.animatronic)
+	can_jumpscare = false
 	under_desk = false
 	animatronic.can_move = false
 	animatronic.position = animatronic.jumpscare_position

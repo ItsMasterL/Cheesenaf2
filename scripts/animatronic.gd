@@ -85,7 +85,7 @@ func _process(delta: float) -> void:
 		can_move = true
 	# Light sensitivity
 	if flashlight > 0:
-		flashlight = clamp(flashlight - delta, 0, 5)
+		flashlight = clamp(flashlight - delta/2, 0, 5)
 	#Music Box
 	if music_box_sensitive && root.is_winding == false:
 		root.musicbox = clamp(root.musicbox - (level * delta) * root.fun_multiplier, 0, 2000)
@@ -118,11 +118,26 @@ func _movement_check():
 			return
 		#If friendly edams
 		if is_edam_animatronic && is_friendly:
-			#If bonnie is in the office, play the warning and TODO: teleport Withered Bonnie to the vent
+			#If bonnie is in the office, play the warning and teleport Withered Bonnie/Chica to the vent
 			if vent_checker && root.night == 2:
 				var warning := $Warning
 				warning.play()
-				timer = check_frequency * 2 #Wait 2 checks before repeating
+				timer = check_frequency * 2 #Wait 3 checks before repeating (Including below line)
+				await get_tree().create_timer(check_frequency).timeout
+				if randi_range(0,1) == 1:
+					# Sorry, but this is going to be very hardcoded for the sake of time
+					if current_position == 8:
+						root.animatronics.get_child(4).current_position = 9
+						root.animatronics.get_child(4)._move_animatronic(9)
+						root.animatronics.get_child(4).timer = root.animatronics.get_child(4).check_frequency
+					elif current_position == 9:
+						root.animatronics.get_child(4).current_position = 12
+						root.animatronics.get_child(4)._move_animatronic(12)
+						root.animatronics.get_child(4).timer = root.animatronics.get_child(4).check_frequency
+					else:
+						root.animatronics.get_child(5).current_position = 14
+						root.animatronics.get_child(5)._move_animatronic(14)
+						root.animatronics.get_child(5).timer = root.animatronics.get_child(5).check_frequency
 			#If chica is in the office, refill the drink
 			elif drink_sensitive:
 				root.cup_fill = 1
@@ -190,6 +205,8 @@ func _movement_check():
 					else:
 						warning.stream = load("res://sounds/dialogue/edamfoxy-night1-1.wav")
 					warning.play()
+				if check_frequency < 1: # Withered Foxy nerf
+					timer = check_frequency * 1.75
 			_move_animatronic(current_position)
 
 func _move_animatronic(pos: int):
@@ -237,6 +254,16 @@ func _stop_dance():
 
 func _flash(value : float):
 	flashlight = clamp(flashlight + value, 0, 5)
+
+func _kill_vent_checker():
+	if can_move == false:
+		return
+	if root.closed_entrances.has(positions[current_position].office_entrance.entrance):
+		var warning := $Warning
+		warning.stream = load("res://sounds/animatronic_death.wav")
+		warning.play()
+		can_move = false
+		root.jammed_entrances.append(positions[current_position].office_entrance.entrance)
 
 func _game_check():
 	if root.p1_has_tablet: #TODO:  && Globals.purchased_apps > 0

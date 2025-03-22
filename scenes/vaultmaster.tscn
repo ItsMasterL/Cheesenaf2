@@ -1,18 +1,194 @@
-[gd_scene load_steps=2 format=3 uid="uid://dg01rdj8qmh6"]
+[gd_scene load_steps=3 format=3 uid="uid://dg01rdj8qmh6"]
 
+[ext_resource type="Script" path="res://scripts/vaultmaster.gd" id="1_4ldb7"]
 [ext_resource type="Texture2D" uid="uid://b65sbrfa4u1na" path="res://textures/animal-957383.jpg" id="2_0nf7x"]
 
-[node name="CamsPlus" type="Control"]
+[node name="VaultMaster" type="Control"]
 clip_contents = true
 custom_minimum_size = Vector2(1280, 800)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1185.0
 offset_bottom = 734.0
+script = ExtResource("1_4ldb7")
 
 [node name="Background" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.501961)
 z_index = -1
 position = Vector2(-2, -1)
 scale = Vector2(1.01651, 1.02938)
 texture = ExtResource("2_0nf7x")
 centered = false
+
+[node name="AudioFeedback" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Confirm" type="Button" parent="."]
+offset_left = 1035.0
+offset_top = 652.0
+offset_right = 1138.0
+offset_bottom = 704.0
+text = "OK"
+
+[node name="Control Buttons" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Front Door" type="Button" parent="Control Buttons"]
+offset_left = 580.0
+offset_top = 74.0
+offset_right = 690.0
+offset_bottom = 182.0
+toggle_mode = true
+text = "FRONT DOORWAY"
+autowrap_mode = 2
+
+[node name="Back Door" type="Button" parent="Control Buttons"]
+offset_left = 580.0
+offset_top = 602.0
+offset_right = 690.0
+offset_bottom = 710.0
+toggle_mode = true
+text = "REAR DOORWAY"
+autowrap_mode = 2
+
+[node name="Left Vent" type="Button" parent="Control Buttons"]
+offset_left = 173.0
+offset_top = 340.0
+offset_right = 283.0
+offset_bottom = 448.0
+toggle_mode = true
+text = "LEFT VENT"
+autowrap_mode = 2
+
+[node name="Right Vent" type="Button" parent="Control Buttons"]
+offset_left = 1027.0
+offset_top = 340.0
+offset_right = 1137.0
+offset_bottom = 448.0
+toggle_mode = true
+text = "RIGHT VENT"
+autowrap_mode = 2
+
+[node name="Ceiling Vent" type="Button" parent="Control Buttons"]
+layout_mode = 0
+offset_left = 580.0
+offset_top = 340.0
+offset_right = 690.0
+offset_bottom = 448.0
+toggle_mode = true
+text = "CEILING VENT"
+autowrap_mode = 2
+
+[node name="Messages" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DarkenBg" type="ColorRect" parent="Messages"]
+visible = false
+layout_mode = 0
+offset_right = 1321.0
+offset_bottom = 844.0
+color = Color(0, 0, 0, 0.572549)
+
+[node name="ErrorMessagebox" type="ColorRect" parent="Messages"]
+visible = false
+layout_mode = 0
+offset_left = 306.0
+offset_top = 225.0
+offset_right = 975.0
+offset_bottom = 563.0
+
+[node name="Error" type="Label" parent="Messages/ErrorMessagebox"]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 169.0
+offset_bottom = 77.0
+theme_override_colors/font_color = Color(0, 0.505882, 0.780392, 1)
+theme_override_font_sizes/font_size = 56
+text = "Error!"
+
+[node name="Error2" type="Label" parent="Messages/ErrorMessagebox"]
+offset_left = 33.0
+offset_top = 82.0
+offset_right = 642.0
+offset_bottom = 220.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 27
+text = "With your current payment plan, you are only able to close 2 doorways. If you wish to upgrade to the $399/mo plan, please contact jimborinijimborini@gmail.com"
+autowrap_mode = 2
+
+[node name="Confirm" type="Button" parent="Messages/ErrorMessagebox"]
+layout_mode = 0
+offset_left = 277.0
+offset_top = 266.0
+offset_right = 380.0
+offset_bottom = 318.0
+text = "OK"
+
+[node name="Loadingbox" type="ColorRect" parent="Messages"]
+visible = false
+offset_left = 306.0
+offset_top = 225.0
+offset_right = 975.0
+offset_bottom = 563.0
+
+[node name="Error" type="Label" parent="Messages/Loadingbox"]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 169.0
+offset_bottom = 77.0
+theme_override_colors/font_color = Color(0, 0.505882, 0.780392, 1)
+theme_override_font_sizes/font_size = 56
+text = "One moment please..."
+
+[node name="Error2" type="Label" parent="Messages/Loadingbox"]
+offset_left = 33.0
+offset_top = 202.0
+offset_right = 642.0
+offset_bottom = 340.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 27
+text = "Please do not close the application."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="JammedMessagebox" type="ColorRect" parent="Messages"]
+visible = false
+offset_left = 306.0
+offset_top = 225.0
+offset_right = 975.0
+offset_bottom = 563.0
+
+[node name="Error" type="Label" parent="Messages/JammedMessagebox"]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 169.0
+offset_bottom = 77.0
+theme_override_colors/font_color = Color(0, 0.505882, 0.780392, 1)
+theme_override_font_sizes/font_size = 56
+text = "Error!"
+
+[node name="Error2" type="Label" parent="Messages/JammedMessagebox"]
+offset_left = 33.0
+offset_top = 82.0
+offset_right = 642.0
+offset_bottom = 220.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 27
+text = "One or more modified doors are not responding. Please ensure the doorways are not blocked or jammed, then try again."
+autowrap_mode = 2
+
+[node name="Confirm" type="Button" parent="Messages/JammedMessagebox"]
+layout_mode = 0
+offset_left = 277.0
+offset_top = 266.0
+offset_right = 380.0
+offset_bottom = 318.0
+text = "OK"
+
+[connection signal="pressed" from="Confirm" to="." method="_check_and_seal"]
+[connection signal="pressed" from="Messages/ErrorMessagebox/Confirm" to="." method="_clear_error_message"]
+[connection signal="pressed" from="Messages/JammedMessagebox/Confirm" to="." method="_clear_error_message"]

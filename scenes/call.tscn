@@ -1,0 +1,97 @@
+[gd_scene load_steps=7 format=3 uid="uid://bajdsp8qkrv1l"]
+
+[ext_resource type="Script" path="res://scripts/calling.gd" id="1_qo780"]
+[ext_resource type="AudioStream" uid="uid://dbsepdjoyjnpp" path="res://sounds/music/ringtone.mp3" id="2_v3j7f"]
+[ext_resource type="Texture2D" uid="uid://b6xdfgjcxnlc" path="res://textures/accept.png" id="3_wd0r5"]
+[ext_resource type="Texture2D" uid="uid://cbv5vof723ers" path="res://textures/psy.png" id="4_yx64j"]
+[ext_resource type="Texture2D" uid="uid://bjpqs78oh50h2" path="res://textures/decline.png" id="5_j1fae"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g8joo"]
+
+[node name="CallService" type="Control"]
+clip_contents = true
+custom_minimum_size = Vector2(1280, 800)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1185.0
+offset_bottom = 734.0
+script = ExtResource("1_qo780")
+
+[node name="Call" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_v3j7f")
+
+[node name="Notification" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 431.0
+offset_top = 141.0
+offset_right = 696.0
+offset_bottom = 488.0
+
+[node name="TextureRect" type="TextureRect" parent="Notification"]
+clip_children = 1
+layout_mode = 0
+offset_left = 70.0
+offset_top = 10.0
+offset_right = 198.0
+offset_bottom = 138.0
+texture = ExtResource("3_wd0r5")
+
+[node name="TextureRect" type="TextureRect" parent="Notification/TextureRect"]
+layout_mode = 0
+offset_left = -239.0
+offset_top = -94.0
+offset_right = 366.0
+offset_bottom = 387.0
+texture = ExtResource("4_yx64j")
+
+[node name="Accept" type="Button" parent="Notification"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 250.0
+offset_right = 99.0
+offset_bottom = 314.0
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_g8joo")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_g8joo")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_g8joo")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_g8joo")
+icon = ExtResource("3_wd0r5")
+expand_icon = true
+
+[node name="Decline" type="Button" parent="Notification"]
+offset_left = 162.0
+offset_top = 250.0
+offset_right = 226.0
+offset_bottom = 314.0
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_g8joo")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_g8joo")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_g8joo")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_g8joo")
+icon = ExtResource("5_j1fae")
+expand_icon = true
+
+[node name="Name" type="Label" parent="Notification"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 123.0
+offset_right = 228.0
+offset_bottom = 182.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 58
+text = "BOSS"
+horizontal_alignment = 1
+
+[node name="IsCalling" type="Label" parent="Notification"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 175.0
+offset_right = 253.0
+offset_bottom = 254.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 27
+text = "Is calling..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Notification/Accept" to="." method="_answer"]
+[connection signal="pressed" from="Notification/Decline" to="." method="_decline"]

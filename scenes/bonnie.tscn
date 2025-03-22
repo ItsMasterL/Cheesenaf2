@@ -169,7 +169,6 @@ script = ExtResource("1_vu3bh")
 animatronic = "edam_bonnie"
 positions = Array[ExtResource("2_81imh")]([SubResource("Resource_qvvvx"), SubResource("Resource_1i3n5"), SubResource("Resource_8d38w"), SubResource("Resource_bpc3w"), SubResource("Resource_pmkvk"), SubResource("Resource_hcd7k"), SubResource("Resource_5kc1d"), SubResource("Resource_pebfs"), SubResource("Resource_r6c4r"), SubResource("Resource_8r12v"), SubResource("Resource_sw0je"), SubResource("Resource_0hntl"), SubResource("Resource_wqs7m")])
 check_frequency = 3.5
-jumpscare_position = Vector3(0, -0.719, 9.146)
 is_edam_animatronic = true
 vent_checker = true
 
