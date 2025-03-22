@@ -2,6 +2,8 @@ extends Camera3D
 
 @export var first_rotation : Vector3
 @export var second_rotation : Vector3
+@export var cam_name : String = "???"
+@export var cam_identifier : String = "Camera #"
 @onready var parent = $".."
 
 func _process(delta):

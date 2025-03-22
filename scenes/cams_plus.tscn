@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://cspw07uddh3kt"]
+[gd_scene load_steps=15 format=3 uid="uid://cspw07uddh3kt"]
 
 [ext_resource type="PackedScene" uid="uid://cpr1ouwmch86j" path="res://scenes/cameras.tscn" id="1_6hi0q"]
 [ext_resource type="Script" path="res://scripts/cams_plus.gd" id="1_cfdmu"]
+[ext_resource type="PackedScene" uid="uid://dlitwdu3r57re" path="res://scenes/vent_cameras.tscn" id="3_4d037"]
 [ext_resource type="Texture2D" uid="uid://b1my2w4jmvnbv" path="res://textures/static.png" id="3_iubtw"]
 [ext_resource type="Script" path="res://scripts/background.gd" id="4_xeoj4"]
 [ext_resource type="FontFile" uid="uid://uc7mo5eme0if" path="res://minecraft_font.ttf" id="5_cc4t8"]
@@ -10,6 +11,8 @@
 [ext_resource type="AudioStream" uid="uid://c7h6lkgdo12dj" path="res://sounds/buzzlight.wav" id="7_8233h"]
 [ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://sounds/change_cam.wav" id="7_hest6"]
 [ext_resource type="AudioStream" uid="uid://xbj7alhjn3i1" path="res://sounds/windup2.wav" id="8_87mr5"]
+[ext_resource type="AudioStream" uid="uid://bxshf8i6p2xex" path="res://sounds/cam_turn.wav" id="8_wd7h4"]
+[ext_resource type="Texture2D" uid="uid://c0f5p2rydqvcp" path="res://textures/cheesenaf 2 map 2.png" id="11_ffjyo"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_q747j"]
 viewport_path = NodePath("Background/SubViewport")
@@ -33,7 +36,11 @@ centered = false
 [node name="SubViewport" type="SubViewport" parent="Background"]
 size = Vector2i(1185, 730)
 
-[node name="Cameras" parent="Background/SubViewport" instance=ExtResource("1_6hi0q")]
+[node name="Cameras" parent="Background/SubViewport" node_paths=PackedStringArray("sound") instance=ExtResource("1_6hi0q")]
+sound = NodePath("../../../CamTurn")
+
+[node name="VentCameras" parent="Background/SubViewport" node_paths=PackedStringArray("sound") instance=ExtResource("3_4d037")]
+sound = NodePath("../../../CamTurn")
 
 [node name="Static" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.219608)
@@ -54,6 +61,12 @@ panning_strength = 0.0
 stream = ExtResource("7_hest6")
 panning_strength = 0.0
 
+[node name="CamTurn" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-2, -1)
+scale = Vector2(1.08354, 1.09726)
+stream = ExtResource("8_wd7h4")
+volume_db = -22.5
+
 [node name="Light" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_8233h")
 volume_db = -2.0
@@ -65,11 +78,6 @@ stream = ExtResource("8_87mr5")
 [node name="Musicbox" type="AudioStreamPlayer2D" parent="."]
 volume_db = -15.0
 
-[node name="Cheesenaf2Map" type="Sprite2D" parent="."]
-position = Vector2(1028, 648)
-scale = Vector2(0.40297, 0.40297)
-texture = ExtResource("7_3v212")
-
 [node name="RoomCams" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -77,6 +85,11 @@ offset_left = 67.0
 offset_top = 85.0
 offset_right = 1349.0
 offset_bottom = 886.0
+
+[node name="Cheesenaf2Map" type="Sprite2D" parent="RoomCams"]
+position = Vector2(961, 563)
+scale = Vector2(0.40297, 0.40297)
+texture = ExtResource("7_3v212")
 
 [node name="Cam1" type="Button" parent="RoomCams"]
 layout_mode = 0
@@ -136,9 +149,24 @@ theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_cc4t8")
 theme_override_font_sizes/font_size = 10
-text = "CAM3"
+text = "CAM3A"
 
 [node name="Cam5" type="Button" parent="RoomCams"]
+layout_mode = 0
+offset_left = 1038.0
+offset_top = 564.0
+offset_right = 1076.0
+offset_bottom = 586.0
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_cc4t8")
+theme_override_font_sizes/font_size = 10
+text = "CAM3B"
+
+[node name="Cam6" type="Button" parent="RoomCams"]
 layout_mode = 0
 offset_left = 1060.0
 offset_top = 679.0
@@ -153,7 +181,7 @@ theme_override_fonts/font = ExtResource("5_cc4t8")
 theme_override_font_sizes/font_size = 10
 text = "CAM4"
 
-[node name="Cam6" type="Button" parent="RoomCams"]
+[node name="Cam7" type="Button" parent="RoomCams"]
 layout_mode = 0
 offset_left = 759.0
 offset_top = 679.0
@@ -168,7 +196,7 @@ theme_override_fonts/font = ExtResource("5_cc4t8")
 theme_override_font_sizes/font_size = 10
 text = "CAM5"
 
-[node name="Cam7" type="Button" parent="RoomCams"]
+[node name="Cam8" type="Button" parent="RoomCams"]
 layout_mode = 0
 offset_left = 1136.0
 offset_top = 548.0
@@ -183,7 +211,7 @@ theme_override_fonts/font = ExtResource("5_cc4t8")
 theme_override_font_sizes/font_size = 10
 text = "CAM6"
 
-[node name="Cam8" type="Button" parent="RoomCams"]
+[node name="Cam9" type="Button" parent="RoomCams"]
 layout_mode = 0
 offset_left = 1059.0
 offset_top = 471.0
@@ -198,7 +226,7 @@ theme_override_fonts/font = ExtResource("5_cc4t8")
 theme_override_font_sizes/font_size = 10
 text = "CAM7"
 
-[node name="Cam9" type="Button" parent="RoomCams"]
+[node name="Cam10" type="Button" parent="RoomCams"]
 layout_mode = 0
 offset_left = 991.0
 offset_top = 468.0
@@ -213,7 +241,7 @@ theme_override_fonts/font = ExtResource("5_cc4t8")
 theme_override_font_sizes/font_size = 10
 text = "CAM8A"
 
-[node name="Cam10" type="Button" parent="RoomCams"]
+[node name="Cam11" type="Button" parent="RoomCams"]
 layout_mode = 0
 offset_left = 996.0
 offset_top = 632.0
@@ -228,7 +256,7 @@ theme_override_fonts/font = ExtResource("5_cc4t8")
 theme_override_font_sizes/font_size = 10
 text = "CAM8B"
 
-[node name="Cam11" type="Button" parent="RoomCams"]
+[node name="Cam12" type="Button" parent="RoomCams"]
 layout_mode = 0
 offset_left = 777.0
 offset_top = 552.0
@@ -243,7 +271,7 @@ theme_override_fonts/font = ExtResource("5_cc4t8")
 theme_override_font_sizes/font_size = 10
 text = "CAM9"
 
-[node name="Cam12" type="Button" parent="RoomCams"]
+[node name="Cam13" type="Button" parent="RoomCams"]
 layout_mode = 0
 offset_left = 832.0
 offset_top = 540.0
@@ -259,18 +287,167 @@ theme_override_font_sizes/font_size = 10
 text = "YOU
 ."
 
-[node name="Button" type="Button" parent="RoomCams"]
+[node name="VentCams" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 67.0
+offset_top = 85.0
+offset_right = 1349.0
+offset_bottom = 886.0
+
+[node name="Cheesenaf2Map" type="Sprite2D" parent="VentCams"]
+position = Vector2(961, 563)
+scale = Vector2(0.40297, 0.40297)
+texture = ExtResource("11_ffjyo")
+
+[node name="Cam1" type="Button" parent="VentCams"]
 layout_mode = 0
-offset_left = 997.0
-offset_top = 376.0
-offset_right = 1172.0
-offset_bottom = 444.0
+offset_left = 879.0
+offset_top = 548.0
+offset_right = 917.0
+offset_bottom = 570.0
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_cc4t8")
+theme_override_font_sizes/font_size = 10
+text = "CAM1"
+
+[node name="Cam2" type="Button" parent="VentCams"]
+layout_mode = 0
+offset_left = 957.0
+offset_top = 548.0
+offset_right = 995.0
+offset_bottom = 570.0
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_cc4t8")
+theme_override_font_sizes/font_size = 10
+text = "CAM2"
+
+[node name="Cam3" type="Button" parent="VentCams"]
+layout_mode = 0
+offset_left = 1016.0
+offset_top = 548.0
+offset_right = 1054.0
+offset_bottom = 570.0
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_cc4t8")
+theme_override_font_sizes/font_size = 10
+text = "CAM3"
+
+[node name="Cam4" type="Button" parent="VentCams"]
+layout_mode = 0
+offset_left = 1112.0
+offset_top = 549.0
+offset_right = 1150.0
+offset_bottom = 571.0
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_cc4t8")
+theme_override_font_sizes/font_size = 10
+text = "CAM4"
+
+[node name="Cam5" type="Button" parent="VentCams"]
+layout_mode = 0
+offset_left = 958.0
+offset_top = 514.0
+offset_right = 1004.0
+offset_bottom = 536.0
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_cc4t8")
+theme_override_font_sizes/font_size = 10
+text = "CAM5A"
+
+[node name="Cam6" type="Button" parent="VentCams"]
+layout_mode = 0
+offset_left = 959.0
+offset_top = 584.0
+offset_right = 1005.0
+offset_bottom = 606.0
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_cc4t8")
+theme_override_font_sizes/font_size = 10
+text = "CAM5B"
+
+[node name="Cam7" type="Button" parent="VentCams"]
+layout_mode = 0
+offset_left = 1118.0
+offset_top = 461.0
+offset_right = 1164.0
+offset_bottom = 483.0
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_cc4t8")
+theme_override_font_sizes/font_size = 10
+text = "CAM6A"
+
+[node name="Cam8" type="Button" parent="VentCams"]
+layout_mode = 0
+offset_left = 1119.0
+offset_top = 636.0
+offset_right = 1165.0
+offset_bottom = 658.0
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_cc4t8")
+theme_override_font_sizes/font_size = 10
+text = "CAM6B"
+
+[node name="Cam9" type="Button" parent="VentCams"]
+layout_mode = 0
+offset_left = 1014.0
+offset_top = 470.0
+offset_right = 1060.0
+offset_bottom = 492.0
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_cc4t8")
+theme_override_font_sizes/font_size = 10
+text = "CAM7"
+
+[node name="WindMusicbox" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1064.0
+offset_top = 461.0
+offset_right = 1239.0
+offset_bottom = 529.0
 theme_override_fonts/font = ExtResource("5_cc4t8")
 text = "WIND MUSIC BOX
  
  "
 
-[node name="ProgressBar" type="ProgressBar" parent="RoomCams/Button"]
+[node name="ProgressBar" type="ProgressBar" parent="WindMusicbox"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 33.0
@@ -282,6 +459,31 @@ step = 50.0
 value = 2000.0
 show_percentage = false
 
-[connection signal="button_down" from="RoomCams/Button" to="." method="_wind_musicbox" binds= [true]]
-[connection signal="button_up" from="RoomCams/Button" to="." method="_wind_musicbox" binds= [false]]
-[connection signal="mouse_exited" from="RoomCams/Button" to="." method="_wind_musicbox" binds= [false]]
+[node name="CamToggle" type="Button" parent="."]
+layout_mode = 0
+offset_left = 816.0
+offset_top = 461.0
+offset_right = 954.0
+offset_bottom = 529.0
+theme_override_fonts/font = ExtResource("5_cc4t8")
+text = "Toggle
+Cameras"
+
+[node name="CameraLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 853.0
+offset_top = 63.0
+offset_right = 1273.0
+offset_bottom = 191.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("5_cc4t8")
+theme_override_font_sizes/font_size = 30
+text = "Camera 1
+Kitchen"
+horizontal_alignment = 2
+
+[connection signal="button_down" from="WindMusicbox" to="." method="_wind_musicbox" binds= [true]]
+[connection signal="button_up" from="WindMusicbox" to="." method="_wind_musicbox" binds= [false]]
+[connection signal="mouse_exited" from="WindMusicbox" to="." method="_wind_musicbox" binds= [false]]
+[connection signal="pressed" from="CamToggle" to="." method="_toggle_vents"]

@@ -24,7 +24,7 @@ var host_ip = "127.0.0.1"
 
 # Save Data
 var save_night : int = 1
-var purchased_apps : int = 0
+var purchased_apps : String = "0x0000"
 var money : int = 0
 var saw_foxy : bool = false
 var saw_foxy_night_1 : bool = false
@@ -86,7 +86,7 @@ func _load():
 				saw_foxy = data["foxy"]
 			if "foxyn1" in data && typeof(data["foxyn1"]) == TYPE_BOOL:
 				saw_foxy_night_1 = data["foxyn1"]
-			if "apps" in data && typeof(data["apps"]) == TYPE_INT:
+			if "apps" in data && typeof(data["apps"]) == TYPE_STRING:
 				purchased_apps = data["apps"]
 			print(data["night"])
 

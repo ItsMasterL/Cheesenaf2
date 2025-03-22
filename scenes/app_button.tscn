@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbeb63a1g0ep4"]
+
+[ext_resource type="Script" path="res://scripts/app_button.gd" id="1_nnmdt"]
+
+[sub_resource type="Theme" id="Theme_qubeu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yl7bk"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_xv3ta"]
+size = Vector2(80, 80)
+
+[node name="Application" type="Button"]
+custom_minimum_size = Vector2(120, 120)
+offset_right = 120.0
+offset_bottom = 157.0
+theme = SubResource("Theme_qubeu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yl7bk")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_yl7bk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_yl7bk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_yl7bk")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yl7bk")
+text = "APPNAME GOES HERE"
+icon = SubResource("PlaceholderTexture2D_xv3ta")
+autowrap_mode = 2
+icon_alignment = 1
+vertical_icon_alignment = 0
+script = ExtResource("1_nnmdt")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxpmp04xt6u6q"]
+[gd_scene load_steps=7 format=3 uid="uid://bxpmp04xt6u6q"]
 
 [ext_resource type="Script" path="res://scripts/tablet_manager.gd" id="1_0wb5n"]
 [ext_resource type="Texture2D" uid="uid://c70vi1sqw8vjc" path="res://textures/andre-ouellet-b1bgPw5sLus-unsplash.jpg" id="1_3v8y3"]
+[ext_resource type="PackedScene" uid="uid://dbeb63a1g0ep4" path="res://scenes/app_button.tscn" id="2_h2de0"]
 [ext_resource type="Texture2D" uid="uid://duvbu0ep0tb3l" path="res://textures/cheesenaf 2 tablet home.png" id="2_pge4p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3kpga"]
@@ -14,6 +15,7 @@ region = Rect2(0, 40, 1280, 760)
 
 [node name="TabletOS" type="Node2D"]
 script = ExtResource("1_0wb5n")
+app_button = ExtResource("2_h2de0")
 
 [node name="TimeUI" type="Control" parent="."]
 clip_contents = true
@@ -64,12 +66,4 @@ theme_override_constants/h_separation = 80
 theme_override_constants/v_separation = 56
 columns = 6
 
-[node name="CamsPlus" type="Button" parent="Home/GridContainer"]
-custom_minimum_size = Vector2(120, 120)
-layout_mode = 2
-text = "CAMS
-PLUS"
-
 [node name="Application" type="Node2D" parent="."]
-
-[connection signal="pressed" from="Home/GridContainer/CamsPlus" to="." method="_load_application" binds= ["cams_plus"]]

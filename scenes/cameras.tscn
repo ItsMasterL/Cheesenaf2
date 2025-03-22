@@ -34,6 +34,8 @@ transform = Transform3D(-0.875465, -0.219406, 0.430608, 0, 0.891006, 0.453991, -
 script = ExtResource("1_bgdrr")
 first_rotation = Vector3(-27, 111.6, 0)
 second_rotation = Vector3(-27, 151, 0)
+cam_name = "Kitchen"
+cam_identifier = "Camera 1"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Camera1"]
 layers = 4
@@ -54,6 +56,8 @@ transform = Transform3D(-0.730162, 0.204327, -0.652007, 0, 0.95424, 0.299041, 0.
 script = ExtResource("1_bgdrr")
 first_rotation = Vector3(-17.4, -140, 0)
 second_rotation = Vector3(-17.4, -202, 0)
+cam_name = "Party Room A"
+cam_identifier = "Camera 2A"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Camera2"]
 layers = 4
@@ -75,6 +79,8 @@ current = true
 script = ExtResource("1_bgdrr")
 first_rotation = Vector3(-33.7, -29, 0)
 second_rotation = Vector3(-18.2, -68.5, 0)
+cam_name = "Party Room B"
+cam_identifier = "Camera 2B"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Camera3"]
 layers = 4
@@ -96,6 +102,8 @@ current = true
 script = ExtResource("1_bgdrr")
 first_rotation = Vector3(-19.5, -129.4, 0)
 second_rotation = Vector3(-19.5, -160, 0)
+cam_name = "Stage"
+cam_identifier = "Camera 3A"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Camera4"]
 layers = 4
@@ -112,14 +120,14 @@ spot_range = 37.0843
 spot_attenuation = 0.0
 
 [node name="Camera5" type="Camera3D" parent="."]
-transform = Transform3D(0.859852, -0.123511, 0.495378, 0, 0.970296, 0.241922, -0.510543, -0.208017, 0.834311, 70.771, 3.569, 37.779)
-environment = SubResource("Environment_jypqd")
+transform = Transform3D(-0.151261, -0.509112, 0.847305, 0, 0.857167, 0.515038, -0.988494, 0.077905, -0.129656, 56.089, 4.92, 5.178)
 script = ExtResource("1_bgdrr")
-first_rotation = Vector3(-19.5, -11.3, 0)
-second_rotation = Vector3(-14, 30, 0)
+first_rotation = Vector3(-31, -261.3, 0)
+second_rotation = Vector3(-19.5, -343.3, 0)
+cam_name = "Lobby"
+cam_identifier = "Camera 3B"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Camera5"]
-transform = Transform3D(1, 1.49012e-08, -2.98023e-08, 7.45058e-09, 1, 1.49012e-08, 0, 1.49012e-08, 1, 0, 0, 0)
 layers = 4
 light_energy = 0.04
 light_indirect_energy = 0.0
@@ -134,13 +142,16 @@ spot_range = 37.0843
 spot_attenuation = 0.0
 
 [node name="Camera6" type="Camera3D" parent="."]
-transform = Transform3D(0.940288, 0.134636, 0.31262, 0, 0.918446, -0.395545, -0.34038, 0.371927, 0.863604, -22.3352, 0.210539, 36.6136)
-environment = SubResource("Environment_8cs7m")
+transform = Transform3D(0.859852, -0.123511, 0.495378, 0, 0.970296, 0.241922, -0.510543, -0.208017, 0.834311, 70.771, 3.569, 37.779)
+environment = SubResource("Environment_jypqd")
 script = ExtResource("1_bgdrr")
-first_rotation = Vector3(12.8, -27.1, 0)
-second_rotation = Vector3(23.3, 20, 0)
+first_rotation = Vector3(-19.5, -11.3, 0)
+second_rotation = Vector3(-14, 30, 0)
+cam_name = "Building Exterior A"
+cam_identifier = "Camera 4"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Camera6"]
+transform = Transform3D(1, 1.49012e-08, -2.98023e-08, 7.45058e-09, 1, 1.49012e-08, 0, 1.49012e-08, 1, 0, 0, 0)
 layers = 4
 light_energy = 0.04
 light_indirect_energy = 0.0
@@ -155,10 +166,13 @@ spot_range = 37.0843
 spot_attenuation = 0.0
 
 [node name="Camera7" type="Camera3D" parent="."]
-transform = Transform3D(0.556296, -0.461067, 0.691341, 0, 0.831955, 0.554845, -0.830985, -0.308658, 0.462813, 88.094, 4.938, 0)
+transform = Transform3D(0.940288, 0.134636, 0.31262, 0, 0.918446, -0.395545, -0.34038, 0.371927, 0.863604, -22.3352, 0.210539, 36.6136)
+environment = SubResource("Environment_8cs7m")
 script = ExtResource("1_bgdrr")
-first_rotation = Vector3(-33.7, 118.7, 0)
-second_rotation = Vector3(-33.7, 56.2, 0)
+first_rotation = Vector3(12.8, -27.1, 0)
+second_rotation = Vector3(23.3, 20, 0)
+cam_name = "Building Exterior B"
+cam_identifier = "Camera 5"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Camera7"]
 layers = 4
@@ -175,10 +189,12 @@ spot_range = 37.0843
 spot_attenuation = 0.0
 
 [node name="Camera8" type="Camera3D" parent="."]
-transform = Transform3D(0.72176, 0.250296, -0.645302, 0, 0.932324, 0.361625, 0.692143, -0.261006, 0.672914, 60.307, 3.363, -18.057)
+transform = Transform3D(0.556296, -0.461067, 0.691341, 0, 0.831955, 0.554845, -0.830985, -0.308658, 0.462813, 88.094, 4.938, 0)
 script = ExtResource("1_bgdrr")
-first_rotation = Vector3(-21.2, 2.2, 0)
-second_rotation = Vector3(-21.2, -43.8, 0)
+first_rotation = Vector3(-33.7, 118.7, 0)
+second_rotation = Vector3(-33.7, 56.2, 0)
+cam_name = "Backstage"
+cam_identifier = "Camera 6"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Camera8"]
 layers = 4
@@ -195,10 +211,12 @@ spot_range = 37.0843
 spot_attenuation = 0.0
 
 [node name="Camera9" type="Camera3D" parent="."]
-transform = Transform3D(-0.703395, -0.131972, 0.698441, 0, 0.982613, 0.185667, -0.7108, 0.130597, -0.691165, 47.171, 4.196, -23.503)
+transform = Transform3D(0.72176, 0.250296, -0.645302, 0, 0.932324, 0.361625, 0.692143, -0.261006, 0.672914, 60.307, 3.363, -18.057)
 script = ExtResource("1_bgdrr")
-first_rotation = Vector3(-10.7, 185.2, 0)
-second_rotation = Vector3(-10.7, 134.7, 0)
+first_rotation = Vector3(-21.2, 2.2, 0)
+second_rotation = Vector3(-21.2, -43.8, 0)
+cam_name = "Storage Room"
+cam_identifier = "Camera 7"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Camera9"]
 layers = 4
@@ -215,10 +233,12 @@ spot_range = 37.0843
 spot_attenuation = 0.0
 
 [node name="Camera10" type="Camera3D" parent="."]
-transform = Transform3D(0.941471, -0.0625874, 0.331234, 0, 0.982614, 0.185667, -0.337095, -0.1748, 0.925101, 50.048, 4.25, 22.714)
+transform = Transform3D(-0.703395, -0.131972, 0.698441, 0, 0.982613, 0.185667, -0.7108, 0.130597, -0.691165, 47.171, 4.196, -23.503)
 script = ExtResource("1_bgdrr")
-first_rotation = Vector3(-10.7, 54.7, 0)
-second_rotation = Vector3(-10.7, -2.2, 0)
+first_rotation = Vector3(-10.7, 185.2, 0)
+second_rotation = Vector3(-10.7, 134.7, 0)
+cam_name = "Restroom A"
+cam_identifier = "Camera 8A"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Camera10"]
 layers = 4
@@ -235,10 +255,12 @@ spot_range = 37.0843
 spot_attenuation = 0.0
 
 [node name="Camera11" type="Camera3D" parent="."]
-transform = Transform3D(0.610145, -0.484507, 0.626878, 0, 0.791224, 0.611527, -0.79229, -0.37312, 0.482761, -8.831, 4.314, 0)
+transform = Transform3D(0.941471, -0.0625874, 0.331234, 0, 0.982614, 0.185667, -0.337095, -0.1748, 0.925101, 50.048, 4.25, 22.714)
 script = ExtResource("1_bgdrr")
-first_rotation = Vector3(-37.7, 115.4, 0)
-second_rotation = Vector3(-37.7, 52.4, 0)
+first_rotation = Vector3(-10.7, 54.7, 0)
+second_rotation = Vector3(-10.7, -2.2, 0)
+cam_name = "Restroom B"
+cam_identifier = "Camera 8B"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Camera11"]
 layers = 4
@@ -255,11 +277,12 @@ spot_range = 37.0843
 spot_attenuation = 0.0
 
 [node name="Camera12" type="Camera3D" parent="."]
-transform = Transform3D(-0.590605, -0.275997, 0.758294, 0, 0.939693, 0.34202, -0.80696, 0.201999, -0.554987, 6.93806, 4.13986, -7.01005)
-fov = 34.8673
+transform = Transform3D(0.610145, -0.484507, 0.626878, 0, 0.791224, 0.611527, -0.79229, -0.37312, 0.482761, -8.831, 4.314, 0)
 script = ExtResource("1_bgdrr")
-first_rotation = Vector3(-20, 139.2, 0)
-second_rotation = Vector3(-20, 126.2, 0)
+first_rotation = Vector3(-37.7, 115.4, 0)
+second_rotation = Vector3(-37.7, 52.4, 0)
+cam_name = "Playroom"
+cam_identifier = "Camera 9"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Camera12"]
 layers = 4
@@ -269,6 +292,29 @@ light_bake_mode = 1
 omni_range = 48.9831
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Camera12"]
+visible = false
+layers = 4
+light_energy = 0.25
+spot_range = 37.0843
+spot_attenuation = 0.0
+
+[node name="Camera13" type="Camera3D" parent="."]
+transform = Transform3D(-0.590605, -0.275997, 0.758294, 0, 0.939693, 0.34202, -0.80696, 0.201999, -0.554987, 6.93806, 4.13986, -7.01005)
+fov = 34.8673
+script = ExtResource("1_bgdrr")
+first_rotation = Vector3(-20, 139.2, 0)
+second_rotation = Vector3(-20, 126.2, 0)
+cam_name = "Office"
+cam_identifier = "Camera 10"
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera13"]
+layers = 4
+light_energy = 0.04
+light_indirect_energy = 0.0
+light_bake_mode = 1
+omni_range = 48.9831
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera13"]
 visible = false
 layers = 5
 light_energy = 0.25

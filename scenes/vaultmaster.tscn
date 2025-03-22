@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://dg01rdj8qmh6"]
+
+[ext_resource type="Texture2D" uid="uid://b65sbrfa4u1na" path="res://textures/animal-957383.jpg" id="2_0nf7x"]
+
+[node name="CamsPlus" type="Control"]
+clip_contents = true
+custom_minimum_size = Vector2(1280, 800)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1185.0
+offset_bottom = 734.0
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-2, -1)
+scale = Vector2(1.01651, 1.02938)
+texture = ExtResource("2_0nf7x")
+centered = false

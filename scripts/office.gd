@@ -38,6 +38,7 @@ var safety_time = Globals.safety_time
 var p1_safety_time = safety_time
 # Etc
 var p1_last_cam
+var p1_vent_cam = false
 var game_sensitive : Array[Node3D]
 var can_jumpscare = true # If a game sensitive animatronic is saving you
 var p1_can_action = true # False if in a jumpscare
@@ -45,14 +46,18 @@ var paranormal_attacking = false # Why is it here?
 var paranormal_attacker : Node3D # What even is it?
 var paranormal_primed = false # What is it doing?
 signal music_box_ran_out
+
 @export var tablet : MeshInstance3D
 @export var animatronics : Node3D
+@export var doors : Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for animatronic in animatronics.get_children():
 		if animatronic.music_box_sensitive:
 			music_box_ran_out.connect(animatronic._stop_dance)
+	if night > 1:
+		$Player/Head/Eyes/Controls.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -136,6 +141,18 @@ func _take_tablet():
 	$Player/Head/Eyes/Cursor.visible = true
 	tablet.queue_free() # You ain't getting that back lmao
 	$Player/Head/LoseTablet.play()
+
+func _set_entrances(values: Array[int]):
+	var i = 0
+	for door in doors.get_children():
+		if values.has(i) && closed_entrances.has(i) == false:
+			door.get_child(1).play(&"close")
+			door.get_child(2).play()
+		elif values.has(i) == false && closed_entrances.has(i):
+			door.get_child(1).play(&"close", -1, -1, true)
+			door.get_child(2).play()
+		i += 1
+	closed_entrances = values
 
 func _jumpscare(animatronic: Node3D):
 	while can_jumpscare == false:
