@@ -27,6 +27,8 @@ func _start_singleplayer(load_night: bool = false):
 		Globals._set_night(Globals.save_night)
 	else:
 		Globals._set_night(1)
+		Globals.saw_foxy = false
+		Globals.saw_foxy_night_1 = false
 	$"../../"._mute_music()
 	_change_menu("loadoffice")
 	

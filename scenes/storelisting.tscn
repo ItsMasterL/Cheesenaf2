@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=3 uid="uid://kdgt6c2c63pk"]
+
+[ext_resource type="Script" path="res://scripts/storelisting.gd" id="1_7cwro"]
+
+[node name="Listing" type="Control"]
+custom_minimum_size = Vector2(1052, 175)
+layout_mode = 3
+anchor_right = 0.909
+anchor_bottom = 0.273
+offset_right = -0.168091
+offset_bottom = 0.095993
+script = ExtResource("1_7cwro")
+
+[node name="Bg" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(1052, 175)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 5.0
+offset_bottom = -2.0
+
+[node name="AppName" type="Label" parent="Bg"]
+layout_mode = 0
+offset_left = 166.0
+offset_top = -6.0
+offset_right = 647.0
+offset_bottom = 58.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 46
+text = "APPNAME GOES HERE"
+
+[node name="Description" type="Label" parent="Bg"]
+layout_mode = 0
+offset_left = 167.0
+offset_top = 59.0
+offset_right = 917.0
+offset_bottom = 156.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 19
+text = "App description App description App description App description App description App description App description App description App description App description App description "
+autowrap_mode = 2
+
+[node name="Icon" type="CenterContainer" parent="Bg"]
+clip_contents = true
+custom_minimum_size = Vector2(147, 147)
+layout_mode = 0
+offset_left = 9.0
+offset_top = 14.0
+offset_right = 156.0
+offset_bottom = 161.0
+
+[node name="TextureRect" type="TextureRect" parent="Bg/Icon"]
+clip_contents = true
+custom_minimum_size = Vector2(147, 147)
+layout_mode = 2
+expand_mode = 4
+
+[node name="Get" type="Button" parent="Bg"]
+layout_mode = 0
+offset_left = 829.0
+offset_top = 10.0
+offset_right = 1019.0
+offset_bottom = 51.0
+text = "BUY $29.99"

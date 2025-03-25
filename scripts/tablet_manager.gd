@@ -6,51 +6,10 @@ var current_process
 @onready var time = $TimeUI/Clock
 @onready var root = get_tree().get_root().get_node("Map")
 @onready var app_container := $Home/GridContainer
-@onready var purchases : int = 0
 
 @export var app_button : PackedScene
 
-enum store_apps {
-	MEDIAPLAYER = 0b0000000001,
-	FLAPPYFOXY = 0b0000000010,
-	CHICAPOP = 0b0000000100,
-	TANKTROUBLE = 0b0000001000,
-	SOCCERPHYSICS = 0b0000010000,
-	POKER = 0b0000100000,
-	DRAWING = 0b0001000000,
-	ANGRYCHICA = 0b0010000000,
-	BONNIESWOODS = 0b0100000000,
-	PODCAST = 0b1000000000
-	}
-
-var store_app_ids = {
-	store_apps.MEDIAPLAYER: "media_player",
-	store_apps.FLAPPYFOXY: "flappy_foxy",
-	store_apps.CHICAPOP: "chica_pop",
-	store_apps.TANKTROUBLE: "tank_trouble",
-	store_apps.SOCCERPHYSICS: "soccer_physics",
-	store_apps.POKER: "poker",
-	store_apps.DRAWING: "drawing",
-	store_apps.ANGRYCHICA: "angry_chica",
-	store_apps.BONNIESWOODS: "bonnies_woods",
-	store_apps.PODCAST: "podcast"
-}
-
-var store_app_names = {
-	store_apps.MEDIAPLAYER: "Freddy Fazbear's Media Player",
-	store_apps.FLAPPYFOXY: "Flappy Foxy",
-	store_apps.CHICAPOP: "Chica Pop",
-	store_apps.TANKTROUBLE: "Tank Trouble",
-	store_apps.SOCCERPHYSICS: "Soccer Physics",
-	store_apps.POKER: "Picture Poker",
-	store_apps.DRAWING: "Fazbear's Drawing App",
-	store_apps.ANGRYCHICA: "Angry Chica",
-	store_apps.BONNIESWOODS: "Bonnie's Woods",
-	store_apps.PODCAST: "Stringbonnie's Podcast"
-}
-
 func _ready():
-	_decode_purchases()
 	_populate_homescreen()
 
 func _process(_delta):
@@ -59,14 +18,9 @@ func _process(_delta):
 	else:
 		time.text = "%02d:%02d AM" % [root.hour, root.minute]
 
-func _decode_purchases():
-	purchases = Globals.purchased_apps.hex_to_int()
-
-func _purchase_app(app : store_apps):
-	purchases |= app
+func _purchase_app(app : Globals.store_apps_binary):
+	Globals._purchase_app(app)
 	_populate_homescreen()
-	# This converts it to hexadecimal
-	Globals.purchased_apps = "%x" % [purchases]
 	Globals._save()
 
 func _populate_homescreen():
@@ -92,12 +46,12 @@ func _populate_homescreen():
 		vaultmaster.pressed.connect(_load_application.bind(vaultmaster.app_id))
 		app_container.add_child(vaultmaster)
 	
-	for app in store_apps:
-		var value = store_apps[app]
-		if purchases & value:
+	for app in Globals.store_apps:
+		var value = Globals.store_apps[app]
+		if Globals._check_app_purchase(value):
 			var button = app_button.instantiate()
-			button.app_id = store_app_ids[value]
-			button.text = store_app_names[value]
+			button.app_id = Globals.apps[value].app_id
+			button.text = Globals.apps[value].app_name
 			button.pressed.connect(_load_application.bind(button.app_id))
 			app_container.add_child(button)
 

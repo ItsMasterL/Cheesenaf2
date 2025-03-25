@@ -23,6 +23,7 @@ centered = false
 [node name="AudioFeedback" type="AudioStreamPlayer2D" parent="."]
 
 [node name="Confirm" type="Button" parent="."]
+layout_mode = 0
 offset_left = 1035.0
 offset_top = 652.0
 offset_right = 1138.0
@@ -35,6 +36,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Front Door" type="Button" parent="Control Buttons"]
+layout_mode = 0
 offset_left = 580.0
 offset_top = 74.0
 offset_right = 690.0
@@ -44,6 +46,7 @@ text = "FRONT DOORWAY"
 autowrap_mode = 2
 
 [node name="Back Door" type="Button" parent="Control Buttons"]
+layout_mode = 0
 offset_left = 580.0
 offset_top = 602.0
 offset_right = 690.0
@@ -53,6 +56,7 @@ text = "REAR DOORWAY"
 autowrap_mode = 2
 
 [node name="Left Vent" type="Button" parent="Control Buttons"]
+layout_mode = 0
 offset_left = 173.0
 offset_top = 340.0
 offset_right = 283.0
@@ -62,6 +66,7 @@ text = "LEFT VENT"
 autowrap_mode = 2
 
 [node name="Right Vent" type="Button" parent="Control Buttons"]
+layout_mode = 0
 offset_left = 1027.0
 offset_top = 340.0
 offset_right = 1137.0
@@ -110,6 +115,7 @@ theme_override_font_sizes/font_size = 56
 text = "Error!"
 
 [node name="Error2" type="Label" parent="Messages/ErrorMessagebox"]
+layout_mode = 0
 offset_left = 33.0
 offset_top = 82.0
 offset_right = 642.0
@@ -129,6 +135,7 @@ text = "OK"
 
 [node name="Loadingbox" type="ColorRect" parent="Messages"]
 visible = false
+layout_mode = 0
 offset_left = 306.0
 offset_top = 225.0
 offset_right = 975.0
@@ -144,6 +151,7 @@ theme_override_font_sizes/font_size = 56
 text = "One moment please..."
 
 [node name="Error2" type="Label" parent="Messages/Loadingbox"]
+layout_mode = 0
 offset_left = 33.0
 offset_top = 202.0
 offset_right = 642.0
@@ -157,6 +165,7 @@ autowrap_mode = 2
 
 [node name="JammedMessagebox" type="ColorRect" parent="Messages"]
 visible = false
+layout_mode = 0
 offset_left = 306.0
 offset_top = 225.0
 offset_right = 975.0
@@ -172,6 +181,7 @@ theme_override_font_sizes/font_size = 56
 text = "Error!"
 
 [node name="Error2" type="Label" parent="Messages/JammedMessagebox"]
+layout_mode = 0
 offset_left = 33.0
 offset_top = 82.0
 offset_right = 642.0

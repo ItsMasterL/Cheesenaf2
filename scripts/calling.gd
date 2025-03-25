@@ -12,7 +12,7 @@ func _ready() -> void:
 	_start_call()
 
 func _start_call():
-	get_tree().create_timer(randf_range(3, 7)).timeout
+	await get_tree().create_timer(randf_range(3, 7)).timeout
 	audio.play()
 	notif.visible = true
 	get_tree().create_timer(20).timeout

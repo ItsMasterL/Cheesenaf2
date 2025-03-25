@@ -15,6 +15,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 1185.0
 offset_bottom = 734.0
+mouse_filter = 2
 script = ExtResource("1_qo780")
 
 [node name="Call" type="AudioStreamPlayer2D" parent="."]
@@ -23,10 +24,10 @@ stream = ExtResource("2_v3j7f")
 [node name="Notification" type="ColorRect" parent="."]
 visible = false
 layout_mode = 0
-offset_left = 431.0
-offset_top = 141.0
-offset_right = 696.0
-offset_bottom = 488.0
+offset_left = 511.0
+offset_top = 215.0
+offset_right = 776.0
+offset_bottom = 562.0
 
 [node name="TextureRect" type="TextureRect" parent="Notification"]
 clip_children = 1
@@ -59,6 +60,7 @@ icon = ExtResource("3_wd0r5")
 expand_icon = true
 
 [node name="Decline" type="Button" parent="Notification"]
+layout_mode = 0
 offset_left = 162.0
 offset_top = 250.0
 offset_right = 226.0
