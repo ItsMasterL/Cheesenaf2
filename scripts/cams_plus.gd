@@ -16,13 +16,14 @@ signal change_dance
 signal paranormal_dance
 
 func _ready():
-	if root.p1_last_cam != null:
-		_change_camera(root.p1_last_cam, false)
 	if root.p1_vent_cam:
 		cams = $Background/SubViewport/VentCameras
 		cambuttons = $VentCams
 		$RoomCams.visible = false
 		$VentCams.visible = true
+		vents = true
+	if root.p1_last_cam != null:
+		_change_camera(root.p1_last_cam, false)
 	# Should be "Animatronics" in office.tscn
 	for animatronic in root.animatronics.get_children():
 		if animatronic.music_box_sensitive:
@@ -66,7 +67,7 @@ func _toggle_vents():
 		$RoomCams.visible = true
 		$VentCams.visible = false
 		camsound.play()
-		root.p1_vent_cam = true
+		root.p1_vent_cam = false
 	for button in cambuttons.get_children() as Array[Button]:
 		if button.name.contains("Cam"):
 			button.pressed.connect(_change_camera.bind(button.name.trim_prefix("Cam").to_int()))

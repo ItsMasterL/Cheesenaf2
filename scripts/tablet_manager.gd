@@ -6,6 +6,8 @@ var current_process
 @onready var time = $TimeUI/Clock
 @onready var root = get_tree().get_root().get_node("Map")
 @onready var app_container := $Home/GridContainer
+var using_tablet = false
+var fun_multiplier = 1
 
 @export var app_button : PackedScene
 
@@ -17,6 +19,12 @@ func _process(_delta):
 		time.text = "12:%02d AM" % [root.minute]
 	else:
 		time.text = "%02d:%02d AM" % [root.hour, root.minute]
+	# For compatibility
+	using_tablet = root.using_tablet
+	if using_tablet:
+		root.fun_multiplier = fun_multiplier
+	else:
+		root.fun_multiplier = 1
 
 func _purchase_app(app : Globals.store_apps_binary):
 	Globals._purchase_app(app)
@@ -30,12 +38,14 @@ func _populate_homescreen():
 	var camsplus = app_button.instantiate()
 	camsplus.app_id = "cams_plus"
 	camsplus.text = "Cams PLUS"
+	camsplus.icon = load("res://textures/apps/camsplus.png")
 	camsplus.pressed.connect(_load_application.bind(camsplus.app_id))
 	app_container.add_child(camsplus)
 	
 	var store = app_button.instantiate()
 	store.app_id = "gameworld"
 	store.text = "Gameworld Store"
+	store.icon = load("res://textures/apps/gameworld.png")
 	store.pressed.connect(_load_application.bind(store.app_id))
 	app_container.add_child(store)
 	
@@ -43,6 +53,7 @@ func _populate_homescreen():
 		var vaultmaster = app_button.instantiate()
 		vaultmaster.app_id = "vaultmaster"
 		vaultmaster.text = "VaultMaster Door Manager"
+		vaultmaster.icon = load("res://textures/apps/vaultmaster.png")
 		vaultmaster.pressed.connect(_load_application.bind(vaultmaster.app_id))
 		app_container.add_child(vaultmaster)
 	
@@ -53,10 +64,13 @@ func _populate_homescreen():
 			var button = app_button.instantiate()
 			button.app_id = Globals.apps[value].app_id
 			button.text = Globals.apps[value].app_name
-			button.pressed.connect(_load_application.bind(button.app_id))
+			button.icon = Globals.apps[value].icon
+			button.pressed.connect(_load_application.bind(button.app_id, Globals.apps[value].fun_multiplier))
 			app_container.add_child(button)
 
-func _load_application(appscene: String):
+func _load_application(appscene: String, fun: float = fun_multiplier):
+	if app_home.get_child_count() > 0:
+		app_home.get_child(0).queue_free()
 	if ResourceLoader.exists("res://scenes/%s.tscn" % [appscene]) == false:
 		print("Scene \"%s\" doesn't exist! Aborting!" % [appscene])
 		return
@@ -67,6 +81,7 @@ func _load_application(appscene: String):
 		root.in_cams = true
 	var instance = current_process.instantiate()
 	app_home.add_child(instance)
+	fun_multiplier = fun
 	home.hide()
 
 func _home():
@@ -74,3 +89,4 @@ func _home():
 		app_home.get_child(0).queue_free()
 	home.show()
 	root.in_cams = false
+	fun_multiplier = 1

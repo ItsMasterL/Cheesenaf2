@@ -24,4 +24,5 @@ icon = SubResource("PlaceholderTexture2D_xv3ta")
 autowrap_mode = 2
 icon_alignment = 1
 vertical_icon_alignment = 0
+expand_icon = true
 script = ExtResource("1_nnmdt")

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cs44guev8s23"]
+[gd_scene load_steps=9 format=3 uid="uid://cs44guev8s23"]
 
 [ext_resource type="Script" path="res://scripts/victory.gd" id="1_wgnha"]
 [ext_resource type="AudioStream" uid="uid://p1jvgrruejbo" path="res://sounds/Clocks_Chimes_Cl_02480702.wav" id="2_ysvoq"]
 [ext_resource type="AudioStream" uid="uid://cxsccyw5som11" path="res://sounds/yay.wav" id="3_gaq0u"]
 [ext_resource type="FontFile" uid="uid://uc7mo5eme0if" path="res://minecraft_font.ttf" id="3_hdica"]
+[ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://consolas.ttf" id="5_l6eor"]
 
 [sub_resource type="Animation" id="Animation_rnwfb"]
 length = 0.001
@@ -135,3 +136,17 @@ offset_bottom = 440.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="Stats" type="Label" parent="."]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_left = 227.0
+offset_top = 512.0
+offset_right = 916.0
+offset_bottom = 626.0
+theme_override_fonts/font = ExtResource("5_l6eor")
+theme_override_font_sizes/font_size = 36
+text = "Your Time: 00:00.00
+Your pay: $5.92"
+horizontal_alignment = 1

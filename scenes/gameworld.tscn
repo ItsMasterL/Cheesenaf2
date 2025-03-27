@@ -1,9 +1,47 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvx1b83kju7w"]
+[gd_scene load_steps=12 format=3 uid="uid://bvx1b83kju7w"]
 
 [ext_resource type="Script" path="res://scripts/gameworld.gd" id="1_qnnyn"]
 [ext_resource type="PackedScene" uid="uid://kdgt6c2c63pk" path="res://scenes/storelisting.tscn" id="2_gjbuv"]
 [ext_resource type="AudioStream" uid="uid://cllymiu6njvok" path="res://sounds/music/gameworld.mp3" id="3_0na3m"]
-[ext_resource type="Texture2D" uid="uid://c70vi1sqw8vjc" path="res://textures/andre-ouellet-b1bgPw5sLus-unsplash.jpg" id="4_d1ep8"]
+[ext_resource type="AudioStream" uid="uid://rusybips7bm" path="res://sounds/kaching.wav" id="4_qcx1t"]
+[ext_resource type="Texture2D" uid="uid://6obfeopjjj2k" path="res://textures/apps/gameworld bg.png" id="4_ykwh6"]
+[ext_resource type="Texture2D" uid="uid://7tprk4csubct" path="res://textures/apps/earth.png" id="5_fmtmd"]
+[ext_resource type="Script" path="res://scripts/gameworld_planet.gd" id="6_osulw"]
+[ext_resource type="Shader" path="res://shaders/ColorRectDitherTest.gdshader" id="7_rpbee"]
+[ext_resource type="Texture2D" uid="uid://btc1kaga7xmy3" path="res://textures/c2cursor.png" id="8_53cq7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0wfnq"]
+shader = ExtResource("7_rpbee")
+shader_parameter/quantize_size = 2.0
+shader_parameter/handle_scale = null
+shader_parameter/handle_subpixels = true
+shader_parameter/dither_enabled = true
+shader_parameter/bayer_pattern = 2.0
+shader_parameter/divisions = 4.0
+shader_parameter/contrast = 1.3
+shader_parameter/shift = 0.0
+shader_parameter/grayscale = false
+shader_parameter/use_palette = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s2v4g"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(1280, -600, 0)
+emission_shape = 1
+emission_sphere_radius = 360.0
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, 98, 0)
+spread = 0.0
+initial_velocity_min = 43.6
+initial_velocity_max = 50.35
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+orbit_velocity_min = 0.0160001
+orbit_velocity_max = 0.0540001
+gravity = Vector3(0, 0, 0)
+scale_min = 0.0
+scale_max = 0.2
 
 [node name="Gameworld" type="Node2D"]
 script = ExtResource("1_qnnyn")
@@ -11,7 +49,11 @@ listing_template = ExtResource("2_gjbuv")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_0na3m")
-volume_db = -20.0
+volume_db = -15.0
+
+[node name="Kaching" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_qcx1t")
+volume_db = -15.0
 
 [node name="Home" type="Control" parent="."]
 clip_contents = true
@@ -21,10 +63,46 @@ offset_right = 1280.0
 offset_bottom = 800.0
 
 [node name="Background" type="Sprite2D" parent="Home"]
-z_index = -1
-position = Vector2(0, -53)
-texture = ExtResource("4_d1ep8")
+z_index = -2
+texture = ExtResource("4_ykwh6")
 centered = false
+
+[node name="Earth" type="Sprite2D" parent="Home"]
+z_index = -1
+position = Vector2(640, 1184)
+texture = ExtResource("5_fmtmd")
+script = ExtResource("6_osulw")
+
+[node name="DitherShader" type="ColorRect" parent="Home"]
+material = SubResource("ShaderMaterial_0wfnq")
+layout_mode = 0
+offset_top = -11.0
+offset_right = 1284.0
+offset_bottom = 810.0
+
+[node name="Stars" type="GPUParticles2D" parent="Home"]
+z_index = -2
+position = Vector2(640, 1182)
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_s2v4g")
+texture = ExtResource("8_53cq7")
+lifetime = 12.0
+fixed_fps = 10
+interpolate = false
+visibility_rect = Rect2(0, -1180, 1280, 500)
+
+[node name="Funds" type="Label" parent="Home"]
+z_index = 1
+layout_mode = 0
+offset_left = 5.0
+offset_top = 711.0
+offset_right = 177.0
+offset_bottom = 802.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 31
+text = "Your funds:
+$600.00"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 offset_left = 107.0

@@ -1,0 +1,137 @@
+[gd_scene load_steps=13 format=3 uid="uid://dotlk2mlle6nb"]
+
+[ext_resource type="Script" path="res://scripts/flappy_foxy.gd" id="1_j0ilp"]
+[ext_resource type="AudioStream" uid="uid://b768bkifm2for" path="res://sounds/flappybird-02.wav" id="3_ogexq"]
+[ext_resource type="Texture2D" uid="uid://6obfeopjjj2k" path="res://textures/apps/gameworld bg.png" id="4_htxwe"]
+[ext_resource type="Texture2D" uid="uid://boqjjllhdogq6" path="res://textures/Modular_Belgard.png" id="5_4dbjg"]
+[ext_resource type="Script" path="res://scripts/flappyfoxy_char.gd" id="5_cxlrj"]
+[ext_resource type="FontFile" uid="uid://uc7mo5eme0if" path="res://minecraft_font.ttf" id="5_gecvb"]
+[ext_resource type="Texture2D" uid="uid://djykfbvdfncen" path="res://textures/apps/flappyfoxy.png" id="5_p5ypo"]
+[ext_resource type="AudioStream" uid="uid://qdpwuu05mhnk" path="res://sounds/flappybird-01.wav" id="6_ixuec"]
+[ext_resource type="AudioStream" uid="uid://bpqq5guvqevsq" path="res://sounds/music/flappyfoxy.mp3" id="8_v6buh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eammq"]
+radius = 77.2787
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8olxj"]
+size = Vector2(128, 523.375)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_80mhv"]
+
+[node name="Flappy Foxy" type="Node2D"]
+script = ExtResource("1_j0ilp")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_v6buh")
+volume_db = -15.0
+
+[node name="Pass sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ogexq")
+volume_db = -5.0
+
+[node name="Home" type="Control" parent="."]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 800.0
+
+[node name="Background" type="Sprite2D" parent="Home"]
+z_index = -2
+texture = ExtResource("4_htxwe")
+centered = false
+
+[node name="Score" type="Label" parent="Home"]
+z_index = 1
+layout_mode = 0
+offset_left = -2.0
+offset_right = 1278.0
+offset_bottom = 207.0
+theme_override_fonts/font = ExtResource("5_gecvb")
+theme_override_font_sizes/font_size = 91
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Foxy" type="CharacterBody2D" parent="."]
+position = Vector2(144, 379)
+script = ExtResource("5_cxlrj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Foxy"]
+shape = SubResource("CircleShape2D_eammq")
+
+[node name="Sprite2D" type="Sprite2D" parent="Foxy"]
+z_index = 1
+texture_filter = 1
+position = Vector2(0, -25)
+scale = Vector2(4, 4)
+texture = ExtResource("5_p5ypo")
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="Foxy"]
+stream = ExtResource("6_ixuec")
+
+[node name="OvenA" type="Node2D" parent="."]
+position = Vector2(1446, 598)
+
+[node name="ModularBelgard" type="Sprite2D" parent="OvenA"]
+position = Vector2(0, 396.75)
+scale = Vector2(0.28, 0.359733)
+texture = ExtResource("5_4dbjg")
+
+[node name="ModularBelgard2" type="Sprite2D" parent="OvenA"]
+position = Vector2(0, -396.75)
+rotation = 3.14159
+scale = Vector2(0.28, 0.359733)
+texture = ExtResource("5_4dbjg")
+flip_h = true
+
+[node name="Collider" type="StaticBody2D" parent="OvenA"]
+
+[node name="Top" type="CollisionShape2D" parent="OvenA/Collider"]
+position = Vector2(-22, -406.688)
+shape = SubResource("RectangleShape2D_8olxj")
+
+[node name="Bottom" type="CollisionShape2D" parent="OvenA/Collider"]
+position = Vector2(-22, 410.25)
+shape = SubResource("RectangleShape2D_8olxj")
+
+[node name="OvenB" type="Node2D" parent="."]
+position = Vector2(2277, 232)
+
+[node name="ModularBelgard" type="Sprite2D" parent="OvenB"]
+position = Vector2(0, 396.75)
+scale = Vector2(0.28, 0.359733)
+texture = ExtResource("5_4dbjg")
+
+[node name="ModularBelgard2" type="Sprite2D" parent="OvenB"]
+position = Vector2(0, -396.75)
+rotation = 3.14159
+scale = Vector2(0.28, 0.359733)
+texture = ExtResource("5_4dbjg")
+flip_h = true
+
+[node name="Collider" type="StaticBody2D" parent="OvenB"]
+
+[node name="Top" type="CollisionShape2D" parent="OvenB/Collider"]
+position = Vector2(-22, -406.688)
+shape = SubResource("RectangleShape2D_8olxj")
+
+[node name="Bottom" type="CollisionShape2D" parent="OvenB/Collider"]
+position = Vector2(-22, 410.25)
+shape = SubResource("RectangleShape2D_8olxj")
+
+[node name="Out of bounds" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Out of bounds"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Out of bounds/StaticBody2D"]
+position = Vector2(108, 982)
+shape = SubResource("WorldBoundaryShape2D_80mhv")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Out of bounds/StaticBody2D"]
+position = Vector2(108, -72)
+rotation = 3.14159
+shape = SubResource("WorldBoundaryShape2D_80mhv")
+
+[connection signal="start_game" from="." to="Foxy" method="_start_game"]
+[connection signal="died" from="Foxy" to="." method="_death"]

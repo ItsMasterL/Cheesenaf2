@@ -12,6 +12,7 @@ offset_bottom = 0.095993
 script = ExtResource("1_7cwro")
 
 [node name="Bg" type="ColorRect" parent="."]
+z_index = -1
 custom_minimum_size = Vector2(1052, 175)
 layout_mode = 1
 anchors_preset = -1
@@ -19,8 +20,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = 5.0
 offset_bottom = -2.0
+color = Color(1, 1, 1, 0.784314)
 
 [node name="AppName" type="Label" parent="Bg"]
+z_index = 1
 layout_mode = 0
 offset_left = 166.0
 offset_top = -6.0
@@ -31,6 +34,7 @@ theme_override_font_sizes/font_size = 46
 text = "APPNAME GOES HERE"
 
 [node name="Description" type="Label" parent="Bg"]
+z_index = 1
 layout_mode = 0
 offset_left = 167.0
 offset_top = 59.0
@@ -42,6 +46,7 @@ text = "App description App description App description App description App desc
 autowrap_mode = 2
 
 [node name="Icon" type="CenterContainer" parent="Bg"]
+z_index = 1
 clip_contents = true
 custom_minimum_size = Vector2(147, 147)
 layout_mode = 0
@@ -57,6 +62,7 @@ layout_mode = 2
 expand_mode = 4
 
 [node name="Get" type="Button" parent="Bg"]
+z_index = 1
 layout_mode = 0
 offset_left = 829.0
 offset_top = 10.0

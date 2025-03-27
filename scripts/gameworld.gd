@@ -15,9 +15,12 @@ func _ready():
 		listing.id = app.global_id
 		listing.get_child(0).get_child(3).pressed.connect(_buy.bind(listing))
 		app_container.add_child(listing)
+	$Home/Funds.text = "Your Funds:\n$%1.2d" % Globals.money
 
 func _buy(listing : Control):
 	if Globals.money >= listing.price:
 		Globals.money -= listing.price
 		os._purchase_app(listing.id)
+		$Kaching.play()
 		listing._purchase()
+	$Home/Funds.text = "Your Funds:\n$%1.2d" % Globals.money

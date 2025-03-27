@@ -109,7 +109,6 @@ func _process(delta):
 		if night < 7:
 			night = clamp(night + 1, 1, 6)
 			Globals.save_night = night
-			Globals._save()
 		#TODO: Save backbuffer for a fade transition like fnaf
 		get_tree().change_scene_to_file("res://scenes/victory.tscn")
 	
