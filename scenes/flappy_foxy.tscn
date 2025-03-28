@@ -21,11 +21,11 @@ size = Vector2(128, 523.375)
 [node name="Flappy Foxy" type="Node2D"]
 script = ExtResource("1_j0ilp")
 
-[node name="Music" type="AudioStreamPlayer2D" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_v6buh")
 volume_db = -15.0
 
-[node name="Pass sound" type="AudioStreamPlayer2D" parent="."]
+[node name="Pass sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ogexq")
 volume_db = -5.0
 

@@ -75,7 +75,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# Camera sensitivity
-	if root.in_cams && root.using_tablet && camera_sensitive:
+	if root.in_cams && root.using_tablet && camera_sensitive && positions[current_position].office_entrance == null:
 		camera_cooldown = randf_range(2,23 - level)
 	if camera_cooldown > 0 && camera_sensitive:
 		camera_cooldown -= delta
@@ -91,10 +91,10 @@ func _process(delta: float) -> void:
 		root.musicbox = clamp(root.musicbox - (level * delta) * root.fun_multiplier, 0, 2000)
 	
 	if timer > 0:
-		#Make it easier on lower levels when they're in the office
-		if level <= 5 && positions[current_position].office_entrance != null:
+		#Make it easier on lower levels when they're in the office (But they leave faster with flashlight)
+		if level <= 5 && positions[current_position].office_entrance != null && flashlight == 0:
 			timer -= (delta / 3) * root.fun_multiplier
-		elif level <= 10 && positions[current_position].office_entrance != null:
+		elif level <= 10 && positions[current_position].office_entrance != null && flashlight == 0:
 			timer -= (delta / 2) * root.fun_multiplier
 		else:
 			timer -= delta * root.fun_multiplier

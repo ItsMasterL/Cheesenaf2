@@ -1,0 +1,141 @@
+[gd_scene load_steps=4 format=3 uid="uid://btb48xhgd3qk2"]
+
+[ext_resource type="Script" path="res://scripts/media_player.gd" id="1_84gfk"]
+[ext_resource type="Texture2D" uid="uid://ccuv5l3lplsr8" path="res://textures/apps/mediaplayerbg.png" id="2_s4jqn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blp43"]
+bg_color = Color(1, 0.811765, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="Media Player" type="Node2D"]
+script = ExtResource("1_84gfk")
+
+[node name="Home" type="Control" parent="."]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 800.0
+
+[node name="Background" type="TextureRect" parent="Home"]
+z_index = -2
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_s4jqn")
+
+[node name="ProgressBar" type="ProgressBar" parent="Home"]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 678.0
+offset_right = 1167.0
+offset_bottom = 699.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_blp43")
+show_percentage = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Home"]
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Home"]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 59.0
+offset_right = 1222.0
+offset_bottom = 640.0
+expand = true
+
+[node name="Play_Pause" type="Button" parent="Home"]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 709.0
+offset_right = 269.0
+offset_bottom = 781.0
+text = "PLAY/PAUSE"
+
+[node name="Next" type="Button" parent="Home"]
+layout_mode = 0
+offset_left = 283.0
+offset_top = 709.0
+offset_right = 437.0
+offset_bottom = 781.0
+text = "NEXT"
+
+[node name="Shuffle" type="Button" parent="Home"]
+layout_mode = 0
+offset_left = 449.0
+offset_top = 709.0
+offset_right = 603.0
+offset_bottom = 781.0
+text = "SHUFFLE
+PLAYLIST"
+
+[node name="ImportFiles" type="Button" parent="Home"]
+layout_mode = 0
+offset_left = 1011.0
+offset_top = 709.0
+offset_right = 1165.0
+offset_bottom = 781.0
+text = "PICK MEDIA..."
+
+[node name="ImportDirectory" type="Button" parent="Home"]
+layout_mode = 0
+offset_left = 846.0
+offset_top = 709.0
+offset_right = 1000.0
+offset_bottom = 781.0
+text = "PICK DIRECTORY..."
+
+[node name="Media" type="FileDialog" parent="Home"]
+title = "Select one or multiple MP3 or OGV files"
+position = Vector2i(10, 30)
+size = Vector2i(1262, 770)
+exclusive = false
+ok_button_text = "Open"
+dialog_hide_on_ok = true
+mode_overrides_title = false
+file_mode = 1
+access = 2
+
+[node name="Directory" type="FileDialog" parent="Home"]
+auto_translate_mode = 1
+title = "Select a directory containing MP3 or OGV files"
+position = Vector2i(10, 30)
+size = Vector2i(1262, 770)
+exclusive = false
+ok_button_text = "Select Current Folder"
+dialog_hide_on_ok = true
+mode_overrides_title = false
+file_mode = 2
+access = 2
+
+[node name="CurrentPosition" type="Label" parent="Home"]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 676.0
+offset_right = 107.0
+offset_bottom = 699.0
+text = "00:00:00"
+horizontal_alignment = 2
+
+[node name="Length" type="Label" parent="Home"]
+layout_mode = 0
+offset_left = 1172.0
+offset_top = 676.0
+offset_right = 1236.0
+offset_bottom = 699.0
+text = "00:00:00"
+horizontal_alignment = 2
+
+[connection signal="pressed" from="Home/Play_Pause" to="." method="_play_pause"]
+[connection signal="pressed" from="Home/Next" to="." method="_skip"]
+[connection signal="pressed" from="Home/Shuffle" to="." method="_shuffle"]
+[connection signal="pressed" from="Home/ImportFiles" to="." method="_open_files"]
+[connection signal="pressed" from="Home/ImportDirectory" to="." method="_open_directory"]
+[connection signal="dir_selected" from="Home/Media" to="." method="_on_dir_selected"]
+[connection signal="file_selected" from="Home/Media" to="." method="_on_file_selected"]
+[connection signal="files_selected" from="Home/Media" to="." method="_on_files_selected"]
+[connection signal="dir_selected" from="Home/Directory" to="." method="_on_dir_selected"]
+[connection signal="file_selected" from="Home/Directory" to="." method="_on_file_selected"]
+[connection signal="files_selected" from="Home/Directory" to="." method="_on_files_selected"]

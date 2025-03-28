@@ -57,7 +57,7 @@ enum store_apps_binary {
 var apps : Array[TabletApp] = [
 	TabletApp.new("Freddy Fazbear's Media Player", "Play your favorite tunes from your own device, while Freddy Fazbear himself dances along!", "media_player", load("res://textures/icons/edam freddy.png"), 0.00, store_apps_binary.MEDIAPLAYER),
 	TabletApp.new("Flappy Foxy", "Make Foxy jump up and down between the Brick%s brand ovens! Touching the floor or the ovens will cause Foxy to die. painfully." % String.chr(8482), "flappy_foxy", load("res://textures/apps/flappyfoxy.png"), 0.00, store_apps_binary.FLAPPYFOXY, 1.25),
-	TabletApp.new("Chica Pop", "Tap the screen to make her go pop! Try for the biggest number!! My high score is 4", "chica_pop", PlaceholderTexture2D.new(), 0.00, store_apps_binary.CHICAPOP, 1.25),
+	TabletApp.new("Chica Pop", "Tap the screen to make her go pop! Try for the biggest number!! My high score is 4", "chica_pop", load("res://textures/icons/edam chica.png"), 0.00, store_apps_binary.CHICAPOP, 1.25),
 	TabletApp.new("Tank Trouble", "Navigate your tank through a simple maze to shoot the opponent's tank! Boy, are these tanks causing some trouble. Wait... say that again...", "tank_trouble", PlaceholderTexture2D.new(), 4.99, store_apps_binary.TANKTROUBLE, 1.5),
 	TabletApp.new("Soccer Physics", "Ever wanted to play soccer, but only being able to kick while jumping? Well, now you can! Beat the enemy team!", "soccer_physics", PlaceholderTexture2D.new(), 4.99, store_apps_binary.SOCCERPHYSICS, 1.5),
 	TabletApp.new("Freddy's Picture Poker", "The classic game where thousands of children learned to gamble. Oh, not from us though. From the folks over at Nintendo.", "poker", PlaceholderTexture2D.new(), 9.99, store_apps_binary.POKER, 1.75),

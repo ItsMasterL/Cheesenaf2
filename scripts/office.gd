@@ -65,6 +65,9 @@ func _ready():
 		$Player/Head/Eyes/Controls.visible = true
 		closed_entrances = [1, 4]
 	_set_entrances(closed_entrances)
+	# Remove Bonnie when he's dead
+	if night > 2 && night < 6:
+		animatronics.get_child(1).queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -193,6 +196,7 @@ func _jumpscare(animatronic: Node3D):
 	sound.play()
 	var playercamanim := $Player/Head/Eyes/AnimationPlayer
 	var playerhead = $Player/Head
+	var playercam = $Player/Head/Eyes
 	var playeranim := $Player/AnimationPlayer
 	var cup = $Player/Head/Eyes/CupHolder
 	if tablet != null:
@@ -200,6 +204,7 @@ func _jumpscare(animatronic: Node3D):
 	cup.visible = false
 	p1_heat = -2
 	playerhead.rotation_degrees = Vector3.ZERO
+	playercam.rotation_degrees = Vector3.ZERO
 	playeranim.play("RESET")
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 	if animatronic.jumpscare_length < 0.7:
@@ -223,6 +228,7 @@ func _jumpscare_save(animatronic: Node3D):
 	sound.play()
 	var playercamanim := $Player/Head/Eyes/AnimationPlayer
 	var playerhead = $Player/Head
+	var playercam = $Player/Head/Eyes
 	var playeranim := $Player/AnimationPlayer
 	var cup = $Player/Head/Eyes/CupHolder
 	if tablet != null:
@@ -230,6 +236,7 @@ func _jumpscare_save(animatronic: Node3D):
 	cup.visible = false
 	p1_heat = -2
 	playerhead.rotation_degrees = Vector3.ZERO
+	playercam.rotation_degrees = Vector3.ZERO
 	playeranim.play("RESET")
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 	playercamanim.play("CameraAction_003")
