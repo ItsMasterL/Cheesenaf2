@@ -41,30 +41,33 @@ enum store_apps {
 	ANGRYCHICA,
 	BONNIESWOODS,
 	PODCAST,
+	FNWF,
 	}
 enum store_apps_binary {
-	MEDIAPLAYER = 0b0000000001,
-	FLAPPYFOXY = 0b0000000010,
-	CHICAPOP = 0b0000000100,
-	TANKTROUBLE = 0b0000001000,
-	SOCCERPHYSICS = 0b0000010000,
-	POKER = 0b0000100000,
-	DRAWING = 0b0001000000,
-	ANGRYCHICA = 0b0010000000,
-	BONNIESWOODS = 0b0100000000,
-	PODCAST = 0b1000000000
+	MEDIAPLAYER = 0b0000_0000_0001,
+	FLAPPYFOXY = 0b0000_0000_0010,
+	CHICAPOP = 0b0000_0000_0100,
+	TANKTROUBLE = 0b0000_0000_1000,
+	SOCCERPHYSICS = 0b0000_0001_0000,
+	POKER = 0b0000_0010_0000,
+	DRAWING = 0b0000_0100_0000,
+	ANGRYCHICA = 0b0000_1000_0000,
+	BONNIESWOODS = 0b0001_0000_0000,
+	PODCAST = 0b0010_0000_0000,
+	FNWF = 0b0100_0000_0000
 	}
 var apps : Array[TabletApp] = [
-	TabletApp.new("Freddy Fazbear's Media Player", "Play your favorite tunes from your own device, while Freddy Fazbear himself dances along!", "media_player", load("res://textures/icons/edam freddy.png"), 0.00, store_apps_binary.MEDIAPLAYER),
+	TabletApp.new("Freddy Fazbear's Media Player", "Play your favorite tunes from your own device, while Freddy Fazbear himself dances along!", "media_player", load("res://textures/apps/mediaplayer.png"), 0.00, store_apps_binary.MEDIAPLAYER),
 	TabletApp.new("Flappy Foxy", "Make Foxy jump up and down between the Brick%s brand ovens! Touching the floor or the ovens will cause Foxy to die. painfully." % String.chr(8482), "flappy_foxy", load("res://textures/apps/flappyfoxy.png"), 0.00, store_apps_binary.FLAPPYFOXY, 1.25),
-	TabletApp.new("Chica Pop", "Tap the screen to make her go pop! Try for the biggest number!! My high score is 4", "chica_pop", load("res://textures/icons/edam chica.png"), 0.00, store_apps_binary.CHICAPOP, 1.25),
-	TabletApp.new("Tank Trouble", "Navigate your tank through a simple maze to shoot the opponent's tank! Boy, are these tanks causing some trouble. Wait... say that again...", "tank_trouble", PlaceholderTexture2D.new(), 4.99, store_apps_binary.TANKTROUBLE, 1.5),
-	TabletApp.new("Soccer Physics", "Ever wanted to play soccer, but only being able to kick while jumping? Well, now you can! Beat the enemy team!", "soccer_physics", PlaceholderTexture2D.new(), 4.99, store_apps_binary.SOCCERPHYSICS, 1.5),
-	TabletApp.new("Freddy's Picture Poker", "The classic game where thousands of children learned to gamble. Oh, not from us though. From the folks over at Nintendo.", "poker", PlaceholderTexture2D.new(), 9.99, store_apps_binary.POKER, 1.75),
-	TabletApp.new("Foxy's Paintin' Location", "Turns out, Foxy is quite the artist, and wants to share his art tools with you! Makes sense, I mean, he is a furry after all. You gotta wonder how he can afford so much booty. That, being treasure, you know. (What, is that quote too overdone?)", "drawing", PlaceholderTexture2D.new(), 9.99, store_apps_binary.DRAWING, 1.75),
-	TabletApp.new("Angry Chica", "Those bad piggies have taken Chica's cupcake! (Based on a true story!) Help her get it back! (Unfortunately, not based on the true story.)", "angry_birds", PlaceholderTexture2D.new(), 9.99, store_apps_binary.ANGRYCHICA, 1.75),
-	TabletApp.new("Bonnie's Woods", "Millions of years ago, Bonnie created the concept of trees. (Not really). You play as Stewart, a mouse who wants to get the Cheese from Bonnie, the CEO of Cheese LLC in the year this takes place, 1792.", "warios_woods", PlaceholderTexture2D.new(), 19.99, store_apps_binary.BONNIESWOODS, 2),
-	TabletApp.new("Stringbonnie's Podcast", "A collection of recordings found in the back room of the previous Freddy's location. We don't know who made them, or what they mean. They were found next to the Stringbonnie suit. We believe these stories to be fully fictional.", "podcast", PlaceholderTexture2D.new(), 19.99, store_apps_binary.PODCAST)
+	TabletApp.new("Chica Pop", "Tap the screen to make her go pop! Try for the biggest number!! My high score is 4", "chica_pop", load("res://textures/apps/chicapopicon.png"), 0.00, store_apps_binary.CHICAPOP, 1.25),
+	TabletApp.new("Tank Trouble", "Navigate your tank through a simple maze to shoot the opponent's tank! Boy, are these tanks causing some trouble. Wait... say that again...", "tank_trouble", load("res://textures/apps/tanktrouble.png"), 4.99, store_apps_binary.TANKTROUBLE, 1.5),
+	TabletApp.new("Soccer Physics", "Ever wanted to play soccer, but only being able to kick while jumping? Well, now you can! Beat the enemy team!", "soccer_physics", load("res://textures/apps/soccerphysics.png"), 4.99, store_apps_binary.SOCCERPHYSICS, 1.5),
+	TabletApp.new("Freddy's Picture Poker", "The classic game where thousands of children learned to gamble. Oh, not from us though. From the folks over at Nintendo.", "poker", load("res://textures/apps/poker.png"), 9.99, store_apps_binary.POKER, 1.75),
+	TabletApp.new("Foxy's Paintin' Location", "Turns out, Foxy is quite the artist, and wants to share his art tools with you! Makes sense, I mean, he is a furry after all. You gotta wonder how he can afford so much booty. That, being treasure, you know. (What, is that quote too overdone?)", "drawing", load("res://textures/apps/foxypaint.png"), 9.99, store_apps_binary.DRAWING, 1.75),
+	TabletApp.new("Angry Chica", "Those bad piggies have taken Chica's cupcake! (Based on a true story!) Help her get it back! (Unfortunately, not based on the true story.)", "angry_birds", load("res://textures/apps/angrychica.png"), 9.99, store_apps_binary.ANGRYCHICA, 1.75),
+	TabletApp.new("Bonnie's Woods", "Millions of years ago, Bonnie created the concept of trees. (Not really). You play as Stewart, a mouse who wants to get the Cheese from Bonnie, the CEO of Cheese LLC in the year this takes place, 1792.", "warios_woods", load("res://textures/apps/bonnieswoods.png"), 19.99, store_apps_binary.BONNIESWOODS, 2),
+	TabletApp.new("Stringbonnie's Podcast", "A collection of recordings found in the back room of the previous Freddy's location. We don't know who made them, or what they mean. They were found next to the Stringbonnie suit. We believe these stories to be fully fictional.", "podcast", load("res://textures/apps/stringbonnie.png"), 19.99, store_apps_binary.PODCAST),
+	TabletApp.new("Five Nights With Freddy (18+)", "Enjoy 5 sensual nights with Freddy and the gang, get to know them intimately, and more~", "fnwf", load("res://textures/apps/fnwf.png"), 29.99, store_apps_binary.FNWF)
 ]
 var purchases : int
 

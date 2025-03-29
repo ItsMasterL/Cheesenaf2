@@ -1,0 +1,79 @@
+[gd_scene load_steps=9 format=3 uid="uid://dfe3oqrxe2jr2"]
+
+[ext_resource type="AudioStream" uid="uid://cxsccyw5som11" path="res://sounds/yay.wav" id="2_0ny0a"]
+[ext_resource type="Script" path="res://scripts/animatronic.gd" id="2_chmh2"]
+[ext_resource type="Texture2D" uid="uid://b4g8hccp5wvq" path="res://textures/pink slip.png" id="3_b6wy1"]
+[ext_resource type="Script" path="res://scripts/animatronic_position.gd" id="3_x62nt"]
+
+[sub_resource type="Resource" id="Resource_crr0h"]
+script = ExtResource("3_x62nt")
+position = Vector3(0, 7, 0)
+rotation = Vector3(0, 0, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([])
+is_vent = false
+animation_id = "Jumpscare"
+
+[sub_resource type="Animation" id="Animation_buatp"]
+resource_name = "Jumpscare"
+length = 1.63
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-2.96, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pq0t2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fl0vu"]
+_data = {
+"Jumpscare": SubResource("Animation_buatp"),
+"RESET": SubResource("Animation_pq0t2")
+}
+
+[node name="PinkSlip" type="Node3D"]
+script = ExtResource("2_chmh2")
+animatronic = "pink_slip"
+positions = Array[ExtResource("3_x62nt")]([SubResource("Resource_crr0h")])
+check_frequency = 1337.0
+jumpscare_animation_id = "RESET"
+jumpscare_position = Vector3(0, 1.622, -1)
+ignore_save = true
+save_jumpscare_id = "Jumpscare"
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(-3.49691e-09, 0, 0.08, 0, 0.08, 0, -0.08, 0, -3.49691e-09, 0, 0, 0)
+transparent = false
+shaded = true
+texture_filter = 1
+texture = ExtResource("3_b6wy1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fl0vu")
+}
+
+[node name="Jumpscare" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_0ny0a")
+
+[node name="Step" type="AudioStreamPlayer" parent="."]

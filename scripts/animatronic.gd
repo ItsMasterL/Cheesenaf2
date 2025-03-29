@@ -207,9 +207,9 @@ func _movement_check():
 					warning.play()
 				if check_frequency < 1: # Withered Foxy nerf
 					timer = check_frequency * 1.75
-			_move_animatronic(current_position)
+			_move_animatronic()
 
-func _move_animatronic(pos: int):
+func _move_animatronic():
 	position = positions[current_position].position
 	rotation_degrees = positions[current_position].rotation
 	scale = positions[current_position].scale
@@ -237,7 +237,7 @@ func _fail_attack():
 		root.paranormal_attacker = null
 		paranormal_song.emit()
 	current_position = positions[current_position].office_entrance.fail_position_index
-	_move_animatronic(current_position)
+	_move_animatronic()
 
 func _change_dance(count : int, id : int = 0):
 	if always_random_dance || music_box_dances.size() < count:
@@ -269,7 +269,7 @@ func _game_check():
 	if root.p1_has_tablet: #TODO:  && Globals.purchased_apps > 0
 		root.gamer_in_office = true
 		current_position = positions[current_position].next_position_indexes.pick_random()
-		_move_animatronic(current_position)
+		_move_animatronic()
 		if is_friendly == false: # If Foxy is mad, but still a chill guy
 			root.animatronics_in_office -= 1
 		var warning := $Warning

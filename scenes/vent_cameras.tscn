@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://scripts/camera_master.gd" id="1_6fsxl"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="2_r7jj3"]
 
-[node name="VentCameras" type="Node3D" node_paths=PackedStringArray("sound")]
+[node name="VentCameras" type="Node3D"]
 script = ExtResource("1_6fsxl")
-sound = NodePath("")
 
 [node name="Camera1" type="Camera3D" parent="."]
 transform = Transform3D(-0.813101, 0.140828, -0.564831, 0, 0.970296, 0.241922, 0.582123, 0.196707, -0.788948, 9.307, 6.011, -0.444)
+cull_mask = 1048573
 script = ExtResource("2_r7jj3")
 first_rotation = Vector3(-14, 133.6, 0)
 second_rotation = Vector3(-14, 215.6, 0)

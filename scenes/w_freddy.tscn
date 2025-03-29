@@ -146,7 +146,7 @@ collision_layer = 16
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RIG_Freddy_ao_001/Skeleton3D/BoneAttachment3D/Eyes" index="0"]
-transform = Transform3D(1, -4.06576e-20, 0, 0, 1, 4.72644e-20, 0, 4.72644e-20, 1, 0, 26.3419, -7.62939e-06)
+transform = Transform3D(1, -4.06576e-20, 0, -1.35525e-20, 1, -2.84217e-14, 0, 2.84218e-14, 1, 0, 12.5045, -3.8147e-06)
 shape = SubResource("SphereShape3D_6m6pw")
 
 [node name="Jumpscare" type="AudioStreamPlayer" parent="." index="2"]

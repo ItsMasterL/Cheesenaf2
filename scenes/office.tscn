@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=4 uid="uid://kfokhb3cioir"]
+[gd_scene load_steps=80 format=4 uid="uid://kfokhb3cioir"]
 
 [ext_resource type="Script" path="res://scripts/office.gd" id="1_a3xfx"]
 [ext_resource type="PackedScene" uid="uid://bs378s4kwr2ux" path="res://scenes/foxy_plush.tscn" id="1_gqipk"]
@@ -38,6 +38,7 @@
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="31_63unw"]
 [ext_resource type="PackedScene" uid="uid://b7dpymyvsicjt" path="res://scenes/cheesestick.tscn" id="31_a7pji"]
 [ext_resource type="Script" path="res://scripts/player_raycast.gd" id="32_5ed2l"]
+[ext_resource type="PackedScene" uid="uid://dfe3oqrxe2jr2" path="res://scenes/pink_slip.tscn" id="38_ry2hb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0grut"]
 resource_name = "cup"
@@ -713,7 +714,7 @@ stream = ExtResource("15_8e4mc")
 volume_db = -20.0
 
 [node name="RayCast3D" type="RayCast3D" parent="Player/Head/Eyes/SpotLight3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(0.999702, -0.0243987, -0.00127868, 0, 0.052336, -0.99863, 0.0244322, 0.998331, 0.0523203, -0.181, 0.168, 0.236)
 target_position = Vector3(0, -23, 0)
 collision_mask = 16
 collide_with_areas = true
@@ -907,6 +908,10 @@ root = NodePath("../..")
 
 [node name="Cheesestick" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("31_a7pji")]
 transform = Transform3D(1.29466, 0, -1.39063, 0, 1.9, 0, 1.39063, 0, 1.29466, -2.573, 0, -8.39344)
+root = NodePath("../..")
+
+[node name="PinkSlip" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("38_ry2hb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.22938, 5.01952, -1.80552)
 root = NodePath("../..")
 
 [node name="BlurShader" type="CanvasLayer" parent="."]

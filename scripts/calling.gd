@@ -12,18 +12,19 @@ func _ready() -> void:
 	_start_call()
 
 func _start_call():
-	await get_tree().create_timer(randf_range(3, 7)).timeout
-	audio.play()
-	notif.visible = true
-	get_tree().create_timer(20).timeout
-	if call_accepted == false:
-		notif.visible = false
-		audio.stop()
+	if root.night < 7:
+		await get_tree().create_timer(randf_range(3, 7)).timeout
+		audio.play()
+		notif.visible = true
+		get_tree().create_timer(20).timeout
+		if call_accepted == false:
+			notif.visible = false
+			audio.stop()
 
 func _answer():
 	audio.stop()
 	#TODO: Call icon in top bar
-	audio.stream = load("res://sounds/dialogue/c2call%s.mp3" % root.night)
+	audio.stream = load("res://sounds/dialogue/c2call%s.wav" % root.night)
 	notif.visible = false
 	audio.play()
 

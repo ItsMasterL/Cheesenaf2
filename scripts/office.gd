@@ -116,8 +116,29 @@ func _process(delta):
 		get_tree().change_scene_to_file("res://scenes/victory.tscn")
 	
 	if OS.is_debug_build():
-		if Input.is_key_pressed(KEY_F1):
-			_jumpscare(animatronics.get_child(5))
+		if can_jumpscare:
+			if Input.is_key_pressed(KEY_F1):
+				_jumpscare(animatronics.get_child(0))
+			if Input.is_key_pressed(KEY_F2):
+				_jumpscare(animatronics.get_child(1))
+			if Input.is_key_pressed(KEY_F3):
+				_jumpscare(animatronics.get_child(2))
+			if Input.is_key_pressed(KEY_F4):
+				_jumpscare(animatronics.get_child(3))
+			if Input.is_key_pressed(KEY_F5):
+				_jumpscare(animatronics.get_child(4))
+			if Input.is_key_pressed(KEY_F6):
+				_jumpscare(animatronics.get_child(5))
+			if Input.is_key_pressed(KEY_F7):
+				_jumpscare(animatronics.get_child(6))
+			if Input.is_key_pressed(KEY_F8):
+				_jumpscare(animatronics.get_child(7))
+			if Input.is_key_pressed(KEY_F9):
+				_jumpscare(animatronics.get_child(8))
+			if Input.is_key_pressed(KEY_F10):
+				_jumpscare(animatronics.get_child(9))
+		if Input.is_key_pressed(KEY_F11):
+			time = 540
 
 func _get_ai(animatronic: String) -> int:
 	match animatronic:
@@ -171,17 +192,17 @@ func _jumpscare(animatronic: Node3D):
 	while can_jumpscare == false:
 		pass
 	p1_can_action = false
+	print("Jumpscared by %s" % animatronic.animatronic)
 	if gamer_in_office:
-		animatronic._fail_attack()
 		for gamer in game_sensitive:
 			if gamer.guarding == true: # Only is set to this when in the office
 				if animatronic.ignore_save == true && animatronic.save_jumpscare_id != animatronic.jumpscare_animation_id:
 					gamer.anim.play(animatronic.save_jumpscare_id)
 					pass
 				else:
+					animatronic._fail_attack()
 					_jumpscare_save(gamer)
 					return
-	print("Jumpscared by %s" % animatronic.animatronic)
 	can_jumpscare = false
 	under_desk = false
 	animatronic.can_move = false

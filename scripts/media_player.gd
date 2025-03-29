@@ -104,7 +104,7 @@ func _open_directory():
 
 func _play_pause():
 	if is_video:
-		videoplayer.stream_paused = !videoplayer.stream_paused
+		videoplayer.paused = !videoplayer.paused
 	else:
 		audioplayer.stream_paused = !audioplayer.stream_paused
 
