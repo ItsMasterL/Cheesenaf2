@@ -29,7 +29,17 @@ var money : int = 0
 var saw_foxy : bool = false
 var saw_foxy_night_1 : bool = false
 
-# Applications
+# User Settings
+var mouse_sensitivity : float = 1.0
+var sfx_volume : int = 100
+var voice_volume : int = 100
+var music_volume : int = 100
+var tablet_volume : int = 100
+var ambient_volume : int = 100
+var jumpscare_volume : int = 100
+var maximize = false
+
+#region Applications
 enum store_apps {
 	MEDIAPLAYER,
 	FLAPPYFOXY,
@@ -69,6 +79,7 @@ var apps : Array[TabletApp] = [
 	TabletApp.new("Stringbonnie's Podcast", "A collection of recordings found in the back room of the previous Freddy's location. We don't know who made them, or what they mean. They were found next to the Stringbonnie suit. We believe these stories to be fully fictional.", "podcast", load("res://textures/apps/stringbonnie.png"), 19.99, store_apps_binary.PODCAST),
 	TabletApp.new("Five Nights With Freddy (18+)", "Enjoy 5 sensual nights with Freddy and the gang, get to know them intimately, and more~", "fnwf", load("res://textures/apps/fnwf.png"), 29.99, store_apps_binary.FNWF)
 ]
+#endregion
 var purchases : int
 
 func _ready():
@@ -89,6 +100,7 @@ func _ready():
 			else:
 				DisplayServer.set_icon(load("res://textures/icons/edam foxy.png"))
 
+#region Saving/Loading
 func _save():
 #TODO: If updating Cheesenaf 1 before publishing alongside Cheesenaf 2 on gamejolt/itch, add a BBGSim mod easter egg in Cheesenaf 2 save data
 	# This converts app purchases to hexadecimal
@@ -133,8 +145,57 @@ func _load():
 			if "apps" in data && typeof(data["apps"]) == TYPE_STRING:
 				purchased_apps = data["apps"]
 				purchases = purchased_apps.hex_to_int()
-				
-			print(data["night"])
+
+func _save_settings():
+	var data = {
+		"mouse_sensitivity" = mouse_sensitivity,
+		"sfx_volume" = sfx_volume,
+		"voice_volume" = voice_volume,
+		"music_volume" = music_volume,
+		"tablet_volume" = tablet_volume,
+		"ambient_volume" = ambient_volume,
+		"jumpscare_volume" = jumpscare_volume,
+		"maximize" = maximize
+	}
+	var file = FileAccess.open("user://settings.json", FileAccess.WRITE)
+	var json_string = JSON.stringify(data)
+	file.store_line(json_string)
+
+func _load_settings():
+	print("Loading user settings")
+	if FileAccess.file_exists("user://settings.json"):
+		var file = FileAccess.open("user://settings.json", FileAccess.READ)
+		while file.get_position() < file.get_length():
+			var json_string = file.get_line()
+
+		# Creates the helper class to interact with JSON.
+			var json = JSON.new()
+
+		# Check if there is any error while parsing the JSON string, skip in case of failure.
+			var parse_result = json.parse(json_string)
+			if not parse_result == OK:
+				print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+				continue
+
+		# Get the data from the JSON object.
+			var data = json.data
+			if "mouse_sensitivity" in data && (typeof(data["mouse_sensitivity"]) == TYPE_FLOAT):
+				mouse_sensitivity = data["mouse_sensitivity"]
+			if "sfx_volume" in data && (typeof(data["sfx_volume"]) == TYPE_INT || typeof(data["sfx_volume"]) == TYPE_FLOAT):
+				sfx_volume = data["sfx_volume"]
+			if "voice_volume" in data && (typeof(data["voice_volume"]) == TYPE_INT || typeof(data["voice_volume"]) == TYPE_FLOAT):
+				voice_volume = data["voice_volume"]
+			if "music_volume" in data && (typeof(data["music_volume"]) == TYPE_INT || typeof(data["music_volume"]) == TYPE_FLOAT):
+				music_volume = data["music_volume"]
+			if "tablet_volume" in data && (typeof(data["tablet_volume"]) == TYPE_INT || typeof(data["tablet_volume"]) == TYPE_FLOAT):
+				tablet_volume = data["tablet_volume"]
+			if "ambient_volume" in data && (typeof(data["ambient_volume"]) == TYPE_INT || typeof(data["ambient_volume"]) == TYPE_FLOAT):
+				ambient_volume = data["ambient_volume"]
+			if "jumpscare_volume" in data && (typeof(data["jumpscare_volume"]) == TYPE_INT || typeof(data["jumpscare_volume"]) == TYPE_FLOAT):
+				ambient_volume = data["jumpscare_volume"]
+			if "maximize" in data && typeof(data["maximize"]) == TYPE_BOOL:
+				maximize = data["maximize"]
+#endregion
 
 func _set_night(night: int):
 	match night:

@@ -21,6 +21,7 @@ config/use_custom_user_dir=true
 config/custom_user_dir_name="MasterLGames/Cheesenaf2"
 config/features=PackedStringArray("4.3", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/show_image=false
 config/icon="res://textures/icons/edam freddy.png"
 config/windows_native_icon="res://textures/icons/edam freddy.ico"
 
@@ -61,5 +62,9 @@ HideUnderDesk={
 
 [rendering]
 
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality=3
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
 anti_aliasing/quality/msaa_3d=3
+lights_and_shadows/size/viewport_height=648
+lights_and_shadows/size/viewport_width=1152
+lights_and_shadows/size/mode=0

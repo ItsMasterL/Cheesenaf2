@@ -3,6 +3,10 @@ extends Control
 @onready var menu = $Menu
 @onready var loadedmenu = $Menu/TitleMenu
 
+func _ready():
+	Globals._load()
+	Globals._load_settings()
+
 func _load_title_screen(screen: String):
 	loadedmenu.queue_free()
 	var loaded = load("res://scenes/%s.tscn" % [screen])

@@ -57,16 +57,19 @@ func _populate_homescreen():
 		vaultmaster.pressed.connect(_load_application.bind(vaultmaster.app_id))
 		app_container.add_child(vaultmaster)
 	
+	var purchased_apps = 0
 	for app in Globals.store_apps_binary:
 		var bin = Globals.store_apps_binary[app]
 		var value = Globals.store_apps[app]
 		if Globals._check_app_purchase(bin):
+			purchased_apps += 1
 			var button = app_button.instantiate()
 			button.app_id = Globals.apps[value].app_id
 			button.text = Globals.apps[value].app_name
 			button.icon = Globals.apps[value].icon
 			button.pressed.connect(_load_application.bind(button.app_id, Globals.apps[value].fun_multiplier))
 			app_container.add_child(button)
+	root.purchased_apps = purchased_apps
 
 func _load_application(appscene: String, fun: float = fun_multiplier):
 	if app_home.get_child_count() > 0:

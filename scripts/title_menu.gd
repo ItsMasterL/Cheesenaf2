@@ -1,8 +1,6 @@
 extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Globals._load()
-	
 	for b in find_children("*", "Button", false):
 		b.mouse_entered.connect(_on_button_hover.bind(b.get_index()))
 		b.mouse_exited.connect(_on_button_unhover.bind(b.get_index()))
@@ -46,6 +44,9 @@ func _start_singleplayer_custom(night: int = 7):
 
 func _change_menu(screen: String):
 	$"../../"._load_title_screen("title_" + screen)
+
+func _open_url(url: String):
+	OS.shell_open(url)
 
 func _toggle_edams(friendly : bool):
 	Globals.edams_friendly = friendly

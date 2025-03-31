@@ -1,0 +1,214 @@
+[gd_scene load_steps=10 format=3 uid="uid://b5rbo5mii6fxo"]
+
+[ext_resource type="Script" path="res://scripts/title_menu.gd" id="1_qxcy6"]
+[ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://consolas.ttf" id="2_bn3vm"]
+[ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://sounds/change_cam.wav" id="3_64dvc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ptv6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_27atk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5pxcu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8w5np"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hjsyr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rsbhx"]
+
+[node name="CustomNight" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qxcy6")
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 598.0
+offset_right = 302.0
+offset_bottom = 627.0
+theme_override_fonts/font = ExtResource("2_bn3vm")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2ptv6")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_27atk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5pxcu")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_8w5np")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_hjsyr")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rsbhx")
+alignment = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Back"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -9.5
+offset_right = 126.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_bn3vm")
+theme_override_font_sizes/normal_font_size = 20
+text = "Back to Main Menu"
+scroll_active = false
+
+[node name="Credits" type="Button" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 566.0
+offset_right = 302.0
+offset_bottom = 595.0
+theme_override_fonts/font = ExtResource("2_bn3vm")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2ptv6")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_27atk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5pxcu")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_8w5np")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_hjsyr")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rsbhx")
+alignment = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Credits"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -9.5
+offset_right = 126.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_bn3vm")
+theme_override_font_sizes/normal_font_size = 20
+text = "View Credits"
+scroll_active = false
+
+[node name="Multiplayer" type="Button" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 52.0
+offset_right = 302.0
+offset_bottom = 81.0
+theme_override_fonts/font = ExtResource("2_bn3vm")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2ptv6")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_27atk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5pxcu")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_8w5np")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_hjsyr")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rsbhx")
+alignment = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Multiplayer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -9.5
+offset_right = 126.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_bn3vm")
+theme_override_font_sizes/normal_font_size = 20
+text = "Multiplayer Menu"
+scroll_active = false
+
+[node name="Discord" type="Button" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 91.0
+offset_right = 302.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("2_bn3vm")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2ptv6")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_27atk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5pxcu")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_8w5np")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_hjsyr")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rsbhx")
+alignment = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Discord"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -9.5
+offset_right = 126.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_bn3vm")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "Join the [color=MEDIUM_SLATE_BLUE]Discord"
+scroll_active = false
+
+[node name="Github" type="Button" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 130.0
+offset_right = 302.0
+offset_bottom = 159.0
+theme_override_fonts/font = ExtResource("2_bn3vm")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2ptv6")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_27atk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5pxcu")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_8w5np")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_hjsyr")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rsbhx")
+alignment = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Github"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -9.5
+offset_right = 126.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_bn3vm")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "GitHub Source Code"
+scroll_active = false
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_64dvc")
+volume_db = -10.0
+autoplay = true
+
+[connection signal="pressed" from="Back" to="." method="_change_menu" binds= ["menu"]]
+[connection signal="pressed" from="Credits" to="." method="_change_menu" binds= ["multiplayer"]]
+[connection signal="pressed" from="Multiplayer" to="." method="_change_menu" binds= ["menu"]]
+[connection signal="pressed" from="Discord" to="." method="_open_url" binds= ["https://discord.com/invite/yKA3MSvvA5"]]
+[connection signal="pressed" from="Github" to="." method="_open_url" binds= ["https://github.com/ItsMasterL/Cheesenaf2"]]

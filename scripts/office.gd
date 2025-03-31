@@ -7,6 +7,7 @@ var time = 0 as float
 var hour = 0
 var minute = 0
 var fun_multiplier = 1 #Set by minigames in singleplayer to make time go by faster
+var purchased_apps
 const time_to_hour = 90
 var using_tablet = false
 var in_cams = false

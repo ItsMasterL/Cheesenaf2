@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=4 uid="uid://kfokhb3cioir"]
+[gd_scene load_steps=83 format=4 uid="uid://kfokhb3cioir"]
 
 [ext_resource type="Script" path="res://scripts/office.gd" id="1_a3xfx"]
 [ext_resource type="PackedScene" uid="uid://bs378s4kwr2ux" path="res://scenes/foxy_plush.tscn" id="1_gqipk"]
@@ -18,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://c5db7xn31angv" path="res://sounds/breathing.wav" id="17_eaqhx"]
 [ext_resource type="Script" path="res://scripts/flashlight_raycast.gd" id="18_gn6u8"]
 [ext_resource type="AudioStream" uid="uid://6a8wpxqhxldr" path="res://sounds/shifting.wav" id="18_jcvyf"]
+[ext_resource type="Script" path="res://scripts/foxylook.gd" id="18_nks4h"]
 [ext_resource type="Texture2D" uid="uid://btc1kaga7xmy3" path="res://textures/c2cursor.png" id="18_sa7mb"]
 [ext_resource type="Animation" uid="uid://b6avorttpy5k5" path="res://models/animation/camerawithered.res" id="19_ookmc"]
 [ext_resource type="AudioStream" uid="uid://c6wkcq2iy687y" path="res://sounds/swipe.wav" id="21_dvkyg"]
@@ -365,7 +366,7 @@ emission_texture = SubResource("ViewportTexture_8e1bu")
 size = Vector3(1, 1, 0.0298462)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tb4yn"]
-size = Vector3(0.189941, 0.0945435, 0.0710754)
+size = Vector3(0.189941, 0.0945435, 0.0845509)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_a413t"]
 size = Vector3(1, 2.37891, 1)
@@ -535,6 +536,12 @@ size = Vector3(7.26953, 1, 56.9973)
 [sub_resource type="BoxShape3D" id="BoxShape3D_wvxuj"]
 size = Vector3(3.39471, 1, 0.212952)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ml5v5"]
+size = Vector3(1.88637, 3.00232, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t6udk"]
+size = Vector3(1.3164, 1.40643, 1.23035)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jp53q"]
 shader = ExtResource("23_h042j")
 shader_parameter/blur_amount = 5.0
@@ -558,6 +565,7 @@ mesh = SubResource("ArrayMesh_y4ewn")
 skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="CupOnDesk/Cup"]
+collision_layer = 9
 script = ExtResource("25_hni3l")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CupOnDesk/Cup/StaticBody3D"]
@@ -599,6 +607,7 @@ mesh = SubResource("ArrayMesh_km3ly")
 skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="ENV_MOD_Desk_Fan_Base_ENV_MOD_Desk_Fan_Base_001"]
+collision_layer = 9
 script = ExtResource("8_refy2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ENV_MOD_Desk_Fan_Base_ENV_MOD_Desk_Fan_Base_001/StaticBody3D"]
@@ -615,6 +624,7 @@ script = ExtResource("7_g7jux")
 
 [node name="TabletBody" type="StaticBody3D" parent="TabletOnDesk/Tablet"]
 transform = Transform3D(0.145326, 0, 0, 0, 0.145326, 0, 0, 0, 0.145326, 0, 0, 0)
+collision_layer = 9
 script = ExtResource("29_wa4as")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TabletOnDesk/Tablet/TabletBody"]
@@ -659,7 +669,7 @@ input_capture_on_drag = true
 script = ExtResource("11_xnjbl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TabletOnDesk/Tablet/HomeButton"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00785814, 0.0742461, 0.7061)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00785899, 0.0742459, 0.709468)
 shape = SubResource("BoxShape3D_tb4yn")
 
 [node name="Player" type="CharacterBody3D" parent="."]
@@ -676,12 +686,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68, 0)
 keep_aspect = 0
 cull_mask = 1048571
 current = true
+far = 100.0
 
-[node name="RayCast3D" type="RayCast3D" parent="Player/Head/Eyes"]
+[node name="Interaction" type="RayCast3D" parent="Player/Head/Eyes"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 target_position = Vector3(0, -2, 0)
 collide_with_areas = true
 script = ExtResource("32_5ed2l")
+
+[node name="FoxyLook" type="RayCast3D" parent="Player/Head/Eyes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+target_position = Vector3(0, -10, 0)
+collision_mask = 8
+collide_with_areas = true
+script = ExtResource("18_nks4h")
 
 [node name="Cursor" type="Sprite3D" parent="Player/Head/Eyes"]
 transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0, 0, -0.077)
@@ -701,6 +719,8 @@ transform = Transform3D(0.999722, 0, 0.0235598, 0.00126423, 0.998559, -0.0536456
 visible = false
 light_energy = 3.0
 shadow_enabled = true
+distance_fade_begin = 0.0
+distance_fade_shadow = 10.0
 spot_range = 23.6456
 spot_angle = 20.4784
 
@@ -854,6 +874,53 @@ shape = SubResource("BoxShape3D_ekjtp")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00558472, 0.493395, -1.49843)
 shape = SubResource("BoxShape3D_wvxuj")
 
+[node name="Interests" type="Node3D" parent="Map"]
+
+[node name="FrontInterest" type="Area3D" parent="Map/Interests"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.54641, -7.41032)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Interests/FrontInterest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000953674, -0.296204, 0)
+shape = SubResource("BoxShape3D_ml5v5")
+
+[node name="BackInterest" type="Area3D" parent="Map/Interests"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.546, 7.41)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Interests/BackInterest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000953674, -0.296204, 0)
+shape = SubResource("BoxShape3D_ml5v5")
+
+[node name="LeftInterest" type="Area3D" parent="Map/Interests"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.41, 1.546, 0)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Interests/LeftInterest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.286961, -1.09415, 0.00189209)
+shape = SubResource("BoxShape3D_t6udk")
+
+[node name="RightInterest" type="Area3D" parent="Map/Interests"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.00837, 1.546, 0)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Interests/RightInterest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.286961, -1.09415, 0.00189209)
+shape = SubResource("BoxShape3D_t6udk")
+
+[node name="UpInterest" type="Area3D" parent="Map/Interests"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.281883, 6.13204, 0)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Interests/UpInterest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.286961, -1.09415, 0.00189209)
+shape = SubResource("BoxShape3D_t6udk")
+
 [node name="Doors" type="Node3D" parent="."]
 
 [node name="FrontDoor" parent="Doors" instance=ExtResource("28_t03s8")]
@@ -887,7 +954,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 31.321
 root = NodePath("../..")
 
 [node name="Edam Foxy" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("26_xrtv4")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 61.7939, -0.031, -8.74062)
+transform = Transform3D(0.900713, 0, -0.434414, 0, 1, 0, 0.434414, 0, 0.900713, 13.843, -0.031, -21.102)
 root = NodePath("../..")
 
 [node name="Withered Bonnie" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("27_nd5pr")]

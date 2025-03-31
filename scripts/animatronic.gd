@@ -60,6 +60,13 @@ var flashlight = 0
 @onready var stepsound := $Step
 @onready var anim := $AnimationPlayer
 
+# For game sensitive animatronics to look at the things the player does
+@onready var skeleton = $"Edam Endo/Skeleton3D"
+var object_of_interest
+var new_rotation = Vector3.ZERO
+var rotx = 0
+var roty = 0
+
 signal paranormal_song
 
 func _ready() -> void:
@@ -92,6 +99,10 @@ func _process(delta: float) -> void:
 	#Music Box
 	if music_box_sensitive && root.is_winding == false:
 		root.musicbox = clamp(root.musicbox - (level * delta) * root.fun_multiplier, 0, 2000)
+	
+	#Look at stuff
+	if game_sensitive && guarding && object_of_interest != null:
+		_look_at_object(delta)
 	
 	if timer > 0:
 		#Make it easier on lower levels when they're in the office (But they leave faster with flashlight)
@@ -275,7 +286,7 @@ func _kill_vent_checker():
 		root.jammed_entrances.append(positions[current_position].office_entrance.entrance)
 
 func _game_check():
-	if root.p1_has_tablet: #TODO:  && Globals.purchased_apps > 0
+	if root.p1_has_tablet && root.purchased_apps > 0:
 		root.gamer_in_office = true
 		current_position = positions[current_position].next_position_indexes.pick_random()
 		_move_animatronic()
@@ -298,3 +309,15 @@ func _game_check():
 	# If no games, Foxy is mad
 	else:
 		root._jumpscare(self)
+
+func _look_at_object(delta):
+	var neck = $"Edam Endo/Skeleton3D/Neck/LookAt"
+	var neckbone = skeleton.find_bone("Head")
+	neck.look_at(object_of_interest.global_position, Vector3.UP, true)
+	var degrees = neck.rotation_degrees
+	degrees.x = clamp(degrees.x, -45, 50)
+	degrees.y = clamp(degrees.y, -90, 90)
+	rotx = lerp_angle(rotx, deg_to_rad(degrees.x), delta * 5)
+	roty = lerp_angle(roty, deg_to_rad(degrees.y), delta * 5)
+	new_rotation = Quaternion.from_euler(Vector3(rotx, roty, 0))
+	skeleton.set_bone_pose_rotation(neckbone, new_rotation)
