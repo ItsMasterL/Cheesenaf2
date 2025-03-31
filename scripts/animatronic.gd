@@ -71,6 +71,9 @@ func _ready() -> void:
 		is_friendly = is_edam_animatronic && root.edams_friendly
 	if game_sensitive:
 		root.game_sensitive.append(self)
+	# Keep friendly dancers on stage
+	if is_friendly && music_box_sensitive:
+		can_move = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -240,12 +243,18 @@ func _fail_attack():
 	_move_animatronic()
 
 func _change_dance(count : int, id : int = 0):
+	anim.play("Reset")
 	if always_random_dance || music_box_dances.size() < count:
 		anim.play(music_box_dances.pick_random())
 	else:
-		anim.play(music_box_dances[id])
+		anim.play(music_box_dances[id - 1])
+
+func _set_dance(dance : String):
+	anim.play("Reset")
+	anim.play(dance)
 
 func _paranormal_dance():
+	anim.play("Reset")
 	anim.play("Cheesestick")
 
 func _stop_dance():

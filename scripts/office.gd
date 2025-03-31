@@ -94,6 +94,7 @@ func _process(delta):
 	# Music box running out
 	if musicbox == 0:
 		musicbox_ran_out = true
+		music_box_ran_out.emit()
 	# Music box winding - Degredation is handled by each music box sensitive animatronic
 	if is_winding:
 		musicbox = clamp(musicbox + 200 * delta, 0, 2000)
@@ -103,7 +104,7 @@ func _process(delta):
 		if in_cams && using_tablet:
 			paranormal_primed = true
 		elif paranormal_primed:
-			paranormal_attacker._move_animatronic(paranormal_attacker.current_position)
+			paranormal_attacker._move_animatronic()
 			paranormal_attacker.timer = 8 - night
 			paranormal_primed = false
 	

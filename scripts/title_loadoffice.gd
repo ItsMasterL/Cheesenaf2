@@ -8,6 +8,7 @@ func _ready() -> void:
 		text.text = "[center]Night %s" % [Globals.night]
 	else:
 		text.text = "[center]Custom Night"
+		print(str(Globals.cheesestick))
 	await get_tree().create_timer(1.25).timeout
 	# This stopped working as soon as I made the button click events separate, so I had to move it here
 	get_tree().change_scene_to_file("res://scenes/office.tscn")

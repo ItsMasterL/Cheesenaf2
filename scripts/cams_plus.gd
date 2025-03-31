@@ -95,7 +95,7 @@ func _process(delta):
 			if randi_range(0,4) >= 2:
 				var id = randi_range(1,songcount)
 				musicbox.stream = load("res://sounds/music/musicbox%s.mp3" % [id])
-				if root.musicbox_ran_out == false:
+				if root.musicbox_ran_out == false || root.edams_friendly:
 					change_dance.emit(songcount, id)
 		else:
 			musicbox.stream = load("res://sounds/music/cheesestick.mp3")
