@@ -12,6 +12,7 @@ extends Node3D
 @export var jumpscare_length : float = 0.6667
 @export var jumpscare_animation_id : String = "Jumpscare"
 @export var jumpscare_position : Vector3 = Vector3(0, -0.719, -2.25)
+@export var jumpscare_rotation : Vector3 = Vector3(0, -90, 0)
 @export_category("Special Animatronics")
 ## If true, the animatronic will be stunned if the cameras are looked at.
 @export var camera_sensitive : bool
@@ -208,8 +209,12 @@ func _movement_check():
 				timer = 99
 				current_position = positions[current_position].next_position_indexes.pick_random()
 				return
-			# If it's an office space, register as such NOTE: Friendly animatronics do not count, nor does Edam Foxy while he's hanging out with you
 			if positions[current_position].office_entrance != null:
+				# If the door is closed and this animatronic checks before entering, immediately reset
+				if positions[current_position].office_entrance.check_before_entering && root.closed_entrances.has(positions[current_position].office_entrance.entrance):
+					current_position = positions[current_position].office_entrance.fail_position_index
+			if positions[current_position].office_entrance != null: # Check again in case they left before entering
+				# If it's an office space, register as such NOTE: Friendly animatronics do not count, nor does Edam Foxy while he's hanging out with you
 				if is_friendly == false:
 					root.animatronics_in_office += 1
 				if game_sensitive:

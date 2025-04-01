@@ -950,7 +950,7 @@ root = NodePath("../..")
 check_frequency = 3.561
 
 [node name="Edam Chica" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("25_m5hqu")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 31.3211, -0.0622944, -8.87918)
+transform = Transform3D(0.745697, 0, -0.666285, 0, 1, 0, 0.666285, 0, 0.745697, 10.1338, 1.21291, 16.9399)
 root = NodePath("../..")
 
 [node name="Edam Foxy" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("26_xrtv4")]

@@ -12,3 +12,5 @@ extends Resource
 @export_enum("Front Door", "Back Door", "Left Vent", "Right Vent", "Ceiling Vent") var entrance : int
 ## Which position as defined in the above field, "Positions", the animatronic will be sent to if their attack check fails from the player hiding under a desk or from a flashlight.
 @export var fail_position_index : int
+## Check to see if the entryway is blocked before moving to the space - Useful for animatronics that clip/go past the doorway
+@export var check_before_entering : bool

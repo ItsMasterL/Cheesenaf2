@@ -1,5 +1,4 @@
 extends Node3D
-
 @onready var blur := $BlurShader/ColorRect
 
 var night = Globals.night
@@ -209,7 +208,7 @@ func _jumpscare(animatronic: Node3D):
 	under_desk = false
 	animatronic.can_move = false
 	animatronic.position = animatronic.jumpscare_position
-	animatronic.rotation_degrees = Vector3(0, -90, 0)
+	animatronic.rotation_degrees = animatronic.jumpscare_rotation
 	var anim : AnimationPlayer = animatronic.get_child(1)
 	var sound : AudioStreamPlayer = animatronic.get_child(2)
 	if animatronic.ignore_save == true && animatronic.save_jumpscare_id != animatronic.jumpscare_animation_id:

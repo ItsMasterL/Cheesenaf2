@@ -1,9 +1,11 @@
-[gd_scene load_steps=30 format=3 uid="uid://d1ffrbutvy4e"]
+[gd_scene load_steps=32 format=3 uid="uid://d1ffrbutvy4e"]
 
 [ext_resource type="Script" path="res://scripts/title_menu.gd" id="1_ads83"]
 [ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://consolas.ttf" id="2_aik6n"]
 [ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://sounds/change_cam.wav" id="4_cl3hh"]
-[ext_resource type="Texture2D" uid="uid://cl7ngqp6v450t" path="res://textures/cheese.png" id="4_t4b52"]
+[ext_resource type="Texture2D" uid="uid://cl7ngqp6v450t" path="res://textures/Renders/cheese.png" id="4_t4b52"]
+[ext_resource type="Texture2D" uid="uid://h1e2tcluwpxe" path="res://textures/Renders/TitleEdams.png" id="5_mtfap"]
+[ext_resource type="Texture2D" uid="uid://cabkjb7bh6s8o" path="res://textures/Renders/TitleWithers.png" id="6_xg12t"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ptv6"]
 
@@ -55,7 +57,7 @@
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_j144y"]
 
-[node name="TitleMenu" type="Control"]
+[node name="TitleMenu" type="Control" node_paths=PackedStringArray("title_renders")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -63,6 +65,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ads83")
+title_renders = [NodePath("Edams"), NodePath("Cheese"), NodePath("Withers")]
+visible_render = 1
 metadata/_edit_lock_ = true
 
 [node name="Title" type="RichTextLabel" parent="."]
@@ -257,10 +261,27 @@ volume_db = -10.0
 autoplay = true
 
 [node name="Cheese" type="Sprite2D" parent="."]
+visible = false
 z_index = -2
 material = SubResource("CanvasItemMaterial_j144y")
 position = Vector2(583, 328)
 texture = ExtResource("4_t4b52")
+
+[node name="Edams" type="Sprite2D" parent="."]
+visible = false
+z_index = -2
+material = SubResource("CanvasItemMaterial_j144y")
+position = Vector2(727, 362)
+scale = Vector2(0.535185, 0.535185)
+texture = ExtResource("5_mtfap")
+
+[node name="Withers" type="Sprite2D" parent="."]
+visible = false
+z_index = -2
+material = SubResource("CanvasItemMaterial_j144y")
+position = Vector2(727, 362)
+scale = Vector2(0.535185, 0.535185)
+texture = ExtResource("6_xg12t")
 
 [connection signal="pressed" from="NewGame" to="." method="_start_singleplayer"]
 [connection signal="pressed" from="Continue" to="." method="_start_singleplayer" binds= [true]]

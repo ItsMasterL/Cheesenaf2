@@ -94,6 +94,7 @@ search_under_desk = false
 flashlight_weakness = false
 entrance = 2
 fail_position_index = 4
+check_before_entering = true
 
 [sub_resource type="Resource" id="Resource_r6c4r"]
 resource_name = "Left Office Vent"
@@ -113,6 +114,7 @@ search_under_desk = false
 flashlight_weakness = false
 entrance = 3
 fail_position_index = 7
+check_before_entering = true
 
 [sub_resource type="Resource" id="Resource_8r12v"]
 resource_name = "Right Office Vent"
@@ -132,6 +134,7 @@ search_under_desk = false
 flashlight_weakness = false
 entrance = 4
 fail_position_index = 11
+check_before_entering = true
 
 [sub_resource type="Resource" id="Resource_sw0je"]
 resource_name = "Office Ceiling Vent"

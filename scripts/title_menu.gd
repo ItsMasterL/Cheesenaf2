@@ -1,4 +1,11 @@
 extends Control
+
+@export var title_renders : Array[Sprite2D]
+@export var visible_render = 0
+var time = 4
+var opacity = 1
+var flicker_timer = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for b in find_children("*", "Button", false):
@@ -6,6 +13,26 @@ func _ready():
 		b.mouse_exited.connect(_on_button_unhover.bind(b.get_index()))
 		# This can be assigned manually
 		#b.pressed.connect(_on_button_pressed)
+	
+	if title_renders.is_empty() == false:
+		for render in title_renders:
+			render.visible = false
+		title_renders[visible_render].visible = true
+
+func _process(delta):
+	if title_renders.is_empty() == false:
+		time += delta
+		if randi_range(0, 60) == 0:
+			flicker_timer = randf_range(0.000,0.100)
+		opacity = clampf(abs(sin(time/4)), 0, 1)
+		if opacity <= 0.01:
+			title_renders[visible_render].visible = false
+			visible_render = randi_range(0, title_renders.size() - 1)
+			title_renders[visible_render].visible = true
+		if flicker_timer > 0:
+			opacity -= 0.25
+			flicker_timer = clampf(flicker_timer - delta, 0, 1)
+		title_renders[visible_render].self_modulate.a = opacity
 
 func _on_button_hover(sender: int):
 	var button = get_child(sender)
