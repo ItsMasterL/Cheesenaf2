@@ -1,0 +1,255 @@
+[gd_scene load_steps=13 format=3 uid="uid://c0spfq78wftov"]
+
+[ext_resource type="Script" path="res://scripts/title_menu.gd" id="1_gen20"]
+[ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://consolas.ttf" id="2_dmw46"]
+[ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://sounds/change_cam.wav" id="3_mw3l6"]
+[ext_resource type="AudioStream" uid="uid://l48yusevyfck" path="res://sounds/door.wav" id="4_mj8cj"]
+[ext_resource type="Script" path="res://scripts/volume_slider.gd" id="5_cli0j"]
+[ext_resource type="Script" path="res://scripts/volume_manager.gd" id="5_y1g3s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ptv6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_27atk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5pxcu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8w5np"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hjsyr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rsbhx"]
+
+[node name="CustomNight" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gen20")
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 598.0
+offset_right = 302.0
+offset_bottom = 627.0
+theme_override_fonts/font = ExtResource("2_dmw46")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2ptv6")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_27atk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5pxcu")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_8w5np")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_hjsyr")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rsbhx")
+alignment = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Back"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -9.5
+offset_right = 126.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_dmw46")
+theme_override_font_sizes/normal_font_size = 20
+text = "Back to Main Menu"
+scroll_active = false
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_mw3l6")
+volume_db = -10.0
+autoplay = true
+
+[node name="TestSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_mj8cj")
+script = ExtResource("5_y1g3s")
+
+[node name="SFX" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 105.0
+offset_right = 368.0
+offset_bottom = 126.0
+max_value = 1.0
+step = 0.001
+script = ExtResource("5_cli0j")
+sound_type = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SFX"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.5
+offset_top = -32.5
+offset_right = 63.5
+offset_bottom = -13.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_dmw46")
+theme_override_font_sizes/normal_font_size = 20
+text = "SFX Volume"
+scroll_active = false
+
+[node name="Voice" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 166.0
+offset_right = 368.0
+offset_bottom = 187.0
+max_value = 1.0
+step = 0.001
+script = ExtResource("5_cli0j")
+sound_type = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Voice"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.5
+offset_top = -32.5
+offset_right = 63.5
+offset_bottom = -13.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_dmw46")
+theme_override_font_sizes/normal_font_size = 20
+text = "Voice Volume"
+scroll_active = false
+
+[node name="Music" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 221.0
+offset_right = 368.0
+offset_bottom = 242.0
+max_value = 1.0
+step = 0.001
+script = ExtResource("5_cli0j")
+sound_type = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Music"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.5
+offset_top = -32.5
+offset_right = 63.5
+offset_bottom = -13.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_dmw46")
+theme_override_font_sizes/normal_font_size = 20
+text = "Music Volume"
+scroll_active = false
+
+[node name="Ambient" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 275.0
+offset_right = 368.0
+offset_bottom = 296.0
+max_value = 1.0
+step = 0.001
+script = ExtResource("5_cli0j")
+sound_type = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Ambient"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.5
+offset_top = -32.5
+offset_right = 63.5
+offset_bottom = -13.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_dmw46")
+theme_override_font_sizes/normal_font_size = 20
+text = "Ambience Volume"
+scroll_active = false
+
+[node name="Jumpscare" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 324.0
+offset_right = 368.0
+offset_bottom = 345.0
+max_value = 1.0
+step = 0.001
+script = ExtResource("5_cli0j")
+sound_type = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Jumpscare"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.5
+offset_top = -32.5
+offset_right = 63.5
+offset_bottom = -13.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_dmw46")
+theme_override_font_sizes/normal_font_size = 20
+text = "Jumpscare Volume"
+scroll_active = false
+
+[node name="Tablet" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 385.0
+offset_right = 368.0
+offset_bottom = 406.0
+max_value = 1.0
+step = 0.001
+script = ExtResource("5_cli0j")
+sound_type = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Tablet"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.5
+offset_top = -32.5
+offset_right = 63.5
+offset_bottom = -13.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_dmw46")
+theme_override_font_sizes/normal_font_size = 20
+text = "Tablet Volume"
+scroll_active = false
+
+[connection signal="pressed" from="Back" to="." method="_change_menu" binds= ["menu"]]

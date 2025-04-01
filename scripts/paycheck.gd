@@ -1,10 +1,10 @@
 extends Control
 
-
+@export var reward : float = 16
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$"surprisingly not placeholder/AnimationPlayer".play("adam_dance")
-	Globals.money += 16
+	Globals.money += reward
 	Globals._save()
 	await get_tree().create_timer(15).timeout
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

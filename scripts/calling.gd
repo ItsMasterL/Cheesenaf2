@@ -24,7 +24,13 @@ func _start_call():
 func _answer():
 	audio.stop()
 	#TODO: Call icon in top bar
-	audio.stream = load("res://sounds/dialogue/c2call%s.wav" % root.night)
+	if Globals.night == 2 || Globals.night == 3:
+		if Globals.saw_foxy_night_1:
+			audio.stream = load("res://sounds/dialogue/c2call%sa.wav" % root.night)
+		else:
+			audio.stream = load("res://sounds/dialogue/c2call%sb.wav" % root.night)
+	else:
+		audio.stream = load("res://sounds/dialogue/c2call%s.wav" % root.night)
 	notif.visible = false
 	audio.play()
 

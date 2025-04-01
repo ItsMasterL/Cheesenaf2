@@ -287,4 +287,4 @@ texture = ExtResource("6_xg12t")
 [connection signal="pressed" from="Continue" to="." method="_start_singleplayer" binds= [true]]
 [connection signal="pressed" from="CustomNight" to="." method="_change_menu" binds= ["customnight"]]
 [connection signal="pressed" from="Extras" to="." method="_change_menu" binds= ["extras"]]
-[connection signal="pressed" from="Settings" to="." method="_change_menu" binds= ["extras"]]
+[connection signal="pressed" from="Settings" to="." method="_change_menu" binds= ["settings"]]

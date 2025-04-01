@@ -31,12 +31,12 @@ var saw_foxy_night_1 : bool = false
 
 # User Settings
 var mouse_sensitivity : float = 1.0
-var sfx_volume : int = 100
-var voice_volume : int = 100
-var music_volume : int = 100
-var tablet_volume : int = 100
-var ambient_volume : int = 100
-var jumpscare_volume : int = 100
+var sfx_volume : float = 1
+var voice_volume : float = 1
+var music_volume : float = 1
+var tablet_volume : float = 1
+var ambient_volume : float = 1
+var jumpscare_volume : float = 1
 var maximize = false
 
 #region Applications

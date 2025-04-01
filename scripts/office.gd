@@ -67,7 +67,8 @@ func _ready():
 	_set_entrances(closed_entrances)
 	# Remove Bonnie when he's dead
 	if night > 2 && night < 6:
-		animatronics.get_child(1).queue_free()
+		animatronics.get_child(1).visible = false
+		animatronics.get_child(1).can_move = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -202,7 +203,7 @@ func _jumpscare(animatronic: Node3D):
 					gamer.position = gamer.jumpscare_position
 					gamer.rotation_degrees = gamer.jumpscare_rotation
 					gamer.anim.play(animatronic.save_jumpscare_id)
-				else:
+				elif animatronic.ignore_save == false:
 					animatronic._fail_attack()
 					_jumpscare_save(gamer)
 					return

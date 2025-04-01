@@ -323,10 +323,11 @@ func _flash(value : float):
 	flashlight = clamp(flashlight + value, 0, 5)
 
 func _kill_vent_checker():
-	if can_move == false:
+	if can_move == false || positions[current_position].office_entrance == null:
 		return
 	if root.closed_entrances.has(positions[current_position].office_entrance.entrance):
 		var warning := $Warning
+		anim.play("Death")
 		warning.stream = load("res://sounds/animatronic_death.wav")
 		warning.play()
 		can_move = false

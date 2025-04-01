@@ -1,0 +1,227 @@
+[gd_scene load_steps=11 format=3 uid="uid://cxwqc43ue6jdw"]
+
+[ext_resource type="Script" path="res://scripts/paycheck.gd" id="1_1xeia"]
+[ext_resource type="AudioStream" uid="uid://dbn231xhw3q55" path="res://sounds/music/paycheck820.mp3" id="2_7b4ls"]
+[ext_resource type="Texture2D" uid="uid://bvte0l0l1kuts" path="res://textures/adam.png" id="3_jjyru"]
+[ext_resource type="Script" path="res://scripts/volume_manager.gd" id="3_yeu3d"]
+[ext_resource type="Texture2D" uid="uid://qimxj426basq" path="res://textures/paycheck.png" id="4_6rlv0"]
+[ext_resource type="FontFile" uid="uid://pwmyfihc72ad" path="res://fennario.ttf" id="5_eqjgs"]
+[ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://consolas.ttf" id="6_htdee"]
+
+[sub_resource type="Animation" id="Animation_aguet"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(591, 648)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:skew")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.471239]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4offa"]
+resource_name = "adam_dance"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.366667, 0.566667, 0.766667, 0.966667, 1.16667, 1.33333, 1.5, 1.66667, 1.86667, 2.06667, 2.26667, 2.46667, 2.66667, 2.83333, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(591, 648), Vector2(591, 648), Vector2(591, 648), Vector2(591, 648), Vector2(591, 648), Vector2(591, 648), Vector2(591, 648), Vector2(591, 547.76), Vector2(591, 648), Vector2(591, 648), Vector2(591, 648), Vector2(591, 648), Vector2(591, 648), Vector2(591, 648), Vector2(591, 648), Vector2(591, 547.76), Vector2(591, 648)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.366667, 0.566667, 0.766667, 0.966667, 1.16667, 1.33333, 1.5, 1.66667, 1.86667, 2.06667, 2.26667, 2.46667, 2.66667, 2.83333, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 0.506112), Vector2(1, 1), Vector2(1, 0.506112), Vector2(1, 1), Vector2(1, 0.506112), Vector2(1, 1), Vector2(1, 0.506112), Vector2(-1, 0.862), Vector2(1, 0.506112), Vector2(1, 1), Vector2(1, 0.506112), Vector2(1, 1), Vector2(1, 0.506112), Vector2(1, 1), Vector2(1, 0.506112), Vector2(-1, 0.862), Vector2(1, 0.506112)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:skew")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.366667, 0.566667, 0.766667, 0.966667, 1.16667, 1.33333, 1.5, 1.66667, 1.86667, 2.06667, 2.26667, 2.46667, 2.66667, 2.83333, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.471239, 0.0, 0.471239, 0.0, -0.471239, 0.0, 0.0, 0.0, 0.471239, 0.0, -0.471239, 0.0, 0.471239, 0.0, 0.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:rotation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.366667, 0.566667, 0.766667, 0.966667, 1.16667, 1.33333, 1.5, 1.66667, 1.86667, 2.06667, 2.26667, 2.46667, 2.66667, 2.83333, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jipu1"]
+_data = {
+"RESET": SubResource("Animation_aguet"),
+"adam_dance": SubResource("Animation_4offa")
+}
+
+[node name="CustomNight" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1xeia")
+reward = 16.05
+metadata/_edit_lock_ = true
+
+[node name="Paycheck" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_7b4ls")
+autoplay = true
+script = ExtResource("3_yeu3d")
+sound_type = 2
+
+[node name="surprisingly not placeholder" type="Sprite2D" parent="."]
+position = Vector2(591, 648)
+skew = -0.471239
+texture = ExtResource("3_jjyru")
+offset = Vector2(0, -204.5)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="surprisingly not placeholder"]
+libraries = {
+"": SubResource("AnimationLibrary_jipu1")
+}
+
+[node name="Paycheck2" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(783, 213)
+scale = Vector2(1.33908, 1.33908)
+texture = ExtResource("4_6rlv0")
+
+[node name="Name" type="Label" parent="Paycheck2"]
+offset_left = -182.215
+offset_top = -16.4292
+offset_right = -73.2146
+offset_bottom = 6.57081
+rotation = -0.0436332
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_eqjgs")
+text = "Adam Sandler"
+
+[node name="Date" type="Label" parent="Paycheck2"]
+offset_left = 134.421
+offset_top = -61.9828
+offset_right = 243.421
+offset_bottom = -38.9828
+rotation = -0.0436332
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_eqjgs")
+text = "11-29-14"
+
+[node name="Memo" type="Label" parent="Paycheck2"]
+offset_left = -195.657
+offset_top = 64.97
+offset_right = 98.3434
+offset_bottom = 87.97
+rotation = -0.0436332
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_eqjgs")
+text = "The Ultimate Sandler (Proven)"
+
+[node name="From" type="Label" parent="Paycheck2"]
+offset_left = 53.0214
+offset_top = 53.0215
+offset_right = 347.021
+offset_bottom = 76.0215
+rotation = -0.0436332
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_eqjgs")
+text = "Fazbear Entertainment"
+
+[node name="Amount1" type="Label" parent="Paycheck2"]
+offset_left = 148.609
+offset_top = -28.3777
+offset_right = 257.609
+offset_bottom = -5.37768
+rotation = -0.0436332
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_eqjgs")
+text = "16.05"
+
+[node name="Amount2" type="Label" parent="Paycheck2"]
+offset_left = 16.4292
+offset_top = 2.98712
+offset_right = 210.429
+offset_bottom = 25.9872
+rotation = -0.0436332
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_eqjgs")
+text = "Sixteen and 5/100"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("6_htdee")
+theme_override_font_sizes/font_size = 56
+text = "Congratulations!
+You're did it
+big time!!!
+
+You're the
+ultimate
+Sandler !!!!"
