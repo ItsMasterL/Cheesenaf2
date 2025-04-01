@@ -1,3 +1,4 @@
+@tool
 extends Camera3D
 
 @export var first_rotation : Vector3

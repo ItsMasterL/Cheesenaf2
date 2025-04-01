@@ -102,13 +102,16 @@ _data = {
 }
 
 [node name="Edam Freddy" instance=ExtResource("1_qyyjk")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 68.541, 1.296, 0)
 script = ExtResource("1_u4dqd")
 animatronic = "edam_freddy"
 positions = Array[ExtResource("2_qge1l")]([SubResource("Resource_qbims"), SubResource("Resource_xwm0t"), SubResource("Resource_ofp60"), SubResource("Resource_8vys7")])
+jumpscare_position = Vector3(0, -0.719, -3.07)
 jumpscare_rotation = Vector3(0, 180, 0)
 music_box_sensitive = true
 music_box_dances = Array[String](["Dance/DefaultDance", "Dance/Heavy_Conga", "Dance/Horny", "Dance/Markiplier", "Dance/ChickenDance", "Dance/PurpleGuy", "Dance/MarkiplierDanceIntro", "Dance/GangnamStyle", "Dance/CaliforniaGirls", "Dance/GetDown"])
 is_edam_animatronic = true
+test_jumpscare = null
 
 [node name="Edam Endo" parent="." index="0"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.0153199, 0, 0)

@@ -132,13 +132,13 @@ func _process(delta):
 				_jumpscare(animatronics.get_child(5))
 			if Input.is_key_pressed(KEY_F7):
 				_jumpscare(animatronics.get_child(6))
-			if Input.is_key_pressed(KEY_F8):
-				_jumpscare(animatronics.get_child(7))
 			if Input.is_key_pressed(KEY_F9):
-				_jumpscare(animatronics.get_child(8))
+				_jumpscare(animatronics.get_child(7))
 			if Input.is_key_pressed(KEY_F10):
+				_jumpscare(animatronics.get_child(8))
+			if Input.is_key_pressed(KEY_F11):
 				_jumpscare(animatronics.get_child(9))
-		if Input.is_key_pressed(KEY_F11):
+		if Input.is_key_pressed(KEY_F12):
 			time = 540
 
 func _get_ai(animatronic: String) -> int:
@@ -198,8 +198,10 @@ func _jumpscare(animatronic: Node3D):
 		for gamer in game_sensitive:
 			if gamer.guarding == true: # Only is set to this when in the office
 				if animatronic.ignore_save == true && animatronic.save_jumpscare_id != animatronic.jumpscare_animation_id:
+					gamer.can_move = false
+					gamer.position = gamer.jumpscare_position
+					gamer.rotation_degrees = gamer.jumpscare_rotation
 					gamer.anim.play(animatronic.save_jumpscare_id)
-					pass
 				else:
 					animatronic._fail_attack()
 					_jumpscare_save(gamer)
@@ -207,13 +209,16 @@ func _jumpscare(animatronic: Node3D):
 	can_jumpscare = false
 	under_desk = false
 	animatronic.can_move = false
-	animatronic.position = animatronic.jumpscare_position
-	animatronic.rotation_degrees = animatronic.jumpscare_rotation
 	var anim : AnimationPlayer = animatronic.get_child(1)
 	var sound : AudioStreamPlayer = animatronic.get_child(2)
-	if animatronic.ignore_save == true && animatronic.save_jumpscare_id != animatronic.jumpscare_animation_id:
+	if gamer_in_office && animatronic.ignore_save == true && animatronic.save_jumpscare_id != animatronic.jumpscare_animation_id:
+		animatronic.position = animatronic.save_ignore_jumpscare_position
+		animatronic.rotation_degrees = animatronic.save_ignore_jumpscare_rotation
+		sound.stream = load("res://sounds/jumpscare_interrupted.wav")
 		anim.play(animatronic.save_jumpscare_id)
 	else:
+		animatronic.position = animatronic.jumpscare_position
+		animatronic.rotation_degrees = animatronic.jumpscare_rotation
 		anim.play(animatronic.jumpscare_animation_id)
 	sound.play()
 	var playercamanim := $Player/Head/Eyes/AnimationPlayer

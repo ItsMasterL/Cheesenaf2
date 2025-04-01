@@ -1,3 +1,4 @@
+@tool
 extends Node3D
 
 @export var root : Node3D
@@ -25,6 +26,8 @@ extends Node3D
 @export var ignore_save : bool
 ## The animation ID to play on a save ignore. This plays on both this and the saving animatronic, so make sure they both have the animation and are synced. However, if it is the same as the jumpscare animation ID, it only plays on this animatronic.
 @export var save_jumpscare_id : String = "SaveInterrupt"
+@export var save_ignore_jumpscare_position : Vector3 = Vector3(0, -0.719, -2.25)
+@export var save_ignore_jumpscare_rotation : Vector3 = Vector3(0, -90, 0)
 @export_subgroup("Game sensitive")
 ## If true, the animatronic will only succeed a jumpscare attempt if the player does not have the tablet, has no installed games, or shakes their head no to the animatronic's voice line requesting to watch you play. It will stay in the last index of it's position array until either a hidden timer expires (1-2 in game hours) or until another animatronic attempts to jumpscare the player, in which case the animatronic will jumpscare the player itself, play an apology voice line, then return to position index 0 for the rest of the night
 @export var game_sensitive : bool
@@ -48,7 +51,39 @@ extends Node3D
 ## Set by combo of is_edam_animatronic and office's edams_friendly. Can be set in the editor. These animatronics will never jumpscare the player.
 @export var is_friendly : bool
 
-var current_position = 0
+@export_category("Editor")
+@export var test_jumpscare = false:
+	set(jumpscare_test):
+		if jumpscare_test == true && Engine.is_editor_hint():
+			test_jumpscare = false
+			position = jumpscare_position
+			rotation_degrees = jumpscare_rotation
+			$AnimationPlayer.play(jumpscare_animation_id)
+			if jumpscare_length > 0.7:
+				$"../../Player/Head/Eyes/AnimationPlayer".play("Long")
+			else:
+				$"../../Player/Head/Eyes/AnimationPlayer".play("Default")
+@export var test_save_ignore_jumpscare = false:
+	set(jumpscare_test):
+		if jumpscare_test == true && Engine.is_editor_hint():
+			test_save_ignore_jumpscare = false
+			position = save_ignore_jumpscare_position
+			rotation_degrees = save_ignore_jumpscare_rotation
+			$AnimationPlayer.play(save_jumpscare_id)
+			if jumpscare_length > 0.7:
+				$"../../Player/Head/Eyes/AnimationPlayer".play("Long")
+			else:
+				$"../../Player/Head/Eyes/AnimationPlayer".play("Default")
+@export var current_position = 0: #Also used normally
+	set(new_position):
+		current_position = new_position
+		if Engine.is_editor_hint():
+			position = positions[current_position].position
+			rotation_degrees = positions[current_position].rotation
+			scale = positions[current_position].scale
+			$AnimationPlayer.play(positions[current_position].animation_id)
+			$"../../Player/Head/Eyes/AnimationPlayer".play("RESET")
+
 # Usually used to disable movement checks during jumpscares
 var can_move = true
 # Used only for game sensitive animatronics
@@ -71,20 +106,23 @@ var roty = 0
 signal paranormal_song
 
 func _ready() -> void:
-	position = positions[0].position
-	rotation_degrees = positions[0].rotation
-	scale = positions[0].scale
-	anim.play(positions[0].animation_id)
-	if is_friendly == false: # In case someone wants an always friendly animatronic.
-		is_friendly = is_edam_animatronic && root.edams_friendly
-	if game_sensitive:
-		root.game_sensitive.append(self)
-	# Keep friendly dancers on stage
-	if is_friendly && music_box_sensitive:
-		can_move = false
+	if Engine.is_editor_hint() == false:
+		position = positions[0].position
+		rotation_degrees = positions[0].rotation
+		scale = positions[0].scale
+		anim.play(positions[0].animation_id)
+		if is_friendly == false: # In case someone wants an always friendly animatronic.
+			is_friendly = is_edam_animatronic && root.edams_friendly
+		if game_sensitive:
+			root.game_sensitive.append(self)
+		# Keep friendly dancers on stage
+		if is_friendly && music_box_sensitive:
+			can_move = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
 	# Camera sensitivity
 	if root.in_cams && root.using_tablet && camera_sensitive && positions[current_position].office_entrance == null:
 		camera_cooldown = randf_range(2,23 - level)
@@ -104,6 +142,10 @@ func _process(delta: float) -> void:
 	#Look at stuff
 	if game_sensitive && guarding && object_of_interest != null:
 		_look_at_object(delta)
+	# Debug - Summon to player
+	if OS.is_debug_build() && game_sensitive && guarding == false && Input.is_key_pressed(KEY_BACKSPACE):
+		current_position = positions.size() - 2
+		_game_check()
 	
 	if timer > 0:
 		#Make it easier on lower levels when they're in the office (But they leave faster with flashlight)
