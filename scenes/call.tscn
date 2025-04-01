@@ -20,6 +20,7 @@ script = ExtResource("1_qo780")
 
 [node name="Call" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_v3j7f")
+bus = &"Voice"
 
 [node name="Notification" type="ColorRect" parent="."]
 visible = false

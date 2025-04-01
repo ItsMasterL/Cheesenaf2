@@ -70,3 +70,4 @@ libraries = {
 [node name="Close" type="AudioStreamPlayer2D" parent="." index="2"]
 stream = ExtResource("2_fpwit")
 volume_db = -10.0
+bus = &"SFX"

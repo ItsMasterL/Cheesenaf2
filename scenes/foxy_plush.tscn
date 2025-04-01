@@ -1469,6 +1469,7 @@ shape = SubResource("SphereShape3D_u2ig2")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Skeleton3D/RIG_Foxy_Clean_mo_002/RIG_Foxy_Clean_mo_002"]
 stream = ExtResource("6_l5wv4")
 volume_db = -15.0
+bus = &"SFX"
 
 [node name="RIG_Foxy_Clean_mo_006" type="BoneAttachment3D" parent="Skeleton3D"]
 transform = Transform3D(1.09941, -0.0345492, -0.147726, 0.0579553, 1.09435, 0.175377, 0.140206, -0.181445, 1.08588, 0.863062, -28.3554, 6.62814)

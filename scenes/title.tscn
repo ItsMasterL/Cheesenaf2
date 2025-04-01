@@ -34,6 +34,7 @@ position = Vector2(576, 330)
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_w6ovr")
 autoplay = true
+bus = &"Music"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 0

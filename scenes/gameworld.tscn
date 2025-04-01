@@ -50,10 +50,12 @@ listing_template = ExtResource("2_gjbuv")
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_0na3m")
 volume_db = -15.0
+bus = &"Tablet"
 
 [node name="Kaching" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_qcx1t")
 volume_db = -15.0
+bus = &"Tablet"
 
 [node name="Home" type="Control" parent="."]
 clip_contents = true

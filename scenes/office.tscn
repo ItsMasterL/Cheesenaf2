@@ -509,12 +509,12 @@ spread = 5.0
 initial_velocity_min = 5.0
 initial_velocity_max = 10.0
 
-[sub_resource type="Curve" id="Curve_203xy"]
+[sub_resource type="Curve" id="Curve_7v2fs"]
 max_value = 0.01
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.214751, 0.01), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5wy1g"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7hnk2"]
 transparency = 1
 cull_mode = 2
 vertex_color_use_as_albedo = true
@@ -522,10 +522,10 @@ albedo_color = Color(1, 1, 1, 0.152941)
 use_particle_trails = true
 
 [sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_4fnyf"]
-material = SubResource("StandardMaterial3D_5wy1g")
+material = SubResource("StandardMaterial3D_7hnk2")
 sections = 2
 section_length = 0.005
-curve = SubResource("Curve_203xy")
+curve = SubResource("Curve_7v2fs")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7ogb0"]
 size = Vector3(3.05475, 0.0235596, 1.17133)
@@ -575,6 +575,7 @@ shape = SubResource("CylinderShape3D_b84qd")
 [node name="Sip" type="AudioStreamPlayer" parent="CupOnDesk/Cup"]
 stream = ExtResource("26_plhk0")
 volume_db = -5.0
+bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CupOnDesk/Cup"]
 libraries = {
@@ -634,6 +635,7 @@ shape = SubResource("BoxShape3D_8yfxk")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TabletOnDesk/Tablet"]
 stream = ExtResource("12_4d1sb")
 volume_db = -20.0
+bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TabletOnDesk/Tablet"]
 reset_on_save = false
@@ -732,6 +734,7 @@ spot_angle = 36.1641
 [node name="FlashlightClick" type="AudioStreamPlayer" parent="Player/Head/Eyes/SpotLight3D"]
 stream = ExtResource("15_8e4mc")
 volume_db = -20.0
+bus = &"SFX"
 
 [node name="RayCast3D" type="RayCast3D" parent="Player/Head/Eyes/SpotLight3D"]
 transform = Transform3D(0.999702, -0.0243987, -0.00127868, 0, 0.052336, -0.99863, 0.0244322, 0.998331, 0.0523203, -0.181, 0.168, 0.236)
@@ -769,14 +772,17 @@ texture = ExtResource("15_batyp")
 [node name="MoveUnderDesk" type="AudioStreamPlayer" parent="Player/Head"]
 stream = ExtResource("18_jcvyf")
 volume_db = -5.0
+bus = &"SFX"
 
 [node name="Breathing" type="AudioStreamPlayer" parent="Player/Head"]
 stream = ExtResource("17_eaqhx")
 volume_db = -10.0
+bus = &"Voice"
 
 [node name="LoseTablet" type="AudioStreamPlayer" parent="Player/Head"]
 stream = ExtResource("21_dvkyg")
 volume_db = -10.0
+bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 libraries = {
@@ -941,9 +947,7 @@ transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -
 [node name="Animatronics" type="Node3D" parent="."]
 
 [node name="Edam Freddy" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("23_d180k")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 68.541, 1.296, 0)
 root = NodePath("../..")
-test_jumpscare = false
 
 [node name="Edam Bonnie" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("22_fo68b")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 39.35, -0.048, 9.265)
@@ -973,11 +977,9 @@ root = NodePath("../..")
 [node name="Withered Freddy" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("30_uyssn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.582, 5.263, -11.521)
 root = NodePath("../..")
-test_save_ignore_jumpscare = false
 current_position = 8
 
 [node name="Cheesestick" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("31_a7pji")]
-transform = Transform3D(1.2958, 0, -1.38957, 0, 1.9, 0, 1.38957, 0, 1.2958, -2.573, 0, -8.65)
 root = NodePath("../..")
 
 [node name="PinkSlip" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("38_ry2hb")]

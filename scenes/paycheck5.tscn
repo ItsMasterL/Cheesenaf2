@@ -131,6 +131,7 @@ metadata/_edit_lock_ = true
 stream = ExtResource("2_sirik")
 volume_db = -10.0
 autoplay = true
+bus = &"Music"
 
 [node name="surprisingly not placeholder" type="Sprite2D" parent="."]
 position = Vector2(591, 648)

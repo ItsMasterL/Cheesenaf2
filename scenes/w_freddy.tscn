@@ -140,7 +140,6 @@ jumpscare_rotation = Vector3(0, 0, 0)
 ignore_save = true
 save_jumpscare_id = "Interrupt"
 save_ignore_jumpscare_position = Vector3(0, -0.609, -2.25)
-test_save_ignore_jumpscare = null
 
 [node name="Skeleton3D" parent="RIG_Freddy_ao_001" index="0"]
 bones/0/position = Vector3(-99.5827, 1.78738, -3.74956)
@@ -289,8 +288,10 @@ shape = SubResource("SphereShape3D_6m6pw")
 [node name="Jumpscare" type="AudioStreamPlayer" parent="." index="2"]
 stream = ExtResource("3_q7pj4")
 volume_db = -5.0
+bus = &"Jumpscare"
 
 [node name="Step" type="AudioStreamPlayer3D" parent="." index="3"]
 volume_db = -30.0
 unit_size = 100.0
 max_db = -10.0
+bus = &"SFX"

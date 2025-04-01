@@ -56,27 +56,33 @@ stream = ExtResource("5_enhw5")
 volume_db = -12.0
 autoplay = true
 panning_strength = 0.0
+bus = &"Tablet"
 
 [node name="ChangeCam" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_hest6")
 panning_strength = 0.0
+bus = &"Tablet"
 
 [node name="CamTurn" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(-2, -1)
 scale = Vector2(1.08354, 1.09726)
 stream = ExtResource("8_wd7h4")
 volume_db = -22.5
+bus = &"Tablet"
 
 [node name="Light" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_8233h")
 volume_db = -2.0
 panning_strength = 0.0
+bus = &"Tablet"
 
 [node name="Wind" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_87mr5")
+bus = &"Tablet"
 
 [node name="Musicbox" type="AudioStreamPlayer2D" parent="."]
 volume_db = -15.0
+bus = &"Tablet"
 
 [node name="RoomCams" type="Control" parent="."]
 layout_mode = 3

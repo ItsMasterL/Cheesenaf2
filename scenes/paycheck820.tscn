@@ -132,6 +132,7 @@ metadata/_edit_lock_ = true
 [node name="Paycheck" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_7b4ls")
 autoplay = true
+bus = &"Music"
 script = ExtResource("3_yeu3d")
 sound_type = 2
 

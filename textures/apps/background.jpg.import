@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c70vi1sqw8vjc"
-path="res://.godot/imported/andre-ouellet-b1bgPw5sLus-unsplash.jpg-daaa1aabf95eea81c7636f8632290f6e.ctex"
+uid="uid://cwmvvjrnwa0ex"
+path="res://.godot/imported/background.jpg-07abd9c4ccbe58ece5b352155795c44b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/andre-ouellet-b1bgPw5sLus-unsplash.jpg"
-dest_files=["res://.godot/imported/andre-ouellet-b1bgPw5sLus-unsplash.jpg-daaa1aabf95eea81c7636f8632290f6e.ctex"]
+source_file="res://textures/apps/background.jpg"
+dest_files=["res://.godot/imported/background.jpg-07abd9c4ccbe58ece5b352155795c44b.ctex"]
 
 [params]
 
@@ -30,5 +30,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=1280
+process/size_limit=0
 detect_3d/compress_to=1

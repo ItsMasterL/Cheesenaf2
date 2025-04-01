@@ -15,7 +15,8 @@ warnings/check_invalid_track_paths=false
 [application]
 
 config/name="Cheesenaf 2"
-config/version="0.1.0"
+config/description="So wait, you're telling me, a cheese naffed this freddy's?"
+config/version="1.0.0"
 run/main_scene="res://scenes/title.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="MasterLGames/Cheesenaf2"

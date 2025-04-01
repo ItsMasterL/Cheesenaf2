@@ -56,10 +56,12 @@ metadata/_edit_group_ = true
 [node name="Chimes" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_ysvoq")
 autoplay = true
+bus = &"SFX"
 
 [node name="Yay" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_gaq0u")
 volume_db = -10.0
+bus = &"SFX"
 
 [node name="5_6" type="RichTextLabel" parent="."]
 layout_mode = 1

@@ -24,10 +24,12 @@ script = ExtResource("1_j0ilp")
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_v6buh")
 volume_db = -15.0
+bus = &"Tablet"
 
 [node name="Pass sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ogexq")
 volume_db = -5.0
+bus = &"Tablet"
 
 [node name="Home" type="Control" parent="."]
 clip_contents = true
@@ -69,6 +71,7 @@ texture = ExtResource("5_p5ypo")
 
 [node name="Jump" type="AudioStreamPlayer2D" parent="Foxy"]
 stream = ExtResource("6_ixuec")
+bus = &"Tablet"
 
 [node name="OvenA" type="Node2D" parent="."]
 position = Vector2(1446, 598)

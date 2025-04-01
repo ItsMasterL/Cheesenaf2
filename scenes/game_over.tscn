@@ -29,3 +29,4 @@ position = Vector2(576, 330)
 stream = ExtResource("4_uryl7")
 volume_db = -10.0
 autoplay = true
+bus = &"SFX"

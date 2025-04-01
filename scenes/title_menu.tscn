@@ -1,7 +1,8 @@
-[gd_scene load_steps=32 format=3 uid="uid://d1ffrbutvy4e"]
+[gd_scene load_steps=33 format=3 uid="uid://d1ffrbutvy4e"]
 
 [ext_resource type="Script" path="res://scripts/title_menu.gd" id="1_ads83"]
 [ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://consolas.ttf" id="2_aik6n"]
+[ext_resource type="Script" path="res://scripts/display_version.gd" id="3_rkemj"]
 [ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://sounds/change_cam.wav" id="4_cl3hh"]
 [ext_resource type="Texture2D" uid="uid://cl7ngqp6v450t" path="res://textures/Renders/cheese.png" id="4_t4b52"]
 [ext_resource type="Texture2D" uid="uid://h1e2tcluwpxe" path="res://textures/Renders/TitleEdams.png" id="5_mtfap"]
@@ -255,10 +256,63 @@ theme_override_font_sizes/normal_font_size = 20
 text = "Settings"
 scroll_active = false
 
+[node name="Exit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 97.0
+offset_top = 570.0
+offset_right = 326.0
+offset_bottom = 599.0
+theme_override_fonts/font = ExtResource("2_aik6n")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8peow")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_2ud1d")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_krr73")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_gmwrq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ve4ch")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1pwwm")
+alignment = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Exit"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -9.5
+offset_right = 82.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_aik6n")
+theme_override_font_sizes/normal_font_size = 20
+text = "Exit Game"
+scroll_active = false
+
+[node name="Version" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -24.0
+offset_right = 507.0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_aik6n")
+theme_override_font_sizes/normal_font_size = 11
+bbcode_enabled = true
+text = "
+[wave]Version abababa"
+scroll_active = false
+script = ExtResource("3_rkemj")
+
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_cl3hh")
 volume_db = -10.0
 autoplay = true
+bus = &"SFX"
 
 [node name="Cheese" type="Sprite2D" parent="."]
 visible = false
@@ -288,3 +342,4 @@ texture = ExtResource("6_xg12t")
 [connection signal="pressed" from="CustomNight" to="." method="_change_menu" binds= ["customnight"]]
 [connection signal="pressed" from="Extras" to="." method="_change_menu" binds= ["extras"]]
 [connection signal="pressed" from="Settings" to="." method="_change_menu" binds= ["settings"]]
+[connection signal="pressed" from="Exit" to="." method="_change_menu" binds= ["settings"]]

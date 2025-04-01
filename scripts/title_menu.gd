@@ -75,6 +75,9 @@ func _change_menu(screen: String):
 func _open_url(url: String):
 	OS.shell_open(url)
 
+func _close_game():
+	get_tree().quit()
+
 func _toggle_edams(friendly : bool):
 	Globals.edams_friendly = friendly
 	$ClickSound.play()

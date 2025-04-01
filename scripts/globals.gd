@@ -31,13 +31,14 @@ var saw_foxy_night_1 : bool = false
 
 # User Settings
 var mouse_sensitivity : float = 1.0
+var master_volume : float = 1
 var sfx_volume : float = 1
 var voice_volume : float = 1
 var music_volume : float = 1
 var tablet_volume : float = 1
 var ambient_volume : float = 1
 var jumpscare_volume : float = 1
-var maximize = false
+var fullscreen = false
 
 #region Applications
 enum store_apps {
@@ -149,13 +150,14 @@ func _load():
 func _save_settings():
 	var data = {
 		"mouse_sensitivity" = mouse_sensitivity,
+		"master_volume" = master_volume,
 		"sfx_volume" = sfx_volume,
 		"voice_volume" = voice_volume,
 		"music_volume" = music_volume,
 		"tablet_volume" = tablet_volume,
 		"ambient_volume" = ambient_volume,
 		"jumpscare_volume" = jumpscare_volume,
-		"maximize" = maximize
+		"fullscreen" = fullscreen
 	}
 	var file = FileAccess.open("user://settings.json", FileAccess.WRITE)
 	var json_string = JSON.stringify(data)
@@ -181,6 +183,8 @@ func _load_settings():
 			var data = json.data
 			if "mouse_sensitivity" in data && (typeof(data["mouse_sensitivity"]) == TYPE_FLOAT):
 				mouse_sensitivity = data["mouse_sensitivity"]
+			if "master_volume" in data && (typeof(data["master_volume"]) == TYPE_INT || typeof(data["master_volume"]) == TYPE_FLOAT):
+				master_volume = data["master_volume"]
 			if "sfx_volume" in data && (typeof(data["sfx_volume"]) == TYPE_INT || typeof(data["sfx_volume"]) == TYPE_FLOAT):
 				sfx_volume = data["sfx_volume"]
 			if "voice_volume" in data && (typeof(data["voice_volume"]) == TYPE_INT || typeof(data["voice_volume"]) == TYPE_FLOAT):
@@ -193,8 +197,19 @@ func _load_settings():
 				ambient_volume = data["ambient_volume"]
 			if "jumpscare_volume" in data && (typeof(data["jumpscare_volume"]) == TYPE_INT || typeof(data["jumpscare_volume"]) == TYPE_FLOAT):
 				ambient_volume = data["jumpscare_volume"]
-			if "maximize" in data && typeof(data["maximize"]) == TYPE_BOOL:
-				maximize = data["maximize"]
+			if "fullscreen" in data && typeof(data["fullscreen"]) == TYPE_BOOL:
+				fullscreen = data["fullscreen"]
+		AudioServer.set_bus_volume_db(0, linear_to_db(master_volume))
+		AudioServer.set_bus_volume_db(1, linear_to_db(sfx_volume))
+		AudioServer.set_bus_volume_db(2, linear_to_db(voice_volume))
+		AudioServer.set_bus_volume_db(3, linear_to_db(music_volume))
+		AudioServer.set_bus_volume_db(4, linear_to_db(ambient_volume))
+		AudioServer.set_bus_volume_db(5, linear_to_db(ambient_volume))
+		AudioServer.set_bus_volume_db(6, linear_to_db(tablet_volume))
+		if fullscreen:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 #endregion
 
 func _set_night(night: int):

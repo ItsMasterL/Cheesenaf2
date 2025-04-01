@@ -1,11 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://c0spfq78wftov"]
+[gd_scene load_steps=18 format=3 uid="uid://c0spfq78wftov"]
 
 [ext_resource type="Script" path="res://scripts/title_menu.gd" id="1_gen20"]
 [ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://consolas.ttf" id="2_dmw46"]
 [ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://sounds/change_cam.wav" id="3_mw3l6"]
 [ext_resource type="AudioStream" uid="uid://l48yusevyfck" path="res://sounds/door.wav" id="4_mj8cj"]
 [ext_resource type="Script" path="res://scripts/volume_slider.gd" id="5_cli0j"]
-[ext_resource type="Script" path="res://scripts/volume_manager.gd" id="5_y1g3s"]
+[ext_resource type="Script" path="res://scripts/reset_settings.gd" id="6_5ukkq"]
+[ext_resource type="Script" path="res://scripts/player_controls_test.gd" id="7_4sktf"]
+[ext_resource type="Script" path="res://scripts/sensitivity_slider.gd" id="7_6v5l0"]
+[ext_resource type="PackedScene" uid="uid://dpn03nj1u7ol3" path="res://models/cheesenaf2.blend" id="7_pi3se"]
+[ext_resource type="Script" path="res://scripts/fullscreen_toggle.gd" id="8_j22wr"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ptv6"]
 
@@ -19,6 +23,9 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rsbhx"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_h1hx3"]
+size = Vector3(1, 2.37891, 1)
+
 [node name="CustomNight" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -26,6 +33,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_gen20")
 
 [node name="Back" type="Button" parent="."]
@@ -67,23 +75,58 @@ scroll_active = false
 stream = ExtResource("3_mw3l6")
 volume_db = -10.0
 autoplay = true
+bus = &"SFX"
 
 [node name="TestSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_mj8cj")
-script = ExtResource("5_y1g3s")
 
-[node name="SFX" type="HSlider" parent="."]
+[node name="Audio" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Master" type="HSlider" parent="Audio"]
 layout_mode = 0
 offset_left = 75.0
-offset_top = 105.0
+offset_top = 62.0
 offset_right = 368.0
-offset_bottom = 126.0
-max_value = 1.0
+offset_bottom = 83.0
+max_value = 2.0
 step = 0.001
 script = ExtResource("5_cli0j")
 sound_type = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="SFX"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Audio/Master"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.5
+offset_top = -32.5
+offset_right = 63.5
+offset_bottom = -13.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_dmw46")
+theme_override_font_sizes/normal_font_size = 20
+text = "Master Volume"
+scroll_active = false
+
+[node name="SFX" type="HSlider" parent="Audio"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 114.0
+offset_right = 368.0
+offset_bottom = 135.0
+max_value = 2.0
+step = 0.001
+script = ExtResource("5_cli0j")
+sound_type = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Audio/SFX"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -102,18 +145,18 @@ theme_override_font_sizes/normal_font_size = 20
 text = "SFX Volume"
 scroll_active = false
 
-[node name="Voice" type="HSlider" parent="."]
+[node name="Voice" type="HSlider" parent="Audio"]
 layout_mode = 0
 offset_left = 75.0
 offset_top = 166.0
 offset_right = 368.0
 offset_bottom = 187.0
-max_value = 1.0
+max_value = 2.0
 step = 0.001
 script = ExtResource("5_cli0j")
-sound_type = 1
+sound_type = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Voice"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Audio/Voice"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -132,18 +175,18 @@ theme_override_font_sizes/normal_font_size = 20
 text = "Voice Volume"
 scroll_active = false
 
-[node name="Music" type="HSlider" parent="."]
+[node name="Music" type="HSlider" parent="Audio"]
 layout_mode = 0
 offset_left = 75.0
-offset_top = 221.0
+offset_top = 217.0
 offset_right = 368.0
-offset_bottom = 242.0
-max_value = 1.0
+offset_bottom = 238.0
+max_value = 2.0
 step = 0.001
 script = ExtResource("5_cli0j")
-sound_type = 2
+sound_type = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Music"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Audio/Music"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -162,18 +205,18 @@ theme_override_font_sizes/normal_font_size = 20
 text = "Music Volume"
 scroll_active = false
 
-[node name="Ambient" type="HSlider" parent="."]
+[node name="Ambient" type="HSlider" parent="Audio"]
 layout_mode = 0
 offset_left = 75.0
-offset_top = 275.0
+offset_top = 268.0
 offset_right = 368.0
-offset_bottom = 296.0
-max_value = 1.0
+offset_bottom = 289.0
+max_value = 2.0
 step = 0.001
 script = ExtResource("5_cli0j")
-sound_type = 3
+sound_type = 4
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Ambient"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Audio/Ambient"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -192,18 +235,18 @@ theme_override_font_sizes/normal_font_size = 20
 text = "Ambience Volume"
 scroll_active = false
 
-[node name="Jumpscare" type="HSlider" parent="."]
+[node name="Jumpscare" type="HSlider" parent="Audio"]
 layout_mode = 0
 offset_left = 75.0
 offset_top = 324.0
 offset_right = 368.0
 offset_bottom = 345.0
-max_value = 1.0
+max_value = 2.0
 step = 0.001
 script = ExtResource("5_cli0j")
-sound_type = 4
+sound_type = 5
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Jumpscare"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Audio/Jumpscare"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -222,18 +265,18 @@ theme_override_font_sizes/normal_font_size = 20
 text = "Jumpscare Volume"
 scroll_active = false
 
-[node name="Tablet" type="HSlider" parent="."]
+[node name="Tablet" type="HSlider" parent="Audio"]
 layout_mode = 0
 offset_left = 75.0
-offset_top = 385.0
+offset_top = 375.0
 offset_right = 368.0
-offset_bottom = 406.0
-max_value = 1.0
+offset_bottom = 396.0
+max_value = 2.0
 step = 0.001
 script = ExtResource("5_cli0j")
-sound_type = 4
+sound_type = 6
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Tablet"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Audio/Tablet"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -252,4 +295,139 @@ theme_override_font_sizes/normal_font_size = 20
 text = "Tablet Volume"
 scroll_active = false
 
+[node name="ResetAudio" type="Button" parent="Audio"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 403.0
+offset_right = 241.0
+offset_bottom = 442.0
+text = "Reset Audio Settings"
+script = ExtResource("6_5ukkq")
+
+[node name="Sensitivity" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sensitivity" type="HSlider" parent="Sensitivity"]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 62.0
+offset_right = 713.0
+offset_bottom = 83.0
+max_value = 2.0
+step = 0.001
+script = ExtResource("7_6v5l0")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Sensitivity/Sensitivity"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.5
+offset_top = -32.5
+offset_right = 63.5
+offset_bottom = -13.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_dmw46")
+theme_override_font_sizes/normal_font_size = 20
+text = "Mouse Sensitivity"
+scroll_active = false
+
+[node name="Test" type="Button" parent="Sensitivity"]
+layout_mode = 0
+offset_left = 422.0
+offset_top = 89.0
+offset_right = 514.0
+offset_bottom = 123.0
+text = "Test"
+script = ExtResource("6_5ukkq")
+
+[node name="Label" type="Label" parent="Sensitivity/Test"]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 63.0
+theme_override_fonts/font = ExtResource("2_dmw46")
+text = "Press Escape to stop testing"
+
+[node name="Reset" type="Button" parent="Sensitivity"]
+layout_mode = 0
+offset_left = 621.0
+offset_top = 89.0
+offset_right = 713.0
+offset_bottom = 123.0
+text = "Reset"
+script = ExtResource("6_5ukkq")
+
+[node name="Misc" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Fullscreen" type="CheckBox" parent="Misc"]
+layout_mode = 0
+offset_left = 778.0
+offset_top = 35.0
+offset_right = 932.0
+offset_bottom = 66.0
+theme_override_fonts/font = ExtResource("2_dmw46")
+text = "Fullscreen"
+script = ExtResource("8_j22wr")
+
+[node name="Map" parent="." instance=ExtResource("7_pi3se")]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, -0.685463, 0.728108, 0, -0.728108, -0.685463, 0, 3.63307, -6.51262)
+light_color = Color(1, 1, 0.847059, 1)
+light_energy = 3.0
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 19.2464
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Map/SpotLight3D"]
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 0.727773, 0.685818, 0, -0.685818, 0.727773, 0, 3.633, 6.513)
+light_color = Color(1, 1, 0.847059, 1)
+light_energy = 3.0
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 19.2464
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Map/SpotLight3D2"]
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
+transform = Transform3D(0.77288, 0.0557739, 0.632096, -0.634551, 0.0700509, 0.7697, -0.00134968, -0.995983, 0.0895323, 69.6845, 8.16925, 35.1654)
+light_color = Color(0.761397, 0.841342, 1, 1)
+light_energy = 0.371
+shadow_enabled = true
+
+[node name="Player" type="CharacterBody3D" parent="."]
+script = ExtResource("7_4sktf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20574, 0)
+shape = SubResource("BoxShape3D_h1hx3")
+
+[node name="Head" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68, 0)
+
+[node name="Eyes" type="Camera3D" parent="Player/Head"]
+keep_aspect = 0
+cull_mask = 1048571
+current = true
+far = 100.0
+
 [connection signal="pressed" from="Back" to="." method="_change_menu" binds= ["menu"]]
+[connection signal="pressed" from="Audio/ResetAudio" to="Audio/ResetAudio" method="_reset_audio"]
+[connection signal="pressed" from="Sensitivity/Test" to="Sensitivity/Test" method="_test_sensitivity"]
+[connection signal="pressed" from="Sensitivity/Reset" to="Sensitivity/Reset" method="_reset_sensitivity"]

@@ -284,5 +284,7 @@ shape = SubResource("SphereShape3D_iljfn")
 [node name="Jumpscare" type="AudioStreamPlayer" parent="." index="2"]
 stream = ExtResource("2_8wgq6")
 volume_db = -5.0
+bus = &"Jumpscare"
 
 [node name="Step" type="AudioStreamPlayer" parent="." index="3"]
+bus = &"SFX"

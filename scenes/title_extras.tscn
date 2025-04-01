@@ -206,6 +206,7 @@ scroll_active = false
 stream = ExtResource("3_64dvc")
 volume_db = -10.0
 autoplay = true
+bus = &"SFX"
 
 [connection signal="pressed" from="Back" to="." method="_change_menu" binds= ["menu"]]
 [connection signal="pressed" from="Credits" to="." method="_change_menu" binds= ["multiplayer"]]

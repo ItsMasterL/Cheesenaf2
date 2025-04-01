@@ -228,7 +228,7 @@ bones/42/rotation = Quaternion(7.77472e-06, 1.91887e-14, 1, 1.05515e-13)
 bones/44/rotation = Quaternion(-0.0364153, 0.99674, -0.0621185, -0.0364113)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="RIG_Bonnie_ao/Skeleton3D" index="0"]
-transform = Transform3D(0.999382, -0.0232474, 0.0263527, 0.0223314, 0.999154, 0.0345338, -0.0271333, -0.033924, 0.999056, -0.0112192, 2.19883, -0.391847)
+transform = Transform3D(0.999382, -0.0232473, 0.0263529, 0.0223314, 0.999154, 0.0345333, -0.0271334, -0.0339235, 0.999056, -0.0112191, 2.19883, -0.391847)
 bone_name = "Head_jnt"
 bone_idx = 9
 
@@ -251,8 +251,10 @@ texture = ExtResource("5_dt2g6")
 [node name="Jumpscare" type="AudioStreamPlayer" parent="." index="2"]
 stream = ExtResource("3_rlb82")
 volume_db = -5.0
+bus = &"Jumpscare"
 
 [node name="Step" type="AudioStreamPlayer3D" parent="." index="3"]
 volume_db = -30.0
 unit_size = 100.0
 max_db = -10.0
+bus = &"SFX"

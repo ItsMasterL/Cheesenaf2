@@ -34,6 +34,7 @@ search_under_desk = false
 flashlight_weakness = false
 entrance = 3
 fail_position_index = 0
+check_before_entering = false
 
 [sub_resource type="Resource" id="Resource_g2lik"]
 resource_name = "Office Right Vent"
@@ -63,6 +64,7 @@ search_under_desk = false
 flashlight_weakness = false
 entrance = 1
 fail_position_index = 0
+check_before_entering = false
 
 [sub_resource type="Resource" id="Resource_2pwif"]
 resource_name = "Back Door"
@@ -92,6 +94,7 @@ search_under_desk = false
 flashlight_weakness = false
 entrance = 0
 fail_position_index = 0
+check_before_entering = false
 
 [sub_resource type="Resource" id="Resource_wn1k0"]
 resource_name = "Front Door"
@@ -212,12 +215,15 @@ bones/61/rotation = Quaternion(-0.0244154, -0.742469, 0.0677398, 0.666)
 [node name="Jumpscare" type="AudioStreamPlayer" parent="." index="2"]
 stream = ExtResource("5_ynres")
 volume_db = -5.0
+bus = &"Jumpscare"
 
 [node name="Step" type="AudioStreamPlayer3D" parent="." index="3"]
 volume_db = -30.0
 unit_size = 100.0
 max_db = -10.0
+bus = &"SFX"
 
 [node name="Warning" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource("6_lmxgf")
 volume_db = -5.0
+bus = &"Voice"

@@ -37,6 +37,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_blp43")
 show_percentage = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Home"]
+bus = &"Tablet"
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Home"]
 layout_mode = 0
@@ -45,6 +46,7 @@ offset_top = 59.0
 offset_right = 1222.0
 offset_bottom = 640.0
 expand = true
+bus = &"Tablet"
 
 [node name="Play_Pause" type="Button" parent="Home"]
 layout_mode = 0

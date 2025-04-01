@@ -21,6 +21,7 @@ texture = ExtResource("2_0nf7x")
 centered = false
 
 [node name="AudioFeedback" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
 
 [node name="Confirm" type="Button" parent="."]
 layout_mode = 0
