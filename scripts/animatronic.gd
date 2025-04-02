@@ -139,7 +139,7 @@ func _process(delta: float) -> void:
 		safety_timer = clamp(safety_timer - delta, 0, safety_timer)
 		print(animatronic + ": " + str(safety_timer))
 	else:
-		safety_timer = clamp(safety_timer + delta, 0, safety_timer)
+		safety_timer = clamp(safety_timer + delta, 0, root.safety_time)
 	# Light sensitivity
 	if flashlight > 0:
 		flashlight = clamp(flashlight - delta/2, 0, 5)

@@ -187,7 +187,7 @@ func _set_entrances(values: Array[int]):
 
 func _jumpscare(animatronic: Node3D):
 	while can_jumpscare == false:
-		pass
+		return
 	p1_can_action = false
 	print("Jumpscared by %s" % animatronic.animatronic)
 	if gamer_in_office:
