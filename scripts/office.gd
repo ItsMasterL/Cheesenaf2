@@ -36,7 +36,6 @@ var wither_foxy = Globals.wither_foxy
 var cheesestick = Globals.cheesestick
 #Changed per night, how long the player has to hide under the desk when an animatronic gets in
 var safety_time = Globals.safety_time
-var p1_safety_time = safety_time
 # Etc
 var p1_last_cam
 var p1_vent_cam = false
