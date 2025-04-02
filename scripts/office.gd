@@ -78,12 +78,6 @@ func _process(delta):
 	minute = floor(lerp(hour * 60, hour * 60 + 60, time / time_to_hour)) as int % 60
 	# Player thirst
 	p1_thirst += (delta * 0.05) * fun_multiplier
-	# Desk safety
-	if animatronics_in_office > 0 && under_desk == false:
-		p1_safety_time = clamp(p1_safety_time - delta, 0, safety_time)
-		print(str(p1_safety_time))
-	elif animatronics_in_office == 0:
-		p1_safety_time = clamp(p1_safety_time + delta, 0, safety_time)
 	# Fan heat
 	if fan_powered:
 		if under_desk:

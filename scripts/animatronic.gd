@@ -90,6 +90,7 @@ var can_move = true
 var guarding = false
 var camera_cooldown = 0
 var flashlight = 0
+var safety_timer
 
 @onready var timer = check_frequency
 @onready var level = root._get_ai(animatronic)
@@ -107,6 +108,7 @@ signal paranormal_song
 
 func _ready() -> void:
 	if Engine.is_editor_hint() == false:
+		safety_timer = Globals.safety_time
 		position = positions[0].position
 		rotation_degrees = positions[0].rotation
 		scale = positions[0].scale
@@ -132,6 +134,12 @@ func _process(delta: float) -> void:
 	# If not in the office
 	elif camera_sensitive && positions[current_position].office_entrance == null:
 		can_move = true
+	# Safety Timer
+	if positions[current_position].office_entrance != null && root.under_desk == false:
+		safety_timer = clamp(safety_timer - delta, 0, safety_timer)
+		print(animatronic + ": " + str(safety_timer))
+	else:
+		safety_timer = clamp(safety_timer + delta, 0, safety_timer)
 	# Light sensitivity
 	if flashlight > 0:
 		flashlight = clamp(flashlight - delta/2, 0, 5)
@@ -223,7 +231,7 @@ func _movement_check():
 			root._take_tablet()
 			_fail_attack()
 		# Desk hiding
-		elif positions[current_position].office_entrance.search_under_desk == false && root.p1_safety_time > 0 && root.under_desk:
+		elif positions[current_position].office_entrance.search_under_desk == false && safety_timer > 0 && root.under_desk:
 			_fail_attack()
 		# Flashlight sensitivity
 		elif positions[current_position].office_entrance.flashlight_weakness && flashlight > 0:
