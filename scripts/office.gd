@@ -81,6 +81,7 @@ func _process(delta):
 	# Desk safety
 	if animatronics_in_office > 0 && under_desk == false:
 		p1_safety_time = clamp(p1_safety_time - delta, 0, safety_time)
+		print(str(p1_safety_time))
 	elif animatronics_in_office == 0:
 		p1_safety_time = clamp(p1_safety_time + delta, 0, safety_time)
 	# Fan heat

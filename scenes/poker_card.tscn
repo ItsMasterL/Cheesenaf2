@@ -1,0 +1,144 @@
+[gd_scene load_steps=9 format=3 uid="uid://3ybl6aotajlg"]
+
+[ext_resource type="Texture2D" uid="uid://psitb0h7iniy" path="res://textures/apps/pokerassets.png" id="1_ovylu"]
+[ext_resource type="Script" path="res://scripts/poker_card.gd" id="2_r3mqd"]
+
+[sub_resource type="Animation" id="Animation_5f3s3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-1000.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_sjapm"]
+resource_name = "draw"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1000.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_pg7uf"]
+resource_name = "selected"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -50.0]
+}
+
+[sub_resource type="Animation" id="Animation_oxfpi"]
+resource_name = "sent"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -2000.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2abcr"]
+_data = {
+"RESET": SubResource("Animation_5f3s3"),
+"draw": SubResource("Animation_sjapm"),
+"selected": SubResource("Animation_pg7uf"),
+"sent": SubResource("Animation_oxfpi")
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jagvo"]
+
+[node name="Card" type="Sprite2D"]
+visible = false
+texture_filter = 1
+scale = Vector2(4.21134, 4.21134)
+texture = ExtResource("1_ovylu")
+region_enabled = true
+region_rect = Rect2(96, 48, 32, 48)
+script = ExtResource("2_r3mqd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2abcr")
+}
+
+[node name="Button" type="Button" parent="."]
+offset_left = -16.0
+offset_top = -23.0
+offset_right = 16.0
+offset_bottom = 24.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jagvo")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_jagvo")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jagvo")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_jagvo")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_jagvo")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_jagvo")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jagvo")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_jagvo")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jagvo")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_jagvo")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jagvo")

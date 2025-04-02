@@ -13,6 +13,7 @@ func _ready():
 		listing.price = app.price
 		listing.icon = app.icon
 		listing.id = app.global_id
+		listing.available = app.available
 		listing.get_child(0).get_child(3).pressed.connect(_buy.bind(listing))
 		app_container.add_child(listing)
 	$Home/Funds.text = "Your Funds:\n$%1.2d" % Globals.money

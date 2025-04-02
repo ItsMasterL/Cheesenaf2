@@ -1,0 +1,145 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4o56xdcgvy6v"]
+
+[ext_resource type="Script" path="res://scripts/title_credits.gd" id="1_cboxk"]
+[ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://consolas.ttf" id="3_8a50c"]
+[ext_resource type="AudioStream" uid="uid://cskpfhrqarprl" path="res://sounds/music/credits.mp3" id="3_mwtck"]
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cboxk")
+
+[node name="Credits" type="RichTextLabel" parent="."]
+z_index = 2
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -581.0
+offset_top = 657.0
+offset_right = 576.0
+offset_bottom = 4750.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_8a50c")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[center]Cheesenaf 2
+
+[wave]Version 1.0.0[/wave]
+
+Programmers
+Master L - Lead Developer
+Foxxicle - Developer
+
+Writing
+Master L - Phone Person, Edam Foxy, Edam Bonnie, Credits
+Syowen - StringBonnie's Podcast, Original Loremaster
+
+Voice Acting
+Arbitrary/Total Randomness - Edam Bonnie
+Master L - Edam Foxy
+Foxxicle - Phone Person
+Syowen - William Afton
+
+Models
+Master L - Pizzeria, Edam Animatronics, Tablet, Cup, Doors
+Just8 - Title Cheese (https://skfb.ly/oCLDS)
+No - Foxy Plushie (https://skfb.ly/oFBzZ)
+Rose - Indoor Playground (https://skfb.ly/pruO7)
+Darksiders 3 - Trash Can
+FNAF: Help Wanted - Desk Fan, Withered Animatronics
+
+Animation
+Master L - Camera Poses, Jumpscares, Purple Guy Dance,
+Markiplier's TikTok Dance
+Taken from Lethal Company Mod BadAssCompany - Most Freddy dances
+
+Audio
+FNAF series - Doors, Flashlight, Camera Light, Footsteps,
+Menu Sounds, 6 AM Chimes, Children YAY, Error sound,
+Music Box Winding, VaultMaster Fail
+OneShot - VaultMaster Success
+Flappy Bird - Flappy Foxy Sounds
+Skype - Ringtone
+Master L - Breathing, Moving Under Desk, Chica Pop Popping
+Everything else is copyright free, found either on YouTube
+or on Pixabay
+
+Music
+Schubert's Serenade - Cheesestick
+Kevin Macleod's Echoes of Time - Title
+3DS July 2014 eShop - Gameworld
+Master L's Mocha Pop Storymode - Chica Pop
+Fortinaiti Babajii FNaF 2 music box [EXTENDED] - Music Box
+FNAF Movie Theme - Music Box
+Kevin Macleod's Cipher - Music Box
+Minimusicman's Crazy La Paint - Music Box
+Chicken Dance - Music Box
+The Living Tombstone's FNAF 1 & 2 songs - Music Box
+Luigi's Mansion 2 Library Piano - Music Box
+Katy Perry's California Girls - Music Box
+Hirose Kohmi - Promise (Get Down) - Music Box
+R3 Music Box's Join Us For A Bite/JT Music [Music Box] - Paycheck
+Alexander Rose's Join Us For A Bite Epic Orchestra Cover - Paycheck
+New Super Mario Bros DS's Luigi Casino - Poker
+Manuel Pizarro Amaya's Survive the Night for Orchestra - Credits
+Master L - Credits Vocals
+
+Artwork
+Master L
+
+Software
+Game Engine - Godot 4.3
+Modeling - Blender 4.2
+
+Super Cool Gamer
+YOU!!!!!!!1!!!!!111!!!1
+
+Special Thanks
+Syowen, for coming up with the lore on the spot
+Foxxicle, for helping around, giving feedback,
+and helping me learn Godot
+Brett Tries, for inspiring the direction of this game
+(He said the first one had nothing to do, thus the tablet)
+Scott Cawthon, because fnaf
+
+Development started on January 22nd, 2025"
+scroll_active = false
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -789.0
+offset_top = -434.0
+offset_right = 789.0
+offset_bottom = 482.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Exit Credits" type="Button" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -43.0
+offset_right = 124.0
+grow_vertical = 0
+text = "Close"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_mwtck")
+bus = &"Music"
+
+[connection signal="pressed" from="Exit Credits" to="." method="_return"]

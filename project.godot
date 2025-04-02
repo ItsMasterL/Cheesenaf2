@@ -39,10 +39,6 @@ window/stretch/aspect="keep_height"
 
 project/assembly_name="Cheesenaf 2"
 
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/unidot_importer/plugin.cfg")
-
 [input]
 
 LeftClick={
