@@ -341,6 +341,14 @@ func _kill_vent_checker():
 		can_move = false
 		root.jammed_entrances.append(positions[current_position].office_entrance.entrance)
 
+func _leave_doorway_check():
+	if root.night == 2 && vent_checker:
+		return
+	if positions[current_position].office_entrance != null:
+		if positions[current_position].office_entrance.check_before_entering:
+			if root.closed_entrances.has(positions[current_position].office_entrance.entrance):
+				_fail_attack()
+
 func _game_check():
 	if root.p1_has_tablet && root.purchased_apps > 0:
 		root.gamer_in_office = true
@@ -364,7 +372,10 @@ func _game_check():
 		_fail_attack()
 	# If no games, Foxy is mad
 	else:
-		root._jumpscare(self)
+		if root.under_desk && positions[current_position].office_entrance.search_under_desk == false:
+			_fail_attack()
+		else:
+			root._jumpscare(self)
 
 func _look_at_object(delta):
 	var neck = $"Edam Endo/Skeleton3D/Neck/LookAt"

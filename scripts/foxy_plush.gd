@@ -20,6 +20,6 @@ func _on_foxy_plush_nose_booped():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if jumpscare == true && sound.playing == false:
-		sound.stream = load("res://Sounds/boop.wav")
+		sound.stream = load("res://sounds/boop.wav")
 		anim.play(&"stare", -1, -1, true)
 		jumpscare = false

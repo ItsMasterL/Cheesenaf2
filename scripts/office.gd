@@ -60,6 +60,7 @@ func _ready():
 			music_box_ran_out.connect(animatronic._stop_dance)
 		if animatronic.vent_checker && night == 2:
 			entrance_closing.connect(animatronic._kill_vent_checker)
+		entrance_closing.connect(animatronic._leave_doorway_check)
 	if night == 1:
 		$Player/Head/Eyes/Controls.visible = true
 		closed_entrances = [1, 4]
@@ -68,6 +69,7 @@ func _ready():
 	if night > 2 && night < 6:
 		animatronics.get_child(1).visible = false
 		animatronics.get_child(1).can_move = false
+	Globals.game_time = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -290,3 +292,4 @@ func _jumpscare_save(animatronic: Node3D):
 		p1_can_action = true
 	animatronic.guarding = false
 	can_jumpscare = true
+	gamer_in_office = false

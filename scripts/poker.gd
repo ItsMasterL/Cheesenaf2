@@ -92,6 +92,15 @@ func _evaluate():
 			player_previous_highest_value = player_highest_count_value
 			player_highest_count = count
 			player_highest_count_value = i
+		elif count == player_highest_count:
+			if player_highest_count_value < i:
+				player_previous_highest = player_highest_count
+				player_previous_highest_value = player_highest_count_value
+				player_highest_count = count
+				player_highest_count_value = i
+			elif player_previous_highest_value < i:
+				player_previous_highest = count
+				player_previous_highest_value = i
 	for i in values.size():
 		var count = cpu_score.count(i)
 		if count > cpu_highest_count:
@@ -99,7 +108,17 @@ func _evaluate():
 			cpu_previous_highest_value = cpu_highest_count_value
 			cpu_highest_count = count
 			cpu_highest_count_value = i
+		elif count == cpu_highest_count:
+			if cpu_highest_count_value < i:
+				cpu_previous_highest = cpu_highest_count
+				cpu_previous_highest_value = cpu_highest_count_value
+				cpu_highest_count = count
+				cpu_highest_count_value = i
+			elif cpu_previous_highest_value < i:
+				cpu_previous_highest = count
+				cpu_previous_highest_value = i
 	print(str(player_highest_count) + " and " + str(player_previous_highest) + " vs " + str(cpu_highest_count) + " and " + str(cpu_previous_highest))
+	print(str(player_highest_count_value) + " and " + str(player_previous_highest_value) + " vs " + str(cpu_highest_count_value) + " and " + str(cpu_previous_highest_value))
 	if player_highest_count > cpu_highest_count:
 		$Table/Result.visible = true
 		$Table/Result.text = "YOU WIN!!"

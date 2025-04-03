@@ -23,6 +23,8 @@ func _raycast_event():
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		cursor.hide()
 		audio.play()
+		if root.night == 1:
+			$"../Tutorial".visible = true
 	elif home_button.is_mouse_inside == true && tablet.is_mouse_inside == false:
 		$"../ScreenQuad/TabletScreen/TabletOS"._home()
 	elif tablet.is_mouse_inside == false:
@@ -32,3 +34,4 @@ func _raycast_event():
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		cursor.show()
 		audio.play()
+		$"../Tutorial".visible = false

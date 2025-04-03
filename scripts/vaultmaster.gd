@@ -8,6 +8,10 @@ extends Control
 @onready var wait = $Messages/Loadingbox
 @onready var audio = $AudioFeedback
 
+func _ready():
+	for i in root.closed_entrances:
+		door_buttons.get_child(i).button_pressed = true
+
 func _check_and_seal():
 	var seals : Array[int]
 	var i = 0
@@ -17,7 +21,7 @@ func _check_and_seal():
 		i += 1
 	dark.visible = true
 	wait.visible = true
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(3.25).timeout
 	wait.visible = false
 	if seals.size() > 2:
 		seals = root.closed_entrances
