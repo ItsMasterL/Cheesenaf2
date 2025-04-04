@@ -1,0 +1,102 @@
+[gd_scene load_steps=10 format=3 uid="uid://mmdtwfhhpt06"]
+
+[ext_resource type="Script" path="res://scripts/title_menu.gd" id="1_fpwe5"]
+[ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://consolas.ttf" id="2_6434j"]
+[ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://sounds/change_cam.wav" id="3_yas5j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ptv6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_27atk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5pxcu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8w5np"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hjsyr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rsbhx"]
+
+[node name="CustomNight" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fpwe5")
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 598.0
+offset_right = 302.0
+offset_bottom = 627.0
+theme_override_fonts/font = ExtResource("2_6434j")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2ptv6")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_27atk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5pxcu")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_8w5np")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_hjsyr")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rsbhx")
+alignment = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Back"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -9.5
+offset_right = 126.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_6434j")
+theme_override_font_sizes/normal_font_size = 20
+text = "Back to Main Menu"
+scroll_active = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 16.0
+offset_bottom = 605.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_6434j")
+theme_override_font_sizes/normal_font_size = 20
+text = "Version 1.0.1 -- 4/3/2025
+
+Fixes:
+- Edam Foxy now checks if the player is hiding when they don't have any games/tablet
+- Timer now properly resets between nights
+- Foxy Plushie boops now work all the time
+- Wither Foxy no longer pokes his snout through the ceiling vent door
+- Wither Freddy now uses the correct jumpscare animation after Edam Foxy has saved the player and left
+- Edam Freddy's Jumpscare now plays properly
+- Multiplayer Menu button now correctly shows (Coming Soon!) -- This was previously hidden
+- Animatronics that got in the way of doors that are closing now leave before it closes. Unless they are meant to be crushed. You killed Bonnie.
+
+Adjustments:
+- Doors now take a bit longer to close (2s -> 3.25s), to incentivise strategic door placement and use of the other survival mechanics
+- Completely redesigned the VaultMaster app for more clear player feedback
+
+Additions:
+- Changelog page
+- Tutorial tips for tablet navigation on night 1
+- Added sound for when Chica refills your drink
+- Gave credit to a Freddy Fazbear's Pizzeria Simulator song I overlooked"
+scroll_active = false
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_yas5j")
+volume_db = -10.0
+autoplay = true
+bus = &"SFX"
+
+[connection signal="pressed" from="Back" to="." method="_change_menu" binds= ["menu"]]

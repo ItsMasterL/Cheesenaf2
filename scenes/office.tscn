@@ -1,7 +1,8 @@
-[gd_scene load_steps=84 format=4 uid="uid://kfokhb3cioir"]
+[gd_scene load_steps=85 format=4 uid="uid://kfokhb3cioir"]
 
 [ext_resource type="Script" path="res://scripts/office.gd" id="1_a3xfx"]
 [ext_resource type="PackedScene" uid="uid://bs378s4kwr2ux" path="res://scenes/foxy_plush.tscn" id="1_gqipk"]
+[ext_resource type="AudioStream" uid="uid://e1n2m7qxkggw" path="res://sounds/drink_refill.wav" id="6_j50h0"]
 [ext_resource type="Texture2D" uid="uid://bi3vtwctdv5ub" path="res://models/textures/Cup.png" id="7_3jvyr"]
 [ext_resource type="Script" path="res://scripts/tablet_screen.gd" id="7_g7jux"]
 [ext_resource type="AudioStream" uid="uid://cvqkqxo21hg6b" path="res://sounds/fan.mp3" id="7_q4oox"]
@@ -549,11 +550,12 @@ shader_parameter/blur_amount = 5.0
 shader_parameter/mix_amount = 0.0
 shader_parameter/color_over = Color(0, 0, 0, 1)
 
-[node name="Map" type="Node3D" node_paths=PackedStringArray("tablet", "animatronics", "doors")]
+[node name="Map" type="Node3D" node_paths=PackedStringArray("tablet", "animatronics", "doors", "drink")]
 script = ExtResource("1_a3xfx")
 tablet = NodePath("TabletOnDesk/Tablet")
 animatronics = NodePath("Animatronics")
 doors = NodePath("Doors")
+drink = NodePath("CupOnDesk/Cup")
 
 [node name="FoxyPlush" parent="." instance=ExtResource("1_gqipk")]
 
@@ -583,6 +585,11 @@ libraries = {
 "": SubResource("AnimationLibrary_xnsyn")
 }
 movie_quit_on_finish = true
+
+[node name="Refill" type="AudioStreamPlayer" parent="CupOnDesk/Cup"]
+stream = ExtResource("6_j50h0")
+volume_db = -15.0
+bus = &"SFX"
 
 [node name="ENV_MOD_Desk_Fan_Fanblade_ENV_MOD_Desk_Fan_Fanblade_001" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.00728012, -0.00562292, 2.03549e-08, 0, -3.32995e-08, -0.00919877, 0.00562292, -0.00728013, 2.6354e-08, 1.52256, 1.33496, -1.0458)

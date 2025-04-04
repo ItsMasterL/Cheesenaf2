@@ -11,7 +11,7 @@ card_scene = ExtResource("5_drhb5")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_78i7l")
-volume_db = -10.0
+volume_db = -15.0
 bus = &"Tablet"
 
 [node name="Table" type="Control" parent="."]

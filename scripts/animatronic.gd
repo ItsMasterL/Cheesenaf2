@@ -98,7 +98,6 @@ var safety_timer
 @onready var anim := $AnimationPlayer
 
 # For game sensitive animatronics to look at the things the player does
-@onready var skeleton = $"Edam Endo/Skeleton3D"
 var object_of_interest
 var new_rotation = Vector3.ZERO
 var rotx = 0
@@ -205,7 +204,7 @@ func _movement_check():
 						root.animatronics.get_child(5).timer = root.animatronics.get_child(5).check_frequency
 			#If chica is in the office, refill the drink
 			elif drink_sensitive:
-				root.cup_fill = 1
+				root._refill_cup()
 				_fail_attack()
 			#If fox is in the office and player has games, sit him down
 			elif game_sensitive:
@@ -220,7 +219,7 @@ func _movement_check():
 					return
 				root._jumpscare(self)
 			else:
-				root.cup_fill = 1
+				root._refill_cup()
 				_fail_attack()
 				return
 		#If foxy is in the office, ask if he can watch you play games (If you have games)
@@ -378,6 +377,7 @@ func _game_check():
 			root._jumpscare(self)
 
 func _look_at_object(delta):
+	var skeleton = $"Edam Endo/Skeleton3D"
 	var neck = $"Edam Endo/Skeleton3D/Neck/LookAt"
 	var neckbone = skeleton.find_bone("Head")
 	neck.look_at(object_of_interest.global_position, Vector3.UP, true)

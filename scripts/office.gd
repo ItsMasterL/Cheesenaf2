@@ -20,7 +20,8 @@ var p1_thirst = 0
 var p1_heat = 0
 var musicbox = 2000
 var is_winding = false
-var musicbox_ran_out = false
+var musicbox_is_playing = true # This is true anytime the musicbox is playing
+var musicbox_ran_out = false # This is true once the musicbox has run out at least once in the night
 var gamer_in_office = false # This is for Edam Foxy. I just thought it'd be a fun variable name
 var p1_has_tablet = true
 # Animatronic AI levels; Animatronics will handle their own paths, timers, etc
@@ -52,6 +53,7 @@ signal entrance_closing
 @export var tablet : MeshInstance3D
 @export var animatronics : Node3D
 @export var doors : Node3D
+@export var drink : MeshInstance3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -90,10 +92,13 @@ func _process(delta):
 	blur.material.set("shader_parameter/blur_amount", p1_heat)
 	# Music box running out
 	if musicbox == 0:
+		if musicbox_is_playing:
+			music_box_ran_out.emit()
 		musicbox_ran_out = true
-		music_box_ran_out.emit()
+		musicbox_is_playing = false
 	# Music box winding - Degredation is handled by each music box sensitive animatronic
 	if is_winding:
+		musicbox_is_playing = true
 		musicbox = clamp(musicbox + 200 * delta, 0, 2000)
 	
 	# ????????
@@ -185,6 +190,10 @@ func _set_entrances(values: Array[int]):
 	closed_entrances = values
 	if time > 0.2:
 		entrance_closing.emit()
+
+func _refill_cup():
+	cup_fill = 1
+	drink.get_child(3).play()
 
 func _jumpscare(animatronic: Node3D):
 	while can_jumpscare == false:
