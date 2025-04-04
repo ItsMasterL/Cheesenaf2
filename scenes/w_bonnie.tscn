@@ -175,6 +175,7 @@ positions = Array[ExtResource("3_028d0")]([SubResource("Resource_p1ed8"), SubRes
 jumpscare_length = 1.217
 jumpscare_position = Vector3(0, -0.604, -2.5)
 jumpscare_rotation = Vector3(0, 0, 0)
+sound_sensitive = true
 
 [node name="Skeleton3D" parent="RIG_Bonnie_ao" index="0"]
 bones/0/position = Vector3(-0.0217551, 1.29885, -0.740393)

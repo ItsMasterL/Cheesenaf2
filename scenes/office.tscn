@@ -690,6 +690,7 @@ transform = Transform3D(0.03, 0, -2.77556e-17, 0, -1.31134e-09, 0.03, 0, -0.03, 
 texture = ExtResource("16_6md6q")
 
 [node name="Label3D" type="Label3D" parent="TabletOnDesk/Tablet/Tutorial/Night1TutorialLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0143449)
 text = "Click off of
 the tablet's
 screen to
@@ -700,6 +701,7 @@ transform = Transform3D(0.03, 0, -2.77556e-17, 0, -1.31134e-09, 0.03, 0, -0.03, 
 texture = ExtResource("16_6md6q")
 
 [node name="Label3D" type="Label3D" parent="TabletOnDesk/Tablet/Tutorial/Night1TutorialRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.93889e-18, 0, -0.00901222)
 text = "Click off of
 the tablet's
 screen to
@@ -710,8 +712,8 @@ transform = Transform3D(-7.86805e-10, -0.018, -7.86805e-10, 0, -7.86805e-10, 0.0
 texture = ExtResource("16_6md6q")
 
 [node name="Label3D" type="Label3D" parent="TabletOnDesk/Tablet/Tutorial/Night1TutorialButton"]
-transform = Transform3D(-7.25609e-08, 1.66, 0, -1.66, -7.25609e-08, 0, 0, 0, 1.66, 0, 0, 0)
-text = "Cllick the Home
+transform = Transform3D(-7.25609e-08, 1.66, 0, -1.66, -7.25609e-08, 0, 0, 0, 1.66, -2.51746e-24, -5.75928e-17, -0.0219014)
+text = "Click the Home
 Button to return to
 the tablet's menu"
 
@@ -1003,6 +1005,7 @@ root = NodePath("../..")
 [node name="Edam Foxy" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("26_xrtv4")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 69.275, 1.121, 13.54)
 root = NodePath("../..")
+sound_sensitive = false
 
 [node name="Withered Bonnie" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("27_nd5pr")]
 root = NodePath("../..")
@@ -1014,6 +1017,7 @@ root = NodePath("../..")
 [node name="Withered Foxy" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("29_t0ahk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.621, 0.599, -23.328)
 root = NodePath("../..")
+sound_sensitive = false
 
 [node name="Withered Freddy" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("30_uyssn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.582, 5.263, -11.521)

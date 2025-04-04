@@ -28,6 +28,18 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2ahre")
 
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 18.0
+offset_right = 756.0
+offset_bottom = 37.0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_wdq0x")
+theme_override_font_sizes/normal_font_size = 20
+text = "Hover over an animatronic's name to get their behavior description."
+scroll_active = false
+
 [node name="Back" type="Button" parent="."]
 layout_mode = 0
 offset_left = 16.0
@@ -297,8 +309,8 @@ grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 tooltip_text = "Hangs out in the kitchen, refills your drink if its empty. When she's
-unfriendly, if you drink isn't empty when she comes to refill, she'll kill
-you, and will wait for you to get out from the desk.
+unfriendly, if your drink isn't empty when she comes to refill, she'll kill
+you. She will wait for you to get out from under the desk.
 
 Appears in either doorway or the right vent."
 theme_override_fonts/normal_font = ExtResource("2_wdq0x")

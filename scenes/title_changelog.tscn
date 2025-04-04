@@ -64,8 +64,8 @@ scroll_active = false
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 16.0
-offset_bottom = 605.0
+offset_top = 9.0
+offset_bottom = 598.0
 grow_horizontal = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_6434j")
@@ -81,16 +81,21 @@ Fixes:
 - Edam Freddy's Jumpscare now plays properly
 - Multiplayer Menu button now correctly shows (Coming Soon!) -- This was previously hidden
 - Animatronics that got in the way of doors that are closing now leave before it closes. Unless they are meant to be crushed. You killed Bonnie.
+- Fixed typo in animatronic descriptions
+- Game is no longer forced into a small window when accessing the title screen or resetting settings
 
 Adjustments:
 - Doors now take a bit longer to close (2s -> 3.25s), to incentivise strategic door placement and use of the other survival mechanics
 - Completely redesigned the VaultMaster app for more clear player feedback
+- Withered Bonnie now finds players with the tablet under the desk, as originally designed
 
 Additions:
 - Changelog page
 - Tutorial tips for tablet navigation on night 1
 - Added sound for when Chica refills your drink
-- Gave credit to a Freddy Fazbear's Pizzeria Simulator song I overlooked"
+- Gave credit to a Freddy Fazbear's Pizzeria Simulator song I overlooked
+- Added hint in custom night menu for descriptions
+- You can now boop Edam Foxy!"
 scroll_active = false
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]

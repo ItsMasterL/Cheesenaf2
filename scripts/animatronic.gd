@@ -21,6 +21,8 @@ extends Node3D
 @export var drink_sensitive : bool
 ## If true, the animatronic doesn't make any footstep sounds, and affects the music box song
 @export var paranormal : bool
+## If true, the animatronic will find the player under the desk if they have the tablet with them
+@export var sound_sensitive : bool
 @export_subgroup("Save ignore")
 ## If true, the jumpscare will overwrite a game sensitive animatronic's save
 @export var ignore_save : bool
@@ -231,7 +233,10 @@ func _movement_check():
 			_fail_attack()
 		# Desk hiding
 		elif positions[current_position].office_entrance.search_under_desk == false && safety_timer > 0 && root.under_desk:
-			_fail_attack()
+			if sound_sensitive && root.using_tablet:
+				root._jumpscare(self)
+			else:
+				_fail_attack()
 		# Flashlight sensitivity
 		elif positions[current_position].office_entrance.flashlight_weakness && flashlight > 0:
 			_fail_attack()
@@ -388,3 +393,13 @@ func _look_at_object(delta):
 	roty = lerp_angle(roty, deg_to_rad(degrees.y), delta * 5)
 	new_rotation = Quaternion.from_euler(Vector3(rotx, roty, 0))
 	skeleton.set_bone_pose_rotation(neckbone, new_rotation)
+
+func _booped():
+	if is_friendly:
+		$Boop.play()
+	else:
+		var rand = randi_range(0,250)
+		if rand < 8 && $Boop.playing == true:
+			root.gamer_in_office = false
+			root._jumpscare(self)
+		$Boop.play()
