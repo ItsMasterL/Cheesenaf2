@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://6obfeopjjj2k" path="res://textures/apps/gameworld bg.png" id="4_htxwe"]
 [ext_resource type="Texture2D" uid="uid://boqjjllhdogq6" path="res://textures/Modular_Belgard.png" id="5_4dbjg"]
 [ext_resource type="Script" path="res://scripts/flappyfoxy_char.gd" id="5_cxlrj"]
-[ext_resource type="FontFile" uid="uid://uc7mo5eme0if" path="res://minecraft_font.ttf" id="5_gecvb"]
+[ext_resource type="FontFile" uid="uid://uc7mo5eme0if" path="res://fonts/minecraft_font.ttf" id="5_gecvb"]
 [ext_resource type="Texture2D" uid="uid://djykfbvdfncen" path="res://textures/apps/flappyfoxy.png" id="5_p5ypo"]
 [ext_resource type="AudioStream" uid="uid://qdpwuu05mhnk" path="res://sounds/flappybird-01.wav" id="6_ixuec"]
 [ext_resource type="AudioStream" uid="uid://bpqq5guvqevsq" path="res://sounds/music/flappyfoxy.mp3" id="8_v6buh"]

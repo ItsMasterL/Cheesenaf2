@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var listing_template : PackedScene
+@export var listing_template: PackedScene
 @onready var os = $"../../"
 @onready var app_container = $ScrollContainer/Appcontainer
 
@@ -16,12 +16,12 @@ func _ready():
 		listing.available = app.available
 		listing.get_child(0).get_child(3).pressed.connect(_buy.bind(listing))
 		app_container.add_child(listing)
-	$Home/Funds.text = "Your Funds:\n$%1.2d" % Globals.money
+	$Home/Funds.text = "Your Funds:\n$%1.2f" % Globals.money
 
-func _buy(listing : Control):
+func _buy(listing: Control):
 	if Globals.money >= listing.price:
 		Globals.money -= listing.price
 		os._purchase_app(listing.id)
 		$Kaching.play()
 		listing._purchase()
-	$Home/Funds.text = "Your Funds:\n$%1.2d" % Globals.money
+	$Home/Funds.text = "Your Funds:\n$%1.2f" % Globals.money

@@ -10,26 +10,27 @@ var died = false
 
 signal start_game
 
-func _ready() -> void:
+func _ready():
 	$Music.play()
-func _process(delta: float) -> void:
+
+func _process(delta):
 	if Input.is_action_just_pressed("LeftClick") && game_started == false && root.using_tablet:
 		game_started = true
 		start_game.emit()
 	
 	if game_started:
-		OvenA.position -= Vector2(delta * speed,0)
-		OvenB.position -= Vector2(delta * speed,0)
+		OvenA.position -= Vector2(delta * speed, 0)
+		OvenB.position -= Vector2(delta * speed, 0)
 		speed += delta * 5
 	
 	if OvenA.position.x < -150:
-		OvenA.position = Vector2(1500, randi_range(210,600))
+		OvenA.position = Vector2(1500, randi_range(210, 600))
 		if died == false:
 			$"Pass sound".play()
 			score += 1
 			$Home/Score.text = str(score)
 	if OvenB.position.x < -150:
-		OvenB.position = Vector2(1500, randi_range(210,600))
+		OvenB.position = Vector2(1500, randi_range(210, 600))
 		if died == false:
 			$"Pass sound".play()
 			score += 1

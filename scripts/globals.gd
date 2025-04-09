@@ -18,26 +18,26 @@ var game_time = 0
 
 # Multiplayer #TODO: Actually implement multiplayer
 var local_playername = ""
-var remote_playernames : Array[String]
+var remote_playernames: Array[String]
 var is_host = false
 var host_ip = "127.0.0.1"
 
 # Save Data
-var save_night : int = 1
-var purchased_apps : String = "0x0000"
-var money : int = 0
-var saw_foxy : bool = false
-var saw_foxy_night_1 : bool = false
+var save_night: int = 1
+var purchased_apps: String = "0x0000"
+var money: float = 0
+var saw_foxy: bool = false
+var saw_foxy_night_1: bool = false
 
 # User Settings
-var mouse_sensitivity : float = 1.0
-var master_volume : float = 1
-var sfx_volume : float = 1
-var voice_volume : float = 1
-var music_volume : float = 1
-var tablet_volume : float = 1
-var ambient_volume : float = 1
-var jumpscare_volume : float = 1
+var mouse_sensitivity: float = 1.0
+var master_volume: float = 1
+var sfx_volume: float = 1
+var voice_volume: float = 1
+var music_volume: float = 1
+var tablet_volume: float = 1
+var ambient_volume: float = 1
+var jumpscare_volume: float = 1
 var fullscreen = false
 
 #region Applications
@@ -67,7 +67,7 @@ enum store_apps_binary {
 	PODCAST = 0b0010_0000_0000,
 	FNWF = 0b0100_0000_0000
 	}
-var apps : Array[TabletApp] = [
+var apps: Array[TabletApp] = [
 	TabletApp.new("Freddy Fazbear's Media Player", "Play your favorite tunes from your own device, while Freddy Fazbear himself dances along!", "media_player", load("res://textures/apps/mediaplayer.png"), 0.00, store_apps_binary.MEDIAPLAYER),
 	TabletApp.new("Flappy Foxy", "Make Foxy jump up and down between the Brick%s brand ovens! Touching the floor or the ovens will cause Foxy to die. painfully." % String.chr(8482), "flappy_foxy", load("res://textures/apps/flappyfoxy.png"), 0.00, store_apps_binary.FLAPPYFOXY, 1.25),
 	TabletApp.new("Chica Pop", "Tap the screen to make her go pop! Try for the biggest number!! My high score is 4", "chica_pop", load("res://textures/apps/chicapopicon.png"), 0.00, store_apps_binary.CHICAPOP, 1.25),
@@ -81,10 +81,10 @@ var apps : Array[TabletApp] = [
 	TabletApp.new("Five Nights With Freddy (18+)", "Enjoy 5 sensual nights with Freddy and the gang, get to know them intimately, and more~", "fnwf", load("res://textures/apps/fnwf.png"), 29.99, store_apps_binary.FNWF)
 ]
 #endregion
-var purchases : int
+var purchases: int
 
 func _ready():
-	match randi_range(0,3):
+	match randi_range(0, 3):
 		0:
 			if OS.get_name() == "Windows":
 				DisplayServer.set_native_icon("res://textures/icons/edam bonnie.ico")
@@ -212,6 +212,7 @@ func _load_settings():
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 #endregion
 
+# TODO: The local function parameter "night" is shadowing an already-declared variable at line 4.
 func _set_night(night: int):
 	match night:
 		1:
@@ -293,7 +294,7 @@ func _set_night(night: int):
 			Globals.cheesestick = 3
 			Globals.safety_time = 2
 
-func _check_app_purchase(app : store_apps_binary) -> bool:
+func _check_app_purchase(app: store_apps_binary) -> bool:
 	return purchases & app
-func _purchase_app(app : store_apps_binary):
+func _purchase_app(app: store_apps_binary):
 	purchases |= app

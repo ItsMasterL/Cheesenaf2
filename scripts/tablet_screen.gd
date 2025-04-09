@@ -20,14 +20,11 @@ func _ready():
 	if node_quad.get_surface_override_material(0).billboard_mode == BaseMaterial3D.BillboardMode.BILLBOARD_DISABLED:
 		set_process(false)
 
-
 func _mouse_entered_area():
 	is_mouse_inside = true
 
-
 func _mouse_exited_area():
 	is_mouse_inside = false
-
 
 func _unhandled_input(event):
 	# Check if the event is a non-mouse/non-touch event
@@ -37,7 +34,6 @@ func _unhandled_input(event):
 			# handled via Physics Picking.
 			return
 	node_viewport.push_input(event)
-
 
 func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Vector3, _normal: Vector3, _shape_idx: int):
 	# Get mesh size to detect edges and make conversions. This code only support PlaneMesh and QuadMesh.
@@ -102,7 +98,6 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 
 	# Finally, send the processed input event to the viewport.
 	node_viewport.push_input(event)
-
 
 func rotate_area_to_billboard():
 	var billboard_mode = node_quad.get_surface_override_material(0).params_billboard_mode

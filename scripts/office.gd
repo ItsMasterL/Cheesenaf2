@@ -1,19 +1,20 @@
 extends Node3D
+
 @onready var blur := $BlurShader/ColorRect
 
 var night = Globals.night
 var time = 0 as float
 var hour = 0
 var minute = 0
-var fun_multiplier = 1 #Set by minigames in singleplayer to make time go by faster
+var fun_multiplier = 1 # Set by minigames in singleplayer to make time go by faster
 var purchased_apps
 const time_to_hour = 90
 var using_tablet = false
 var in_cams = false
 var under_desk = false
 var animatronics_in_office = 0
-var closed_entrances : Array[int]
-var jammed_entrances : Array[int]
+var closed_entrances: Array[int]
+var jammed_entrances: Array[int]
 var cup_fill = 1
 var fan_powered = true
 var p1_thirst = 0
@@ -40,20 +41,20 @@ var safety_time = Globals.safety_time
 # Etc
 var p1_last_cam
 var p1_vent_cam = false
-var game_sensitive : Array[Node3D]
+var game_sensitive: Array[Node3D]
 var can_jumpscare = true # If a game sensitive animatronic is saving you
 var p1_can_action = true # False if in a jumpscare
 var paranormal_attacking = false # Why is it here?
-var paranormal_attacker : Node3D # What even is it?
+var paranormal_attacker: Node3D # What even is it?
 var paranormal_primed = false # What is it doing?
 
 signal music_box_ran_out
 signal entrance_closing
 
-@export var tablet : MeshInstance3D
-@export var animatronics : Node3D
-@export var doors : Node3D
-@export var drink : MeshInstance3D
+@export var tablet: MeshInstance3D
+@export var animatronics: Node3D
+@export var doors: Node3D
+@export var drink: MeshInstance3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -215,8 +216,8 @@ func _jumpscare(animatronic: Node3D):
 	can_jumpscare = false
 	under_desk = false
 	animatronic.can_move = false
-	var anim : AnimationPlayer = animatronic.get_child(1)
-	var sound : AudioStreamPlayer = animatronic.get_child(2)
+	var anim: AnimationPlayer = animatronic.get_child(1)
+	var sound: AudioStreamPlayer = animatronic.get_child(2)
 	if gamer_in_office && animatronic.ignore_save == true && animatronic.save_jumpscare_id != animatronic.jumpscare_animation_id:
 		animatronic.position = animatronic.save_ignore_jumpscare_position
 		animatronic.rotation_degrees = animatronic.save_ignore_jumpscare_rotation
@@ -253,10 +254,10 @@ func _jumpscare_save(animatronic: Node3D):
 	under_desk = false
 	animatronic.position = Vector3(0, -0.719, -2.25)
 	animatronic.rotation_degrees = Vector3(0, -90, 0)
-	var anim : AnimationPlayer = animatronic.get_child(1)
-	var sound : AudioStreamPlayer = animatronic.get_child(2)
-	var warning : AudioStreamPlayer = animatronic.get_child(4)
-	warning.stream = load("res://sounds/dialogue/edamfoxy-save%s.wav" % [randi_range(1,7)])
+	var anim: AnimationPlayer = animatronic.get_child(1)
+	var sound: AudioStreamPlayer = animatronic.get_child(2)
+	var warning: AudioStreamPlayer = animatronic.get_child(4)
+	warning.stream = load("res://sounds/dialogue/edamfoxy-save%s.wav" % [randi_range(1, 7)])
 	anim.play(animatronic.save_animation_id)
 	sound.play()
 	var playercamanim := $Player/Head/Eyes/AnimationPlayer

@@ -1,7 +1,7 @@
 extends Node2D
 
-var playlist : Array[String]
-var queued_media : String = ""
+var playlist: Array[String]
+var queued_media: String = ""
 @onready var audioplayer := $Home/AudioStreamPlayer
 @onready var videoplayer := $Home/VideoStreamPlayer
 @onready var progressbar := $Home/ProgressBar
@@ -11,12 +11,11 @@ var is_media_playing = false
 var is_video = false
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+func _ready():
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta):
 	is_media_playing = audioplayer.playing || videoplayer.is_playing()
 	if queued_media != "" && is_media_playing == false:
 		if queued_media.ends_with(".ogv") && is_media_playing == false:
@@ -42,7 +41,7 @@ func _process(delta: float) -> void:
 		elif queued_media.ends_with(".wav") && audioplayer.stream == null:
 			queued_media = ""
 			return # They just play back static rn
-			is_video = false
+			is_video = false # TODO: Unreachable code (statement after return) in function "_process()".
 			var file = FileAccess.open(queued_media, FileAccess.READ)
 			var sound = AudioStreamWAV.new()
 			sound.data = file.get_buffer(file.get_length())
@@ -54,6 +53,7 @@ func _process(delta: float) -> void:
 		elif queued_media.ends_with(".ogg") && audioplayer.stream == null:
 			is_video = false
 			var sound = AudioStreamOggVorbis.new()
+			# TODO: The function "load_from_file()" is a static function but was called from an instance. Instead, it should be directly called from the type: "AudioStreamOggVorbis.load_from_file()".
 			sound.load_from_file(queued_media)
 			progressbar.max_value = sound.get_length()
 			length.text = "%02d:%02d:%02d" % [floor(sound.get_length() / 60 / 60), fmod(floor(sound.get_length() / 60), 60), fmod(sound.get_length(), 60)]

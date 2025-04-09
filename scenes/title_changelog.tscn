@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://mmdtwfhhpt06"]
 
 [ext_resource type="Script" path="res://scripts/title_menu.gd" id="1_fpwe5"]
-[ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://consolas.ttf" id="2_6434j"]
+[ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://fonts/consolas.ttf" id="2_6434j"]
 [ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://sounds/change_cam.wav" id="3_yas5j"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ptv6"]

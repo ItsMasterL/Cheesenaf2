@@ -1,4 +1,5 @@
 extends StaticBody3D
+
 @onready var stand := $"../.."
 @onready var hold := $"../../../Player/Head/Eyes/TabletHolder"
 @onready var tablet = $".."

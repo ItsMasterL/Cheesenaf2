@@ -4,8 +4,8 @@
 [ext_resource type="AudioStream" uid="uid://qbt0kcf5yc26" path="res://sounds/music/paycheck5.mp3" id="2_sirik"]
 [ext_resource type="Texture2D" uid="uid://bvte0l0l1kuts" path="res://textures/adam.png" id="3_wvjln"]
 [ext_resource type="Texture2D" uid="uid://qimxj426basq" path="res://textures/paycheck.png" id="4_pkq8e"]
-[ext_resource type="FontFile" uid="uid://pwmyfihc72ad" path="res://fennario.ttf" id="5_xdktj"]
-[ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://consolas.ttf" id="6_2d0gc"]
+[ext_resource type="FontFile" uid="uid://pwmyfihc72ad" path="res://fonts/fennario.ttf" id="5_xdktj"]
+[ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://fonts/consolas.ttf" id="6_2d0gc"]
 
 [sub_resource type="Animation" id="Animation_aguet"]
 length = 0.001

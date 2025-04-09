@@ -8,7 +8,7 @@ extends Control
 var call_accepted
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+func _ready():
 	_start_call()
 
 func _start_call():
@@ -16,7 +16,7 @@ func _start_call():
 		await get_tree().create_timer(randf_range(3, 7)).timeout
 		audio.play()
 		notif.visible = true
-		get_tree().create_timer(20).timeout
+		await get_tree().create_timer(20).timeout
 		if call_accepted == false:
 			notif.visible = false
 			audio.stop()

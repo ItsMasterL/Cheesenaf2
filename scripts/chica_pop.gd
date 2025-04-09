@@ -1,16 +1,16 @@
 extends Node2D
 
-var anim_timer : float
+var anim_timer: float
 var anim_offset = false
 var score = 0
 @onready var chica := $Chica
 @onready var scoredisplay := $Chica/Score
 @onready var root = $"../.."
 
-func _ready() -> void:
+func _ready():
 	$Music.play()
 
-func _process(delta: float) -> void:
+func _process(delta):
 	anim_timer += delta
 	if anim_timer > 0.3:
 		anim_timer = 0

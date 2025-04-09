@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 const JUMP_VELOCITY = -800.0
 
 var can_jump = true
@@ -10,7 +9,7 @@ var gravity = false
 
 signal died
 
-func _physics_process(delta: float) -> void:
+func _physics_process(delta):
 	# Add the gravity.
 	if gravity:
 		velocity += get_gravity() * delta * 3

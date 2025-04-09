@@ -1,57 +1,57 @@
 @tool
 extends Node3D
 
-@export var root : Node3D
+@export var root: Node3D
 @export_category("General Animatronic")
 ## The name of the animatronic, example: "edam_bonnie" or "wither_bonnie"
-@export var animatronic : String
+@export var animatronic: String
 ## Wherever the animatronic can appear, including position, rotation, animation, and more.
-@export var positions : Array[AnimatronicPosition]
+@export var positions: Array[AnimatronicPosition]
 ## How often a check is performed. Varying this number on each animatronic will make gameplay more interesting. Lower is faster.
-@export var check_frequency : float = 5
+@export var check_frequency: float = 5
 ## The time in seconds for this animatronic to play its jumpscare. Animations can be longer than this time, mainly useful if `game_sensitive` below is enabled for an apology animation.
-@export var jumpscare_length : float = 0.6667
-@export var jumpscare_animation_id : String = "Jumpscare"
-@export var jumpscare_position : Vector3 = Vector3(0, -0.719, -2.25)
-@export var jumpscare_rotation : Vector3 = Vector3(0, -90, 0)
+@export var jumpscare_length: float = 0.6667
+@export var jumpscare_animation_id: String = "Jumpscare"
+@export var jumpscare_position: Vector3 = Vector3(0, -0.719, -2.25)
+@export var jumpscare_rotation: Vector3 = Vector3(0, -90, 0)
 @export_category("Special Animatronics")
 ## If true, the animatronic will be stunned if the cameras are looked at.
-@export var camera_sensitive : bool
+@export var camera_sensitive: bool
 ## If true, the animatronic will only succeed a jumpscare attempt if the player's cup isn't empty. Otherwise, they will refill the drink and leave.
-@export var drink_sensitive : bool
+@export var drink_sensitive: bool
 ## If true, the animatronic doesn't make any footstep sounds, and affects the music box song
-@export var paranormal : bool
+@export var paranormal: bool
 ## If true, the animatronic will find the player under the desk if they have the tablet with them
-@export var sound_sensitive : bool
+@export var sound_sensitive: bool
 @export_subgroup("Save ignore")
 ## If true, the jumpscare will overwrite a game sensitive animatronic's save
-@export var ignore_save : bool
+@export var ignore_save: bool
 ## The animation ID to play on a save ignore. This plays on both this and the saving animatronic, so make sure they both have the animation and are synced. However, if it is the same as the jumpscare animation ID, it only plays on this animatronic.
-@export var save_jumpscare_id : String = "SaveInterrupt"
-@export var save_ignore_jumpscare_position : Vector3 = Vector3(0, -0.719, -2.25)
-@export var save_ignore_jumpscare_rotation : Vector3 = Vector3(0, -90, 0)
+@export var save_jumpscare_id: String = "SaveInterrupt"
+@export var save_ignore_jumpscare_position: Vector3 = Vector3(0, -0.719, -2.25)
+@export var save_ignore_jumpscare_rotation: Vector3 = Vector3(0, -90, 0)
 @export_subgroup("Game sensitive")
 ## If true, the animatronic will only succeed a jumpscare attempt if the player does not have the tablet, has no installed games, or shakes their head no to the animatronic's voice line requesting to watch you play. It will stay in the last index of it's position array until either a hidden timer expires (1-2 in game hours) or until another animatronic attempts to jumpscare the player, in which case the animatronic will jumpscare the player itself, play an apology voice line, then return to position index 0 for the rest of the night
-@export var game_sensitive : bool
-@export var save_animation_id : String
+@export var game_sensitive: bool
+@export var save_animation_id: String
 ## How long in seconds before a voiceline plays
-@export var save_voiceline_delay : float
+@export var save_voiceline_delay: float
 ## How long in seconds before the player regains control
-@export var save_player_free : float
+@export var save_player_free: float
 @export_subgroup("Music Box")
 ## If true, the animatronic will not move until the music box has run out. Restarting the music box afterwards will not reset them. This animatronic's AI level will affect the music box's winding down speed.
-@export var music_box_sensitive : bool
+@export var music_box_sensitive: bool
 ## If `music_box_sensitive` is true, whenever the music box changes music the below list will be checked. If an index matches with the song's index, that animation will play. If not, an animation will be picked at random from this list.
-@export var music_box_dances : Array[String]
+@export var music_box_dances: Array[String]
 ## If this and `music_box_sensitive` are true, always randomize the music box dance regardless of matching arrays.
-@export var always_random_dance : bool
+@export var always_random_dance: bool
 @export_subgroup("Friendly Animatronics")
 ## If true, the animatronic will be friendly in singleplayer/co-op nights 1 and 2 and will never be able to jumpscare the player.
-@export var is_edam_animatronic : bool
+@export var is_edam_animatronic: bool
 ## If true, the animatronic will warn of other animatronics entering the office vents when friendly, and will be killed on night 2 in singleplayer/co-op.
-@export var vent_checker : bool
+@export var vent_checker: bool
 ## Set by combo of is_edam_animatronic and office's edams_friendly. Can be set in the editor. These animatronics will never jumpscare the player.
-@export var is_friendly : bool
+@export var is_friendly: bool
 
 @export_category("Editor")
 @export var test_jumpscare = false:
@@ -76,7 +76,7 @@ extends Node3D
 				$"../../Player/Head/Eyes/AnimationPlayer".play("Long")
 			else:
 				$"../../Player/Head/Eyes/AnimationPlayer".play("Default")
-@export var current_position = 0: #Also used normally
+@export var current_position = 0: # Also used normally
 	set(new_position):
 		current_position = new_position
 		if Engine.is_editor_hint():
@@ -128,7 +128,7 @@ func _process(delta: float) -> void:
 		return
 	# Camera sensitivity
 	if root.in_cams && root.using_tablet && camera_sensitive && positions[current_position].office_entrance == null:
-		camera_cooldown = randf_range(2,23 - level)
+		camera_cooldown = randf_range(2, 23 - level)
 	if camera_cooldown > 0 && camera_sensitive:
 		camera_cooldown -= delta
 		can_move = false
@@ -143,7 +143,7 @@ func _process(delta: float) -> void:
 		safety_timer = clamp(safety_timer + delta, 0, root.safety_time)
 	# Light sensitivity
 	if flashlight > 0:
-		flashlight = clamp(flashlight - delta/2, 0, 5)
+		flashlight = clamp(flashlight - delta / 2, 0, 5)
 	#Music Box
 	if music_box_sensitive && root.is_winding == false:
 		root.musicbox = clamp(root.musicbox - (level * delta) * root.fun_multiplier, 0, 2000)
@@ -188,9 +188,9 @@ func _movement_check():
 			if vent_checker && root.night == 2:
 				var warning := $Warning
 				warning.play()
-				timer = check_frequency * 2 #Wait 3 checks before repeating (Including below line)
+				timer = check_frequency * 2 # Wait 3 checks before repeating (Including below line)
 				await get_tree().create_timer(check_frequency).timeout
-				if randi_range(0,1) == 1:
+				if randi_range(0, 1) == 1:
 					# Sorry, but this is going to be very hardcoded for the sake of time
 					if current_position == 8:
 						root.animatronics.get_child(4).current_position = 9
@@ -274,7 +274,7 @@ func _movement_check():
 				if game_sensitive:
 					var warning := $Warning
 					if Globals.saw_foxy:
-						warning.stream = load("res://sounds/dialogue/edamfoxy-enter%s.wav" % randi_range(1,4))
+						warning.stream = load("res://sounds/dialogue/edamfoxy-enter%s.wav" % randi_range(1, 4))
 					else:
 						warning.stream = load("res://sounds/dialogue/edamfoxy-night1-1.wav")
 					warning.play()
@@ -292,11 +292,11 @@ func _move_animatronic():
 			if check_frequency < 1.5:
 				stepsound.stream = load("res://sounds/ventwalk_run.wav")
 			else:
-				stepsound.stream = load("res://sounds/ventwalk" + str(randi_range(1,2)) + ".wav")
+				stepsound.stream = load("res://sounds/ventwalk" + str(randi_range(1, 2)) + ".wav")
 		elif check_frequency < 1.5:
 			stepsound.stream = load("res://sounds/walk_run.wav")
 		else:
-			stepsound.stream = load("res://sounds/walk" + str(randi_range(1,5)) + ".wav")
+			stepsound.stream = load("res://sounds/walk" + str(randi_range(1, 5)) + ".wav")
 		stepsound.play()
 	print(str(animatronic) + " moved to " + str(current_position))
 
@@ -312,14 +312,14 @@ func _fail_attack():
 	current_position = positions[current_position].office_entrance.fail_position_index
 	_move_animatronic()
 
-func _change_dance(count : int, id : int = 0):
+func _change_dance(count: int, id: int = 0):
 	anim.play("Reset")
 	if always_random_dance || music_box_dances.size() < count:
 		anim.play(music_box_dances.pick_random())
 	else:
 		anim.play(music_box_dances[id - 1])
 
-func _set_dance(dance : String):
+func _set_dance(dance: String):
 	anim.play("Reset")
 	anim.play(dance)
 
@@ -331,7 +331,7 @@ func _stop_dance():
 	anim.stop()
 	anim.play(positions[current_position].animation_id)
 
-func _flash(value : float):
+func _flash(value: float):
 	flashlight = clamp(flashlight + value, 0, 5)
 
 func _kill_vent_checker():
@@ -362,7 +362,7 @@ func _game_check():
 			root.animatronics_in_office -= 1
 		var warning := $Warning
 		if Globals.saw_foxy:
-			warning.stream = load("res://sounds/dialogue/edamfoxy-sit%s.wav" % randi_range(1,4))
+			warning.stream = load("res://sounds/dialogue/edamfoxy-sit%s.wav" % randi_range(1, 4))
 		else:
 			warning.stream = load("res://sounds/dialogue/edamfoxy-night1-2.wav")
 		warning.play()
@@ -398,7 +398,7 @@ func _booped():
 	if is_friendly:
 		$Boop.play()
 	else:
-		var rand = randi_range(0,250)
+		var rand = randi_range(0, 250)
 		if rand < 8 && $Boop.playing == true:
 			root.gamer_in_office = false
 			root._jumpscare(self)

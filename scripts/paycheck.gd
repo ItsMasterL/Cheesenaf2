@@ -1,6 +1,7 @@
 extends Control
 
-@export var reward : float = 16
+@export var reward: float = 16
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$"surprisingly not placeholder/AnimationPlayer".play("adam_dance")

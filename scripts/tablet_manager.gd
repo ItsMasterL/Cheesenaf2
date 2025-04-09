@@ -9,7 +9,7 @@ var current_process
 var using_tablet = false
 var fun_multiplier = 1
 
-@export var app_button : PackedScene
+@export var app_button: PackedScene
 
 func _ready():
 	_populate_homescreen()
@@ -26,7 +26,7 @@ func _process(_delta):
 	else:
 		root.fun_multiplier = 1
 
-func _purchase_app(app : Globals.store_apps_binary):
+func _purchase_app(app: Globals.store_apps_binary):
 	Globals._purchase_app(app)
 	_populate_homescreen()
 	Globals._save()

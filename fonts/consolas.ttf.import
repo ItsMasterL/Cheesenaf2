@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://pwmyfihc72ad"
-path="res://.godot/imported/fennario.ttf-29c0a35a5143b640ba7f4dedf930e8cd.fontdata"
+uid="uid://jvtdvd72wv06"
+path="res://.godot/imported/consolas.ttf-e6d3511b36db99e399b28f677ea24544.fontdata"
 
 [deps]
 
-source_file="res://fennario.ttf"
-dest_files=["res://.godot/imported/fennario.ttf-29c0a35a5143b640ba7f4dedf930e8cd.fontdata"]
+source_file="res://fonts/consolas.ttf"
+dest_files=["res://.godot/imported/consolas.ttf-e6d3511b36db99e399b28f677ea24544.fontdata"]
 
 [params]
 

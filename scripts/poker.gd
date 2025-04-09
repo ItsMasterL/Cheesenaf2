@@ -1,20 +1,21 @@
 extends Node2D
 
-@export var card_scene : PackedScene
+@export var card_scene: PackedScene
 @onready var player_cards = $PlayerCards
 @onready var cpu_cards = $CPUCards
-var player_score : Array[int]
-var cpu_score : Array[int]
+var player_score: Array[int]
+var cpu_score: Array[int]
 enum values {
-	Foxy,Chica,Bonnie,Freddy,Cheesestick,Afton
+	Foxy, Chica, Bonnie, Freddy, Cheesestick, Afton
 }
 var phase = 0
+
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+func _ready():
 	$Music.play()
 	_start_phase(0)
 
-func _process(delta):
+func _process(_delta):
 	if phase == 1:
 		$Table/Draw.text = "HOLD"
 		for card in player_cards.get_children():
@@ -39,7 +40,7 @@ func _start_phase(p: int):
 			await get_tree().create_timer(1).timeout
 			for card in player_cards.get_children():
 				if card.selected_for_reshuffle:
-					card.card_value = randi_range(0,values.size() - 1)
+					card.card_value = randi_range(0, values.size() - 1)
 					card._flip_card(true)
 					card.anim.play("draw")
 			await get_tree().create_timer(1).timeout
@@ -60,7 +61,7 @@ func _deal_cards(side: Node2D, selectable = false):
 		var card = card_scene.instantiate()
 		side.add_child(card)
 		card.selectable = selectable
-		card.card_value = randi_range(0,values.size() - 1)
+		card.card_value = randi_range(0, values.size() - 1)
 		card.position = Vector2(200 * i, card.position.y)
 		card.anim.play("draw")
 		#TODO: Add sound effects

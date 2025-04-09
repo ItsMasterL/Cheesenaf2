@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bwwxh0vqeqgrd"]
 
 [ext_resource type="Script" path="res://scripts/title_loadoffice.gd" id="1_sich6"]
-[ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://consolas.ttf" id="2_mcenq"]
+[ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://fonts/consolas.ttf" id="2_mcenq"]
 [ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://sounds/change_cam.wav" id="3_imwn0"]
 
 [node name="LoadOffice" type="Control"]

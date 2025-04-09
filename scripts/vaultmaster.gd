@@ -13,7 +13,7 @@ func _ready():
 		door_buttons.get_child(i).button_pressed = true
 
 func _check_and_seal():
-	var seals : Array[int]
+	var seals: Array[int]
 	var i = 0
 	for button in door_buttons.get_children():
 		if button.button_pressed:

@@ -1,6 +1,6 @@
 extends Control
 
-@export var title_renders : Array[Sprite2D]
+@export var title_renders: Array[Sprite2D]
 @export var visible_render = 0
 var time = 4
 var opacity = 1
@@ -23,8 +23,8 @@ func _process(delta):
 	if title_renders.is_empty() == false:
 		time += delta
 		if randi_range(0, 60) == 0:
-			flicker_timer = randf_range(0.000,0.100)
-		opacity = clampf(abs(sin(time/4)), 0, 1)
+			flicker_timer = randf_range(0.000, 0.100)
+		opacity = clampf(abs(sin(time / 4)), 0, 1)
 		if opacity <= 0.01:
 			title_renders[visible_render].visible = false
 			visible_render = randi_range(0, title_renders.size() - 1)
@@ -78,7 +78,7 @@ func _open_url(url: String):
 func _close_game():
 	get_tree().quit()
 
-func _toggle_edams(friendly : bool):
+func _toggle_edams(friendly: bool):
 	Globals.edams_friendly = friendly
 	$ClickSound.play()
 	_update_customnight_displays()
@@ -119,4 +119,3 @@ func _calculate_safety() -> float:
 	var value = (Globals.edam_freddy / 20) + (Globals.edam_bonnie / 20) + (Globals.edam_chica / 20) + (Globals.edam_foxy / 20) + (Globals.wither_freddy / 20) + (Globals.wither_bonnie / 20) + (Globals.wither_chica / 20) + (Globals.wither_foxy / 20) / 8
 	print(str(clampf((3.8 - 3 * value) + 1, 1.5, 5)))
 	return clampf((3.8 - 3 * value) + 1, 1.5, 5) # Revisit this
-	

@@ -1,4 +1,5 @@
 extends CharacterBody3D
+
 @onready var head := $Head
 @onready var camera := $Head/Eyes
 @onready var flashlight := $Head/Eyes/SpotLight3D
@@ -22,7 +23,7 @@ func _unhandled_input(event):
 			anim.play(&"desk_hide")
 			moving.play()
 		if event.is_action_released(&"HideUnderDesk") && anim.is_playing() == false && root.under_desk:
-			anim.play(&"desk_hide",-1,-1,true)
+			anim.play(&"desk_hide", -1, -1, true)
 			moving.play()
 	if event.is_action_pressed(&"LeftClick") && root.using_tablet == false:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

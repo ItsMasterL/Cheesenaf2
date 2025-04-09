@@ -1,4 +1,5 @@
 extends Control
+
 @onready var cams = $Background/SubViewport/Cameras
 @onready var current_cam := $Background/SubViewport/Cameras/Camera4
 @onready var light := $Background/SubViewport/Cameras/Camera4/SpotLight3D
@@ -81,7 +82,7 @@ func _unhandled_input(event):
 		light.visible = false
 		lightsound.stop()
 
-func _process(delta):
+func _process(_delta):
 	if root.is_winding:
 		if windsound.playing == false:
 			windsound.play()
@@ -92,8 +93,8 @@ func _process(delta):
 		musicbox.stop()
 	elif musicbox.playing == false:
 		if root.paranormal_attacking == false:
-			if randi_range(0,4) >= 2:
-				var id = randi_range(1,songcount)
+			if randi_range(0, 4) >= 2:
+				var id = randi_range(1, songcount)
 				musicbox.stream = load("res://sounds/music/musicbox%s.mp3" % [id])
 				if root.musicbox_ran_out == false || root.edams_friendly:
 					change_dance.emit(songcount, id)

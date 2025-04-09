@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://scripts/victory.gd" id="1_wgnha"]
 [ext_resource type="AudioStream" uid="uid://p1jvgrruejbo" path="res://sounds/Clocks_Chimes_Cl_02480702.wav" id="2_ysvoq"]
 [ext_resource type="AudioStream" uid="uid://cxsccyw5som11" path="res://sounds/yay.wav" id="3_gaq0u"]
-[ext_resource type="FontFile" uid="uid://uc7mo5eme0if" path="res://minecraft_font.ttf" id="3_hdica"]
-[ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://consolas.ttf" id="5_l6eor"]
+[ext_resource type="FontFile" uid="uid://uc7mo5eme0if" path="res://fonts/minecraft_font.ttf" id="3_hdica"]
+[ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://fonts/consolas.ttf" id="5_l6eor"]
 
 [sub_resource type="Animation" id="Animation_rnwfb"]
 length = 0.001

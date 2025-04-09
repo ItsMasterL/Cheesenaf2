@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b4o56xdcgvy6v"]
 
 [ext_resource type="Script" path="res://scripts/title_credits.gd" id="1_cboxk"]
-[ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://consolas.ttf" id="3_8a50c"]
+[ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://fonts/consolas.ttf" id="3_8a50c"]
 [ext_resource type="AudioStream" uid="uid://cskpfhrqarprl" path="res://sounds/music/credits.mp3" id="3_mwtck"]
 
 [node name="Credits" type="Control"]

@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://bvte0l0l1kuts" path="res://textures/adam.png" id="3_jjyru"]
 [ext_resource type="Script" path="res://scripts/volume_manager.gd" id="3_yeu3d"]
 [ext_resource type="Texture2D" uid="uid://qimxj426basq" path="res://textures/paycheck.png" id="4_6rlv0"]
-[ext_resource type="FontFile" uid="uid://pwmyfihc72ad" path="res://fennario.ttf" id="5_eqjgs"]
-[ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://consolas.ttf" id="6_htdee"]
+[ext_resource type="FontFile" uid="uid://pwmyfihc72ad" path="res://fonts/fennario.ttf" id="5_eqjgs"]
+[ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://fonts/consolas.ttf" id="6_htdee"]
 
 [sub_resource type="Animation" id="Animation_aguet"]
 length = 0.001

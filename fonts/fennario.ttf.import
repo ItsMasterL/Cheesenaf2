@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://uc7mo5eme0if"
-path="res://.godot/imported/minecraft_font.ttf-02aa0851a24f9f1a669e7ae39107d350.fontdata"
+uid="uid://pwmyfihc72ad"
+path="res://.godot/imported/fennario.ttf-b2026e74d7f30f438d6c660b037e8c70.fontdata"
 
 [deps]
 
-source_file="res://minecraft_font.ttf"
-dest_files=["res://.godot/imported/minecraft_font.ttf-02aa0851a24f9f1a669e7ae39107d350.fontdata"]
+source_file="res://fonts/fennario.ttf"
+dest_files=["res://.godot/imported/fennario.ttf-b2026e74d7f30f438d6c660b037e8c70.fontdata"]
 
 [params]
 
