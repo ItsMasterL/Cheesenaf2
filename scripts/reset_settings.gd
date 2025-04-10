@@ -1,5 +1,6 @@
 extends Button
 
+
 func _reset_audio():
 		Globals.master_volume = 1
 		Globals.sfx_volume = 1

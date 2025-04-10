@@ -1,8 +1,11 @@
 extends Node2D
 
+
 @export var listing_template: PackedScene
+
 @onready var os = $"../../"
 @onready var app_container = $ScrollContainer/Appcontainer
+
 
 func _ready():
 	$Music.play()

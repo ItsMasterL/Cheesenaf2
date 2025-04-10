@@ -1,15 +1,18 @@
 extends Node2D
 
+
+@export var app_button: PackedScene
+
 var current_process
+var using_tablet = false
+var fun_multiplier = 1
+
 @onready var home = $Home
 @onready var app_home = $Application
 @onready var time = $TimeUI/Clock
 @onready var root = get_tree().get_root().get_node("Map")
 @onready var app_container := $Home/GridContainer
-var using_tablet = false
-var fun_multiplier = 1
 
-@export var app_button: PackedScene
 
 func _ready():
 	_populate_homescreen()

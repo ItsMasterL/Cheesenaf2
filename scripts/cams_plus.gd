@@ -1,5 +1,11 @@
 extends Control
 
+
+signal change_dance
+signal paranormal_dance
+
+const SONG_COUNT = 10
+
 @onready var cams = $Background/SubViewport/Cameras
 @onready var current_cam := $Background/SubViewport/Cameras/Camera4
 @onready var light := $Background/SubViewport/Cameras/Camera4/SpotLight3D
@@ -11,10 +17,7 @@ extends Control
 @onready var musicbox := $Musicbox
 @onready var cambuttons = $RoomCams
 @onready var vents = false
-var songcount = 10
 
-signal change_dance
-signal paranormal_dance
 
 func _ready():
 	if root.p1_vent_cam:
@@ -36,6 +39,26 @@ func _ready():
 		if button.name.contains("Cam"):
 			button.pressed.connect(_change_camera.bind(button.name.trim_prefix("Cam").to_int()))
 	
+func _process(_delta):
+	if root.is_winding:
+		if windsound.playing == false:
+			windsound.play()
+	musicprogress.value = root.musicbox
+	
+	# Randomize musicbox
+	if root.musicbox == 0:
+		musicbox.stop()
+	elif musicbox.playing == false:
+		if root.paranormal_attacking == false:
+			if randi_range(0, 4) >= 2:
+				var id = randi_range(1, SONG_COUNT)
+				musicbox.stream = load("res://sounds/music/musicbox%s.mp3" % [id])
+				if root.musicbox_ran_out == false || root.edams_friendly:
+					change_dance.emit(SONG_COUNT, id)
+		else:
+			musicbox.stream = load("res://sounds/music/cheesestick.mp3")
+			paranormal_dance.emit()
+		musicbox.play()
 
 func _change_camera(cam: int, sound: bool = true):
 	current_cam = cams.get_child(cam - 1)
@@ -81,27 +104,6 @@ func _unhandled_input(event):
 	if event.is_action_released(&"Flashlight"):
 		light.visible = false
 		lightsound.stop()
-
-func _process(_delta):
-	if root.is_winding:
-		if windsound.playing == false:
-			windsound.play()
-	musicprogress.value = root.musicbox
-	
-	# Randomize musicbox
-	if root.musicbox == 0:
-		musicbox.stop()
-	elif musicbox.playing == false:
-		if root.paranormal_attacking == false:
-			if randi_range(0, 4) >= 2:
-				var id = randi_range(1, songcount)
-				musicbox.stream = load("res://sounds/music/musicbox%s.mp3" % [id])
-				if root.musicbox_ran_out == false || root.edams_friendly:
-					change_dance.emit(songcount, id)
-		else:
-			musicbox.stream = load("res://sounds/music/cheesestick.mp3")
-			paranormal_dance.emit()
-		musicbox.play()
 
 func _wind_musicbox(input: bool):
 	root.is_winding = input

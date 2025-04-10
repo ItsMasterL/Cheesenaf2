@@ -1,13 +1,16 @@
 extends CharacterBody2D
 
+
+signal died
+
 const JUMP_VELOCITY = -800.0
 
 var can_jump = true
 var gravity = false
+
 @onready var jump_sound := $Jump
 @onready var root = $"../../.."
 
-signal died
 
 func _physics_process(delta):
 	# Add the gravity.

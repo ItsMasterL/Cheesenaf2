@@ -1,7 +1,9 @@
 extends Control
 
+
 @onready var menu = $Menu
 @onready var loadedmenu = $Menu/TitleMenu
+
 
 func _ready():
 	Globals._load()

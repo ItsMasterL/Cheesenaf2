@@ -1,8 +1,11 @@
 extends HSlider
 
+
 @export_enum("Master", "SFX", "Voice", "Music", "Ambient", "Jumpscare", "Tablet") var sound_type
+
 @onready var slider := $"."
 @onready var test_sound := $"../../TestSound"
+
 
 func _ready():
 	slider.value = db_to_linear(AudioServer.get_bus_volume_db(sound_type))

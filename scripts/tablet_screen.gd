@@ -1,5 +1,6 @@
 extends Node3D
 
+
 # Used for checking if the mouse is inside the Area3D.
 var is_mouse_inside = false
 # The last processed input touch/mouse event. To calculate relative movement.
@@ -10,6 +11,7 @@ var last_event_time: float = -1.0
 @onready var node_viewport = $ScreenQuad/TabletScreen
 @onready var node_quad = $ScreenQuad
 @onready var node_area = $ScreenQuad/Area3D
+
 
 func _ready():
 	node_area.mouse_entered.connect(_mouse_entered_area)

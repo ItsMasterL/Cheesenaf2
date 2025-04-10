@@ -1,6 +1,7 @@
 class_name AnimatronicPosition
 extends Resource
 
+
 @export var position: Vector3
 @export var rotation: Vector3
 @export var scale: Vector3 = Vector3.ONE

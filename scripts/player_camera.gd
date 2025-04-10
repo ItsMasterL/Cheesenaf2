@@ -1,5 +1,8 @@
 extends CharacterBody3D
 
+
+const RAY_LENGTH = 1000.0
+
 @onready var head := $Head
 @onready var camera := $Head/Eyes
 @onready var flashlight := $Head/Eyes/SpotLight3D
@@ -8,7 +11,7 @@ extends CharacterBody3D
 @onready var anim := $AnimationPlayer
 @onready var breathing := $Head/Breathing
 @onready var moving := $Head/MoveUnderDesk
-const RAY_LENGTH = 1000.0
+
 
 func _unhandled_input(event):
 	if root.p1_can_action:

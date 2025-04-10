@@ -53,7 +53,8 @@ enum store_apps {
 	BONNIESWOODS,
 	PODCAST,
 	FNWF,
-	}
+}
+
 enum store_apps_binary {
 	MEDIAPLAYER = 0b0000_0000_0001,
 	FLAPPYFOXY = 0b0000_0000_0010,
@@ -65,8 +66,9 @@ enum store_apps_binary {
 	ANGRYCHICA = 0b0000_1000_0000,
 	BONNIESWOODS = 0b0001_0000_0000,
 	PODCAST = 0b0010_0000_0000,
-	FNWF = 0b0100_0000_0000
-	}
+	FNWF = 0b0100_0000_0000,
+}
+
 var apps: Array[TabletApp] = [
 	TabletApp.new("Freddy Fazbear's Media Player", "Play your favorite tunes from your own device, while Freddy Fazbear himself dances along!", "media_player", load("res://textures/apps/mediaplayer.png"), 0.00, store_apps_binary.MEDIAPLAYER),
 	TabletApp.new("Flappy Foxy", "Make Foxy jump up and down between the Brick%s brand ovens! Touching the floor or the ovens will cause Foxy to die. painfully." % String.chr(8482), "flappy_foxy", load("res://textures/apps/flappyfoxy.png"), 0.00, store_apps_binary.FLAPPYFOXY, 1.25),

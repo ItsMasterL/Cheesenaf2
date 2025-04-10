@@ -1,5 +1,6 @@
 extends Control
 
+
 @onready var door_buttons = $"Control Buttons"
 @onready var root = get_tree().get_root().get_node("Map")
 @onready var dark = $Messages/DarkenBg
@@ -7,6 +8,7 @@ extends Control
 @onready var jam = $Messages/JammedMessagebox
 @onready var wait = $Messages/Loadingbox
 @onready var audio = $AudioFeedback
+
 
 func _ready():
 	for i in root.closed_entrances:

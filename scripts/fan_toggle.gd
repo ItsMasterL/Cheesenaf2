@@ -1,11 +1,14 @@
 extends StaticBody3D
 
+
+var power = true
+var speed = 1
+
 @onready var fananim := $"../../ENV_MOD_Desk_Fan_Fanblade_ENV_MOD_Desk_Fan_Fanblade_001/AnimationPlayer"
 @onready var fansound := $"../../ENV_MOD_Desk_Fan_Fanblade_ENV_MOD_Desk_Fan_Fanblade_001/AudioStreamPlayer3D"
 @onready var clicksound := $"../../ENV_MOD_Desk_Fan_Fanblade_ENV_MOD_Desk_Fan_Fanblade_001/FanClick"
 @onready var root = $"../.."
-var power = true
-var speed = 1
+
 
 func _ready():
 	fananim.play(&"spin")

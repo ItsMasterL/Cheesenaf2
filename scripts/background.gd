@@ -1,6 +1,8 @@
 extends Sprite2D
 
+
 var wait_time = 0.015
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

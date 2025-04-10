@@ -1,14 +1,24 @@
 extends Node2D
 
+
+enum values {
+	FOXY,
+	CHICA,
+	BONNIE,
+	FREDDY,
+	CHEESESTICK,
+	AFTON,
+}
+
 @export var card_scene: PackedScene
-@onready var player_cards = $PlayerCards
-@onready var cpu_cards = $CPUCards
+
 var player_score: Array[int]
 var cpu_score: Array[int]
-enum values {
-	Foxy, Chica, Bonnie, Freddy, Cheesestick, Afton
-}
 var phase = 0
+
+@onready var player_cards = $PlayerCards
+@onready var cpu_cards = $CPUCards
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

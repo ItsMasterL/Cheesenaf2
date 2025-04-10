@@ -1,6 +1,15 @@
 extends Node3D
 
-@onready var blur := $BlurShader/ColorRect
+
+signal music_box_ran_out
+signal entrance_closing
+
+const time_to_hour = 90
+
+@export var tablet: MeshInstance3D
+@export var animatronics: Node3D
+@export var doors: Node3D
+@export var drink: MeshInstance3D
 
 var night = Globals.night
 var time = 0 as float
@@ -8,7 +17,6 @@ var hour = 0
 var minute = 0
 var fun_multiplier = 1 # Set by minigames in singleplayer to make time go by faster
 var purchased_apps
-const time_to_hour = 90
 var using_tablet = false
 var in_cams = false
 var under_desk = false
@@ -48,13 +56,8 @@ var paranormal_attacking = false # Why is it here?
 var paranormal_attacker: Node3D # What even is it?
 var paranormal_primed = false # What is it doing?
 
-signal music_box_ran_out
-signal entrance_closing
+@onready var blur := $BlurShader/ColorRect
 
-@export var tablet: MeshInstance3D
-@export var animatronics: Node3D
-@export var doors: Node3D
-@export var drink: MeshInstance3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

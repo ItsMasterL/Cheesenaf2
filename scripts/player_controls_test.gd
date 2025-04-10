@@ -1,7 +1,9 @@
 extends Node
 
+
 @onready var head := $Head
 @onready var camera := $Head/Eyes
+
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion && Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:

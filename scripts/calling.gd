@@ -1,11 +1,14 @@
 extends Control
 
+
+var call_accepted
+
 @onready var audio := $Call
 @onready var accept := $Notification/Accept
 @onready var decline := $Notification/Decline
 @onready var notif = $Notification
 @onready var root = get_tree().get_root().get_node("Map")
-var call_accepted
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

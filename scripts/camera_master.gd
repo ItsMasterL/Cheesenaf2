@@ -1,9 +1,12 @@
 @tool
 extends Node3D
 
+
 var camera_value = 0
 var editor_value = 0
+
 @export var sound: AudioStreamPlayer2D
+
 
 func _process(delta):
 	if Engine.is_editor_hint() == false:

@@ -1,6 +1,9 @@
 @tool
 extends Node3D
 
+
+signal paranormal_song
+
 @export var root: Node3D
 @export_category("General Animatronic")
 ## The name of the animatronic, example: "edam_bonnie" or "wither_bonnie"
@@ -94,20 +97,19 @@ var camera_cooldown = 0
 var flashlight = 0
 var safety_timer
 
-@onready var timer = check_frequency
-@onready var level = root._get_ai(animatronic)
-@onready var stepsound := $Step
-@onready var anim := $AnimationPlayer
-
 # For game sensitive animatronics to look at the things the player does
 var object_of_interest
 var new_rotation = Vector3.ZERO
 var rotx = 0
 var roty = 0
 
-signal paranormal_song
+@onready var timer = check_frequency
+@onready var level = root._get_ai(animatronic)
+@onready var stepsound := $Step
+@onready var anim := $AnimationPlayer
 
-func _ready() -> void:
+
+func _ready():
 	if Engine.is_editor_hint() == false:
 		safety_timer = Globals.safety_time
 		position = positions[0].position
@@ -123,7 +125,7 @@ func _ready() -> void:
 			can_move = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(delta):
 	if Engine.is_editor_hint():
 		return
 	# Camera sensitivity

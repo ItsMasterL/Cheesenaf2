@@ -1,5 +1,6 @@
 extends StaticBody3D
 
+
 @onready var stand := $"../.."
 @onready var hold := $"../../../Player/Head/Eyes/TabletHolder"
 @onready var tablet = $".."
@@ -8,6 +9,7 @@ extends StaticBody3D
 @onready var cursor := $"../../../Player/Head/Eyes/Cursor"
 @onready var root = $"../../.."
 @onready var anim := $"../AnimationPlayer"
+
 
 func _ready():
 	print(stand, ", ", hold)

@@ -1,11 +1,14 @@
 extends Node2D
 
+
 var anim_timer: float
 var anim_offset = false
 var score = 0
+
 @onready var chica := $Chica
 @onready var scoredisplay := $Chica/Score
 @onready var root = $"../.."
+
 
 func _ready():
 	$Music.play()

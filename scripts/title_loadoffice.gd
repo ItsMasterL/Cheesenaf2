@@ -1,9 +1,11 @@
 extends Control
 
+
 @onready var text := $RichTextLabel
 
+
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+func _ready():
 	if Globals.night < 7:
 		text.text = "[center]Night %s" % [Globals.night]
 	else:

@@ -1,6 +1,7 @@
 class_name EntranceProperty
 extends Resource
 
+
 @export_category("Office Properties")
 ## If there are more animatronics in the office than this number, the movement check to enter will always fail.
 @export var office_animatronic_limit: int

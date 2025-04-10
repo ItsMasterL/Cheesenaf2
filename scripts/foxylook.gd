@@ -1,8 +1,11 @@
 extends RayCast3D
 
+
 var foxy: Array[Node3D]
 var last_look
+
 @onready var root = get_tree().get_root().get_node("Map")
+
 
 func _ready():
 	for animatronic in root.animatronics.get_children():

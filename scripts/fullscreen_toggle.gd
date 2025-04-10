@@ -1,6 +1,8 @@
 extends CheckBox
 
+
 @onready var check = $"."
+
 
 func _ready():
 	check.button_pressed = Globals.fullscreen

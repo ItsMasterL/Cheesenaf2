@@ -1,14 +1,17 @@
 extends Node2D
 
+
 var playlist: Array[String]
 var queued_media: String = ""
+var is_media_playing = false
+var is_video = false
+
 @onready var audioplayer := $Home/AudioStreamPlayer
 @onready var videoplayer := $Home/VideoStreamPlayer
 @onready var progressbar := $Home/ProgressBar
 @onready var current_position := $Home/CurrentPosition
 @onready var length := $Home/Length
-var is_media_playing = false
-var is_video = false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

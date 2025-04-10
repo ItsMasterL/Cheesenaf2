@@ -1,14 +1,17 @@
 extends Node2D
 
-@onready var OvenA = $OvenA
-@onready var OvenB = $OvenB
-@onready var root = $"../.."
+
+signal start_game
+
 var speed = 400
 var game_started = false
 var score = 0
 var died = false
 
-signal start_game
+@onready var OvenA = $OvenA
+@onready var OvenB = $OvenB
+@onready var root = $"../.."
+
 
 func _ready():
 	$Music.play()

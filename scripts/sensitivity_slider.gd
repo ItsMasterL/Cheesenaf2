@@ -1,6 +1,8 @@
 extends HSlider
 
+
 @onready var slider = $"."
+
 
 func _ready():
 	slider.value = Globals.mouse_sensitivity

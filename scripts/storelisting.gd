@@ -1,5 +1,6 @@
 extends Control
 
+
 var app_name: String
 var app_description: String
 var price: float
@@ -7,7 +8,9 @@ var icon: Texture2D
 var id: Globals.store_apps_binary
 var purchased: bool = false
 var available: bool = true
+
 @onready var button = $Bg/Get
+
 
 func _ready():
 	$Bg/AppName.text = app_name
