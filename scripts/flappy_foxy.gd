@@ -8,8 +8,8 @@ var game_started = false
 var score = 0
 var died = false
 
-@onready var OvenA = $OvenA
-@onready var OvenB = $OvenB
+@onready var oven_a = $OvenA
+@onready var oven_b = $OvenB
 @onready var root = $"../.."
 
 
@@ -22,18 +22,18 @@ func _process(delta):
 		start_game.emit()
 	
 	if game_started:
-		OvenA.position -= Vector2(delta * speed, 0)
-		OvenB.position -= Vector2(delta * speed, 0)
+		oven_a.position -= Vector2(delta * speed, 0)
+		oven_b.position -= Vector2(delta * speed, 0)
 		speed += delta * 5
 	
-	if OvenA.position.x < -150:
-		OvenA.position = Vector2(1500, randi_range(210, 600))
+	if oven_a.position.x < -150:
+		oven_a.position = Vector2(1500, randi_range(210, 600))
 		if died == false:
 			$"Pass sound".play()
 			score += 1
 			$Home/Score.text = str(score)
-	if OvenB.position.x < -150:
-		OvenB.position = Vector2(1500, randi_range(210, 600))
+	if oven_b.position.x < -150:
+		oven_b.position = Vector2(1500, randi_range(210, 600))
 		if died == false:
 			$"Pass sound".play()
 			score += 1

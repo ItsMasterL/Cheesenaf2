@@ -13,7 +13,7 @@ enum sprite_id {
 	SIDEWAYS,
 }
 
-const card_rects = [
+const CARD_RECTS = [
 	Rect2(144, 0, 32, 48), # 0 - Foxy
 	Rect2(96, 0, 32, 48), # 1 - Chica
 	Rect2(48, 0, 32, 48), # 2 - Bonnie
@@ -30,7 +30,7 @@ const card_rects = [
 		card_value = new_value
 		if Engine.is_editor_hint():
 			if face_up:
-				sprite.region_rect = card_rects[card_value]
+				sprite.region_rect = CARD_RECTS[card_value]
 @export var face_up = false:
 	set(flip):
 		face_up = flip
@@ -58,22 +58,22 @@ func _select():
 
 func _flip_card(faceup: bool):
 	if faceup == false:
-		sprite.region_rect = card_rects[card_value]
+		sprite.region_rect = CARD_RECTS[card_value]
 		await get_tree().create_timer(0.1).timeout
-		sprite.region_rect = Rect2(card_rects[card_value].position.x + 32, card_rects[card_value].position.y, card_rects[card_value].size.x / 2, card_rects[card_value].size.y)
+		sprite.region_rect = Rect2(CARD_RECTS[card_value].position.x + 32, CARD_RECTS[card_value].position.y, CARD_RECTS[card_value].size.x / 2, CARD_RECTS[card_value].size.y)
 		await get_tree().create_timer(0.1).timeout
-		sprite.region_rect = card_rects[sprite_id.SIDEWAYS]
+		sprite.region_rect = CARD_RECTS[sprite_id.SIDEWAYS]
 		await get_tree().create_timer(0.1).timeout
-		sprite.region_rect = card_rects[sprite_id.CARD_BACK_FLIP]
+		sprite.region_rect = CARD_RECTS[sprite_id.CARD_BACK_FLIP]
 		await get_tree().create_timer(0.1).timeout
-		sprite.region_rect = card_rects[sprite_id.CARD_BACK]
+		sprite.region_rect = CARD_RECTS[sprite_id.CARD_BACK]
 	else:
-		sprite.region_rect = card_rects[sprite_id.CARD_BACK]
+		sprite.region_rect = CARD_RECTS[sprite_id.CARD_BACK]
 		await get_tree().create_timer(0.1).timeout
-		sprite.region_rect = card_rects[sprite_id.CARD_BACK_FLIP]
+		sprite.region_rect = CARD_RECTS[sprite_id.CARD_BACK_FLIP]
 		await get_tree().create_timer(0.1).timeout
-		sprite.region_rect = card_rects[sprite_id.SIDEWAYS]
+		sprite.region_rect = CARD_RECTS[sprite_id.SIDEWAYS]
 		await get_tree().create_timer(0.1).timeout
-		sprite.region_rect = Rect2(card_rects[card_value].position.x + 32, card_rects[card_value].position.y, card_rects[card_value].size.x / 2, card_rects[card_value].size.y)
+		sprite.region_rect = Rect2(CARD_RECTS[card_value].position.x + 32, CARD_RECTS[card_value].position.y, CARD_RECTS[card_value].size.x / 2, CARD_RECTS[card_value].size.y)
 		await get_tree().create_timer(0.1).timeout
-		sprite.region_rect = card_rects[card_value]
+		sprite.region_rect = CARD_RECTS[card_value]

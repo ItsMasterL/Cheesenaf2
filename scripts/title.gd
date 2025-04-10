@@ -2,7 +2,7 @@ extends Control
 
 
 @onready var menu = $Menu
-@onready var loadedmenu = $Menu/TitleMenu
+@onready var loaded_menu = $Menu/TitleMenu
 
 
 func _ready():
@@ -10,10 +10,10 @@ func _ready():
 	Globals._load_settings()
 
 func _load_title_screen(screen: String):
-	loadedmenu.queue_free()
+	loaded_menu.queue_free()
 	var loaded = load("res://scenes/%s.tscn" % [screen])
-	loadedmenu = loaded.instantiate()
-	menu.add_child(loadedmenu)
+	loaded_menu = loaded.instantiate()
+	menu.add_child(loaded_menu)
 
 func _mute_music():
 	$AudioStreamPlayer2D.stop()

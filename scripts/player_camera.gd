@@ -6,7 +6,7 @@ const RAY_LENGTH = 1000.0
 @onready var head := $Head
 @onready var camera := $Head/Eyes
 @onready var flashlight := $Head/Eyes/SpotLight3D
-@onready var flashlightsound := $Head/Eyes/SpotLight3D/FlashlightClick
+@onready var flashlight_sound := $Head/Eyes/SpotLight3D/FlashlightClick
 @onready var root = $".."
 @onready var anim := $AnimationPlayer
 @onready var breathing := $Head/Breathing
@@ -17,11 +17,11 @@ func _unhandled_input(event):
 	if root.p1_can_action:
 		if event.is_action_pressed(&"Flashlight") && root.using_tablet == false:
 			flashlight.visible = true
-			flashlightsound.play()
+			flashlight_sound.play()
 		if event.is_action_released(&"Flashlight"):
 			flashlight.visible = false
 			if root.using_tablet == false:
-				flashlightsound.play()
+				flashlight_sound.play()
 		if event.is_action_pressed(&"HideUnderDesk") && anim.is_playing() == false && root.under_desk == false:
 			anim.play(&"desk_hide")
 			moving.play()

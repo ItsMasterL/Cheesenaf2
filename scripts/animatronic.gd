@@ -100,12 +100,12 @@ var safety_timer
 # For game sensitive animatronics to look at the things the player does
 var object_of_interest
 var new_rotation = Vector3.ZERO
-var rotx = 0
-var roty = 0
+var rot_x = 0
+var rot_y = 0
 
 @onready var timer = check_frequency
 @onready var level = root._get_ai(animatronic)
-@onready var stepsound := $Step
+@onready var step_sound := $Step
 @onready var anim := $AnimationPlayer
 
 
@@ -292,14 +292,14 @@ func _move_animatronic():
 	if paranormal == false:
 		if positions[current_position].is_vent:
 			if check_frequency < 1.5:
-				stepsound.stream = load("res://sounds/ventwalk_run.wav")
+				step_sound.stream = load("res://sounds/ventwalk_run.wav")
 			else:
-				stepsound.stream = load("res://sounds/ventwalk" + str(randi_range(1, 2)) + ".wav")
+				step_sound.stream = load("res://sounds/ventwalk" + str(randi_range(1, 2)) + ".wav")
 		elif check_frequency < 1.5:
-			stepsound.stream = load("res://sounds/walk_run.wav")
+			step_sound.stream = load("res://sounds/walk_run.wav")
 		else:
-			stepsound.stream = load("res://sounds/walk" + str(randi_range(1, 5)) + ".wav")
-		stepsound.play()
+			step_sound.stream = load("res://sounds/walk" + str(randi_range(1, 5)) + ".wav")
+		step_sound.play()
 	print(str(animatronic) + " moved to " + str(current_position))
 
 func _fail_attack():
@@ -386,15 +386,15 @@ func _game_check():
 func _look_at_object(delta):
 	var skeleton = $"Edam Endo/Skeleton3D"
 	var neck = $"Edam Endo/Skeleton3D/Neck/LookAt"
-	var neckbone = skeleton.find_bone("Head")
+	var neck_bone = skeleton.find_bone("Head")
 	neck.look_at(object_of_interest.global_position, Vector3.UP, true)
 	var degrees = neck.rotation_degrees
 	degrees.x = clamp(degrees.x, -45, 50)
 	degrees.y = clamp(degrees.y, -90, 90)
-	rotx = lerp_angle(rotx, deg_to_rad(degrees.x), delta * 5)
-	roty = lerp_angle(roty, deg_to_rad(degrees.y), delta * 5)
-	new_rotation = Quaternion.from_euler(Vector3(rotx, roty, 0))
-	skeleton.set_bone_pose_rotation(neckbone, new_rotation)
+	rot_x = lerp_angle(rot_x, deg_to_rad(degrees.x), delta * 5)
+	rot_y = lerp_angle(rot_y, deg_to_rad(degrees.y), delta * 5)
+	new_rotation = Quaternion.from_euler(Vector3(rot_x, rot_y, 0))
+	skeleton.set_bone_pose_rotation(neck_bone, new_rotation)
 
 func _booped():
 	if is_friendly:

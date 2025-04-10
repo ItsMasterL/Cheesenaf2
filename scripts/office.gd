@@ -4,7 +4,7 @@ extends Node3D
 signal music_box_ran_out
 signal entrance_closing
 
-const time_to_hour = 90
+const TIME_TO_HOUR = 90
 
 @export var tablet: MeshInstance3D
 @export var animatronics: Node3D
@@ -81,8 +81,8 @@ func _ready():
 func _process(delta):
 	Globals.game_time += delta
 	time += (delta * fun_multiplier)
-	hour = floor(time / time_to_hour)
-	minute = floor(lerp(hour * 60, hour * 60 + 60, time / time_to_hour)) as int % 60
+	hour = floor(time / TIME_TO_HOUR)
+	minute = floor(lerp(hour * 60, hour * 60 + 60, time / TIME_TO_HOUR)) as int % 60
 	# Player thirst
 	p1_thirst += (delta * 0.05) * fun_multiplier
 	# Fan heat
@@ -231,23 +231,23 @@ func _jumpscare(animatronic: Node3D):
 		animatronic.rotation_degrees = animatronic.jumpscare_rotation
 		anim.play(animatronic.jumpscare_animation_id)
 	sound.play()
-	var playercamanim := $Player/Head/Eyes/AnimationPlayer
-	var playerhead = $Player/Head
-	var playercam = $Player/Head/Eyes
-	var playeranim := $Player/AnimationPlayer
+	var player_cam_anim := $Player/Head/Eyes/AnimationPlayer
+	var player_head = $Player/Head
+	var player_cam = $Player/Head/Eyes
+	var player_anim := $Player/AnimationPlayer
 	var cup = $Player/Head/Eyes/CupHolder
 	if tablet != null:
 		tablet.visible = false
 	cup.visible = false
 	p1_heat = -2
-	playerhead.rotation_degrees = Vector3.ZERO
-	playercam.rotation_degrees = Vector3.ZERO
-	playeranim.play("RESET")
+	player_head.rotation_degrees = Vector3.ZERO
+	player_cam.rotation_degrees = Vector3.ZERO
+	player_anim.play("RESET")
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 	if animatronic.jumpscare_length < 0.7:
-		playercamanim.play("Default")
+		player_cam_anim.play("Default")
 	else:
-		playercamanim.play("Long")
+		player_cam_anim.play("Long")
 	await get_tree().create_timer(animatronic.jumpscare_length).timeout
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
@@ -263,20 +263,20 @@ func _jumpscare_save(animatronic: Node3D):
 	warning.stream = load("res://sounds/dialogue/edamfoxy-save%s.wav" % [randi_range(1, 7)])
 	anim.play(animatronic.save_animation_id)
 	sound.play()
-	var playercamanim := $Player/Head/Eyes/AnimationPlayer
-	var playerhead = $Player/Head
-	var playercam = $Player/Head/Eyes
-	var playeranim := $Player/AnimationPlayer
+	var player_cam_anim := $Player/Head/Eyes/AnimationPlayer
+	var player_head = $Player/Head
+	var player_cam = $Player/Head/Eyes
+	var player_anim := $Player/AnimationPlayer
 	var cup = $Player/Head/Eyes/CupHolder
 	if tablet != null:
 		tablet.visible = false
 	cup.visible = false
 	p1_heat = -2
-	playerhead.rotation_degrees = Vector3.ZERO
-	playercam.rotation_degrees = Vector3.ZERO
-	playeranim.play("RESET")
+	player_head.rotation_degrees = Vector3.ZERO
+	player_cam.rotation_degrees = Vector3.ZERO
+	player_anim.play("RESET")
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
-	playercamanim.play("CameraAction_003")
+	player_cam_anim.play("CameraAction_003")
 	if animatronic.save_voiceline_delay < animatronic.save_player_free: # Most likely
 		await get_tree().create_timer(animatronic.save_voiceline_delay).timeout
 		warning.play()

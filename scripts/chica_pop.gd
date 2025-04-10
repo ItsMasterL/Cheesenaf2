@@ -6,7 +6,7 @@ var anim_offset = false
 var score = 0
 
 @onready var chica := $Chica
-@onready var scoredisplay := $Chica/Score
+@onready var score_display := $Chica/Score
 @onready var root = $"../.."
 
 
@@ -29,6 +29,6 @@ func _process(delta):
 	if Input.is_action_just_pressed("LeftClick") && root.using_tablet:
 		score += 1
 		$Pop.play()
-		scoredisplay.text = str(score)
+		score_display.text = str(score)
 	if Input.is_action_just_released("LeftClick") && root.using_tablet:
 		$Unpop.play()
