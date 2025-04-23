@@ -298,5 +298,6 @@ func _set_night(night: int):
 
 func _check_app_purchase(app: store_apps_binary) -> bool:
 	return purchases & app
+	
 func _purchase_app(app: store_apps_binary):
 	purchases |= app

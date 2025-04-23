@@ -59,6 +59,14 @@ func _process(_delta):
 			music_box.stream = load("res://sounds/music/cheesestick.mp3")
 			paranormal_dance.emit()
 		music_box.play()
+		
+func _unhandled_input(event):
+	if event.is_action_pressed(&"Flashlight") && root.using_tablet:
+		light.visible = true
+		light_sound.play()
+	if event.is_action_released(&"Flashlight"):
+		light.visible = false
+		light_sound.stop()
 
 func _change_camera(cam: int, sound: bool = true):
 	current_cam = cams.get_child(cam - 1)
@@ -96,14 +104,6 @@ func _toggle_vents():
 		if button.name.contains("Cam"):
 			button.pressed.connect(_change_camera.bind(button.name.trim_prefix("Cam").to_int()))
 	_change_camera(1, false)
-
-func _unhandled_input(event):
-	if event.is_action_pressed(&"Flashlight") && root.using_tablet:
-		light.visible = true
-		light_sound.play()
-	if event.is_action_released(&"Flashlight"):
-		light.visible = false
-		light_sound.stop()
 
 func _wind_musicbox(input: bool):
 	root.is_winding = input

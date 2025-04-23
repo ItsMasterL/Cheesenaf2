@@ -94,7 +94,6 @@ offset_bottom = 83.0
 max_value = 2.0
 step = 0.001
 script = ExtResource("5_cli0j")
-sound_type = 0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Audio/Master"]
 layout_mode = 1

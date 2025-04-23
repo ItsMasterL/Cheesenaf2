@@ -6,4 +6,4 @@ func _ready():
 	var string = "\n[wave]Version " + ProjectSettings.get_setting("application/config/version")
 	if OS.is_debug_build():
 		string += " (Debug Build)"
-	$".".text = string
+	self.text = string

@@ -1,35 +1,43 @@
 extends HSlider
 
+enum SoundType {
+	MASTER,
+	SFX,
+	VOICE,
+	MUSIC,
+	AMBIENT,
+	JUMPSCARE,
+	TABLET,
+}
 
-@export_enum("Master", "SFX", "Voice", "Music", "Ambient", "Jumpscare", "Tablet") var sound_type
+@export var sound_type: SoundType
 
-@onready var slider := $"."
 @onready var test_sound := $"../../TestSound"
 
 
 func _ready():
-	slider.value = db_to_linear(AudioServer.get_bus_volume_db(sound_type))
+	self.value = db_to_linear(AudioServer.get_bus_volume_db(sound_type))
 	drag_ended.connect(_apply_and_test)
 
-func _apply_and_test(changed: bool):
-	if changed == false:
+func _apply_and_test(volume_changed: bool):
+	if volume_changed == false:
 		return
-	AudioServer.set_bus_volume_db(sound_type, linear_to_db(slider.value))
+	AudioServer.set_bus_volume_db(sound_type, linear_to_db(self.value))
 	test_sound.bus = AudioServer.get_bus_name(sound_type)
 	match sound_type:
-		0:
-			Globals.master_volume = slider.value
-		1:
-			Globals.sfx_volume = slider.value
-		2:
-			Globals.voice_volume = slider.value
-		3:
-			Globals.music_volume = slider.value
-		4:
-			Globals.ambient_volume = slider.value
-		5:
-			Globals.jumpscare_volume = slider.value
-		6:
-			Globals.tablet_volume = slider.value
+		SoundType.MASTER:
+			Globals.master_volume = self.value
+		SoundType.SFX:
+			Globals.sfx_volume = self.value
+		SoundType.VOICE:
+			Globals.voice_volume = self.value
+		SoundType.MUSIC:
+			Globals.music_volume = self.value
+		SoundType.AMBIENT:
+			Globals.ambient_volume = self.value
+		SoundType.JUMPSCARE:
+			Globals.jumpscare_volume = self.value
+		SoundType.TABLET:
+			Globals.tablet_volume = self.value
 	Globals._save_settings()
 	test_sound.play()

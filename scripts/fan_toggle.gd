@@ -13,13 +13,6 @@ var speed = 1
 func _ready():
 	fan_anim.play(&"spin")
 
-func _raycast_event():
-	power = !power
-	if fan_sound.playing == false:
-		fan_sound.play()
-	click_sound.play()
-	root.fan_powered = power
-
 func _process(delta):
 	if power:
 		speed += delta * 0.25
@@ -33,3 +26,10 @@ func _process(delta):
 	else:
 		fan_sound.pitch_scale = speed
 		fan_sound.volume_db = (1 - speed) * -40
+
+func _raycast_event():
+	power = !power
+	if fan_sound.playing == false:
+		fan_sound.play()
+	click_sound.play()
+	root.fan_powered = power
