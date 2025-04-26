@@ -214,9 +214,8 @@ func _load_settings():
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 #endregion
 
-# TODO: The local function parameter "night" is shadowing an already-declared variable at line 4.
-func _set_night(night: int):
-	match night:
+func _set_night(set_night: int):
+	match set_night:
 		1:
 			Globals.night = 1
 			Globals.edams_friendly = true

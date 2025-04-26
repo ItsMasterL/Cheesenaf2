@@ -23,6 +23,5 @@ func _ready():
 			if Globals.wither_bonnie == 20 && Globals.wither_chica == 20 && Globals.wither_foxy == 20 && Globals.wither_freddy == 20:
 				get_tree().change_scene_to_file("res://scenes/paycheck820.tscn")
 	else:
-		#TODO: Make proper end screen
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		get_tree().change_scene_to_file("res://scenes/title.tscn")

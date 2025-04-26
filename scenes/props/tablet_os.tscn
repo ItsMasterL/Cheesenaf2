@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://bxpmp04xt6u6q"]
 
 [ext_resource type="Script" path="res://scripts/tablet_manager.gd" id="1_0wb5n"]
-[ext_resource type="PackedScene" uid="uid://dbeb63a1g0ep4" path="res://scenes/app_button.tscn" id="2_h2de0"]
+[ext_resource type="PackedScene" uid="uid://dbeb63a1g0ep4" path="res://scenes/props/app_button.tscn" id="2_h2de0"]
 [ext_resource type="Texture2D" uid="uid://duvbu0ep0tb3l" path="res://textures/cheesenaf 2 tablet home.png" id="2_pge4p"]
 [ext_resource type="Texture2D" uid="uid://cwmvvjrnwa0ex" path="res://textures/apps/background.jpg" id="4_jhf2s"]
-[ext_resource type="PackedScene" uid="uid://bajdsp8qkrv1l" path="res://scenes/call.tscn" id="5_h5xad"]
+[ext_resource type="PackedScene" uid="uid://bajdsp8qkrv1l" path="res://scenes/props/call.tscn" id="5_h5xad"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3kpga"]
 atlas = ExtResource("2_pge4p")

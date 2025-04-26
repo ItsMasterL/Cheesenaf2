@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/poker.gd" id="1_o40u1"]
 [ext_resource type="AudioStream" uid="uid://dffoentymsqjk" path="res://sounds/music/poker.mp3" id="3_78i7l"]
 [ext_resource type="Texture2D" uid="uid://psitb0h7iniy" path="res://textures/apps/pokerassets.png" id="4_eyr2s"]
-[ext_resource type="PackedScene" uid="uid://3ybl6aotajlg" path="res://scenes/poker_card.tscn" id="5_drhb5"]
+[ext_resource type="PackedScene" uid="uid://3ybl6aotajlg" path="res://scenes/props/poker_card.tscn" id="5_drhb5"]
 
 [node name="Freddy Poker" type="Node2D"]
 script = ExtResource("1_o40u1")

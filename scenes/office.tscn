@@ -1,13 +1,13 @@
 [gd_scene load_steps=85 format=4 uid="uid://kfokhb3cioir"]
 
 [ext_resource type="Script" path="res://scripts/office.gd" id="1_a3xfx"]
-[ext_resource type="PackedScene" uid="uid://bs378s4kwr2ux" path="res://scenes/foxy_plush.tscn" id="1_gqipk"]
+[ext_resource type="PackedScene" uid="uid://bs378s4kwr2ux" path="res://scenes/props/foxy_plush.tscn" id="1_gqipk"]
 [ext_resource type="AudioStream" uid="uid://e1n2m7qxkggw" path="res://sounds/drink_refill.wav" id="6_j50h0"]
 [ext_resource type="Texture2D" uid="uid://bi3vtwctdv5ub" path="res://models/textures/Cup.png" id="7_3jvyr"]
 [ext_resource type="Script" path="res://scripts/tablet_screen.gd" id="7_g7jux"]
 [ext_resource type="AudioStream" uid="uid://cvqkqxo21hg6b" path="res://sounds/fan.mp3" id="7_q4oox"]
 [ext_resource type="Script" path="res://scripts/fan_toggle.gd" id="8_refy2"]
-[ext_resource type="PackedScene" uid="uid://bxpmp04xt6u6q" path="res://scenes/tablet_os.tscn" id="9_l1dhy"]
+[ext_resource type="PackedScene" uid="uid://bxpmp04xt6u6q" path="res://scenes/props/tablet_os.tscn" id="9_l1dhy"]
 [ext_resource type="Texture2D" uid="uid://c6v23n3ihlgyw" path="res://models/textures/ENV_TEX_Desk_Fan_BaseColor.png" id="10_gkukb"]
 [ext_resource type="ArrayMesh" uid="uid://drtja2xn8oyq" path="res://models/tablet.tres" id="10_vek4i"]
 [ext_resource type="Script" path="res://scripts/home_button.gd" id="11_xnjbl"]
@@ -25,23 +25,23 @@
 [ext_resource type="Animation" uid="uid://b6avorttpy5k5" path="res://models/animation/camerawithered.res" id="19_ookmc"]
 [ext_resource type="AudioStream" uid="uid://c6wkcq2iy687y" path="res://sounds/swipe.wav" id="21_dvkyg"]
 [ext_resource type="AudioStream" uid="uid://couxcp7krb1i6" path="res://sounds/music/storm outside.mp3" id="21_h77es"]
-[ext_resource type="PackedScene" uid="uid://sr5bhwimbn6q" path="res://scenes/bonnie.tscn" id="22_fo68b"]
-[ext_resource type="PackedScene" uid="uid://bx7i4uyvysowi" path="res://scenes/freddy.tscn" id="23_d180k"]
+[ext_resource type="PackedScene" uid="uid://sr5bhwimbn6q" path="res://scenes/animatronics/bonnie.tscn" id="22_fo68b"]
+[ext_resource type="PackedScene" uid="uid://bx7i4uyvysowi" path="res://scenes/animatronics/freddy.tscn" id="23_d180k"]
 [ext_resource type="Shader" path="res://shaders/blur.gdshader" id="23_h042j"]
 [ext_resource type="Script" path="res://scripts/toggle_cup.gd" id="25_hni3l"]
-[ext_resource type="PackedScene" uid="uid://cuiite2xlb70y" path="res://scenes/chica.tscn" id="25_m5hqu"]
+[ext_resource type="PackedScene" uid="uid://cuiite2xlb70y" path="res://scenes/animatronics/chica.tscn" id="25_m5hqu"]
 [ext_resource type="AudioStream" uid="uid://bip471h5exvnx" path="res://sounds/slurp.wav" id="26_plhk0"]
-[ext_resource type="PackedScene" uid="uid://ctk8vkg2rvilm" path="res://scenes/foxy.tscn" id="26_xrtv4"]
-[ext_resource type="PackedScene" uid="uid://e4xdtpwnnrts" path="res://scenes/w_bonnie.tscn" id="27_nd5pr"]
-[ext_resource type="PackedScene" uid="uid://ddnqh2fwb8i4v" path="res://scenes/w_chica.tscn" id="28_iw35l"]
-[ext_resource type="PackedScene" uid="uid://1425e1cbu38i" path="res://scenes/door.tscn" id="28_t03s8"]
-[ext_resource type="PackedScene" uid="uid://cgejnvievuxf8" path="res://scenes/w_foxy.tscn" id="29_t0ahk"]
+[ext_resource type="PackedScene" uid="uid://ctk8vkg2rvilm" path="res://scenes/animatronics/foxy.tscn" id="26_xrtv4"]
+[ext_resource type="PackedScene" uid="uid://e4xdtpwnnrts" path="res://scenes/animatronics/w_bonnie.tscn" id="27_nd5pr"]
+[ext_resource type="PackedScene" uid="uid://ddnqh2fwb8i4v" path="res://scenes/animatronics/w_chica.tscn" id="28_iw35l"]
+[ext_resource type="PackedScene" uid="uid://1425e1cbu38i" path="res://scenes/props/door.tscn" id="28_t03s8"]
+[ext_resource type="PackedScene" uid="uid://cgejnvievuxf8" path="res://scenes/animatronics/w_foxy.tscn" id="29_t0ahk"]
 [ext_resource type="Script" path="res://scripts/toggle_tablet.gd" id="29_wa4as"]
-[ext_resource type="PackedScene" uid="uid://dwhn6aeiuwg7x" path="res://scenes/w_freddy.tscn" id="30_uyssn"]
+[ext_resource type="PackedScene" uid="uid://dwhn6aeiuwg7x" path="res://scenes/animatronics/w_freddy.tscn" id="30_uyssn"]
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="31_63unw"]
-[ext_resource type="PackedScene" uid="uid://b7dpymyvsicjt" path="res://scenes/cheesestick.tscn" id="31_a7pji"]
+[ext_resource type="PackedScene" uid="uid://b7dpymyvsicjt" path="res://scenes/animatronics/cheesestick.tscn" id="31_a7pji"]
 [ext_resource type="Script" path="res://scripts/player_raycast.gd" id="32_5ed2l"]
-[ext_resource type="PackedScene" uid="uid://dfe3oqrxe2jr2" path="res://scenes/pink_slip.tscn" id="38_ry2hb"]
+[ext_resource type="PackedScene" uid="uid://dfe3oqrxe2jr2" path="res://scenes/animatronics/pink_slip.tscn" id="38_ry2hb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0grut"]
 resource_name = "cup"
@@ -1005,7 +1005,6 @@ root = NodePath("../..")
 [node name="Edam Foxy" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("26_xrtv4")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 69.275, 1.121, 13.54)
 root = NodePath("../..")
-sound_sensitive = false
 
 [node name="Withered Bonnie" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("27_nd5pr")]
 root = NodePath("../..")
@@ -1017,7 +1016,6 @@ root = NodePath("../..")
 [node name="Withered Foxy" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("29_t0ahk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.621, 0.599, -23.328)
 root = NodePath("../..")
-sound_sensitive = false
 
 [node name="Withered Freddy" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("30_uyssn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.582, 5.263, -11.521)

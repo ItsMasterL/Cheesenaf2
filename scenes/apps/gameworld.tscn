@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://bvx1b83kju7w"]
 
 [ext_resource type="Script" path="res://scripts/gameworld.gd" id="1_qnnyn"]
-[ext_resource type="PackedScene" uid="uid://kdgt6c2c63pk" path="res://scenes/storelisting.tscn" id="2_gjbuv"]
+[ext_resource type="PackedScene" uid="uid://kdgt6c2c63pk" path="res://scenes/props/storelisting.tscn" id="2_gjbuv"]
 [ext_resource type="AudioStream" uid="uid://cllymiu6njvok" path="res://sounds/music/gameworld.mp3" id="3_0na3m"]
 [ext_resource type="AudioStream" uid="uid://rusybips7bm" path="res://sounds/kaching.wav" id="4_qcx1t"]
 [ext_resource type="Texture2D" uid="uid://6obfeopjjj2k" path="res://textures/apps/gameworld bg.png" id="4_ykwh6"]
