@@ -77,12 +77,12 @@ func _populate_homescreen():
 func _load_application(appscene: String, fun: float = fun_multiplier):
 	if app_home.get_child_count() > 0:
 		app_home.get_child(0).queue_free()
-	if ResourceLoader.exists("res://scenes/%s.tscn" % [appscene]) == false:
+	if ResourceLoader.exists("res://scenes/apps/%s.tscn" % [appscene]) == false:
 		print("Scene \"%s\" doesn't exist! Aborting!" % [appscene])
 		return
 	if app_home.get_child_count() > 0:
 		app_home.get_child(0).queue_free()
-	current_process = load("res://scenes/%s.tscn" % [appscene])
+	current_process = load("res://scenes/apps/%s.tscn" % [appscene])
 	if appscene == "cams_plus":
 		root.in_cams = true
 	var instance = current_process.instantiate()
