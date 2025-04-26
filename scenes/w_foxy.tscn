@@ -338,7 +338,6 @@ check_frequency = 1.356
 jumpscare_length = 1.217
 jumpscare_position = Vector3(0, -0.561, -2.75)
 camera_sensitive = true
-sound_sensitive = null
 
 [node name="Skeleton3D" parent="Armature" index="0"]
 bones/0/position = Vector3(0, 0.00955629, 0)

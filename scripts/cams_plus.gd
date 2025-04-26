@@ -43,16 +43,16 @@ func _process(_delta):
 	if root.is_winding:
 		if wind_sound.playing == false:
 			wind_sound.play()
-	music_progress.value = root.music_box
+	music_progress.value = root.musicbox
 	
 	# Randomize music_box
-	if root.music_box == 0:
+	if root.musicbox == 0:
 		music_box.stop()
 	elif music_box.playing == false:
 		if root.paranormal_attacking == false:
 			if randi_range(0, 4) >= 2:
 				var id = randi_range(1, SONG_COUNT)
-				music_box.stream = load("res://sounds/music/music_box%s.mp3" % [id])
+				music_box.stream = load("res://sounds/music/musicbox%s.mp3" % [id])
 				if root.musicbox_ran_out == false || root.edams_friendly:
 					change_dance.emit(SONG_COUNT, id)
 		else:

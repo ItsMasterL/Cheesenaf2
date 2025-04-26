@@ -100,7 +100,6 @@ animatronic = "edam_foxy"
 positions = Array[ExtResource("3_lvccg")]([SubResource("Resource_48hc7"), SubResource("Resource_qxlvi"), SubResource("Resource_t34ru"), SubResource("Resource_e4c0a"), SubResource("Resource_op77r"), SubResource("Resource_oacql"), SubResource("Resource_3vlub")])
 check_frequency = 5.274
 camera_sensitive = true
-sound_sensitive = null
 game_sensitive = true
 save_animation_id = "Save"
 save_voiceline_delay = 2.35
