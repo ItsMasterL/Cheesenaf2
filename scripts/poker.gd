@@ -1,13 +1,23 @@
 extends Node2D
 
 
-enum values {
+enum CardValue {
 	FOXY,
 	CHICA,
 	BONNIE,
 	FREDDY,
 	CHEESESTICK,
 	AFTON,
+}
+
+enum HandRanking {
+	NONE,
+	ONE_PAIR,
+	TWO_PAIR,
+	THREE_OF_A_KIND,
+	FULL_HOUSE,
+	FOUR_OF_A_KIND,
+	FIVE_OF_A_KIND,
 }
 
 @export var card_scene: PackedScene
@@ -50,7 +60,7 @@ func _start_phase(p: int):
 			await get_tree().create_timer(1).timeout
 			for card in player_cards.get_children():
 				if card.selected_for_reshuffle:
-					card.card_value = randi_range(0, values.size() - 1)
+					card.card_value = randi_range(0, CardValue.size() - 1)
 					card._flip_card(true)
 					card.anim.play("draw")
 			await get_tree().create_timer(1).timeout
@@ -71,7 +81,7 @@ func _deal_cards(side: Node2D, selectable = false):
 		var card = card_scene.instantiate()
 		side.add_child(card)
 		card.selectable = selectable
-		card.card_value = randi_range(0, values.size() - 1)
+		card.card_value = randi_range(0, CardValue.size() - 1)
 		card.position = Vector2(200 * i, card.position.y)
 		card.anim.play("draw")
 		#TODO: Add sound effects
@@ -96,7 +106,7 @@ func _evaluate():
 	var cpu_highest_count = 0
 	var cpu_previous_highest_value = 0
 	var cpu_highest_count_value = 0
-	for i in values.size():
+	for i in CardValue.size():
 		var count = player_score.count(i)
 		if count > player_highest_count:
 			player_previous_highest = player_highest_count
@@ -112,7 +122,7 @@ func _evaluate():
 			elif player_previous_highest_value < i:
 				player_previous_highest = count
 				player_previous_highest_value = i
-	for i in values.size():
+	for i in CardValue.size():
 		var count = cpu_score.count(i)
 		if count > cpu_highest_count:
 			cpu_previous_highest = cpu_highest_count
