@@ -139,7 +139,7 @@ func _evaluate():
 	elif player_highest_count == cpu_highest_count && player_previous_highest == cpu_previous_highest && player_highest_count_value > cpu_highest_count_value:
 		$Table/Result.visible = true
 		$Table/Result.text = "YOU WIN!!"
-	elif player_highest_count == cpu_highest_count && player_previous_highest == cpu_previous_highest && player_previous_highest_value > cpu_previous_highest:
+	elif player_highest_count == cpu_highest_count && player_previous_highest == cpu_previous_highest && player_highest_count_value == cpu_highest_count_value && player_previous_highest_value > cpu_previous_highest:
 		$Table/Result.visible = true
 		$Table/Result.text = "YOU WIN!!"
 	elif player_highest_count == cpu_highest_count && player_previous_highest == cpu_previous_highest:
