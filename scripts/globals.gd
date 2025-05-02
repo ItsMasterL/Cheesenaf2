@@ -16,6 +16,11 @@ var safety_time = 2.5
 var office_mode = 0 # 0 - Singleplayer, 1 - Co-op, 2 - 1v1 vs, 3 - 2v2 vs
 var game_time = 0
 
+# Cheesenaf Code
+var cheesenaf1_path = ""
+var cheesenaf1_code = ""
+var cheesenaf1_seed : int
+
 # Multiplayer #TODO: Actually implement multiplayer
 var local_playername = ""
 var remote_playernames: Array[String]
@@ -105,7 +110,6 @@ func _ready():
 
 #region Saving/Loading
 func _save():
-#TODO: If updating Cheesenaf 1 before publishing alongside Cheesenaf 2 on gamejolt/itch, add a BBGSim mod easter egg in Cheesenaf 2 save data
 	# This converts app purchases to hexadecimal
 	purchased_apps = "%x" % [purchases]
 	var data = {

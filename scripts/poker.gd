@@ -66,7 +66,7 @@ func _start_phase(p: int):
 			await get_tree().create_timer(1).timeout
 			_flip_cards(cpu_cards, true)
 			await get_tree().create_timer(1).timeout
-			_evaluate()
+			_old_evaluate()
 			await get_tree().create_timer(2).timeout
 			for card in player_cards.get_children():
 				card.queue_free()
@@ -91,7 +91,7 @@ func _flip_cards(side: Node2D, faceup: bool):
 	for child in side.get_children():
 		child.face_up = faceup
 
-func _evaluate():
+func _old_evaluate():
 	player_score.clear()
 	cpu_score.clear()
 	for card in player_cards.get_children():
@@ -152,9 +152,17 @@ func _evaluate():
 	elif player_highest_count == cpu_highest_count && player_previous_highest == cpu_previous_highest && player_highest_count_value == cpu_highest_count_value && player_previous_highest_value > cpu_previous_highest:
 		$Table/Result.visible = true
 		$Table/Result.text = "YOU WIN!!"
-	elif player_highest_count == cpu_highest_count && player_previous_highest == cpu_previous_highest:
+	elif player_highest_count == cpu_highest_count && player_previous_highest == cpu_previous_highest && player_highest_count_value == cpu_highest_count_value && player_previous_highest_value == cpu_previous_highest_value:
 		$Table/Result.visible = true
 		$Table/Result.text = "DRAW!"
 	else:
 		$Table/Result.visible = true
 		$Table/Result.text = "Too bad."
+
+func _evaluate():
+	player_score.clear()
+	cpu_score.clear()
+	for card in player_cards.get_children():
+		player_score.append(card)
+	for card in cpu_cards.get_children():
+		cpu_score.append(card)
