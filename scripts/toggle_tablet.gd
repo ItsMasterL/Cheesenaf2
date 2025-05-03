@@ -10,10 +10,6 @@ extends StaticBody3D
 @onready var root = $"../../.."
 @onready var anim := $"../AnimationPlayer"
 
-
-func _ready():
-	print(stand, ", ", hold)
-
 func _raycast_event():
 	if root.p1_has_tablet == false:
 		return

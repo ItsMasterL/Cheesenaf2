@@ -17,6 +17,7 @@ var office_mode = 0 # 0 - Singleplayer, 1 - Co-op, 2 - 1v1 vs, 3 - 2v2 vs
 var game_time = 0
 
 # Cheesenaf Code
+var cheesenaf1_app = ""
 var cheesenaf1_path = ""
 var cheesenaf1_code = ""
 var cheesenaf1_seed : int
@@ -44,6 +45,8 @@ var tablet_volume: float = 1
 var ambient_volume: float = 1
 var jumpscare_volume: float = 1
 var fullscreen = false
+var language = 0
+var languages = ["en", "es", "tr"]
 
 #region Applications
 enum store_apps {
@@ -75,17 +78,17 @@ enum store_apps_binary {
 }
 
 var apps: Array[TabletApp] = [
-	TabletApp.new("Freddy Fazbear's Media Player", "Play your favorite tunes from your own device, while Freddy Fazbear himself dances along!", "media_player", load("res://textures/apps/mediaplayer.png"), 0.00, store_apps_binary.MEDIAPLAYER),
-	TabletApp.new("Flappy Foxy", "Make Foxy jump up and down between the Brick%s brand ovens! Touching the floor or the ovens will cause Foxy to die. painfully." % String.chr(8482), "flappy_foxy", load("res://textures/apps/flappyfoxy.png"), 0.00, store_apps_binary.FLAPPYFOXY, 1.25),
-	TabletApp.new("Chica Pop", "Tap the screen to make her go pop! Try for the biggest number!! My high score is 4", "chica_pop", load("res://textures/apps/chicapopicon.png"), 0.00, store_apps_binary.CHICAPOP, 1.25),
-	TabletApp.new("Tank Trouble", "Navigate your tank through a simple maze to shoot the opponent's tank! Boy, are these tanks causing some trouble. Wait... say that again...", "tank_trouble", load("res://textures/apps/tanktrouble.png"), 4.99, store_apps_binary.TANKTROUBLE, 1.5, false),
-	TabletApp.new("Soccer Physics", "Ever wanted to play soccer, but only being able to kick while jumping? Well, now you can! Beat the enemy team!", "soccer_physics", load("res://textures/apps/soccerphysics.png"), 4.99, store_apps_binary.SOCCERPHYSICS, 1.5, false),
-	TabletApp.new("Freddy's Picture Poker", "The classic game where thousands of children learned to gamble. Oh, not from us though. From the folks over at Nintendo.", "poker", load("res://textures/apps/poker.png"), 9.99, store_apps_binary.POKER, 1.75),
-	TabletApp.new("Foxy's Paintin' Location", "Turns out, Foxy is quite the artist, and wants to share his art tools with you! Makes sense, I mean, he is a furry after all. You gotta wonder how he can afford so much booty. That, being treasure, you know. (What, is that quote too overdone?)", "drawing", load("res://textures/apps/foxypaint.png"), 9.99, store_apps_binary.DRAWING, 1.75, false),
-	TabletApp.new("Angry Chica", "Those bad piggies have taken Chica's cupcake! (Based on a true story!) Help her get it back! (Unfortunately, not based on the true story.)", "angry_birds", load("res://textures/apps/angrychica.png"), 9.99, store_apps_binary.ANGRYCHICA, 1.75, false),
-	TabletApp.new("Bonnie's Woods", "Millions of years ago, Bonnie created the concept of trees. (Not really). You play as Stewart, a mouse who wants to get the Cheese from Bonnie, the CEO of Cheese LLC in the year this takes place, 1792.", "warios_woods", load("res://textures/apps/bonnieswoods.png"), 19.99, store_apps_binary.BONNIESWOODS, 2, false),
-	TabletApp.new("Stringbonnie's Podcast", "A collection of recordings found in the back room of the previous Freddy's location. We don't know who made them, or what they mean. They were found next to the Stringbonnie suit. We believe these stories to be fully fictional.", "podcast", load("res://textures/apps/stringbonnie.png"), 19.99, store_apps_binary.PODCAST),
-	TabletApp.new("Five Nights With Freddy (18+)", "Enjoy 5 sensual nights with Freddy and the gang, get to know them intimately, and more~", "fnwf", load("res://textures/apps/fnwf.png"), 29.99, store_apps_binary.FNWF)
+	TabletApp.new("Freddy Fazbear's Media Player", "MEDIA_DESC", "media_player", load("res://textures/apps/mediaplayer.png"), 0.00, store_apps_binary.MEDIAPLAYER),
+	TabletApp.new("Flappy Foxy", "FLAPPY_FOXY_DESC", "flappy_foxy", load("res://textures/apps/flappyfoxy.png"), 0.00, store_apps_binary.FLAPPYFOXY, 1.25),
+	TabletApp.new("Chica Pop", "CHICA_POP_DESC", "chica_pop", load("res://textures/apps/chicapopicon.png"), 0.00, store_apps_binary.CHICAPOP, 1.25),
+	TabletApp.new("Tank Trouble", "TANK_TROUBLE_DESC", "tank_trouble", load("res://textures/apps/tanktrouble.png"), 4.99, store_apps_binary.TANKTROUBLE, 1.5, false),
+	TabletApp.new("Soccer Physics", "SOCCER_PHYS_DESC", "soccer_physics", load("res://textures/apps/soccerphysics.png"), 4.99, store_apps_binary.SOCCERPHYSICS, 1.5, false),
+	TabletApp.new("Freddy's Picture Poker", "POKER_DESC", "poker", load("res://textures/apps/poker.png"), 9.99, store_apps_binary.POKER, 1.75),
+	TabletApp.new("Foxy's Paintin' Location", "DRAWING_DESC", "drawing", load("res://textures/apps/foxypaint.png"), 9.99, store_apps_binary.DRAWING, 1.75, false),
+	TabletApp.new("Angry Chica", "ANGRY_CHICA_DESC", "angry_birds", load("res://textures/apps/angrychica.png"), 9.99, store_apps_binary.ANGRYCHICA, 1.75, false),
+	TabletApp.new("Bonnie's Woods", "BONNIE_WOODS_DESC", "warios_woods", load("res://textures/apps/bonnieswoods.png"), 19.99, store_apps_binary.BONNIESWOODS, 2, false),
+	TabletApp.new("Stringbonnie's Podcast", "PODCAST_DESC", "podcast", load("res://textures/apps/stringbonnie.png"), 19.99, store_apps_binary.PODCAST),
+	TabletApp.new("Five Nights With Freddy (18+)", "FNWF_DESC", "fnwf", load("res://textures/apps/fnwf.png"), 29.99, store_apps_binary.FNWF)
 ]
 #endregion
 var purchases: int
@@ -163,7 +166,8 @@ func _save_settings():
 		"tablet_volume" = tablet_volume,
 		"ambient_volume" = ambient_volume,
 		"jumpscare_volume" = jumpscare_volume,
-		"fullscreen" = fullscreen
+		"fullscreen" = fullscreen,
+		"language" = language
 	}
 	var file = FileAccess.open("user://settings.json", FileAccess.WRITE)
 	var json_string = JSON.stringify(data)
@@ -205,6 +209,8 @@ func _load_settings():
 				ambient_volume = data["jumpscare_volume"]
 			if "fullscreen" in data && typeof(data["fullscreen"]) == TYPE_BOOL:
 				fullscreen = data["fullscreen"]
+			if "language" in data && typeof(data["language"]) == TYPE_INT || typeof(data["language"]) == TYPE_FLOAT:
+				language = clamp(floor(data["language"]),0,2)
 		AudioServer.set_bus_volume_db(0, linear_to_db(master_volume))
 		AudioServer.set_bus_volume_db(1, linear_to_db(sfx_volume))
 		AudioServer.set_bus_volume_db(2, linear_to_db(voice_volume))
@@ -216,6 +222,7 @@ func _load_settings():
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		elif DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		TranslationServer.set_locale(languages[language])
 #endregion
 
 func _set_night(set_night: int):

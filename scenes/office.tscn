@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=4 uid="uid://kfokhb3cioir"]
+[gd_scene load_steps=86 format=4 uid="uid://kfokhb3cioir"]
 
 [ext_resource type="Script" path="res://scripts/office.gd" id="1_a3xfx"]
 [ext_resource type="PackedScene" uid="uid://bs378s4kwr2ux" path="res://scenes/props/foxy_plush.tscn" id="1_gqipk"]
@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://sr5bhwimbn6q" path="res://scenes/animatronics/bonnie.tscn" id="22_fo68b"]
 [ext_resource type="PackedScene" uid="uid://bx7i4uyvysowi" path="res://scenes/animatronics/freddy.tscn" id="23_d180k"]
 [ext_resource type="Shader" path="res://shaders/blur.gdshader" id="23_h042j"]
+[ext_resource type="Script" path="res://scripts/display_controls.gd" id="25_6djot"]
 [ext_resource type="Script" path="res://scripts/toggle_cup.gd" id="25_hni3l"]
 [ext_resource type="PackedScene" uid="uid://cuiite2xlb70y" path="res://scenes/animatronics/chica.tscn" id="25_m5hqu"]
 [ext_resource type="AudioStream" uid="uid://bip471h5exvnx" path="res://sounds/slurp.wav" id="26_plhk0"]
@@ -691,10 +692,9 @@ texture = ExtResource("16_6md6q")
 
 [node name="Label3D" type="Label3D" parent="TabletOnDesk/Tablet/Tutorial/Night1TutorialLeft"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0143449)
-text = "Click off of
-the tablet's
-screen to
-set it down"
+text = "TUTORIAL_TABLET_DOWN"
+autowrap_mode = 3
+width = 200.0
 
 [node name="Night1TutorialRight" type="Sprite3D" parent="TabletOnDesk/Tablet/Tutorial"]
 transform = Transform3D(0.03, 0, -2.77556e-17, 0, -1.31134e-09, 0.03, 0, -0.03, -1.31134e-09, 0.168268, 0.0157884, -4.71578e-10)
@@ -702,20 +702,19 @@ texture = ExtResource("16_6md6q")
 
 [node name="Label3D" type="Label3D" parent="TabletOnDesk/Tablet/Tutorial/Night1TutorialRight"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.93889e-18, 0, -0.00901222)
-text = "Click off of
-the tablet's
-screen to
-set it down"
+text = "TUTORIAL_TABLET_DOWN"
+autowrap_mode = 3
+width = 200.0
 
 [node name="Night1TutorialButton" type="Sprite3D" parent="TabletOnDesk/Tablet/Tutorial"]
-transform = Transform3D(-7.86805e-10, -0.018, -7.86805e-10, 0, -7.86805e-10, 0.018, -0.018, 7.86805e-10, 3.43923e-17, 0.0412887, 0.0166434, 0.102448)
+transform = Transform3D(-7.86805e-10, -0.018, -7.86805e-10, 0, -7.86805e-10, 0.018, -0.018, 7.86805e-10, 3.43923e-17, 0.0477919, 0.0166434, 0.102448)
 texture = ExtResource("16_6md6q")
 
 [node name="Label3D" type="Label3D" parent="TabletOnDesk/Tablet/Tutorial/Night1TutorialButton"]
 transform = Transform3D(-7.25609e-08, 1.66, 0, -1.66, -7.25609e-08, 0, 0, 0, 1.66, -2.51746e-24, -5.75928e-17, -0.0219014)
-text = "Click the Home
-Button to return to
-the tablet's menu"
+text = "TUTORIAL_TABLET_HOME"
+autowrap_mode = 3
+width = 318.0
 
 [node name="Player" type="CharacterBody3D" parent="."]
 script = ExtResource("31_63unw")
@@ -802,6 +801,7 @@ Hold [CTRL] to use your flashlight or camera light
 Left click to interact with objects you're looking at"
 horizontal_alignment = 0
 vertical_alignment = 2
+script = ExtResource("25_6djot")
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Player/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94943, 0)

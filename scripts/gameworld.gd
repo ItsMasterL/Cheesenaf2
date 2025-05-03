@@ -12,7 +12,7 @@ func _ready():
 	for app in Globals.apps:
 		var listing = listing_template.instantiate()
 		listing.app_name = app.app_name
-		listing.app_description = app.app_description
+		listing.app_description = tr(app.app_description)
 		listing.price = app.price
 		listing.icon = app.icon
 		listing.id = app.global_id

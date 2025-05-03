@@ -59,7 +59,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_bn3vm")
 theme_override_font_sizes/normal_font_size = 20
-text = "Back to Main Menu"
+text = "MENU_TOMAIN"
 scroll_active = false
 
 [node name="Credits" type="Button" parent="."]
@@ -94,7 +94,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_bn3vm")
 theme_override_font_sizes/normal_font_size = 20
-text = "View Credits"
+text = "EXTRA_CREDITS"
 scroll_active = false
 
 [node name="Changelog" type="Button" parent="."]
@@ -129,7 +129,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_bn3vm")
 theme_override_font_sizes/normal_font_size = 20
-text = "View Changelog"
+text = "EXTRA_CHLOG"
 scroll_active = false
 
 [node name="Multiplayer" type="Button" parent="."]
@@ -164,7 +164,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_bn3vm")
 theme_override_font_sizes/normal_font_size = 20
-text = "Multiplayer Menu (Coming soon!)"
+text = "EXTRA_MULTI"
 scroll_active = false
 
 [node name="Discord" type="Button" parent="."]
@@ -200,7 +200,7 @@ mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_bn3vm")
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
-text = "Join the [color=MEDIUM_SLATE_BLUE]Discord"
+text = "EXTRA_DISCORD"
 scroll_active = false
 
 [node name="Github" type="Button" parent="."]
@@ -236,7 +236,7 @@ mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_bn3vm")
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
-text = "GitHub Source Code"
+text = "EXTRA_GITHUB"
 scroll_active = false
 
 [node name="Cheesenaf1" type="Button" parent="."]
@@ -273,7 +273,7 @@ mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_bn3vm")
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
-text = "Enter Cheesenaf Passcode"
+text = "EXTRA_CODE"
 scroll_active = false
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]

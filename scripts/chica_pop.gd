@@ -19,16 +19,16 @@ func _process(delta):
 		anim_timer = 0
 		anim_offset = !anim_offset
 	
-	if Input.is_action_pressed("LeftClick") && root.using_tablet:
+	if Input.is_action_pressed("Interact") && root.using_tablet:
 		chica.frame = 2
 	else:
 		chica.frame = 0
 	if anim_offset:
 		chica.frame += 1
 	
-	if Input.is_action_just_pressed("LeftClick") && root.using_tablet:
+	if Input.is_action_just_pressed("Interact") && root.using_tablet:
 		score += 1
 		$Pop.play()
 		score_display.text = str(score)
-	if Input.is_action_just_released("LeftClick") && root.using_tablet:
+	if Input.is_action_just_released("Interact") && root.using_tablet:
 		$Unpop.play()

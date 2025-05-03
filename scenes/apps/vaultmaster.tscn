@@ -51,7 +51,7 @@ offset_left = 1035.0
 offset_top = 652.0
 offset_right = 1138.0
 offset_bottom = 704.0
-text = "OK"
+text = "VAULT_OK"
 
 [node name="Control Buttons" type="Control" parent="."]
 anchors_preset = 0
@@ -68,8 +68,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_yc48w")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_eagjk")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6csa8")
 toggle_mode = true
-text = "FRONT
-DOORWAY"
+text = "VAULT_DOOR_FRONT"
 autowrap_mode = 2
 
 [node name="Back Door" type="Button" parent="Control Buttons"]
@@ -82,8 +81,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_yc48w")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_eagjk")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6csa8")
 toggle_mode = true
-text = "REAR
-DOORWAY"
+text = "VAULT_DOOR_BACK"
 autowrap_mode = 2
 
 [node name="Left Vent" type="Button" parent="Control Buttons"]
@@ -96,7 +94,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_yc48w")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_eagjk")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6csa8")
 toggle_mode = true
-text = "LEFT VENT"
+text = "VAULT_VENT_LEFT"
 autowrap_mode = 2
 
 [node name="Right Vent" type="Button" parent="Control Buttons"]
@@ -109,7 +107,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_yc48w")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_eagjk")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6csa8")
 toggle_mode = true
-text = "RIGHT VENT"
+text = "VAULT_VENT_RIGHT"
 autowrap_mode = 2
 
 [node name="Ceiling Vent" type="Button" parent="Control Buttons"]
@@ -122,8 +120,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_yc48w")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_eagjk")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6csa8")
 toggle_mode = true
-text = "CEILING
-VENT"
+text = "VAULT_VENT_TOP"
 autowrap_mode = 2
 
 [node name="Messages" type="Control" parent="."]
@@ -153,7 +150,7 @@ offset_right = 169.0
 offset_bottom = 77.0
 theme_override_colors/font_color = Color(0, 0.505882, 0.780392, 1)
 theme_override_font_sizes/font_size = 56
-text = "Error!"
+text = "VAULT_ERR"
 
 [node name="Error2" type="Label" parent="Messages/ErrorMessagebox"]
 layout_mode = 0
@@ -163,7 +160,7 @@ offset_right = 642.0
 offset_bottom = 220.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 27
-text = "With your current payment plan, you are only able to close 2 doorways. If you wish to upgrade to the $399/mo plan, please contact jimborinijimborini@gmail.com"
+text = "VAULT_ERR_TOOMANY"
 autowrap_mode = 2
 
 [node name="Confirm" type="Button" parent="Messages/ErrorMessagebox"]
@@ -189,7 +186,7 @@ offset_right = 169.0
 offset_bottom = 77.0
 theme_override_colors/font_color = Color(0, 0.505882, 0.780392, 1)
 theme_override_font_sizes/font_size = 56
-text = "One moment please..."
+text = "VAULT_WAIT"
 
 [node name="Error2" type="Label" parent="Messages/Loadingbox"]
 layout_mode = 0
@@ -199,7 +196,7 @@ offset_right = 642.0
 offset_bottom = 340.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 27
-text = "Please do not close the application."
+text = "VAULT_WAIT_MESSAGE"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
@@ -219,7 +216,7 @@ offset_right = 169.0
 offset_bottom = 77.0
 theme_override_colors/font_color = Color(0, 0.505882, 0.780392, 1)
 theme_override_font_sizes/font_size = 56
-text = "Error!"
+text = "VAULT_ERR"
 
 [node name="Error2" type="Label" parent="Messages/JammedMessagebox"]
 layout_mode = 0
@@ -229,7 +226,7 @@ offset_right = 642.0
 offset_bottom = 220.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 27
-text = "One or more modified doors are not responding. Please ensure the doorways are not blocked or jammed, then try again."
+text = "VAULT_ERR_JAM"
 autowrap_mode = 2
 
 [node name="Confirm" type="Button" parent="Messages/JammedMessagebox"]
@@ -250,8 +247,7 @@ theme_override_constants/outline_size = 15
 theme_override_fonts/normal_font = ExtResource("4_udoj7")
 theme_override_font_sizes/normal_font_size = 26
 bbcode_enabled = true
-text = "[color=red]Door disabled
-[color=green]Door enabled"
+text = "VAULT_INFO"
 
 [connection signal="pressed" from="Confirm" to="." method="_check_and_seal"]
 [connection signal="pressed" from="Messages/ErrorMessagebox/Confirm" to="." method="_clear_error_message"]

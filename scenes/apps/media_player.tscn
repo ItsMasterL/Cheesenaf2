@@ -54,7 +54,8 @@ offset_left = 115.0
 offset_top = 709.0
 offset_right = 269.0
 offset_bottom = 781.0
-text = "PLAY/PAUSE"
+text = "MEDIA_PLAYPAUSE"
+autowrap_mode = 2
 
 [node name="Next" type="Button" parent="Home"]
 layout_mode = 0
@@ -62,7 +63,8 @@ offset_left = 283.0
 offset_top = 709.0
 offset_right = 437.0
 offset_bottom = 781.0
-text = "NEXT"
+text = "MEDIA_NEXT"
+autowrap_mode = 2
 
 [node name="Shuffle" type="Button" parent="Home"]
 layout_mode = 0
@@ -70,8 +72,8 @@ offset_left = 449.0
 offset_top = 709.0
 offset_right = 603.0
 offset_bottom = 781.0
-text = "SHUFFLE
-PLAYLIST"
+text = "MEDIA_SHUFFLE"
+autowrap_mode = 2
 
 [node name="ImportFiles" type="Button" parent="Home"]
 layout_mode = 0
@@ -79,7 +81,8 @@ offset_left = 1011.0
 offset_top = 709.0
 offset_right = 1165.0
 offset_bottom = 781.0
-text = "PICK MEDIA..."
+text = "MEDIA_FILE"
+autowrap_mode = 2
 
 [node name="ImportDirectory" type="Button" parent="Home"]
 layout_mode = 0
@@ -87,7 +90,8 @@ offset_left = 846.0
 offset_top = 709.0
 offset_right = 1000.0
 offset_bottom = 781.0
-text = "PICK DIRECTORY..."
+text = "MEDIA_DIRECTORY"
+autowrap_mode = 2
 
 [node name="Media" type="FileDialog" parent="Home"]
 title = "Select one or multiple MP3 or OGV files"

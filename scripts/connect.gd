@@ -1,6 +1,6 @@
 extends Node
 
-var process = "bbgsim"
+const process = "bbgsim"
 var game_open = false
 var run_thread = true
 var thread: Thread
@@ -31,12 +31,14 @@ func _connect_games():
 		var output = []
 		#Runs powershell
 		OS.execute('powershell.exe', ['/C', "get-process %s | Select-Object -ExpandProperty Path" % [process]], output)
-		var string = output[0] as String
+		var string = output[0].strip_edges() as String
+		Globals.cheesenaf1_app = string
 		var i = string.length() - 1
 		while (string[i] != '/') && (string[i] != '\\'):
 			string = string.left(string.length() - 1)
 			i -= 1
-		print(string)
+		if OS.is_debug_build():
+			print(string)
 		Globals.cheesenaf1_path = string
 		$"../"._change_menu("code")
 	else:

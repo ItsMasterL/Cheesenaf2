@@ -9,6 +9,7 @@ Adjustments:
 
 Additions:
 - Added a new option in Extras. Just how does it work, though...?
+- Added language support, with English, Spanish, and Translated available
 
 
 

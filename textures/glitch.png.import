@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0n26oim8ebke"
-path="res://.godot/imported/neutral.png-db16e77167395289ddb050a283367b75.ctex"
+uid="uid://lvkpx5r0xu4u"
+path="res://.godot/imported/glitch.png-2f7881c8480a45502301117eb164d621.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/bbgsim/alan/neutral.png"
-dest_files=["res://.godot/imported/neutral.png-db16e77167395289ddb050a283367b75.ctex"]
+source_file="res://textures/glitch.png"
+dest_files=["res://.godot/imported/glitch.png-2f7881c8480a45502301117eb164d621.ctex"]
 
 [params]
 

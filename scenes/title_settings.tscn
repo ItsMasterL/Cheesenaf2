@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c0spfq78wftov"]
+[gd_scene load_steps=19 format=3 uid="uid://c0spfq78wftov"]
 
 [ext_resource type="Script" path="res://scripts/title_menu.gd" id="1_gen20"]
 [ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://fonts/consolas.ttf" id="2_dmw46"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/sensitivity_slider.gd" id="7_6v5l0"]
 [ext_resource type="PackedScene" uid="uid://dpn03nj1u7ol3" path="res://models/cheesenaf2.blend" id="7_pi3se"]
 [ext_resource type="Script" path="res://scripts/fullscreen_toggle.gd" id="8_j22wr"]
+[ext_resource type="Script" path="res://scripts/set_language.gd" id="9_1sieu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ptv6"]
 
@@ -68,7 +69,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_dmw46")
 theme_override_font_sizes/normal_font_size = 20
-text = "Back to Main Menu"
+text = "MENU_TOMAIN"
 scroll_active = false
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
@@ -103,15 +104,16 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -144.5
-offset_top = -32.5
+offset_top = -33.5
 offset_right = 63.5
-offset_bottom = -13.5
+offset_bottom = -10.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_dmw46")
 theme_override_font_sizes/normal_font_size = 20
-text = "Master Volume"
+text = "SETTING_VOL_MAST"
+fit_content = true
 scroll_active = false
 
 [node name="SFX" type="HSlider" parent="Audio"]
@@ -133,15 +135,16 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -144.5
-offset_top = -32.5
+offset_top = -33.5
 offset_right = 63.5
-offset_bottom = -13.5
+offset_bottom = -10.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_dmw46")
 theme_override_font_sizes/normal_font_size = 20
-text = "SFX Volume"
+text = "SETTING_VOL_SFX"
+fit_content = true
 scroll_active = false
 
 [node name="Voice" type="HSlider" parent="Audio"]
@@ -163,15 +166,16 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -144.5
-offset_top = -32.5
+offset_top = -33.5
 offset_right = 63.5
-offset_bottom = -13.5
+offset_bottom = -10.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_dmw46")
 theme_override_font_sizes/normal_font_size = 20
-text = "Voice Volume"
+text = "SETTING_VOL_VOIC"
+fit_content = true
 scroll_active = false
 
 [node name="Music" type="HSlider" parent="Audio"]
@@ -195,13 +199,14 @@ anchor_bottom = 0.5
 offset_left = -144.5
 offset_top = -32.5
 offset_right = 63.5
-offset_bottom = -13.5
+offset_bottom = -9.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_dmw46")
 theme_override_font_sizes/normal_font_size = 20
-text = "Music Volume"
+text = "SETTING_VOL_MUS"
+fit_content = true
 scroll_active = false
 
 [node name="Ambient" type="HSlider" parent="Audio"]
@@ -225,13 +230,14 @@ anchor_bottom = 0.5
 offset_left = -144.5
 offset_top = -32.5
 offset_right = 63.5
-offset_bottom = -13.5
+offset_bottom = -9.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_dmw46")
 theme_override_font_sizes/normal_font_size = 20
-text = "Ambience Volume"
+text = "SETTING_VOL_AMB"
+fit_content = true
 scroll_active = false
 
 [node name="Jumpscare" type="HSlider" parent="Audio"]
@@ -255,13 +261,14 @@ anchor_bottom = 0.5
 offset_left = -144.5
 offset_top = -32.5
 offset_right = 63.5
-offset_bottom = -13.5
+offset_bottom = -9.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_dmw46")
 theme_override_font_sizes/normal_font_size = 20
-text = "Jumpscare Volume"
+text = "SETTING_VOL_JMPSC"
+fit_content = true
 scroll_active = false
 
 [node name="Tablet" type="HSlider" parent="Audio"]
@@ -285,13 +292,14 @@ anchor_bottom = 0.5
 offset_left = -144.5
 offset_top = -32.5
 offset_right = 63.5
-offset_bottom = -13.5
+offset_bottom = -9.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_dmw46")
 theme_override_font_sizes/normal_font_size = 20
-text = "Tablet Volume"
+text = "SETTING_VOL_TBLT"
+fit_content = true
 scroll_active = false
 
 [node name="ResetAudio" type="Button" parent="Audio"]
@@ -300,7 +308,7 @@ offset_left = 75.0
 offset_top = 403.0
 offset_right = 241.0
 offset_bottom = 442.0
-text = "Reset Audio Settings"
+text = "SETTING_VOL_RESET"
 script = ExtResource("6_5ukkq")
 
 [node name="Sensitivity" type="Control" parent="."]
@@ -327,14 +335,14 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -144.5
 offset_top = -32.5
-offset_right = 63.5
+offset_right = 204.5
 offset_bottom = -13.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_dmw46")
 theme_override_font_sizes/normal_font_size = 20
-text = "Mouse Sensitivity"
+text = "SETTING_MOUSE"
 scroll_active = false
 
 [node name="Test" type="Button" parent="Sensitivity"]
@@ -343,7 +351,7 @@ offset_left = 422.0
 offset_top = 89.0
 offset_right = 514.0
 offset_bottom = 123.0
-text = "Test"
+text = "SETTING_MOUSE_TST"
 script = ExtResource("6_5ukkq")
 
 [node name="Label" type="Label" parent="Sensitivity/Test"]
@@ -352,7 +360,7 @@ offset_top = 40.0
 offset_right = 40.0
 offset_bottom = 63.0
 theme_override_fonts/font = ExtResource("2_dmw46")
-text = "Press Escape to stop testing"
+text = "SETTING_MOUSE_ESC"
 
 [node name="Reset" type="Button" parent="Sensitivity"]
 layout_mode = 0
@@ -360,7 +368,7 @@ offset_left = 621.0
 offset_top = 89.0
 offset_right = 713.0
 offset_bottom = 123.0
-text = "Reset"
+text = "SETTING_MOUSE_RESET"
 script = ExtResource("6_5ukkq")
 
 [node name="Misc" type="Control" parent="."]
@@ -375,8 +383,30 @@ offset_top = 35.0
 offset_right = 932.0
 offset_bottom = 66.0
 theme_override_fonts/font = ExtResource("2_dmw46")
-text = "Fullscreen"
+text = "SETTING_FULLSCREEN"
 script = ExtResource("8_j22wr")
+
+[node name="Language" type="OptionButton" parent="Misc"]
+layout_mode = 0
+offset_left = 782.0
+offset_top = 87.0
+offset_right = 980.0
+offset_bottom = 120.0
+selected = 0
+allow_reselect = true
+item_count = 3
+popup/item_0/text = "English"
+popup/item_1/text = "Español"
+popup/item_1/id = 1
+popup/item_2/text = "Translated"
+popup/item_2/id = 2
+script = ExtResource("9_1sieu")
+
+[node name="Label" type="Label" parent="Misc/Language"]
+layout_mode = 0
+offset_top = -23.0
+offset_right = 281.0
+text = "SETTING_LANG"
 
 [node name="Map" parent="." instance=ExtResource("7_pi3se")]
 
@@ -430,3 +460,4 @@ far = 100.0
 [connection signal="pressed" from="Audio/ResetAudio" to="Audio/ResetAudio" method="_reset_audio"]
 [connection signal="pressed" from="Sensitivity/Test" to="Sensitivity/Test" method="_test_sensitivity"]
 [connection signal="pressed" from="Sensitivity/Reset" to="Sensitivity/Reset" method="_reset_sensitivity"]
+[connection signal="item_selected" from="Misc/Language" to="Misc/Language" method="_set_language"]

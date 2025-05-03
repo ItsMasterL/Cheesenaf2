@@ -120,5 +120,6 @@ func _update_customnight_displays():
 
 func _calculate_safety() -> float:
 	var value = (Globals.edam_freddy / 20) + (Globals.edam_bonnie / 20) + (Globals.edam_chica / 20) + (Globals.edam_foxy / 20) + (Globals.wither_freddy / 20) + (Globals.wither_bonnie / 20) + (Globals.wither_chica / 20) + (Globals.wither_foxy / 20) / 8
-	print(str(clampf((3.8 - 3 * value) + 1, 1.5, 5)))
+	if OS.is_debug_build():
+		print(str(clampf((3.8 - 3 * value) + 1, 1.5, 5)))
 	return clampf((3.8 - 3 * value) + 1, 1.5, 5) # Revisit this

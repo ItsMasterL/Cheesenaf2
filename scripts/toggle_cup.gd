@@ -5,10 +5,6 @@ extends StaticBody3D
 @onready var hold := $"../../../Player/Head/Eyes/CupHolder"
 @onready var root = $"../../.."
 
-
-func _ready():
-	print(stand, ", ", hold)
-
 func _raycast_event():
 	var tablet = get_parent_node_3d()
 	var temp_parent = tablet.get_parent_node_3d()

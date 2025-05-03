@@ -28,7 +28,7 @@ func _unhandled_input(event):
 		if event.is_action_released(&"HideUnderDesk") && anim.is_playing() == false && root.under_desk:
 			anim.play(&"desk_hide", -1, -1, true)
 			moving.play()
-	if event.is_action_pressed(&"LeftClick") && root.using_tablet == false:
+	if event.is_action_pressed(&"Interact") && root.using_tablet == false:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	elif event.is_action_pressed(&"ui_cancel"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:

@@ -168,7 +168,7 @@ offset_bottom = -38.9828
 rotation = -0.0436332
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_eqjgs")
-text = "11-29-14"
+text = "11-XX-14"
 
 [node name="Memo" type="Label" parent="Paycheck2"]
 offset_left = -195.657
@@ -178,7 +178,7 @@ offset_bottom = 87.97
 rotation = -0.0436332
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_eqjgs")
-text = "The Ultimate Sandler (Proven)"
+text = "PAYCHECK_820_MEMO"
 
 [node name="From" type="Label" parent="Paycheck2"]
 offset_left = 53.0214
@@ -201,14 +201,15 @@ theme_override_fonts/font = ExtResource("5_eqjgs")
 text = "16.05"
 
 [node name="Amount2" type="Label" parent="Paycheck2"]
-offset_left = 16.4292
-offset_top = 2.98712
-offset_right = 210.429
-offset_bottom = 25.9872
+offset_left = -232.0
+offset_top = 14.0
+offset_right = 136.0
+offset_bottom = 37.0
 rotation = -0.0436332
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_eqjgs")
-text = "Sixteen and 5/100"
+text = "PAYCHECK_820_SIXTEEN"
+horizontal_alignment = 2
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
@@ -216,10 +217,4 @@ offset_right = 40.0
 offset_bottom = 23.0
 theme_override_fonts/font = ExtResource("6_htdee")
 theme_override_font_sizes/font_size = 56
-text = "Congratulations!
-You're did it
-big time!!!
-
-You're the
-ultimate
-Sandler !!!!"
+text = "PAYCHECK_820_CONGR"

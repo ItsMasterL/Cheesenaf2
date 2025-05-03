@@ -16,7 +16,7 @@ warnings/check_invalid_track_paths=false
 
 config/name="Cheesenaf 2"
 config/description="So wait, you're telling me, a cheese naffed this freddy's?"
-config/version="1.0.1"
+config/version="1.1.0"
 run/main_scene="res://scenes/title.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="MasterLGames/Cheesenaf2"
@@ -41,7 +41,7 @@ project/assembly_name="Cheesenaf 2"
 
 [input]
 
-LeftClick={
+Interact={
 "deadzone": 0.0,
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
 ]
@@ -56,6 +56,11 @@ HideUnderDesk={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194325,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translation_remaps={}
+locale/translations=PackedStringArray("res://lang/cheesenaf2lang.en.translation", "res://lang/cheesenaf2lang.es.translation", "res://lang/cheesenaf2lang.tr.translation")
 
 [rendering]
 

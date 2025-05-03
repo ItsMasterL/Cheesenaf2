@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c8611li4u7rbn"]
+[gd_scene load_steps=14 format=3 uid="uid://c8611li4u7rbn"]
 
 [ext_resource type="Script" path="res://scripts/title_menu.gd" id="1_2ahre"]
 [ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://fonts/consolas.ttf" id="2_wdq0x"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ljlpq26vn8rv" path="res://textures/cheesenaf 2 poster.png" id="4_qq7de"]
 [ext_resource type="AudioStream" uid="uid://bq8rf5dvwjd30" path="res://sounds/customnightselect.wav" id="4_xf85n"]
 [ext_resource type="Texture2D" uid="uid://bey322e62ants" path="res://textures/PizzaPoster.png" id="6_e08k8"]
+[ext_resource type="Script" path="res://scripts/customnight_preset.gd" id="7_ybfid"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ptv6"]
 
@@ -37,7 +38,8 @@ offset_bottom = 37.0
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_wdq0x")
 theme_override_font_sizes/normal_font_size = 20
-text = "Hover over an animatronic's name to get their behavior description."
+text = "CUSTOM_HINT"
+fit_content = true
 scroll_active = false
 
 [node name="Back" type="Button" parent="."]
@@ -72,7 +74,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_wdq0x")
 theme_override_font_sizes/normal_font_size = 20
-text = "Back to Main Menu"
+text = "MENU_TOMAIN"
 scroll_active = false
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
@@ -93,28 +95,24 @@ texture = ExtResource("4_qq7de")
 region_enabled = true
 region_rect = Rect2(334, 427, 402, 402)
 
-[node name="Name" type="RichTextLabel" parent="edam_freddy"]
+[node name="Name" type="Label" parent="edam_freddy"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -445.664
-offset_top = -192.288
-offset_right = 47.3363
-offset_bottom = -95.2882
+offset_left = -706.0
+offset_top = -192.0
+offset_right = 307.0
+offset_bottom = -95.0
 grow_horizontal = 2
 grow_vertical = 0
-tooltip_text = "Will bust a move if you keep up his groove. If friendly, he will just be 
-sad if you let the music stop. If it stops when he's unfriendly, he'll go to 
-your office and take your tablet. He will then take it back to his stage
-and wind the musicbox for himself.
-
-Appears in front door, will find you under the desk."
-theme_override_fonts/normal_font = ExtResource("2_wdq0x")
-theme_override_font_sizes/normal_font_size = 80
-text = "Edam Freddy"
-scroll_active = false
+tooltip_text = "EDAM_FREDDY_HINT"
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("2_wdq0x")
+theme_override_font_sizes/font_size = 80
+text = "EDAM_FREDDY_NAME"
+horizontal_alignment = 1
 
 [node name="Level" type="RichTextLabel" parent="edam_freddy"]
 anchors_preset = 7
@@ -194,7 +192,7 @@ texture = ExtResource("4_qq7de")
 region_enabled = true
 region_rect = Rect2(1040, 378, 402, 402)
 
-[node name="Name" type="RichTextLabel" parent="edam_bonnie"]
+[node name="Name" type="Label" parent="edam_bonnie"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -206,15 +204,12 @@ offset_right = 47.3363
 offset_bottom = -95.2882
 grow_horizontal = 2
 grow_vertical = 0
-tooltip_text = "When friendly, he checks your vents for you, blocking any malicious
-animatronics from entering that doorway. If he isn't friendly, he'll
-attack you when he gets into the office.
-
-Appears in any of the 3 vents."
-theme_override_fonts/normal_font = ExtResource("2_wdq0x")
-theme_override_font_sizes/normal_font_size = 80
-text = "Edam Bonnie"
-scroll_active = false
+tooltip_text = "EDAM_BONNIE_HINT"
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("2_wdq0x")
+theme_override_font_sizes/font_size = 80
+text = "EDAM_BONNIE_NAME"
+horizontal_alignment = 1
 
 [node name="Level" type="RichTextLabel" parent="edam_bonnie"]
 anchors_preset = 7
@@ -294,7 +289,7 @@ texture = ExtResource("4_qq7de")
 region_enabled = true
 region_rect = Rect2(11, 326, 402, 402)
 
-[node name="Name" type="RichTextLabel" parent="edam_chica"]
+[node name="Name" type="Label" parent="edam_chica"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -307,16 +302,12 @@ offset_bottom = -95.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
-size_flags_vertical = 4
-tooltip_text = "Hangs out in the kitchen, refills your drink if its empty. When she's
-unfriendly, if your drink isn't empty when she comes to refill, she'll kill
-you. She will wait for you to get out from under the desk.
-
-Appears in either doorway or the right vent."
-theme_override_fonts/normal_font = ExtResource("2_wdq0x")
-theme_override_font_sizes/normal_font_size = 80
-text = "Edam Cheeseca"
-scroll_active = false
+tooltip_text = "EDAM_CHICA_HINT"
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("2_wdq0x")
+theme_override_font_sizes/font_size = 80
+text = "EDAM_CHICA_NAME"
+horizontal_alignment = 1
 
 [node name="Level" type="RichTextLabel" parent="edam_chica"]
 anchors_preset = 7
@@ -396,7 +387,7 @@ texture = ExtResource("4_qq7de")
 region_enabled = true
 region_rect = Rect2(697, 291, 402, 402)
 
-[node name="Name" type="RichTextLabel" parent="edam_foxy"]
+[node name="Name" type="Label" parent="edam_foxy"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -409,17 +400,12 @@ offset_bottom = -95.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
-size_flags_vertical = 4
-tooltip_text = "Very chill guy who ust wants to watch you play games on your phone.
-He will protect you from another animatronic attack once per night if
-he's watching you play while it attacks. When unfriendly, he'll kill you if
-your tablet has been taken or has no games installed.
-
-Appears in front door only."
-theme_override_fonts/normal_font = ExtResource("2_wdq0x")
-theme_override_font_sizes/normal_font_size = 80
-text = "Edam Foxy"
-scroll_active = false
+tooltip_text = "EDAM_FOXY_HINT"
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("2_wdq0x")
+theme_override_font_sizes/font_size = 80
+text = "EDAM_FOXY_NAME"
+horizontal_alignment = 1
 
 [node name="Level" type="RichTextLabel" parent="edam_foxy"]
 anchors_preset = 7
@@ -499,7 +485,7 @@ texture = ExtResource("6_e08k8")
 region_enabled = true
 region_rect = Rect2(602, 615, 402, 402)
 
-[node name="Name" type="RichTextLabel" parent="wither_freddy"]
+[node name="Name" type="Label" parent="wither_freddy"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -511,15 +497,12 @@ offset_right = 137.248
 offset_bottom = -95.0
 grow_horizontal = 2
 grow_vertical = 0
-tooltip_text = "Aggressive and rude, he ignores Foxy's save. He can be stopped by
-hiding under the desk if he's in the front doorway, and by flashing the
-flashlight on him in either doorway.
-
-Appears in either doorway."
-theme_override_fonts/normal_font = ExtResource("2_wdq0x")
-theme_override_font_sizes/normal_font_size = 80
-text = "Withered Freddy"
-scroll_active = false
+tooltip_text = "WITHER_FREDDY_HINT"
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("2_wdq0x")
+theme_override_font_sizes/font_size = 80
+text = "WITHER_FREDDY_NAME"
+horizontal_alignment = 1
 
 [node name="Level" type="RichTextLabel" parent="wither_freddy"]
 anchors_preset = 7
@@ -599,7 +582,7 @@ texture = ExtResource("6_e08k8")
 region_enabled = true
 region_rect = Rect2(1040, 575, 402, 402)
 
-[node name="Name" type="RichTextLabel" parent="wither_bonnie"]
+[node name="Name" type="Label" parent="wither_bonnie"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -611,15 +594,12 @@ offset_right = 133.015
 offset_bottom = -95.0
 grow_horizontal = 2
 grow_vertical = 0
-tooltip_text = "He gets more aggressive while your tablet is up, as he can hear you.
-Can be stopped by hiding under the desk, but can hear if you use the
-tablet while under the desk. Unaffected by flashlight.
-
-Can appear in either side vent, or the doorway behind you."
-theme_override_fonts/normal_font = ExtResource("2_wdq0x")
-theme_override_font_sizes/normal_font_size = 80
-text = "Withered Bonnie"
-scroll_active = false
+tooltip_text = "WITHER_BONNIE_HINT"
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("2_wdq0x")
+theme_override_font_sizes/font_size = 80
+text = "WITHER_BONNIE_NAME"
+horizontal_alignment = 1
 
 [node name="Level" type="RichTextLabel" parent="wither_bonnie"]
 anchors_preset = 7
@@ -699,7 +679,7 @@ texture = ExtResource("6_e08k8")
 region_enabled = true
 region_rect = Rect2(71, 548, 402, 402)
 
-[node name="Name" type="RichTextLabel" parent="wither_chica"]
+[node name="Name" type="Label" parent="wither_chica"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -712,15 +692,12 @@ offset_bottom = -95.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
-size_flags_vertical = 4
-tooltip_text = "She will simply attack you if she can. She can be stopped by hiding
-under the desk, or by flashlight if she's in the ceiling vent.
-
-Appears in either the front door or ceiling vent."
-theme_override_fonts/normal_font = ExtResource("2_wdq0x")
-theme_override_font_sizes/normal_font_size = 80
-text = "Withered Chica"
-scroll_active = false
+tooltip_text = "WITHER_CHICA_HINT"
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("2_wdq0x")
+theme_override_font_sizes/font_size = 80
+text = "WITHER_CHICA_NAME"
+horizontal_alignment = 1
 
 [node name="Level" type="RichTextLabel" parent="wither_chica"]
 anchors_preset = 7
@@ -800,7 +777,7 @@ texture = ExtResource("6_e08k8")
 region_enabled = true
 region_rect = Rect2(255, 61, 402, 402)
 
-[node name="Name" type="RichTextLabel" parent="wither_foxy"]
+[node name="Name" type="Label" parent="wither_foxy"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -813,15 +790,12 @@ offset_bottom = -95.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
-size_flags_vertical = 4
-tooltip_text = "He gets more aggressive if you don't use CamsPlus, but can be
-stopped by a flashlight. He can find you under the desk.
-
-Appears in any entrance."
-theme_override_fonts/normal_font = ExtResource("2_wdq0x")
-theme_override_font_sizes/normal_font_size = 80
-text = "Withered Foxy"
-scroll_active = false
+tooltip_text = "WITHER_FOXY_HINT"
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("2_wdq0x")
+theme_override_font_sizes/font_size = 80
+text = "WITHER_FOXY_NAME"
+horizontal_alignment = 1
 
 [node name="Level" type="RichTextLabel" parent="wither_foxy"]
 anchors_preset = 7
@@ -926,7 +900,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("2_wdq0x")
 theme_override_font_sizes/normal_font_size = 20
-text = "Start Custom Night"
+text = "CUSTOM_START_CUST"
 scroll_active = false
 
 [node name="Night1" type="Button" parent="."]
@@ -945,7 +919,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_hjsyr")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_rsbhx")
 alignment = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Night1"]
+[node name="RichTextLabel" type="Label" parent="Night1"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -953,15 +927,15 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -149.0
-offset_top = -9.5
-offset_bottom = 9.5
+offset_top = -11.5
+offset_bottom = 11.5
 grow_horizontal = 0
 grow_vertical = 2
-mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("2_wdq0x")
-theme_override_font_sizes/normal_font_size = 20
+theme_override_fonts/font = ExtResource("2_wdq0x")
+theme_override_font_sizes/font_size = 20
 text = "Start Night 1"
-scroll_active = false
+script = ExtResource("7_ybfid")
+night = 1
 
 [node name="Night2" type="Button" parent="."]
 layout_mode = 0
@@ -979,7 +953,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_hjsyr")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_rsbhx")
 alignment = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Night2"]
+[node name="RichTextLabel" type="Label" parent="Night2"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -987,15 +961,15 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -149.0
-offset_top = -9.5
-offset_bottom = 9.5
+offset_top = -11.5
+offset_bottom = 11.5
 grow_horizontal = 0
 grow_vertical = 2
-mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("2_wdq0x")
-theme_override_font_sizes/normal_font_size = 20
+theme_override_fonts/font = ExtResource("2_wdq0x")
+theme_override_font_sizes/font_size = 20
 text = "Start Night 2"
-scroll_active = false
+script = ExtResource("7_ybfid")
+night = 2
 
 [node name="Night3" type="Button" parent="."]
 layout_mode = 0
@@ -1013,7 +987,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_hjsyr")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_rsbhx")
 alignment = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Night3"]
+[node name="RichTextLabel" type="Label" parent="Night3"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -1021,15 +995,15 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -149.0
-offset_top = -9.5
-offset_bottom = 9.5
+offset_top = -11.5
+offset_bottom = 11.5
 grow_horizontal = 0
 grow_vertical = 2
-mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("2_wdq0x")
-theme_override_font_sizes/normal_font_size = 20
+theme_override_fonts/font = ExtResource("2_wdq0x")
+theme_override_font_sizes/font_size = 20
 text = "Start Night 3"
-scroll_active = false
+script = ExtResource("7_ybfid")
+night = 3
 
 [node name="Night4" type="Button" parent="."]
 layout_mode = 0
@@ -1047,7 +1021,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_hjsyr")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_rsbhx")
 alignment = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Night4"]
+[node name="RichTextLabel" type="Label" parent="Night4"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -1055,15 +1029,15 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -149.0
-offset_top = -9.5
-offset_bottom = 9.5
+offset_top = -11.5
+offset_bottom = 11.5
 grow_horizontal = 0
 grow_vertical = 2
-mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("2_wdq0x")
-theme_override_font_sizes/normal_font_size = 20
+theme_override_fonts/font = ExtResource("2_wdq0x")
+theme_override_font_sizes/font_size = 20
 text = "Start Night 4"
-scroll_active = false
+script = ExtResource("7_ybfid")
+night = 4
 
 [node name="Night5" type="Button" parent="."]
 layout_mode = 0
@@ -1081,7 +1055,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_hjsyr")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_rsbhx")
 alignment = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Night5"]
+[node name="RichTextLabel" type="Label" parent="Night5"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -1089,15 +1063,15 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -149.0
-offset_top = -9.5
-offset_bottom = 9.5
+offset_top = -11.5
+offset_bottom = 11.5
 grow_horizontal = 0
 grow_vertical = 2
-mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("2_wdq0x")
-theme_override_font_sizes/normal_font_size = 20
+theme_override_fonts/font = ExtResource("2_wdq0x")
+theme_override_font_sizes/font_size = 20
 text = "Start Night 5"
-scroll_active = false
+script = ExtResource("7_ybfid")
+night = 5
 
 [node name="Night6" type="Button" parent="."]
 layout_mode = 0
@@ -1115,7 +1089,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_hjsyr")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_rsbhx")
 alignment = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Night6"]
+[node name="RichTextLabel" type="Label" parent="Night6"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -1123,15 +1097,15 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -149.0
-offset_top = -9.5
-offset_bottom = 9.5
+offset_top = -11.5
+offset_bottom = 11.5
 grow_horizontal = 0
 grow_vertical = 2
-mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("2_wdq0x")
-theme_override_font_sizes/normal_font_size = 20
+theme_override_fonts/font = ExtResource("2_wdq0x")
+theme_override_font_sizes/font_size = 20
 text = "Start Night 6"
-scroll_active = false
+script = ExtResource("7_ybfid")
+night = 6
 
 [node name="FriendlyEdams" type="Control" parent="."]
 anchors_preset = 0
@@ -1152,8 +1126,7 @@ offset_right = 142.0
 offset_bottom = 23.0
 theme_override_fonts/font = ExtResource("2_wdq0x")
 theme_override_font_sizes/font_size = 22
-text = "Friendly
-Edams"
+text = "CUSTOM_FRIENDLY"
 
 [connection signal="ready" from="." to="." method="_update_customnight_displays"]
 [connection signal="pressed" from="Back" to="." method="_change_menu" binds= ["menu"]]

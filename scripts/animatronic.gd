@@ -140,7 +140,8 @@ func _process(delta):
 	# Safety Timer
 	if positions[current_position].office_entrance != null && root.under_desk == false:
 		safety_timer = clamp(safety_timer - delta, 0, safety_timer)
-		print(animatronic + ": " + str(safety_timer))
+		if OS.is_debug_build():
+			print(animatronic + ": " + str(safety_timer))
 	else:
 		safety_timer = clamp(safety_timer + delta, 0, root.safety_time)
 	# Light sensitivity
@@ -300,7 +301,8 @@ func _move_animatronic():
 		else:
 			step_sound.stream = load("res://sounds/walk" + str(randi_range(1, 5)) + ".wav")
 		step_sound.play()
-	print(str(animatronic) + " moved to " + str(current_position))
+	if OS.is_debug_build():
+		print(str(animatronic) + " moved to " + str(current_position))
 
 func _fail_attack():
 	# Friendly animatronics don't count towards this as they cannot harm you

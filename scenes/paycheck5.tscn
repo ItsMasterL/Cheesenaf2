@@ -178,7 +178,7 @@ offset_bottom = 87.97
 rotation = -0.0436332
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_xdktj")
-text = "Huge bonus"
+text = "PAYCHECK_5_MEMO"
 
 [node name="From" type="Label" parent="Paycheck2"]
 offset_left = 53.0214
@@ -201,14 +201,15 @@ theme_override_fonts/font = ExtResource("5_xdktj")
 text = "16.00"
 
 [node name="Amount2" type="Label" parent="Paycheck2"]
-offset_left = 73.9313
-offset_top = 1.49356
-offset_right = 182.931
-offset_bottom = 24.4936
+offset_left = -231.502
+offset_top = 14.9356
+offset_right = 136.498
+offset_bottom = 37.9356
 rotation = -0.0436332
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_xdktj")
-text = "Sixteen"
+text = "PAYCHECK_5_SIXTEEN"
+horizontal_alignment = 2
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
@@ -216,9 +217,4 @@ offset_right = 40.0
 offset_bottom = 23.0
 theme_override_fonts/font = ExtResource("6_2d0gc")
 theme_override_font_sizes/font_size = 56
-text = "Congratulations!
-You're did it!
-
-Just look at
-how happy you
-are!"
+text = "PAYCHECK_5_CONGR"

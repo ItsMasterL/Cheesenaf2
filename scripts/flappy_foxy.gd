@@ -17,7 +17,7 @@ func _ready():
 	$Music.play()
 
 func _process(delta):
-	if Input.is_action_just_pressed("LeftClick") && game_started == false && root.using_tablet:
+	if Input.is_action_just_pressed("Interact") && game_started == false && root.using_tablet:
 		game_started = true
 		start_game.emit()
 	

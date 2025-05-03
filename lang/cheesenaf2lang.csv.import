@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://m20j8m5o302d"
+
+[deps]
+
+files=["res://lang/cheesenaf2lang.en.translation", "res://lang/cheesenaf2lang.tr.translation", "res://lang/cheesenaf2lang.es.translation"]
+
+source_file="res://lang/cheesenaf2lang.csv"
+dest_files=["res://lang/cheesenaf2lang.en.translation", "res://lang/cheesenaf2lang.tr.translation", "res://lang/cheesenaf2lang.es.translation"]
+
+[params]
+
+compress=true
+delimiter=0
