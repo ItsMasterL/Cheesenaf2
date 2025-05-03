@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cabkjb7bh6s8o"
-path="res://.godot/imported/TitleWithers.png-979e9cc15abb99e8c6ca53196e4efd55.ctex"
+uid="uid://bsg2jx8rvt3dw"
+path="res://.godot/imported/unhappy.png-dfaf23f1be4a9df6601ba2f9bff21405.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/Renders/TitleWithers.png"
-dest_files=["res://.godot/imported/TitleWithers.png-979e9cc15abb99e8c6ca53196e4efd55.ctex"]
+source_file="res://textures/bbgsim/bonnie/unhappy.png"
+dest_files=["res://.godot/imported/unhappy.png-dfaf23f1be4a9df6601ba2f9bff21405.ctex"]
 
 [params]
 

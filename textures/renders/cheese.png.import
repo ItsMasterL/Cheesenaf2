@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://h1e2tcluwpxe"
-path="res://.godot/imported/TitleEdams.png-a341a9834d87ff640a5d45f8f79b6336.ctex"
+uid="uid://cl7ngqp6v450t"
+path="res://.godot/imported/cheese.png-78e0bdb6098eca2b381af8c6ff1c4fce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/Renders/TitleEdams.png"
-dest_files=["res://.godot/imported/TitleEdams.png-a341a9834d87ff640a5d45f8f79b6336.ctex"]
+source_file="res://textures/renders/cheese.png"
+dest_files=["res://.godot/imported/cheese.png-78e0bdb6098eca2b381af8c6ff1c4fce.ctex"]
 
 [params]
 

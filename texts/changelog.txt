@@ -1,0 +1,40 @@
+Version 1.1.0 -- 5/15/2025
+
+Fixes:
+- Freddy Fazbear's Picture Poker no longer incorrectly scores your hand
+
+Adjustments:
+- Reorganized most scripts and scenes
+- Moved the credits and changelog to their own files
+
+Additions:
+- Added a new option in Extras. Just how does it work, though...?
+
+
+
+Version 1.0.1 -- 4/3/2025
+
+Fixes:
+- Edam Foxy now checks if the player is hiding when they don't have any games/tablet
+- Timer now properly resets between nights
+- Foxy Plushie boops now work all the time
+- Wither Foxy no longer pokes his snout through the ceiling vent door
+- Wither Freddy now uses the correct jumpscare animation after Edam Foxy has saved the player and left
+- Edam Freddy's Jumpscare now plays properly
+- Multiplayer Menu button now correctly shows (Coming Soon!) -- This was previously hidden
+- Animatronics that got in the way of doors that are closing now leave before it closes. Unless they are meant to be crushed. You killed Bonnie.
+- Fixed typo in animatronic descriptions
+- Game is no longer forced into a small window when accessing the title screen or resetting settings
+
+Adjustments:
+- Doors now take a bit longer to close (2s -> 3.25s), to incentivise strategic door placement and use of the other survival mechanics
+- Completely redesigned the VaultMaster app for more clear player feedback
+- Withered Bonnie now finds players with the tablet under the desk, as originally designed
+
+Additions:
+- Changelog page
+- Tutorial tips for tablet navigation on night 1
+- Added sound for when Chica refills your drink
+- Gave credit to a Freddy Fazbear's Pizzeria Simulator song I overlooked
+- Added hint in custom night menu for descriptions
+- You can now boop Edam Foxy!

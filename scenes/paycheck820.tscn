@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://cxwqc43ue6jdw"]
+[gd_scene load_steps=10 format=3 uid="uid://cxwqc43ue6jdw"]
 
 [ext_resource type="Script" path="res://scripts/paycheck.gd" id="1_1xeia"]
 [ext_resource type="AudioStream" uid="uid://dbn231xhw3q55" path="res://sounds/music/paycheck820.mp3" id="2_7b4ls"]
 [ext_resource type="Texture2D" uid="uid://bvte0l0l1kuts" path="res://textures/adam.png" id="3_jjyru"]
-[ext_resource type="Script" path="res://scripts/volume_manager.gd" id="3_yeu3d"]
 [ext_resource type="Texture2D" uid="uid://qimxj426basq" path="res://textures/paycheck.png" id="4_6rlv0"]
 [ext_resource type="FontFile" uid="uid://pwmyfihc72ad" path="res://fonts/fennario.ttf" id="5_eqjgs"]
 [ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://fonts/consolas.ttf" id="6_htdee"]
@@ -133,8 +132,6 @@ metadata/_edit_lock_ = true
 stream = ExtResource("2_7b4ls")
 autoplay = true
 bus = &"Music"
-script = ExtResource("3_yeu3d")
-sound_type = 2
 
 [node name="surprisingly not placeholder" type="Sprite2D" parent="."]
 position = Vector2(591, 648)
