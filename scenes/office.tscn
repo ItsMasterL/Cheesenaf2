@@ -1,16 +1,16 @@
 [gd_scene load_steps=86 format=4 uid="uid://kfokhb3cioir"]
 
-[ext_resource type="Script" path="res://scripts/office.gd" id="1_a3xfx"]
+[ext_resource type="Script" uid="uid://bmd8ubev6prvd" path="res://scripts/office.gd" id="1_a3xfx"]
 [ext_resource type="PackedScene" uid="uid://bs378s4kwr2ux" path="res://scenes/props/foxy_plush.tscn" id="1_gqipk"]
 [ext_resource type="AudioStream" uid="uid://e1n2m7qxkggw" path="res://sounds/drink_refill.wav" id="6_j50h0"]
 [ext_resource type="Texture2D" uid="uid://bi3vtwctdv5ub" path="res://models/textures/Cup.png" id="7_3jvyr"]
-[ext_resource type="Script" path="res://scripts/tablet_screen.gd" id="7_g7jux"]
+[ext_resource type="Script" uid="uid://cudf2g6wtbfe0" path="res://scripts/tablet_screen.gd" id="7_g7jux"]
 [ext_resource type="AudioStream" uid="uid://cvqkqxo21hg6b" path="res://sounds/fan.mp3" id="7_q4oox"]
-[ext_resource type="Script" path="res://scripts/fan_toggle.gd" id="8_refy2"]
+[ext_resource type="Script" uid="uid://cjpq8m7pcqrle" path="res://scripts/fan_toggle.gd" id="8_refy2"]
 [ext_resource type="PackedScene" uid="uid://bxpmp04xt6u6q" path="res://scenes/props/tablet_os.tscn" id="9_l1dhy"]
 [ext_resource type="Texture2D" uid="uid://c6v23n3ihlgyw" path="res://models/textures/ENV_TEX_Desk_Fan_BaseColor.png" id="10_gkukb"]
 [ext_resource type="ArrayMesh" uid="uid://drtja2xn8oyq" path="res://models/tablet.tres" id="10_vek4i"]
-[ext_resource type="Script" path="res://scripts/home_button.gd" id="11_xnjbl"]
+[ext_resource type="Script" uid="uid://dbhnbls0gnrds" path="res://scripts/home_button.gd" id="11_xnjbl"]
 [ext_resource type="AudioStream" uid="uid://c3su1po70v7f7" path="res://sounds/camera_toggle.wav" id="12_4d1sb"]
 [ext_resource type="PackedScene" uid="uid://dpn03nj1u7ol3" path="res://models/cheesenaf2.blend" id="13_3pria"]
 [ext_resource type="AudioStream" uid="uid://c03hwdkcsbb7s" path="res://sounds/flashlight.wav" id="15_8e4mc"]
@@ -18,18 +18,18 @@
 [ext_resource type="Texture2D" uid="uid://1jgarnvtkmgi" path="res://textures/Hint.png" id="16_6md6q"]
 [ext_resource type="Animation" uid="uid://ds0rscx8wtpac" path="res://models/animation/camera.res" id="17_7bi74"]
 [ext_resource type="AudioStream" uid="uid://c5db7xn31angv" path="res://sounds/breathing.wav" id="17_eaqhx"]
-[ext_resource type="Script" path="res://scripts/flashlight_raycast.gd" id="18_gn6u8"]
+[ext_resource type="Script" uid="uid://cfkykkwi1dekx" path="res://scripts/flashlight_raycast.gd" id="18_gn6u8"]
 [ext_resource type="AudioStream" uid="uid://6a8wpxqhxldr" path="res://sounds/shifting.wav" id="18_jcvyf"]
-[ext_resource type="Script" path="res://scripts/foxylook.gd" id="18_nks4h"]
+[ext_resource type="Script" uid="uid://dvmnk5t1mvwgu" path="res://scripts/foxylook.gd" id="18_nks4h"]
 [ext_resource type="Texture2D" uid="uid://btc1kaga7xmy3" path="res://textures/c2cursor.png" id="18_sa7mb"]
 [ext_resource type="Animation" uid="uid://b6avorttpy5k5" path="res://models/animation/camerawithered.res" id="19_ookmc"]
 [ext_resource type="AudioStream" uid="uid://c6wkcq2iy687y" path="res://sounds/swipe.wav" id="21_dvkyg"]
 [ext_resource type="AudioStream" uid="uid://couxcp7krb1i6" path="res://sounds/music/storm outside.mp3" id="21_h77es"]
 [ext_resource type="PackedScene" uid="uid://sr5bhwimbn6q" path="res://scenes/animatronics/bonnie.tscn" id="22_fo68b"]
 [ext_resource type="PackedScene" uid="uid://bx7i4uyvysowi" path="res://scenes/animatronics/freddy.tscn" id="23_d180k"]
-[ext_resource type="Shader" path="res://shaders/blur.gdshader" id="23_h042j"]
-[ext_resource type="Script" path="res://scripts/display_controls.gd" id="25_6djot"]
-[ext_resource type="Script" path="res://scripts/toggle_cup.gd" id="25_hni3l"]
+[ext_resource type="Shader" uid="uid://bx8h6c0abu4a5" path="res://shaders/blur.gdshader" id="23_h042j"]
+[ext_resource type="Script" uid="uid://78vypdxj67jn" path="res://scripts/display_controls.gd" id="25_6djot"]
+[ext_resource type="Script" uid="uid://c0tapl7dtakpi" path="res://scripts/toggle_cup.gd" id="25_hni3l"]
 [ext_resource type="PackedScene" uid="uid://cuiite2xlb70y" path="res://scenes/animatronics/chica.tscn" id="25_m5hqu"]
 [ext_resource type="AudioStream" uid="uid://bip471h5exvnx" path="res://sounds/slurp.wav" id="26_plhk0"]
 [ext_resource type="PackedScene" uid="uid://ctk8vkg2rvilm" path="res://scenes/animatronics/foxy.tscn" id="26_xrtv4"]
@@ -37,11 +37,11 @@
 [ext_resource type="PackedScene" uid="uid://ddnqh2fwb8i4v" path="res://scenes/animatronics/w_chica.tscn" id="28_iw35l"]
 [ext_resource type="PackedScene" uid="uid://1425e1cbu38i" path="res://scenes/props/door.tscn" id="28_t03s8"]
 [ext_resource type="PackedScene" uid="uid://cgejnvievuxf8" path="res://scenes/animatronics/w_foxy.tscn" id="29_t0ahk"]
-[ext_resource type="Script" path="res://scripts/toggle_tablet.gd" id="29_wa4as"]
+[ext_resource type="Script" uid="uid://b0l2dh2jnibqv" path="res://scripts/toggle_tablet.gd" id="29_wa4as"]
 [ext_resource type="PackedScene" uid="uid://dwhn6aeiuwg7x" path="res://scenes/animatronics/w_freddy.tscn" id="30_uyssn"]
-[ext_resource type="Script" path="res://scripts/player_camera.gd" id="31_63unw"]
+[ext_resource type="Script" uid="uid://kd61qln6tuf5" path="res://scripts/player_camera.gd" id="31_63unw"]
 [ext_resource type="PackedScene" uid="uid://b7dpymyvsicjt" path="res://scenes/animatronics/cheesestick.tscn" id="31_a7pji"]
-[ext_resource type="Script" path="res://scripts/player_raycast.gd" id="32_5ed2l"]
+[ext_resource type="Script" uid="uid://qmxanvnp0xjt" path="res://scripts/player_raycast.gd" id="32_5ed2l"]
 [ext_resource type="PackedScene" uid="uid://dfe3oqrxe2jr2" path="res://scenes/animatronics/pink_slip.tscn" id="38_ry2hb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0grut"]
@@ -159,8 +159,8 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xnsyn"]
 _data = {
-"RESET": SubResource("Animation_66s6t"),
-"cup_drink": SubResource("Animation_rqrgq")
+&"RESET": SubResource("Animation_66s6t"),
+&"cup_drink": SubResource("Animation_rqrgq")
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d7kud"]
@@ -236,8 +236,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oid2a"]
 _data = {
-"RESET": SubResource("Animation_1esxr"),
-"spin": SubResource("Animation_f2wmk")
+&"RESET": SubResource("Animation_1esxr"),
+&"spin": SubResource("Animation_f2wmk")
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ht282"]
@@ -344,8 +344,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0lqxg"]
 _data = {
-"RESET": SubResource("Animation_bl4ql"),
-"flipup": SubResource("Animation_elb40")
+&"RESET": SubResource("Animation_bl4ql"),
+&"flipup": SubResource("Animation_elb40")
 }
 
 [sub_resource type="QuadMesh" id="QuadMesh_xv7s7"]
@@ -415,9 +415,9 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ny178"]
 _data = {
-"Default": ExtResource("17_7bi74"),
-"Long": ExtResource("19_ookmc"),
-"RESET": SubResource("Animation_tnqve")
+&"Default": ExtResource("17_7bi74"),
+&"Long": ExtResource("19_ookmc"),
+&"RESET": SubResource("Animation_tnqve")
 }
 
 [sub_resource type="Animation" id="Animation_fcbw6"]
@@ -499,8 +499,8 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3b2wx"]
 _data = {
-"RESET": SubResource("Animation_fcbw6"),
-"desk_hide": SubResource("Animation_1arho")
+&"RESET": SubResource("Animation_fcbw6"),
+&"desk_hide": SubResource("Animation_1arho")
 }
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_48d6p"]
@@ -513,7 +513,7 @@ initial_velocity_min = 5.0
 initial_velocity_max = 10.0
 
 [sub_resource type="Curve" id="Curve_7v2fs"]
-max_value = 0.01
+_limits = [0.0, 0.01, 0.0, 1.0]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.214751, 0.01), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
@@ -583,7 +583,7 @@ bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CupOnDesk/Cup"]
 libraries = {
-"": SubResource("AnimationLibrary_xnsyn")
+&"": SubResource("AnimationLibrary_xnsyn")
 }
 movie_quit_on_finish = true
 
@@ -603,7 +603,7 @@ autoplay = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ENV_MOD_Desk_Fan_Fanblade_ENV_MOD_Desk_Fan_Fanblade_001"]
 libraries = {
-"": SubResource("AnimationLibrary_oid2a")
+&"": SubResource("AnimationLibrary_oid2a")
 }
 
 [node name="FanClick" type="AudioStreamPlayer" parent="ENV_MOD_Desk_Fan_Fanblade_ENV_MOD_Desk_Fan_Fanblade_001"]
@@ -649,7 +649,7 @@ bus = &"SFX"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TabletOnDesk/Tablet"]
 reset_on_save = false
 libraries = {
-"": SubResource("AnimationLibrary_0lqxg")
+&"": SubResource("AnimationLibrary_0lqxg")
 }
 
 [node name="ScreenQuad" type="MeshInstance3D" parent="TabletOnDesk/Tablet"]
@@ -787,7 +787,7 @@ script = ExtResource("18_gn6u8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Head/Eyes"]
 libraries = {
-"": SubResource("AnimationLibrary_ny178")
+&"": SubResource("AnimationLibrary_ny178")
 }
 
 [node name="Controls" type="Label3D" parent="Player/Head/Eyes"]
@@ -829,7 +829,7 @@ bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 libraries = {
-"": SubResource("AnimationLibrary_3b2wx")
+&"": SubResource("AnimationLibrary_3b2wx")
 }
 
 [node name="Map" parent="." instance=ExtResource("13_3pria")]

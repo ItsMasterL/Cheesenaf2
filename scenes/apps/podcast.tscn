@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cnnkaumdjob72"]
 
-[ext_resource type="Script" path="res://scripts/podcast.gd" id="1_jkyk4"]
+[ext_resource type="Script" uid="uid://benlmvi42i7o5" path="res://scripts/podcast.gd" id="1_jkyk4"]
 [ext_resource type="Texture2D" uid="uid://3hn21opxapn7" path="res://textures/apps/stringbonnie.png" id="2_ey4dd"]
 
 [node name="Media Player" type="Node2D"]

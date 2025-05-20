@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cs44guev8s23"]
 
-[ext_resource type="Script" path="res://scripts/victory.gd" id="1_wgnha"]
+[ext_resource type="Script" uid="uid://0obrlc0d57df" path="res://scripts/victory.gd" id="1_wgnha"]
 [ext_resource type="AudioStream" uid="uid://p1jvgrruejbo" path="res://sounds/Clocks_Chimes_Cl_02480702.wav" id="2_ysvoq"]
 [ext_resource type="AudioStream" uid="uid://cxsccyw5som11" path="res://sounds/yay.wav" id="3_gaq0u"]
 [ext_resource type="FontFile" uid="uid://uc7mo5eme0if" path="res://fonts/minecraft_font.ttf" id="3_hdica"]
@@ -39,8 +39,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_01201"]
 _data = {
-"RESET": SubResource("Animation_rnwfb"),
-"default": SubResource("Animation_rfflk")
+&"RESET": SubResource("Animation_rnwfb"),
+&"default": SubResource("Animation_rfflk")
 }
 
 [node name="LoadOffice" type="Control"]
@@ -85,7 +85,7 @@ scroll_active = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="5_6"]
 libraries = {
-"": SubResource("AnimationLibrary_01201")
+&"": SubResource("AnimationLibrary_01201")
 }
 
 [node name="AM" type="RichTextLabel" parent="."]

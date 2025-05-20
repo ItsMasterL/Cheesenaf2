@@ -1,12 +1,12 @@
 [gd_scene load_steps=14 format=3 uid="uid://mojkwoyc0koh"]
 
-[ext_resource type="Script" path="res://scripts/title_menu.gd" id="1_081lj"]
+[ext_resource type="Script" uid="uid://d1yaj1ed4fml" path="res://scripts/title_menu.gd" id="1_081lj"]
 [ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://fonts/consolas.ttf" id="2_ns3ox"]
 [ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://sounds/change_cam.wav" id="4_cogtr"]
-[ext_resource type="Script" path="res://scripts/cheesenaf1_mod_generator.gd" id="4_gxeou"]
+[ext_resource type="Script" uid="uid://blklfxji16akj" path="res://scripts/cheesenaf1_mod_generator.gd" id="4_gxeou"]
 [ext_resource type="AudioStream" uid="uid://dr6brpeujsf68" path="res://sounds/long glitched2.wav" id="4_tv06v"]
 [ext_resource type="Texture2D" uid="uid://lvkpx5r0xu4u" path="res://textures/glitch.png" id="6_hd1sw"]
-[ext_resource type="Script" path="res://scripts/background.gd" id="7_528bw"]
+[ext_resource type="Script" uid="uid://bc0tklwmfofti" path="res://scripts/background.gd" id="7_528bw"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ptv6"]
 

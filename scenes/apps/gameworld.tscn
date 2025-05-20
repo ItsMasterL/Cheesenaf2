@@ -1,19 +1,19 @@
 [gd_scene load_steps=12 format=3 uid="uid://bvx1b83kju7w"]
 
-[ext_resource type="Script" path="res://scripts/gameworld.gd" id="1_qnnyn"]
+[ext_resource type="Script" uid="uid://dhr0h8cd3qplt" path="res://scripts/gameworld.gd" id="1_qnnyn"]
 [ext_resource type="PackedScene" uid="uid://kdgt6c2c63pk" path="res://scenes/props/storelisting.tscn" id="2_gjbuv"]
 [ext_resource type="AudioStream" uid="uid://cllymiu6njvok" path="res://sounds/music/gameworld.mp3" id="3_0na3m"]
 [ext_resource type="AudioStream" uid="uid://rusybips7bm" path="res://sounds/kaching.wav" id="4_qcx1t"]
 [ext_resource type="Texture2D" uid="uid://6obfeopjjj2k" path="res://textures/apps/gameworld bg.png" id="4_ykwh6"]
 [ext_resource type="Texture2D" uid="uid://7tprk4csubct" path="res://textures/apps/earth.png" id="5_fmtmd"]
-[ext_resource type="Script" path="res://scripts/gameworld_planet.gd" id="6_osulw"]
-[ext_resource type="Shader" path="res://shaders/ColorRectDitherTest.gdshader" id="7_rpbee"]
+[ext_resource type="Script" uid="uid://bpnchd1rl4owc" path="res://scripts/gameworld_planet.gd" id="6_osulw"]
+[ext_resource type="Shader" uid="uid://xvvlfy5bwtl1" path="res://shaders/ColorRectDitherTest.gdshader" id="7_rpbee"]
 [ext_resource type="Texture2D" uid="uid://btc1kaga7xmy3" path="res://textures/c2cursor.png" id="8_53cq7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0wfnq"]
 shader = ExtResource("7_rpbee")
 shader_parameter/quantize_size = 2.0
-shader_parameter/handle_scale = null
+shader_parameter/handle_scale = false
 shader_parameter/handle_subpixels = true
 shader_parameter/dither_enabled = true
 shader_parameter/bayer_pattern = 2.0
@@ -86,12 +86,12 @@ offset_bottom = 810.0
 z_index = -2
 position = Vector2(640, 1182)
 amount = 64
-process_material = SubResource("ParticleProcessMaterial_s2v4g")
 texture = ExtResource("8_53cq7")
 lifetime = 12.0
 fixed_fps = 10
 interpolate = false
 visibility_rect = Rect2(0, -1180, 1280, 500)
+process_material = SubResource("ParticleProcessMaterial_s2v4g")
 
 [node name="Funds" type="Label" parent="Home"]
 z_index = 1

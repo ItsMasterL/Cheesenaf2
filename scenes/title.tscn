@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://lbjqjlv5clj6"]
 
-[ext_resource type="Script" path="res://scripts/title.gd" id="1_3f131"]
+[ext_resource type="Script" uid="uid://bb30x6fyrsy15" path="res://scripts/title.gd" id="1_3f131"]
 [ext_resource type="Texture2D" uid="uid://b1my2w4jmvnbv" path="res://textures/static.png" id="1_7gfe5"]
-[ext_resource type="Script" path="res://scripts/background.gd" id="2_jc731"]
+[ext_resource type="Script" uid="uid://bc0tklwmfofti" path="res://scripts/background.gd" id="2_jc731"]
 [ext_resource type="PackedScene" uid="uid://d1ffrbutvy4e" path="res://scenes/title_menu.tscn" id="3_xhvqt"]
 [ext_resource type="AudioStream" uid="uid://b8itxrejv1wji" path="res://sounds/music/echoes_of_time.mp3" id="4_w6ovr"]
 

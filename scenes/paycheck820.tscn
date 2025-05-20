@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cxwqc43ue6jdw"]
 
-[ext_resource type="Script" path="res://scripts/paycheck.gd" id="1_1xeia"]
+[ext_resource type="Script" uid="uid://cjne2bgfo7ggk" path="res://scripts/paycheck.gd" id="1_1xeia"]
 [ext_resource type="AudioStream" uid="uid://dbn231xhw3q55" path="res://sounds/music/paycheck820.mp3" id="2_7b4ls"]
 [ext_resource type="Texture2D" uid="uid://bvte0l0l1kuts" path="res://textures/adam.png" id="3_jjyru"]
 [ext_resource type="Texture2D" uid="uid://qimxj426basq" path="res://textures/paycheck.png" id="4_6rlv0"]
@@ -113,8 +113,8 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jipu1"]
 _data = {
-"RESET": SubResource("Animation_aguet"),
-"adam_dance": SubResource("Animation_4offa")
+&"RESET": SubResource("Animation_aguet"),
+&"adam_dance": SubResource("Animation_4offa")
 }
 
 [node name="CustomNight" type="Control"]
@@ -141,7 +141,7 @@ offset = Vector2(0, -204.5)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="surprisingly not placeholder"]
 libraries = {
-"": SubResource("AnimationLibrary_jipu1")
+&"": SubResource("AnimationLibrary_jipu1")
 }
 
 [node name="Paycheck2" type="Sprite2D" parent="."]
