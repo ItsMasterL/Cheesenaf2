@@ -16,7 +16,7 @@ func _process(delta):
 			else:
 				frame = randi_range(0, hframes - 1)
 		else:
-			if (frame + 1 < vframes && uses_vframes) || (frame + 1 < hframes && uses_vframes == false):
+			if (frame + 1 < vframes and uses_vframes) or (frame + 1 < hframes and uses_vframes == false):
 				frame += 1
 			else:
 				frame = 0

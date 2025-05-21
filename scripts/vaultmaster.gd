@@ -31,7 +31,7 @@ func _check_and_seal():
 		audio.stream = load("res://sounds/vm_fail.wav")
 	else:
 		for j in root.jammed_entrances:
-			if (j in seals && not j in root.closed_entrances) || (j in root.closed_entrances && not j in seals):
+			if (j in seals and not j in root.closed_entrances) or (j in root.closed_entrances and not j in seals):
 				seals = root.closed_entrances
 				jam.visible = true
 				audio.stream = load("res://sounds/vm_fail.wav")

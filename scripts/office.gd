@@ -64,7 +64,7 @@ func _ready():
 	for animatronic in animatronics.get_children():
 		if animatronic.music_box_sensitive:
 			music_box_ran_out.connect(animatronic._stop_dance)
-		if animatronic.vent_checker && night == 2:
+		if animatronic.vent_checker and night == 2:
 			entrance_closing.connect(animatronic._kill_vent_checker)
 		entrance_closing.connect(animatronic._leave_doorway_check)
 	if night == 1:
@@ -72,7 +72,7 @@ func _ready():
 		closed_entrances = [1, 4]
 	_set_entrances(closed_entrances)
 	# Remove Bonnie when he's dead
-	if night > 2 && night < 6:
+	if night > 2 and night < 6:
 		animatronics.get_child(1).visible = false
 		animatronics.get_child(1).can_move = false
 	Globals.game_time = 0
@@ -107,7 +107,7 @@ func _process(delta):
 	
 	# ????????
 	if paranormal_attacking:
-		if in_cams && using_tablet:
+		if in_cams and using_tablet:
 			paranormal_primed = true
 		elif paranormal_primed:
 			paranormal_attacker._move_animatronic()
@@ -182,13 +182,13 @@ func _take_tablet():
 func _set_entrances(values: Array[int]):
 	var i = 0
 	for door in doors.get_children():
-		if values.has(i) && closed_entrances.has(i) == false:
+		if values.has(i) and closed_entrances.has(i) == false:
 			door.get_child(1).play(&"close")
 			door.get_child(2).play()
-		elif values.has(i) == false && closed_entrances.has(i):
+		elif values.has(i) == false and closed_entrances.has(i):
 			door.get_child(1).play(&"close", -1, -1, true)
 			door.get_child(2).play()
-		elif values.has(i) == false && closed_entrances.has(i) == false:
+		elif values.has(i) == false and closed_entrances.has(i) == false:
 			door.get_child(1).play(&"opened", -1, -1, true)
 		i += 1
 	closed_entrances = values
@@ -207,7 +207,7 @@ func _jumpscare(animatronic: Node3D):
 	if gamer_in_office:
 		for gamer in game_sensitive:
 			if gamer.guarding == true: # Only is set to this when in the office
-				if animatronic.ignore_save == true && animatronic.save_jumpscare_id != animatronic.jumpscare_animation_id:
+				if animatronic.ignore_save == true and animatronic.save_jumpscare_id != animatronic.jumpscare_animation_id:
 					gamer.can_move = false
 					gamer.position = gamer.jumpscare_position
 					gamer.rotation_degrees = gamer.jumpscare_rotation
@@ -221,7 +221,7 @@ func _jumpscare(animatronic: Node3D):
 	animatronic.can_move = false
 	var anim: AnimationPlayer = animatronic.get_child(1)
 	var sound: AudioStreamPlayer = animatronic.get_child(2)
-	if gamer_in_office && animatronic.ignore_save == true && animatronic.save_jumpscare_id != animatronic.jumpscare_animation_id:
+	if gamer_in_office and animatronic.ignore_save == true and animatronic.save_jumpscare_id != animatronic.jumpscare_animation_id:
 		animatronic.position = animatronic.save_ignore_jumpscare_position
 		animatronic.rotation_degrees = animatronic.save_ignore_jumpscare_rotation
 		sound.stream = load("res://sounds/jumpscare_interrupted.wav")

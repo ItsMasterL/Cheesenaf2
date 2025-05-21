@@ -15,25 +15,25 @@ const RAY_LENGTH = 1000.0
 
 func _unhandled_input(event):
 	if root.p1_can_action:
-		if event.is_action_pressed(&"Flashlight") && root.using_tablet == false:
+		if event.is_action_pressed(&"Flashlight") and root.using_tablet == false:
 			flashlight.visible = true
 			flashlight_sound.play()
 		if event.is_action_released(&"Flashlight"):
 			flashlight.visible = false
 			if root.using_tablet == false:
 				flashlight_sound.play()
-		if event.is_action_pressed(&"HideUnderDesk") && anim.is_playing() == false && root.under_desk == false:
+		if event.is_action_pressed(&"HideUnderDesk") and anim.is_playing() == false and root.under_desk == false:
 			anim.play(&"desk_hide")
 			moving.play()
-		if event.is_action_released(&"HideUnderDesk") && anim.is_playing() == false && root.under_desk:
+		if event.is_action_released(&"HideUnderDesk") and anim.is_playing() == false and root.under_desk:
 			anim.play(&"desk_hide", -1, -1, true)
 			moving.play()
-	if event.is_action_pressed(&"Interact") && root.using_tablet == false:
+	if event.is_action_pressed(&"Interact") and root.using_tablet == false:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	elif event.is_action_pressed(&"ui_cancel"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		elif Input.mouse_mode == Input.MOUSE_MODE_VISIBLE && root.using_tablet == false:
+		elif Input.mouse_mode == Input.MOUSE_MODE_VISIBLE and root.using_tablet == false:
 			get_tree().change_scene_to_file("res://scenes/title.tscn")
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:

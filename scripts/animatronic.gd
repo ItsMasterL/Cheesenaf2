@@ -59,7 +59,7 @@ signal paranormal_song
 @export_category("Editor")
 @export var test_jumpscare = false:
 	set(jumpscare_test):
-		if jumpscare_test == true && Engine.is_editor_hint():
+		if jumpscare_test == true and Engine.is_editor_hint():
 			test_jumpscare = false
 			position = jumpscare_position
 			rotation_degrees = jumpscare_rotation
@@ -70,7 +70,7 @@ signal paranormal_song
 				$"../../Player/Head/Eyes/AnimationPlayer".play("Default")
 @export var test_save_ignore_jumpscare = false:
 	set(jumpscare_test):
-		if jumpscare_test == true && Engine.is_editor_hint():
+		if jumpscare_test == true and Engine.is_editor_hint():
 			test_save_ignore_jumpscare = false
 			position = save_ignore_jumpscare_position
 			rotation_degrees = save_ignore_jumpscare_rotation
@@ -117,11 +117,11 @@ func _ready():
 		scale = positions[0].scale
 		anim.play(positions[0].animation_id)
 		if is_friendly == false: # In case someone wants an always friendly animatronic.
-			is_friendly = is_edam_animatronic && root.edams_friendly
+			is_friendly = is_edam_animatronic and root.edams_friendly
 		if game_sensitive:
 			root.game_sensitive.append(self)
 		# Keep friendly dancers on stage
-		if is_friendly && music_box_sensitive:
+		if is_friendly and music_box_sensitive:
 			can_move = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -129,16 +129,16 @@ func _process(delta):
 	if Engine.is_editor_hint():
 		return
 	# Camera sensitivity
-	if root.in_cams && root.using_tablet && camera_sensitive && positions[current_position].office_entrance == null:
+	if root.in_cams and root.using_tablet and camera_sensitive and positions[current_position].office_entrance == null:
 		camera_cooldown = randf_range(2, 23 - level)
-	if camera_cooldown > 0 && camera_sensitive:
+	if camera_cooldown > 0 and camera_sensitive:
 		camera_cooldown -= delta
 		can_move = false
 	# If not in the office
-	elif camera_sensitive && positions[current_position].office_entrance == null:
+	elif camera_sensitive and positions[current_position].office_entrance == null:
 		can_move = true
 	# Safety Timer
-	if positions[current_position].office_entrance != null && root.under_desk == false:
+	if positions[current_position].office_entrance != null and root.under_desk == false:
 		safety_timer = clamp(safety_timer - delta, 0, safety_timer)
 		if OS.is_debug_build():
 			print(animatronic + ": " + str(safety_timer))
@@ -148,22 +148,22 @@ func _process(delta):
 	if flashlight > 0:
 		flashlight = clamp(flashlight - delta / 2, 0, 5)
 	#Music Box
-	if music_box_sensitive && root.is_winding == false:
+	if music_box_sensitive and root.is_winding == false:
 		root.musicbox = clamp(root.musicbox - (level * delta) * root.fun_multiplier, 0, 2000)
 	
 	#Look at stuff
-	if game_sensitive && guarding && object_of_interest != null:
+	if game_sensitive and guarding and object_of_interest != null:
 		_look_at_object(delta)
 	# Debug - Summon to player
-	if OS.is_debug_build() && game_sensitive && guarding == false && Input.is_key_pressed(KEY_BACKSPACE):
+	if OS.is_debug_build() and game_sensitive and guarding == false and Input.is_key_pressed(KEY_BACKSPACE):
 		current_position = positions.size() - 2
 		_game_check()
 	
 	if timer > 0:
 		#Make it easier on lower levels when they're in the office (But they leave faster with flashlight)
-		if level <= 5 && positions[current_position].office_entrance != null && flashlight == 0:
+		if level <= 5 and positions[current_position].office_entrance != null and flashlight == 0:
 			timer -= (delta / 3) * root.fun_multiplier
-		elif level <= 10 && positions[current_position].office_entrance != null && flashlight == 0:
+		elif level <= 10 and positions[current_position].office_entrance != null and flashlight == 0:
 			timer -= (delta / 2) * root.fun_multiplier
 		else:
 			timer -= delta * root.fun_multiplier
@@ -177,7 +177,7 @@ func _movement_check():
 	if can_move == false:
 		return
 	# Don't let music box characters roam until the music box has run out
-	if music_box_sensitive && root.musicbox_ran_out == false:
+	if music_box_sensitive and root.musicbox_ran_out == false:
 		return
 	# If the animatronic is in the office (Any doorway or vent), always act
 	if positions[current_position].office_entrance != null:
@@ -186,9 +186,9 @@ func _movement_check():
 			_fail_attack()
 			return
 		#If friendly edams
-		if is_edam_animatronic && is_friendly:
+		if is_edam_animatronic and is_friendly:
 			#If bonnie is in the office, play the warning and teleport Withered Bonnie/Chica to the vent
-			if vent_checker && root.night == 2:
+			if vent_checker and root.night == 2:
 				var warning := $Warning
 				warning.play()
 				timer = check_frequency * 2 # Wait 3 checks before repeating (Including below line)
@@ -220,7 +220,7 @@ func _movement_check():
 		elif drink_sensitive:
 			if root.cup_fill > 0.25:
 				# Waits for you to exit the desk, unless it can search under desks
-				if root.under_desk && positions[current_position].office_entrance.search_under_desk == false:
+				if root.under_desk and positions[current_position].office_entrance.search_under_desk == false:
 					return
 				root._jumpscare(self)
 			else:
@@ -231,17 +231,17 @@ func _movement_check():
 		elif game_sensitive:
 			_game_check()
 		# Tablet taking
-		elif music_box_sensitive && root.p1_has_tablet:
+		elif music_box_sensitive and root.p1_has_tablet:
 			root._take_tablet()
 			_fail_attack()
 		# Desk hiding
-		elif positions[current_position].office_entrance.search_under_desk == false && safety_timer > 0 && root.under_desk:
-			if sound_sensitive && root.using_tablet:
+		elif positions[current_position].office_entrance.search_under_desk == false and safety_timer > 0 and root.under_desk:
+			if sound_sensitive and root.using_tablet:
 				root._jumpscare(self)
 			else:
 				_fail_attack()
 		# Flashlight sensitivity
-		elif positions[current_position].office_entrance.flashlight_weakness && flashlight > 0:
+		elif positions[current_position].office_entrance.flashlight_weakness and flashlight > 0:
 			_fail_attack()
 		#All jumpscare exceptions/defenses are down. game over :3
 		else:
@@ -255,7 +255,7 @@ func _movement_check():
 			# Move to the next space
 			current_position = positions[current_position].next_position_indexes.pick_random()
 			# If the next space is an office space, but the office limit is reached, wait if not friendly. (If 0, office must be empty)
-			if positions[current_position].office_entrance != null && root.animatronics_in_office > positions[current_position].office_entrance.office_animatronic_limit && is_friendly == false:
+			if positions[current_position].office_entrance != null and root.animatronics_in_office > positions[current_position].office_entrance.office_animatronic_limit and is_friendly == false:
 				current_position = old_position
 				return
 			# Queue movement for camera use if paranormal
@@ -268,7 +268,7 @@ func _movement_check():
 				return
 			if positions[current_position].office_entrance != null:
 				# If the door is closed and this animatronic checks before entering, immediately reset
-				if positions[current_position].office_entrance.check_before_entering && root.closed_entrances.has(positions[current_position].office_entrance.entrance):
+				if positions[current_position].office_entrance.check_before_entering and root.closed_entrances.has(positions[current_position].office_entrance.entrance):
 					current_position = positions[current_position].office_entrance.fail_position_index
 			if positions[current_position].office_entrance != null: # Check again in case they left before entering
 				# If it's an office space, register as such NOTE: Friendly animatronics do not count, nor does Edam Foxy while he's hanging out with you
@@ -318,7 +318,7 @@ func _fail_attack():
 
 func _change_dance(count: int, id: int = 0):
 	anim.play("Reset")
-	if always_random_dance || music_box_dances.size() < count:
+	if always_random_dance or music_box_dances.size() < count:
 		anim.play(music_box_dances.pick_random())
 	else:
 		anim.play(music_box_dances[id - 1])
@@ -339,7 +339,7 @@ func _flash(value: float):
 	flashlight = clamp(flashlight + value, 0, 5)
 
 func _kill_vent_checker():
-	if can_move == false || positions[current_position].office_entrance == null:
+	if can_move == false or positions[current_position].office_entrance == null:
 		return
 	if root.closed_entrances.has(positions[current_position].office_entrance.entrance):
 		var warning := $Warning
@@ -350,7 +350,7 @@ func _kill_vent_checker():
 		root.jammed_entrances.append(positions[current_position].office_entrance.entrance)
 
 func _leave_doorway_check():
-	if root.night == 2 && vent_checker:
+	if root.night == 2 and vent_checker:
 		return
 	if positions[current_position].office_entrance != null:
 		if positions[current_position].office_entrance.check_before_entering:
@@ -358,7 +358,7 @@ func _leave_doorway_check():
 				_fail_attack()
 
 func _game_check():
-	if root.p1_has_tablet && root.purchased_apps > 0:
+	if root.p1_has_tablet and root.purchased_apps > 0:
 		root.gamer_in_office = true
 		current_position = positions[current_position].next_position_indexes.pick_random()
 		_move_animatronic()
@@ -380,7 +380,7 @@ func _game_check():
 		_fail_attack()
 	# If no games, Foxy is mad
 	else:
-		if root.under_desk && positions[current_position].office_entrance.search_under_desk == false:
+		if root.under_desk and positions[current_position].office_entrance.search_under_desk == false:
 			_fail_attack()
 		else:
 			root._jumpscare(self)
@@ -403,7 +403,7 @@ func _booped():
 		$Boop.play()
 	else:
 		var rand = randi_range(0, 250)
-		if rand < 8 && $Boop.playing == true:
+		if rand < 8 and $Boop.playing == true:
 			root.gamer_in_office = false
 			root._jumpscare(self)
 		$Boop.play()

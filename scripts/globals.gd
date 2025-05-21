@@ -159,15 +159,15 @@ func _load():
 
 		# Get the data from the JSON object.
 		var data = json.data
-		if "night" in data && typeof(data["night"]) in [TYPE_INT, TYPE_FLOAT]:
+		if "night" in data and typeof(data["night"]) in [TYPE_INT, TYPE_FLOAT]:
 			save_night = data["night"]
-		if "money" in data && typeof(data["money"]) in [TYPE_INT, TYPE_FLOAT]:
+		if "money" in data and typeof(data["money"]) in [TYPE_INT, TYPE_FLOAT]:
 			money = data["money"]
-		if "foxy" in data && typeof(data["foxy"]) == TYPE_BOOL:
+		if "foxy" in data and typeof(data["foxy"]) == TYPE_BOOL:
 			saw_foxy = data["foxy"]
-		if "foxyn1" in data && typeof(data["foxyn1"]) == TYPE_BOOL:
+		if "foxyn1" in data and typeof(data["foxyn1"]) == TYPE_BOOL:
 			saw_foxy_night_1 = data["foxyn1"]
-		if "apps" in data && typeof(data["apps"]) == TYPE_STRING:
+		if "apps" in data and typeof(data["apps"]) == TYPE_STRING:
 			purchased_apps = data["apps"]
 			purchases = purchased_apps.hex_to_int()
 
@@ -204,25 +204,25 @@ func _load_settings():
 		else:
 			# Get the data from the JSON object.
 			var data = json.data
-			if "mouse_sensitivity" in data && typeof(data["mouse_sensitivity"]) == TYPE_FLOAT:
+			if "mouse_sensitivity" in data and typeof(data["mouse_sensitivity"]) == TYPE_FLOAT:
 				self.mouse_sensitivity = data["mouse_sensitivity"]
-			if "master_volume" in data && typeof(data["master_volume"]) in [TYPE_INT, TYPE_FLOAT]:
+			if "master_volume" in data and typeof(data["master_volume"]) in [TYPE_INT, TYPE_FLOAT]:
 				self.master_volume = data["master_volume"]
-			if "sfx_volume" in data && typeof(data["sfx_volume"]) in [TYPE_INT, TYPE_FLOAT]:
+			if "sfx_volume" in data and typeof(data["sfx_volume"]) in [TYPE_INT, TYPE_FLOAT]:
 				self.sfx_volume = data["sfx_volume"]
-			if "voice_volume" in data && typeof(data["voice_volume"]) in [TYPE_INT, TYPE_FLOAT]:
+			if "voice_volume" in data and typeof(data["voice_volume"]) in [TYPE_INT, TYPE_FLOAT]:
 				self.voice_volume = data["voice_volume"]
-			if "music_volume" in data && typeof(data["music_volume"]) in [TYPE_INT, TYPE_FLOAT]:
+			if "music_volume" in data and typeof(data["music_volume"]) in [TYPE_INT, TYPE_FLOAT]:
 				self.music_volume = data["music_volume"]
-			if "tablet_volume" in data && typeof(data["tablet_volume"]) in [TYPE_INT, TYPE_FLOAT]:
+			if "tablet_volume" in data and typeof(data["tablet_volume"]) in [TYPE_INT, TYPE_FLOAT]:
 				self.tablet_volume = data["tablet_volume"]
-			if "ambient_volume" in data && typeof(data["ambient_volume"]) in [TYPE_INT, TYPE_FLOAT]:
+			if "ambient_volume" in data and typeof(data["ambient_volume"]) in [TYPE_INT, TYPE_FLOAT]:
 				self.ambient_volume = data["ambient_volume"]
-			if "jumpscare_volume" in data && typeof(data["jumpscare_volume"]) in [TYPE_INT, TYPE_FLOAT]:
+			if "jumpscare_volume" in data and typeof(data["jumpscare_volume"]) in [TYPE_INT, TYPE_FLOAT]:
 				self.ambient_volume = data["jumpscare_volume"]
-			if "fullscreen" in data && typeof(data["fullscreen"]) == TYPE_BOOL:
+			if "fullscreen" in data and typeof(data["fullscreen"]) == TYPE_BOOL:
 				self.fullscreen = data["fullscreen"]
-			if "language" in data && typeof(data["language"]) == TYPE_INT || typeof(data["language"]) == TYPE_FLOAT:
+			if "language" in data and typeof(data["language"]) == TYPE_INT or typeof(data["language"]) == TYPE_FLOAT:
 				self.language = clamp(floor(data["language"]), 0, 2)
 		AudioServer.set_bus_volume_db(0, linear_to_db(self.master_volume))
 		AudioServer.set_bus_volume_db(1, linear_to_db(self.sfx_volume))

@@ -24,7 +24,7 @@ func _raycast_event():
 		audio.play()
 		if root.night == 1:
 			$"../Tutorial".visible = true
-	elif home_button.is_mouse_inside == true && tablet.is_mouse_inside == false:
+	elif home_button.is_mouse_inside == true and tablet.is_mouse_inside == false:
 		$"../ScreenQuad/TabletScreen/TabletOS"._home()
 	elif tablet.is_mouse_inside == false:
 		temp_parent.remove_child(tablet)

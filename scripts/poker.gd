@@ -124,9 +124,9 @@ func _evaluate():
 	var player_hand = _rank(player_score)
 	var cpu_hand = _rank(cpu_score)
 	$Table/Result.visible = true
-	if player_hand > cpu_hand || (player_hand == cpu_hand && _tie_break(player_hand) == 1):
+	if player_hand > cpu_hand or (player_hand == cpu_hand and _tie_break(player_hand) == 1):
 		$Table/Result.text = "YOU WIN!!"
-	elif cpu_hand > player_hand || (player_hand == cpu_hand && _tie_break(player_hand) == 2):
+	elif cpu_hand > player_hand or (player_hand == cpu_hand and _tie_break(player_hand) == 2):
 		$Table/Result.text = "Too bad."
 	else:
 		$Table/Result.text = "DRAW!"

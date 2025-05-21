@@ -18,7 +18,7 @@ func _physics_process(delta):
 		velocity += get_gravity() * delta * 3
 	
 	# Handle jump.
-	if Input.is_action_just_pressed("Interact") && can_jump && root.using_tablet:
+	if Input.is_action_just_pressed("Interact") and can_jump and root.using_tablet:
 		velocity.y = JUMP_VELOCITY
 		jump_sound.play()
 	
@@ -26,7 +26,7 @@ func _physics_process(delta):
 	
 	var collision_info = move_and_slide()
 	# Gravity check due to bug where dying lead to dying on the reset
-	if collision_info && can_jump && gravity == true:
+	if collision_info and can_jump and gravity == true:
 		can_jump = false
 		jump_sound.stream = load("res://sounds/flappybird-03.wav")
 		velocity += get_gravity() * delta * 3

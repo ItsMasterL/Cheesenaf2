@@ -15,7 +15,7 @@ func _check_for_process():
 		#Runs powershell
 		OS.execute('powershell.exe', ['/C', "get-process %s" % [process]], output)
 		var last_check = game_open
-		game_open = output.size() > 0 && output[0].contains("Cannot find") == false
+		game_open = output.size() > 0 and output[0].contains("Cannot find") == false
 		return game_open
 
 func _passive_game_check():
@@ -34,7 +34,7 @@ func _connect_games():
 		var string = output[0].strip_edges() as String
 		Globals.cheesenaf1_app = string
 		var i = string.length() - 1
-		while (string[i] != '/') && (string[i] != '\\'):
+		while (string[i] != '/') and (string[i] != '\\'):
 			string = string.left(string.length() - 1)
 			i -= 1
 		if OS.is_debug_build():

@@ -19,9 +19,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	is_media_playing = audio_player.playing || video_player.is_playing()
-	if queued_media != "" && is_media_playing == false:
-		if queued_media.ends_with(".ogv") && is_media_playing == false:
+	is_media_playing = audio_player.playing or video_player.is_playing()
+	if queued_media != "" and is_media_playing == false:
+		if queued_media.ends_with(".ogv") and is_media_playing == false:
 			is_video = true
 			var video = VideoStreamTheora.new()
 			video.file = queued_media
@@ -31,7 +31,7 @@ func _process(_delta):
 			progress_bar.max_value = video_player.get_stream_length()
 			length.text = "%02d:%02d:%02d" % [floor(video_player.get_stream_length() / 60 / 60), fmod(floor(video_player.get_stream_length() / 60), 60), fmod(video_player.get_stream_length(), 60)]
 			queued_media = ""
-		elif queued_media.ends_with(".mp3") && audio_player.stream == null:
+		elif queued_media.ends_with(".mp3") and audio_player.stream == null:
 			is_video = false
 			var file = FileAccess.open(queued_media, FileAccess.READ)
 			var sound = AudioStreamMP3.new()
@@ -41,7 +41,7 @@ func _process(_delta):
 			audio_player.stream = sound
 			audio_player.play()
 			queued_media = ""
-		elif queued_media.ends_with(".wav") && audio_player.stream == null:
+		elif queued_media.ends_with(".wav") and audio_player.stream == null:
 			queued_media = ""
 			return # They just play back static rn
 			is_video = false # TODO: Unreachable code (statement after return) in function "_process()".
@@ -53,7 +53,7 @@ func _process(_delta):
 			audio_player.stream = sound
 			audio_player.play()
 			queued_media = ""
-		elif queued_media.ends_with(".ogg") && audio_player.stream == null:
+		elif queued_media.ends_with(".ogg") and audio_player.stream == null:
 			is_video = false
 			var sound = AudioStreamOggVorbis.new()
 			# TODO: The function "load_from_file()" is a static function but was called from an instance. Instead, it should be directly called from the type: "AudioStreamOggVorbis.load_from_file()".
@@ -64,7 +64,7 @@ func _process(_delta):
 			audio_player.play()
 			queued_media = ""
 		
-	elif playlist.size() > 0 && queued_media == "":
+	elif playlist.size() > 0 and queued_media == "":
 		queued_media = playlist[0]
 		playlist.remove_at(0)
 	
@@ -84,19 +84,19 @@ func _on_dir_selected(dir: String):
 		var path = directory.get_next()
 		while path != "":
 			if directory.current_is_dir() == false:
-				if path.ends_with(".mp3") || path.ends_with(".ogv"):
+				if path.ends_with(".mp3") or path.ends_with(".ogv"):
 					playlist.append(dir + "/" + path)
 			path = directory.get_next()
 
 func _on_file_selected(path: String):
 	if FileAccess.file_exists(path):
-		if path.ends_with(".mp3") || path.ends_with(".ogv"):
+		if path.ends_with(".mp3") or path.ends_with(".ogv"):
 			playlist.append(path)
 
 func _on_files_selected(paths: PackedStringArray):
 	for path in paths:
 		if FileAccess.file_exists(path):
-			if path.ends_with(".mp3") || path.ends_with(".ogv"):
+			if path.ends_with(".mp3") or path.ends_with(".ogv"):
 				playlist.append(path)
 
 func _open_files():

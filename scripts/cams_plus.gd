@@ -53,7 +53,7 @@ func _process(_delta):
 			if randi_range(0, 4) >= 2:
 				var id = randi_range(1, SONG_COUNT)
 				music_box.stream = load("res://sounds/music/musicbox%s.mp3" % [id])
-				if root.musicbox_ran_out == false || root.edams_friendly:
+				if root.musicbox_ran_out == false or root.edams_friendly:
 					change_dance.emit(SONG_COUNT, id)
 		else:
 			music_box.stream = load("res://sounds/music/cheesestick.mp3")
@@ -61,7 +61,7 @@ func _process(_delta):
 		music_box.play()
 		
 func _unhandled_input(event):
-	if event.is_action_pressed(&"Flashlight") && root.using_tablet:
+	if event.is_action_pressed(&"Flashlight") and root.using_tablet:
 		light.visible = true
 		light_sound.play()
 	if event.is_action_released(&"Flashlight"):
@@ -75,7 +75,7 @@ func _change_camera(cam: int, sound: bool = true):
 	light = current_cam.get_child(1)
 	light.visible = light_temp
 	current_cam.current = true
-	if current_cam.name == "Camera4" && vents == false:
+	if current_cam.name == "Camera4" and vents == false:
 		music_box.volume_db = -15
 	else:
 		music_box.volume_db = -40

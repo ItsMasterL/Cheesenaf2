@@ -13,7 +13,7 @@ func _ready():
 			foxy.append(animatronic)
 
 func _physics_process(_delta):
-	if is_colliding() && get_collider() && get_collider() != last_look:
+	if is_colliding() and get_collider() and get_collider() != last_look:
 		if get_collider().get_name() == "friend": # On Foxy's head. Making eye contact
 			for fella in foxy:
 				fella.object_of_interest = $"../.."

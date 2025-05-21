@@ -11,7 +11,7 @@ var chance = 250
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if jumpscare == true && sound.playing == false:
+	if jumpscare == true and sound.playing == false:
 		sound.stream = load("res://sounds/boop.wav")
 		anim.play(&"stare", -1, -1, true)
 		jumpscare = false
@@ -19,7 +19,7 @@ func _process(_delta):
 func _on_foxy_plush_nose_booped():
 	if jumpscare == false:
 		var rand = rng.randi() % chance
-		if rand < 8 && sound.playing == true:
+		if rand < 8 and sound.playing == true:
 			jumpscare = true
 			sound.stream = load("res://sounds/sting%s.wav" % [rand + 1])
 		sound.play()
