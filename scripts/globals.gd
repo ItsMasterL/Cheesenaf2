@@ -1,5 +1,21 @@
 extends Node
 
+enum OfficeMode {
+	SINGLEPLAYER,
+	CO_OP,
+	ONE_VS_ONE,
+	TWO_VS_TWO,
+}
+
+const night_data = {
+	1: {"edams_friendly": true, "edam_freddy": 3, "edam_bonnie": 7, "edam_chica": 7, "edam_foxy": 7, "wither_freddy": 0, "wither_bonnie": 0, "wither_chica": 0, "wither_foxy": 0, "cheesestick": 0, "safety_time": 5},
+	2: {"edams_friendly": true, "edam_freddy": 5, "edam_bonnie": 15, "edam_chica": 5, "edam_foxy": 8, "wither_freddy": 2, "wither_bonnie": 3, "wither_chica": 0, "wither_foxy": 0, "cheesestick": 0, "safety_time": 5},
+	3: {"edams_friendly": false, "edam_freddy": 7, "edam_bonnie": 0, "edam_chica": 3, "edam_foxy": 6, "wither_freddy": 5, "wither_bonnie": 3, "wither_chica": 3, "wither_foxy": 2, "cheesestick": 0, "safety_time": 3},
+	4: {"edams_friendly": false, "edam_freddy": 8, "edam_bonnie": 0, "edam_chica": 9, "edam_foxy": 4, "wither_freddy": 8, "wither_bonnie": 6, "wither_chica": 5, "wither_foxy": 6, "cheesestick": 0, "safety_time": 2.8},
+	5: {"edams_friendly": false, "edam_freddy": 9, "edam_bonnie": 0, "edam_chica": 9, "edam_foxy": 2, "wither_freddy": 9, "wither_bonnie": 8, "wither_chica": 6, "wither_foxy": 7, "cheesestick": 1, "safety_time": 2.5},
+	6: {"edams_friendly": false, "edam_freddy": 10, "edam_bonnie": 8, "edam_chica": 10, "edam_foxy": 7, "wither_freddy": 10, "wither_bonnie": 8, "wither_chica": 7, "wither_foxy": 8, "cheesestick": 3, "safety_time": 2},
+}
+
 # Office
 var night = 0
 var edams_friendly = true
@@ -13,14 +29,14 @@ var wither_chica = 0
 var wither_foxy = 0
 var cheesestick = 0
 var safety_time = 2.5
-var office_mode = 0 # 0 - Singleplayer, 1 - Co-op, 2 - 1v1 vs, 3 - 2v2 vs
+var office_mode: OfficeMode = OfficeMode.SINGLEPLAYER
 var game_time = 0
 
 # Cheesenaf Code
 var cheesenaf1_app = ""
 var cheesenaf1_path = ""
 var cheesenaf1_code = ""
-var cheesenaf1_seed : int
+var cheesenaf1_seed: int
 
 # Multiplayer #TODO: Actually implement multiplayer
 var local_playername = ""
@@ -130,31 +146,30 @@ func _load():
 	print("Loading user data")
 	if FileAccess.file_exists("user://data.json"):
 		var file = FileAccess.open("user://data.json", FileAccess.READ)
-		while file.get_position() < file.get_length():
-			var json_string = file.get_line()
+		var json_string = file.get_as_text();
 
 		# Creates the helper class to interact with JSON.
-			var json = JSON.new()
+		var json = JSON.new();
 
 		# Check if there is any error while parsing the JSON string, skip in case of failure.
-			var parse_result = json.parse(json_string)
-			if not parse_result == OK:
-				print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
-				continue
+		var parse_result = json.parse(json_string)
+		if parse_result != OK:
+			print("JSON Parse Error: ", json.get_error_message())
+			return ;
 
 		# Get the data from the JSON object.
-			var data = json.data
-			if "night" in data && (typeof(data["night"]) == TYPE_INT || typeof(data["night"]) == TYPE_FLOAT):
-				save_night = data["night"]
-			if "money" in data && (typeof(data["money"]) == TYPE_INT || typeof(data["money"]) == TYPE_FLOAT):
-				money = data["money"]
-			if "foxy" in data && typeof(data["foxy"]) == TYPE_BOOL:
-				saw_foxy = data["foxy"]
-			if "foxyn1" in data && typeof(data["foxyn1"]) == TYPE_BOOL:
-				saw_foxy_night_1 = data["foxyn1"]
-			if "apps" in data && typeof(data["apps"]) == TYPE_STRING:
-				purchased_apps = data["apps"]
-				purchases = purchased_apps.hex_to_int()
+		var data = json.data
+		if "night" in data && typeof(data["night"]) in [TYPE_INT, TYPE_FLOAT]:
+			save_night = data["night"]
+		if "money" in data && typeof(data["money"]) in [TYPE_INT, TYPE_FLOAT]:
+			money = data["money"]
+		if "foxy" in data && typeof(data["foxy"]) == TYPE_BOOL:
+			saw_foxy = data["foxy"]
+		if "foxyn1" in data && typeof(data["foxyn1"]) == TYPE_BOOL:
+			saw_foxy_night_1 = data["foxyn1"]
+		if "apps" in data && typeof(data["apps"]) == TYPE_STRING:
+			purchased_apps = data["apps"]
+			purchases = purchased_apps.hex_to_int()
 
 func _save_settings():
 	var data = {
@@ -177,47 +192,45 @@ func _load_settings():
 	print("Loading user settings")
 	if FileAccess.file_exists("user://settings.json"):
 		var file = FileAccess.open("user://settings.json", FileAccess.READ)
-		while file.get_position() < file.get_length():
-			var json_string = file.get_line()
+		var json_string = file.get_as_text()
 
 		# Creates the helper class to interact with JSON.
-			var json = JSON.new()
+		var json = JSON.new()
 
 		# Check if there is any error while parsing the JSON string, skip in case of failure.
-			var parse_result = json.parse(json_string)
-			if not parse_result == OK:
-				print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
-				continue
-
-		# Get the data from the JSON object.
+		var parse_result = json.parse(json_string)
+		if parse_result != OK:
+			print("JSON Parse Error: ", json.get_error_message())
+		else:
+			# Get the data from the JSON object.
 			var data = json.data
-			if "mouse_sensitivity" in data && (typeof(data["mouse_sensitivity"]) == TYPE_FLOAT):
-				mouse_sensitivity = data["mouse_sensitivity"]
-			if "master_volume" in data && (typeof(data["master_volume"]) == TYPE_INT || typeof(data["master_volume"]) == TYPE_FLOAT):
-				master_volume = data["master_volume"]
-			if "sfx_volume" in data && (typeof(data["sfx_volume"]) == TYPE_INT || typeof(data["sfx_volume"]) == TYPE_FLOAT):
-				sfx_volume = data["sfx_volume"]
-			if "voice_volume" in data && (typeof(data["voice_volume"]) == TYPE_INT || typeof(data["voice_volume"]) == TYPE_FLOAT):
-				voice_volume = data["voice_volume"]
-			if "music_volume" in data && (typeof(data["music_volume"]) == TYPE_INT || typeof(data["music_volume"]) == TYPE_FLOAT):
-				music_volume = data["music_volume"]
-			if "tablet_volume" in data && (typeof(data["tablet_volume"]) == TYPE_INT || typeof(data["tablet_volume"]) == TYPE_FLOAT):
-				tablet_volume = data["tablet_volume"]
-			if "ambient_volume" in data && (typeof(data["ambient_volume"]) == TYPE_INT || typeof(data["ambient_volume"]) == TYPE_FLOAT):
-				ambient_volume = data["ambient_volume"]
-			if "jumpscare_volume" in data && (typeof(data["jumpscare_volume"]) == TYPE_INT || typeof(data["jumpscare_volume"]) == TYPE_FLOAT):
-				ambient_volume = data["jumpscare_volume"]
+			if "mouse_sensitivity" in data && typeof(data["mouse_sensitivity"]) == TYPE_FLOAT:
+				self.mouse_sensitivity = data["mouse_sensitivity"]
+			if "master_volume" in data && typeof(data["master_volume"]) in [TYPE_INT, TYPE_FLOAT]:
+				self.master_volume = data["master_volume"]
+			if "sfx_volume" in data && typeof(data["sfx_volume"]) in [TYPE_INT, TYPE_FLOAT]:
+				self.sfx_volume = data["sfx_volume"]
+			if "voice_volume" in data && typeof(data["voice_volume"]) in [TYPE_INT, TYPE_FLOAT]:
+				self.voice_volume = data["voice_volume"]
+			if "music_volume" in data && typeof(data["music_volume"]) in [TYPE_INT, TYPE_FLOAT]:
+				self.music_volume = data["music_volume"]
+			if "tablet_volume" in data && typeof(data["tablet_volume"]) in [TYPE_INT, TYPE_FLOAT]:
+				self.tablet_volume = data["tablet_volume"]
+			if "ambient_volume" in data && typeof(data["ambient_volume"]) in [TYPE_INT, TYPE_FLOAT]:
+				self.ambient_volume = data["ambient_volume"]
+			if "jumpscare_volume" in data && typeof(data["jumpscare_volume"]) in [TYPE_INT, TYPE_FLOAT]:
+				self.ambient_volume = data["jumpscare_volume"]
 			if "fullscreen" in data && typeof(data["fullscreen"]) == TYPE_BOOL:
-				fullscreen = data["fullscreen"]
+				self.fullscreen = data["fullscreen"]
 			if "language" in data && typeof(data["language"]) == TYPE_INT || typeof(data["language"]) == TYPE_FLOAT:
-				language = clamp(floor(data["language"]),0,2)
-		AudioServer.set_bus_volume_db(0, linear_to_db(master_volume))
-		AudioServer.set_bus_volume_db(1, linear_to_db(sfx_volume))
-		AudioServer.set_bus_volume_db(2, linear_to_db(voice_volume))
-		AudioServer.set_bus_volume_db(3, linear_to_db(music_volume))
-		AudioServer.set_bus_volume_db(4, linear_to_db(ambient_volume))
-		AudioServer.set_bus_volume_db(5, linear_to_db(ambient_volume))
-		AudioServer.set_bus_volume_db(6, linear_to_db(tablet_volume))
+				self.language = clamp(floor(data["language"]), 0, 2)
+		AudioServer.set_bus_volume_db(0, linear_to_db(self.master_volume))
+		AudioServer.set_bus_volume_db(1, linear_to_db(self.sfx_volume))
+		AudioServer.set_bus_volume_db(2, linear_to_db(self.voice_volume))
+		AudioServer.set_bus_volume_db(3, linear_to_db(self.music_volume))
+		AudioServer.set_bus_volume_db(4, linear_to_db(self.ambient_volume))
+		AudioServer.set_bus_volume_db(5, linear_to_db(self.ambient_volume))
+		AudioServer.set_bus_volume_db(6, linear_to_db(self.tablet_volume))
 		if fullscreen:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		elif DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
@@ -225,86 +238,20 @@ func _load_settings():
 		TranslationServer.set_locale(languages[language])
 #endregion
 
-func _set_night(set_night: int):
-	match set_night:
-		1:
-			Globals.night = 1
-			Globals.edams_friendly = true
-			Globals.edam_freddy = 3
-			Globals.edam_bonnie = 7
-			Globals.edam_chica = 7
-			Globals.edam_foxy = 7
-			Globals.wither_freddy = 0
-			Globals.wither_bonnie = 0
-			Globals.wither_chica = 0
-			Globals.wither_foxy = 0
-			Globals.cheesestick = 0
-			Globals.safety_time = 5
-		2:
-			Globals.night = 2
-			Globals.edams_friendly = true
-			Globals.edam_freddy = 5
-			Globals.edam_bonnie = 15
-			Globals.edam_chica = 5
-			Globals.edam_foxy = 8
-			Globals.wither_freddy = 2
-			Globals.wither_bonnie = 3
-			Globals.wither_chica = 0
-			Globals.wither_foxy = 0
-			Globals.cheesestick = 0
-			Globals.safety_time = 5
-		3:
-			Globals.night = 3
-			Globals.edams_friendly = false
-			Globals.edam_freddy = 7
-			Globals.edam_bonnie = 0
-			Globals.edam_chica = 3
-			Globals.edam_foxy = 6
-			Globals.wither_freddy = 5
-			Globals.wither_bonnie = 3
-			Globals.wither_chica = 3
-			Globals.wither_foxy = 2
-			Globals.cheesestick = 0
-			Globals.safety_time = 3
-		4:
-			Globals.night = 4
-			Globals.edams_friendly = false
-			Globals.edam_freddy = 8
-			Globals.edam_bonnie = 0
-			Globals.edam_chica = 9
-			Globals.edam_foxy = 4
-			Globals.wither_freddy = 8
-			Globals.wither_bonnie = 6
-			Globals.wither_chica = 5
-			Globals.wither_foxy = 6
-			Globals.cheesestick = 0
-			Globals.safety_time = 2.8
-		5:
-			Globals.night = 5
-			Globals.edams_friendly = false
-			Globals.edam_freddy = 9
-			Globals.edam_bonnie = 0
-			Globals.edam_chica = 9
-			Globals.edam_foxy = 2
-			Globals.wither_freddy = 9
-			Globals.wither_bonnie = 8
-			Globals.wither_chica = 6
-			Globals.wither_foxy = 7
-			Globals.cheesestick = 1
-			Globals.safety_time = 2.5
-		6:
-			Globals.night = 6
-			Globals.edams_friendly = false
-			Globals.edam_freddy = 10
-			Globals.edam_bonnie = 8
-			Globals.edam_chica = 10
-			Globals.edam_foxy = 7
-			Globals.wither_freddy = 10
-			Globals.wither_bonnie = 8
-			Globals.wither_chica = 7
-			Globals.wither_foxy = 8
-			Globals.cheesestick = 3
-			Globals.safety_time = 2
+func _set_night(night_number: int):
+	var data = night_data[night_number]
+	self.night = night_number
+	self.edams_friendly = data["edams_friendly"]
+	self.edam_freddy = data["edam_freddy"]
+	self.edam_bonnie = data["edam_bonnie"]
+	self.edam_chica = data["edam_chica"]
+	self.edam_foxy = data["edam_foxy"]
+	self.wither_freddy = data["wither_freddy"]
+	self.wither_bonnie = data["wither_bonnie"]
+	self.wither_chica = data["wither_chica"]
+	self.wither_foxy = data["wither_foxy"]
+	self.cheesestick = data["cheesestick"]
+	self.safety_time = data["safety_time"]
 
 func _check_app_purchase(app: store_apps_binary) -> bool:
 	return purchases & app
