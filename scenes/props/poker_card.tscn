@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://3ybl6aotajlg"]
 
 [ext_resource type="Texture2D" uid="uid://psitb0h7iniy" path="res://textures/apps/pokerassets.png" id="1_ovylu"]
-[ext_resource type="Script" path="res://scripts/poker_card.gd" id="2_r3mqd"]
+[ext_resource type="Script" uid="uid://cy57xqlcypx84" path="res://scripts/poker_card.gd" id="2_r3mqd"]
 
 [sub_resource type="Animation" id="Animation_5f3s3"]
 length = 0.001
@@ -104,10 +104,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2abcr"]
 _data = {
-"RESET": SubResource("Animation_5f3s3"),
-"draw": SubResource("Animation_sjapm"),
-"selected": SubResource("Animation_pg7uf"),
-"sent": SubResource("Animation_oxfpi")
+&"RESET": SubResource("Animation_5f3s3"),
+&"draw": SubResource("Animation_sjapm"),
+&"selected": SubResource("Animation_pg7uf"),
+&"sent": SubResource("Animation_oxfpi")
 }
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jagvo"]
@@ -123,7 +123,7 @@ script = ExtResource("2_r3mqd")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_2abcr")
+&"": SubResource("AnimationLibrary_2abcr")
 }
 
 [node name="Button" type="Button" parent="."]

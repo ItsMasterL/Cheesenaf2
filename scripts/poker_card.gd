@@ -39,6 +39,7 @@ const CARD_RECTS = [
 var selected_for_reshuffle: bool
 var selectable = false
 var hovered = false
+var sorting = false
 
 @onready var anim = $AnimationPlayer
 

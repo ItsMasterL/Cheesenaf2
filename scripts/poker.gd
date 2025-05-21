@@ -11,7 +11,7 @@ enum CardValue {
 }
 
 enum HandRanking {
-	NONE,
+	JUNK,
 	ONE_PAIR,
 	TWO_PAIR,
 	THREE_OF_A_KIND,
@@ -22,8 +22,12 @@ enum HandRanking {
 
 @export var card_scene: PackedScene
 
-var player_score: Array[int]
-var cpu_score: Array[int]
+var player_score: Array
+var player_values: Array
+var cpu_score: Array
+var cpu_values: Array
+var player_card_coords: Array
+var cpu_card_coords: Array
 var phase = 0
 
 @onready var player_cards = $PlayerCards
@@ -64,9 +68,7 @@ func _start_phase(p: int):
 					card._flip_card(true)
 					card.anim.play("draw")
 			await get_tree().create_timer(1).timeout
-			_flip_cards(cpu_cards, true)
-			await get_tree().create_timer(1).timeout
-			_old_evaluate()
+			await _evaluate()
 			await get_tree().create_timer(2).timeout
 			for card in player_cards.get_children():
 				card.queue_free()
@@ -91,78 +93,100 @@ func _flip_cards(side: Node2D, faceup: bool):
 	for child in side.get_children():
 		child.face_up = faceup
 
-func _old_evaluate():
-	player_score.clear()
-	cpu_score.clear()
-	for card in player_cards.get_children():
-		player_score.append(card.card_value)
-	for card in cpu_cards.get_children():
-		cpu_score.append(card.card_value)
-	var player_previous_highest = 0
-	var player_highest_count = 0
-	var player_previous_highest_value = 0
-	var player_highest_count_value = 0
-	var cpu_previous_highest = 0
-	var cpu_highest_count = 0
-	var cpu_previous_highest_value = 0
-	var cpu_highest_count_value = 0
-	for i in CardValue.size():
-		var count = player_score.count(i)
-		if count > player_highest_count:
-			player_previous_highest = player_highest_count
-			player_previous_highest_value = player_highest_count_value
-			player_highest_count = count
-			player_highest_count_value = i
-		elif count == player_highest_count:
-			if player_highest_count_value < i:
-				player_previous_highest = player_highest_count
-				player_previous_highest_value = player_highest_count_value
-				player_highest_count = count
-				player_highest_count_value = i
-			elif player_previous_highest_value < i:
-				player_previous_highest = count
-				player_previous_highest_value = i
-	for i in CardValue.size():
-		var count = cpu_score.count(i)
-		if count > cpu_highest_count:
-			cpu_previous_highest = cpu_highest_count
-			cpu_previous_highest_value = cpu_highest_count_value
-			cpu_highest_count = count
-			cpu_highest_count_value = i
-		elif count == cpu_highest_count:
-			if cpu_highest_count_value < i:
-				cpu_previous_highest = cpu_highest_count
-				cpu_previous_highest_value = cpu_highest_count_value
-				cpu_highest_count = count
-				cpu_highest_count_value = i
-			elif cpu_previous_highest_value < i:
-				cpu_previous_highest = count
-				cpu_previous_highest_value = i
-	print(str(player_highest_count) + " and " + str(player_previous_highest) + " vs " + str(cpu_highest_count) + " and " + str(cpu_previous_highest))
-	print(str(player_highest_count_value) + " and " + str(player_previous_highest_value) + " vs " + str(cpu_highest_count_value) + " and " + str(cpu_previous_highest_value))
-	if player_highest_count > cpu_highest_count:
-		$Table/Result.visible = true
-		$Table/Result.text = "YOU WIN!!"
-	elif player_highest_count == cpu_highest_count && player_previous_highest > 1 && player_previous_highest > cpu_previous_highest:
-		$Table/Result.visible = true
-		$Table/Result.text = "YOU WIN!!"
-	elif player_highest_count == cpu_highest_count && player_previous_highest == cpu_previous_highest && player_highest_count_value > cpu_highest_count_value:
-		$Table/Result.visible = true
-		$Table/Result.text = "YOU WIN!!"
-	elif player_highest_count == cpu_highest_count && player_previous_highest == cpu_previous_highest && player_highest_count_value == cpu_highest_count_value && player_previous_highest_value > cpu_previous_highest:
-		$Table/Result.visible = true
-		$Table/Result.text = "YOU WIN!!"
-	elif player_highest_count == cpu_highest_count && player_previous_highest == cpu_previous_highest && player_highest_count_value == cpu_highest_count_value && player_previous_highest_value == cpu_previous_highest_value:
-		$Table/Result.visible = true
-		$Table/Result.text = "DRAW!"
-	else:
-		$Table/Result.visible = true
-		$Table/Result.text = "Too bad."
-
 func _evaluate():
 	player_score.clear()
 	cpu_score.clear()
+	player_values.clear()
+	cpu_values.clear()
+	player_card_coords.clear()
+	cpu_card_coords.clear()
 	for card in player_cards.get_children():
 		player_score.append(card)
+		player_values.append(card.card_value)
+		player_card_coords.append(card.position)
 	for card in cpu_cards.get_children():
 		cpu_score.append(card)
+		cpu_values.append(card.card_value)
+		cpu_card_coords.append(card.position)
+	player_score.sort_custom(_card_compare_player)
+	cpu_score.sort_custom(_card_compare_cpu)
+	var i = 0
+	for card in player_score:
+		card.position = player_card_coords[i]
+		i += 1
+	i = 0
+	for card in cpu_score:
+		card.position = cpu_card_coords[i]
+		i += 1
+	await get_tree().create_timer(1).timeout
+	_flip_cards(cpu_cards, true)
+	await get_tree().create_timer(1).timeout
+	var player_hand = _rank(player_score)
+	var cpu_hand = _rank(cpu_score)
+	$Table/Result.visible = true
+	if player_hand > cpu_hand || (player_hand == cpu_hand && _tie_break(player_hand) == 1):
+		$Table/Result.text = "YOU WIN!!"
+	elif cpu_hand > player_hand || (player_hand == cpu_hand && _tie_break(player_hand) == 2):
+		$Table/Result.text = "Too bad."
+	else:
+		$Table/Result.text = "DRAW!"
+
+func _card_compare_player(a, b):
+	if player_values.count(a.card_value) > player_values.count(b.card_value):
+		return true
+	elif player_values.count(a.card_value) < player_values.count(b.card_value):
+		return false
+	else:
+		return a.card_value > b.card_value
+
+func _card_compare_cpu(a, b):
+	if cpu_values.count(a.card_value) > cpu_values.count(b.card_value):
+		return true
+	elif cpu_values.count(a.card_value) < cpu_values.count(b.card_value):
+		return false
+	else:
+		return a.card_value > b.card_value
+
+func _rank(cards):
+	if cards[0].card_value == cards[1].card_value:
+		if cards[1].card_value == cards[2].card_value:
+			if cards[3].card_value == cards[2].card_value:
+				if cards[4].card_value == cards[3].card_value:
+					return HandRanking.FIVE_OF_A_KIND
+				return HandRanking.FOUR_OF_A_KIND
+			if cards[3].card_value == cards[4].card_value:
+				return HandRanking.FULL_HOUSE
+			return HandRanking.THREE_OF_A_KIND
+		if cards[2].card_value == cards[3].card_value:
+			return HandRanking.TWO_PAIR
+		return HandRanking.ONE_PAIR
+	return HandRanking.JUNK
+
+func _tie_break(ranking: HandRanking):
+	match ranking:
+		_:
+			if player_score[0].card_value > cpu_score[0].card_value:
+				return 1
+			if player_score[0].card_value < cpu_score[0].card_value:
+				return 2
+			return 0
+		HandRanking.TWO_PAIR:
+			if player_score[0].card_value > cpu_score[0].card_value:
+				return 1
+			if player_score[2].card_value > cpu_score[2].card_value:
+				return 1
+			if player_score[0].card_value < cpu_score[0].card_value:
+				return 2
+			if player_score[2].card_value < cpu_score[2].card_value:
+				return 2
+			return 0
+		HandRanking.FULL_HOUSE:
+			if player_score[0].card_value > cpu_score[0].card_value:
+				return 1
+			if player_score[3].card_value > cpu_score[3].card_value:
+				return 1
+			if player_score[0].card_value < cpu_score[0].card_value:
+				return 2
+			if player_score[3].card_value < cpu_score[3].card_value:
+				return 2
+			return 0
