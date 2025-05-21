@@ -25,6 +25,8 @@ const CARD_RECTS = [
 	Rect2(144, 48, 4, 48), # 8 - Card Sideways
 ]
 
+const SLIDE_DURATION = 1.0 / 3
+
 @export_enum("Foxy", "Chica", "Bonnie", "Freddy", "Cheesestick", "Afton") var card_value:
 	set(new_value):
 		card_value = new_value
@@ -40,6 +42,7 @@ var selected_for_reshuffle: bool
 var selectable = false
 var hovered = false
 var sorting = false
+var tween: Tween
 
 @onready var anim = $AnimationPlayer
 
@@ -77,3 +80,11 @@ func _flip_card(faceup: bool):
 		self.region_rect = Rect2(CARD_RECTS[card_value].position.x + 32, CARD_RECTS[card_value].position.y, CARD_RECTS[card_value].size.x / 2, CARD_RECTS[card_value].size.y)
 		await get_tree().create_timer(0.1).timeout
 		self.region_rect = CARD_RECTS[card_value]
+
+func move_self(new_position: Vector2):
+	if tween:
+		tween.kill()
+	tween = create_tween()
+	tween.set_trans(Tween.TRANS_QUINT)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(self, "position", new_position, SLIDE_DURATION).from_current()

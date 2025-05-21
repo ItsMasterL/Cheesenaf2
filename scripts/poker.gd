@@ -112,11 +112,11 @@ func _evaluate():
 	cpu_score.sort_custom(_card_compare_cpu)
 	var i = 0
 	for card in player_score:
-		card.position = player_card_coords[i]
+		card.move_self(player_card_coords[i])
 		i += 1
 	i = 0
 	for card in cpu_score:
-		card.position = cpu_card_coords[i]
+		card.move_self(cpu_card_coords[i])
 		i += 1
 	await get_tree().create_timer(1).timeout
 	_flip_cards(cpu_cards, true)
