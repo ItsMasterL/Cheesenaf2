@@ -4,7 +4,7 @@ extends RayCast3D
 var foxy: Array[Node3D]
 var last_look
 
-@onready var root = get_tree().get_root().get_node("Map")
+@onready var root = get_node(^"/root/Map")
 
 
 func _ready():

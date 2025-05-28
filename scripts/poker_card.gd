@@ -87,4 +87,4 @@ func move_self(new_position: Vector2):
 	tween = create_tween()
 	tween.set_trans(Tween.TRANS_QUINT)
 	tween.set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(self, "position", new_position, SLIDE_DURATION).from_current()
+	tween.tween_property(self, ^"position", new_position, SLIDE_DURATION).from_current()

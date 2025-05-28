@@ -2,7 +2,7 @@ extends Control
 
 
 @onready var door_buttons = $"Control Buttons"
-@onready var root = get_tree().get_root().get_node("Map")
+@onready var root = get_node(^"/root/Map")
 @onready var dark = $Messages/DarkenBg
 @onready var error = $Messages/ErrorMessagebox
 @onready var jam = $Messages/JammedMessagebox

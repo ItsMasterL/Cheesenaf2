@@ -10,7 +10,7 @@ var fun_multiplier = 1
 @onready var home = $Home
 @onready var app_home = $Application
 @onready var time = $TimeUI/Clock
-@onready var root = get_tree().get_root().get_node("Map")
+@onready var root = get_node(^"/root/Map")
 @onready var app_container := $Home/GridContainer
 
 
