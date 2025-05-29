@@ -7,7 +7,7 @@ enum OfficeMode {
 	TWO_VS_TWO,
 }
 
-const night_data = {
+const NIGHT_DATA = {
 	1: {"edams_friendly": true, "edam_freddy": 3, "edam_bonnie": 7, "edam_chica": 7, "edam_foxy": 7, "wither_freddy": 0, "wither_bonnie": 0, "wither_chica": 0, "wither_foxy": 0, "cheesestick": 0, "safety_time": 5},
 	2: {"edams_friendly": true, "edam_freddy": 5, "edam_bonnie": 15, "edam_chica": 5, "edam_foxy": 8, "wither_freddy": 2, "wither_bonnie": 3, "wither_chica": 0, "wither_foxy": 0, "cheesestick": 0, "safety_time": 5},
 	3: {"edams_friendly": false, "edam_freddy": 7, "edam_bonnie": 0, "edam_chica": 3, "edam_foxy": 6, "wither_freddy": 5, "wither_bonnie": 3, "wither_chica": 3, "wither_foxy": 2, "cheesestick": 0, "safety_time": 3},
@@ -239,7 +239,7 @@ func _load_settings():
 #endregion
 
 func _set_night(night_number: int):
-	var data = night_data[night_number]
+	var data = NIGHT_DATA[night_number]
 	self.night = night_number
 	self.edams_friendly = data["edams_friendly"]
 	self.edam_freddy = data["edam_freddy"]

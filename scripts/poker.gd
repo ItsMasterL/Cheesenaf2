@@ -79,7 +79,7 @@ func _start_phase(p: int):
 			_start_phase(0)
 
 func _deal_cards(side: Node2D, selectable = false):
-	for i in 5:
+	for i in range(5):
 		var card = card_scene.instantiate()
 		side.add_child(card)
 		card.selectable = selectable
@@ -110,14 +110,10 @@ func _evaluate():
 		cpu_card_coords.append(card.position)
 	player_score.sort_custom(_card_compare_player)
 	cpu_score.sort_custom(_card_compare_cpu)
-	var i = 0
-	for card in player_score:
-		card.move_self(player_card_coords[i])
-		i += 1
-	i = 0
-	for card in cpu_score:
-		card.move_self(cpu_card_coords[i])
-		i += 1
+	for i in range(player_score.size()):
+		player_score[i].move_self(player_card_coords[i])
+	for i in range(cpu_score.size()):
+		cpu_score[i].move_self(cpu_card_coords[i])
 	await get_tree().create_timer(1).timeout
 	_flip_cards(cpu_cards, true)
 	await get_tree().create_timer(1).timeout
