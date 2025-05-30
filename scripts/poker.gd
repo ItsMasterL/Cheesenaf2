@@ -110,13 +110,17 @@ func _evaluate():
 		cpu_card_coords.append(card.position)
 	player_score.sort_custom(_card_compare_player)
 	cpu_score.sort_custom(_card_compare_cpu)
-	for i in range(player_score.size()):
-		player_score[i].move_self(player_card_coords[i])
-	for i in range(cpu_score.size()):
-		cpu_score[i].move_self(cpu_card_coords[i])
-	await get_tree().create_timer(1).timeout
+	var i = 0
+	for card in player_score:
+		card.move_self(player_card_coords[i])
+		i += 1
+	i = 0
+	for card in cpu_score:
+		card.move_self(cpu_card_coords[i])
+		i += 1
+	await get_tree().create_timer(0.75).timeout
 	_flip_cards(cpu_cards, true)
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(1.5).timeout
 	var player_hand = _rank(player_score)
 	var cpu_hand = _rank(cpu_score)
 	$Table/Result.visible = true
@@ -160,10 +164,14 @@ func _rank(cards):
 
 func _tie_break(ranking: HandRanking):
 	match ranking:
-		_:
+		HandRanking.FULL_HOUSE:
 			if player_score[0].card_value > cpu_score[0].card_value:
 				return 1
+			if player_score[3].card_value > cpu_score[3].card_value:
+				return 1
 			if player_score[0].card_value < cpu_score[0].card_value:
+				return 2
+			if player_score[3].card_value < cpu_score[3].card_value:
 				return 2
 			return 0
 		HandRanking.TWO_PAIR:
@@ -176,13 +184,9 @@ func _tie_break(ranking: HandRanking):
 			if player_score[2].card_value < cpu_score[2].card_value:
 				return 2
 			return 0
-		HandRanking.FULL_HOUSE:
+		_:
 			if player_score[0].card_value > cpu_score[0].card_value:
 				return 1
-			if player_score[3].card_value > cpu_score[3].card_value:
-				return 1
 			if player_score[0].card_value < cpu_score[0].card_value:
-				return 2
-			if player_score[3].card_value < cpu_score[3].card_value:
 				return 2
 			return 0

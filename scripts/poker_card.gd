@@ -25,7 +25,7 @@ const CARD_RECTS = [
 	Rect2(144, 48, 4, 48), # 8 - Card Sideways
 ]
 
-const SLIDE_DURATION = 1.0 / 3
+const SLIDE_DURATION = 0.25
 
 @export_enum("Foxy", "Chica", "Bonnie", "Freddy", "Cheesestick", "Afton") var card_value:
 	set(new_value):
@@ -41,7 +41,6 @@ const SLIDE_DURATION = 1.0 / 3
 var selected_for_reshuffle: bool
 var selectable = false
 var hovered = false
-var sorting = false
 var tween: Tween
 
 @onready var anim = $AnimationPlayer
@@ -85,6 +84,6 @@ func move_self(new_position: Vector2):
 	if tween:
 		tween.kill()
 	tween = create_tween()
-	tween.set_trans(Tween.TRANS_QUINT)
+	tween.set_trans(Tween.TRANS_QUAD)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(self, ^"position", new_position, SLIDE_DURATION).from_current()
