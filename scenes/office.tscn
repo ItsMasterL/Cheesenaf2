@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://c6v23n3ihlgyw" path="res://models/textures/ENV_TEX_Desk_Fan_BaseColor.png" id="10_gkukb"]
 [ext_resource type="ArrayMesh" uid="uid://drtja2xn8oyq" path="res://models/tablet.tres" id="10_vek4i"]
 [ext_resource type="Script" uid="uid://dbhnbls0gnrds" path="res://scripts/home_button.gd" id="11_xnjbl"]
-[ext_resource type="AudioStream" uid="uid://c3su1po70v7f7" path="res://sounds/camera_toggle.wav" id="12_4d1sb"]
+[ext_resource type="AudioStream" uid="uid://c3su1po70v7f7" path="res://sounds/minigame/camera_toggle.wav" id="12_4d1sb"]
 [ext_resource type="PackedScene" uid="uid://dpn03nj1u7ol3" path="res://models/cheesenaf2.blend" id="13_3pria"]
 [ext_resource type="AudioStream" uid="uid://c03hwdkcsbb7s" path="res://sounds/flashlight.wav" id="15_8e4mc"]
 [ext_resource type="Texture2D" uid="uid://bvte0l0l1kuts" path="res://textures/adam.png" id="15_batyp"]
@@ -668,6 +668,7 @@ shape = SubResource("BoxShape3D_j1onk")
 [node name="TabletScreen" type="SubViewport" parent="TabletOnDesk/Tablet/ScreenQuad"]
 disable_3d = true
 audio_listener_enable_2d = true
+audio_listener_enable_3d = true
 gui_embed_subwindows = true
 size = Vector2i(1280, 800)
 
@@ -926,48 +927,43 @@ shape = SubResource("BoxShape3D_wvxuj")
 [node name="Interests" type="Node3D" parent="Map"]
 
 [node name="FrontInterest" type="Area3D" parent="Map/Interests"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.54641, -7.41032)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -7.41)
 collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Interests/FrontInterest"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000953674, -0.296204, 0)
 shape = SubResource("BoxShape3D_ml5v5")
 
 [node name="BackInterest" type="Area3D" parent="Map/Interests"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.546, 7.41)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 7.41)
 collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Interests/BackInterest"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000953674, -0.296204, 0)
 shape = SubResource("BoxShape3D_ml5v5")
 
 [node name="LeftInterest" type="Area3D" parent="Map/Interests"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.41, 1.546, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.721, 0.452, 0)
 collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Interests/LeftInterest"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.286961, -1.09415, 0.00189209)
 shape = SubResource("BoxShape3D_t6udk")
 
 [node name="RightInterest" type="Area3D" parent="Map/Interests"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.00837, 1.546, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.721, 0.452, 0)
 collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Interests/RightInterest"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.286961, -1.09415, 0.00189209)
 shape = SubResource("BoxShape3D_t6udk")
 
 [node name="UpInterest" type="Area3D" parent="Map/Interests"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.281883, 6.13204, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.005, 5.038, 0)
 collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Interests/UpInterest"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.286961, -1.09415, 0.00189209)
 shape = SubResource("BoxShape3D_t6udk")
 
 [node name="Doors" type="Node3D" parent="."]

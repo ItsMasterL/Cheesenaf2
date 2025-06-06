@@ -129,6 +129,7 @@ func _ready():
 
 #region Saving/Loading
 func _save():
+	print("Saving user data")
 	# This converts app purchases to hexadecimal
 	purchased_apps = "%x" % [purchases]
 	var data = {
@@ -146,16 +147,16 @@ func _load():
 	print("Loading user data")
 	if FileAccess.file_exists("user://data.json"):
 		var file = FileAccess.open("user://data.json", FileAccess.READ)
-		var json_string = file.get_as_text();
+		var json_string = file.get_as_text()
 
 		# Creates the helper class to interact with JSON.
-		var json = JSON.new();
+		var json = JSON.new()
 
 		# Check if there is any error while parsing the JSON string, skip in case of failure.
 		var parse_result = json.parse(json_string)
 		if parse_result != OK:
 			print("JSON Parse Error: ", json.get_error_message())
-			return ;
+			return
 
 		# Get the data from the JSON object.
 		var data = json.data
@@ -172,6 +173,7 @@ func _load():
 			purchases = purchased_apps.hex_to_int()
 
 func _save_settings():
+	print("Saving user settings")
 	var data = {
 		"mouse_sensitivity" = mouse_sensitivity,
 		"master_volume" = master_volume,

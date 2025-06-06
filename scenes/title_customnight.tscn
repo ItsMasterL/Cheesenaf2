@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d1yaj1ed4fml" path="res://scripts/title_menu.gd" id="1_2ahre"]
 [ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://fonts/consolas.ttf" id="2_wdq0x"]
-[ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://sounds/change_cam.wav" id="3_ydhxk"]
+[ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://sounds/minigame/change_cam.wav" id="3_ydhxk"]
 [ext_resource type="Texture2D" uid="uid://ljlpq26vn8rv" path="res://textures/cheesenaf 2 poster.png" id="4_qq7de"]
 [ext_resource type="AudioStream" uid="uid://bq8rf5dvwjd30" path="res://sounds/customnightselect.wav" id="4_xf85n"]
 [ext_resource type="Texture2D" uid="uid://bey322e62ants" path="res://textures/PizzaPoster.png" id="6_e08k8"]

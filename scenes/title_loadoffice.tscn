@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://fgp2agkh1ndt" path="res://scripts/title_loadoffice.gd" id="1_sich6"]
 [ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://fonts/consolas.ttf" id="2_mcenq"]
-[ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://sounds/change_cam.wav" id="3_imwn0"]
+[ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://sounds/minigame/change_cam.wav" id="3_imwn0"]
 
 [node name="LoadOffice" type="Control"]
 layout_mode = 3

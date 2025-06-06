@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://wnhhmeojpku"
-path="res://.godot/imported/pop.wav-caea051cf3692d1fea44d2218ecc425e.sample"
+uid="uid://bxshf8i6p2xex"
+path="res://.godot/imported/cam_turn.wav-00d3ec98301b108fb0402b45e801f7aa.sample"
 
 [deps]
 
-source_file="res://sounds/pop.wav"
-dest_files=["res://.godot/imported/pop.wav-caea051cf3692d1fea44d2218ecc425e.sample"]
+source_file="res://sounds/minigame/cam_turn.wav"
+dest_files=["res://.godot/imported/cam_turn.wav-00d3ec98301b108fb0402b45e801f7aa.sample"]
 
 [params]
 

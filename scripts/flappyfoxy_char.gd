@@ -28,7 +28,7 @@ func _physics_process(delta):
 	# Gravity check due to bug where dying lead to dying on the reset
 	if collision_info and can_jump and gravity == true:
 		can_jump = false
-		jump_sound.stream = load("res://sounds/flappybird-03.wav")
+		jump_sound.stream = load("res://sounds/minigame/flappybird-03.wav")
 		velocity += get_gravity() * delta * 3
 		jump_sound.play()
 		died.emit()

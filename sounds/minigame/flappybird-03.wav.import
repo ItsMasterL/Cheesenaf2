@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bosw50to67ah7"
-path="res://.godot/imported/flappybird-03.wav-8b5765b5b25bd6c871ad5048e8e28a2c.sample"
+path="res://.godot/imported/flappybird-03.wav-ce7f57ae7b14c18180164a7956116c27.sample"
 
 [deps]
 
-source_file="res://sounds/flappybird-03.wav"
-dest_files=["res://.godot/imported/flappybird-03.wav-8b5765b5b25bd6c871ad5048e8e28a2c.sample"]
+source_file="res://sounds/minigame/flappybird-03.wav"
+dest_files=["res://.godot/imported/flappybird-03.wav-ce7f57ae7b14c18180164a7956116c27.sample"]
 
 [params]
 

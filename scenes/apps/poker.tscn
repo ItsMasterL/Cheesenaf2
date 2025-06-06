@@ -11,7 +11,11 @@ card_scene = ExtResource("5_drhb5")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_78i7l")
-volume_db = -15.0
+volume_db = -20.0
+bus = &"Tablet"
+
+[node name="CardSounds" type="AudioStreamPlayer" parent="."]
+volume_db = -20.0
 bus = &"Tablet"
 
 [node name="Table" type="Control" parent="."]
@@ -45,8 +49,18 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 41
 text = "DRAW"
 
+[node name="Bet" type="Button" parent="Table/Draw"]
+layout_mode = 0
+offset_left = -255.5
+offset_top = -193.5
+offset_right = -169.5
+offset_bottom = -106.5
+theme_override_font_sizes/font_size = 36
+text = "BET!"
+
 [node name="Result" type="Label" parent="Table"]
 visible = false
+z_index = 2
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -54,14 +68,37 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -417.5
-offset_top = -137.5
+offset_top = -193.0
 offset_right = 417.5
-offset_bottom = 137.5
+offset_bottom = 82.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/outline_size = 35
 theme_override_font_sizes/font_size = 171
 text = "YOU WIN!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Type" type="RichTextLabel" parent="Table"]
+visible = false
+z_index = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -417.0
+offset_top = 20.0
+offset_right = 418.0
+offset_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/normal_font_size = 61
+bbcode_enabled = true
+text = "[rainbow freq=0.1 speed=5][wave amp=50]FOUR OF A KIND"
+scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -73,6 +110,39 @@ texture = ExtResource("4_eyr2s")
 region_enabled = true
 region_rect = Rect2(192, 0, 20, 97)
 
+[node name="CheeseCount" type="Sprite2D" parent="Table"]
+texture_filter = 1
+position = Vector2(37, 388)
+scale = Vector2(3.85, 3.85)
+texture = ExtResource("4_eyr2s")
+region_enabled = true
+region_rect = Rect2(150, 50, 18, 20)
+
+[node name="Label" type="Label" parent="Table/CheeseCount"]
+anchors_preset = -1
+anchor_left = -0.00432899
+anchor_top = -0.00519488
+anchor_right = 1.05123
+anchor_bottom = 0.294805
+offset_left = 2.07792
+offset_top = -3.8961
+offset_right = 42.0779
+offset_bottom = 7.1039
+theme_override_font_sizes/font_size = 12
+text = "x 99999"
+metadata/_edit_use_anchors_ = true
+
+[node name="CheeseBet" type="Node2D" parent="Table"]
+texture_filter = 1
+position = Vector2(37, 306)
+scale = Vector2(3.85, 3.85)
+
+[node name="icon" type="Sprite2D" parent="Table/CheeseBet"]
+texture_filter = 1
+texture = ExtResource("4_eyr2s")
+region_enabled = true
+region_rect = Rect2(150, 50, 18, 20)
+
 [node name="PlayerCards" type="Node2D" parent="."]
 position = Vector2(250, 650)
 
@@ -80,3 +150,4 @@ position = Vector2(250, 650)
 position = Vector2(250, 150)
 
 [connection signal="pressed" from="Table/Draw" to="." method="_start_phase" binds= [2]]
+[connection signal="pressed" from="Table/Draw/Bet" to="." method="_increase_bet"]

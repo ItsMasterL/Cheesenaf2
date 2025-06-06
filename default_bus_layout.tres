@@ -1,4 +1,11 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://cluf4hf316551"]
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://cluf4hf316551"]
+
+[sub_resource type="AudioEffectEQ" id="AudioEffectEQ_j3pel"]
+resource_name = "EQ"
+band_db/32_hz = -23.5
+band_db/100_hz = -17.3
+band_db/320_hz = -9.4
+band_db/10000_hz = -8.5
 
 [resource]
 bus/1/name = &"SFX"
@@ -37,3 +44,5 @@ bus/6/mute = false
 bus/6/bypass_fx = false
 bus/6/volume_db = 0.0
 bus/6/send = &"Master"
+bus/6/effect/0/effect = SubResource("AudioEffectEQ_j3pel")
+bus/6/effect/0/enabled = true

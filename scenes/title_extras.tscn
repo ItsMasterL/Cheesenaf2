@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d1yaj1ed4fml" path="res://scripts/title_menu.gd" id="1_qxcy6"]
 [ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://fonts/consolas.ttf" id="2_bn3vm"]
-[ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://sounds/change_cam.wav" id="3_64dvc"]
+[ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://sounds/minigame/change_cam.wav" id="3_64dvc"]
 [ext_resource type="Script" uid="uid://bvn88mahdcwmt" path="res://scripts/connect.gd" id="3_y8i3a"]
 [ext_resource type="AudioStream" uid="uid://8n3q5bsykdh4" path="res://sounds/error.wav" id="5_hxibe"]
 

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c7h6lkgdo12dj"
-path="res://.godot/imported/buzzlight.wav-c3bb928f61cb783cc47da6ea8cf88b0e.sample"
+path="res://.godot/imported/buzzlight.wav-53f17f7da9eb2551cdb3326eca2c7b3f.sample"
 
 [deps]
 
-source_file="res://sounds/buzzlight.wav"
-dest_files=["res://.godot/imported/buzzlight.wav-c3bb928f61cb783cc47da6ea8cf88b0e.sample"]
+source_file="res://sounds/minigame/buzzlight.wav"
+dest_files=["res://.godot/imported/buzzlight.wav-53f17f7da9eb2551cdb3326eca2c7b3f.sample"]
 
 [params]
 

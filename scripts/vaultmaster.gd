@@ -28,17 +28,17 @@ func _check_and_seal():
 	if seals.size() > 2:
 		seals = root.closed_entrances
 		error.visible = true
-		audio.stream = load("res://sounds/vm_fail.wav")
+		audio.stream = load("res://sounds/minigame/vm_fail.wav")
 	else:
 		for j in root.jammed_entrances:
 			if (j in seals and not j in root.closed_entrances) or (j in root.closed_entrances and not j in seals):
 				seals = root.closed_entrances
 				jam.visible = true
-				audio.stream = load("res://sounds/vm_fail.wav")
+				audio.stream = load("res://sounds/minigame/vm_fail.wav")
 				audio.play()
 				return
 		dark.visible = false
-		audio.stream = load("res://sounds/vm_success.wav")
+		audio.stream = load("res://sounds/minigame/vm_success.wav")
 		root._set_entrances(seals)
 	audio.play()
 

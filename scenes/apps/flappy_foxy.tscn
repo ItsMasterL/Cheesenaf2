@@ -1,13 +1,13 @@
 [gd_scene load_steps=13 format=3 uid="uid://dotlk2mlle6nb"]
 
-[ext_resource type="Script" path="res://scripts/flappy_foxy.gd" id="1_j0ilp"]
-[ext_resource type="AudioStream" uid="uid://b768bkifm2for" path="res://sounds/flappybird-02.wav" id="3_ogexq"]
+[ext_resource type="Script" uid="uid://cgpyvo1e6o8lh" path="res://scripts/flappy_foxy.gd" id="1_j0ilp"]
+[ext_resource type="AudioStream" uid="uid://b768bkifm2for" path="res://sounds/minigame/flappybird-02.wav" id="3_ogexq"]
 [ext_resource type="Texture2D" uid="uid://6obfeopjjj2k" path="res://textures/apps/gameworld bg.png" id="4_htxwe"]
 [ext_resource type="Texture2D" uid="uid://boqjjllhdogq6" path="res://textures/Modular_Belgard.png" id="5_4dbjg"]
-[ext_resource type="Script" path="res://scripts/flappyfoxy_char.gd" id="5_cxlrj"]
+[ext_resource type="Script" uid="uid://q5nd4ph8e43f" path="res://scripts/flappyfoxy_char.gd" id="5_cxlrj"]
 [ext_resource type="FontFile" uid="uid://uc7mo5eme0if" path="res://fonts/minecraft_font.ttf" id="5_gecvb"]
 [ext_resource type="Texture2D" uid="uid://djykfbvdfncen" path="res://textures/apps/flappyfoxy.png" id="5_p5ypo"]
-[ext_resource type="AudioStream" uid="uid://qdpwuu05mhnk" path="res://sounds/flappybird-01.wav" id="6_ixuec"]
+[ext_resource type="AudioStream" uid="uid://qdpwuu05mhnk" path="res://sounds/minigame/flappybird-01.wav" id="6_ixuec"]
 [ext_resource type="AudioStream" uid="uid://bpqq5guvqevsq" path="res://sounds/music/flappyfoxy.mp3" id="8_v6buh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eammq"]

@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://rusybips7bm"
-path="res://.godot/imported/kaching.wav-a96f88ed5530f261b72e1711b6dfefba.sample"
+uid="uid://xbj7alhjn3i1"
+path="res://.godot/imported/windup2.wav-d257b24e1bca44bbb3f80880743e4dba.sample"
 
 [deps]
 
-source_file="res://sounds/kaching.wav"
-dest_files=["res://.godot/imported/kaching.wav-a96f88ed5530f261b72e1711b6dfefba.sample"]
+source_file="res://sounds/minigame/windup2.wav"
+dest_files=["res://.godot/imported/windup2.wav-d257b24e1bca44bbb3f80880743e4dba.sample"]
 
 [params]
 

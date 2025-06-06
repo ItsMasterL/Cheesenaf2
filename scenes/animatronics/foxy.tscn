@@ -1,12 +1,12 @@
 [gd_scene load_steps=19 format=3 uid="uid://ctk8vkg2rvilm"]
 
 [ext_resource type="PackedScene" uid="uid://d1fpt77i3oa5x" path="res://models/foxy.glb" id="1_oyaby"]
-[ext_resource type="Script" path="res://scripts/animatronic.gd" id="2_44u51"]
-[ext_resource type="Script" path="res://scripts/animatronic_position.gd" id="3_lvccg"]
+[ext_resource type="Script" uid="uid://bj1onaat51pqp" path="res://scripts/animatronic.gd" id="2_44u51"]
+[ext_resource type="Script" uid="uid://4en87cf4wnfr" path="res://scripts/animatronic_position.gd" id="3_lvccg"]
 [ext_resource type="AudioStream" uid="uid://c3n0lfpxca8e8" path="res://sounds/jumpscare_edam.wav" id="4_72a7w"]
-[ext_resource type="Script" path="res://scripts/animatronic_entrance.gd" id="4_gx0gv"]
+[ext_resource type="Script" uid="uid://b7m76kqb1eco1" path="res://scripts/animatronic_entrance.gd" id="4_gx0gv"]
 [ext_resource type="AudioStream" uid="uid://blj2fpebqrwua" path="res://sounds/dialogue/bonnie.wav" id="5_3kum6"]
-[ext_resource type="Script" path="res://scripts/foxy_plush_nose.gd" id="5_i806u"]
+[ext_resource type="Script" uid="uid://djxkl3pab3hxr" path="res://scripts/foxy_plush_nose.gd" id="5_i806u"]
 [ext_resource type="AudioStream" uid="uid://klyq4qs7twg3" path="res://sounds/boop_classic.wav" id="8_q7q7m"]
 
 [sub_resource type="Resource" id="Resource_48hc7"]
@@ -113,7 +113,7 @@ bones/0/scale = Vector3(1, 1, 1)
 bones/1/rotation = Quaternion(0.0668152, 0.516799, 0.842798, -0.134709)
 bones/1/scale = Vector3(1, 1, 1.00001)
 bones/2/rotation = Quaternion(-0.733669, 0.000289125, -0.0387533, 0.678401)
-bones/3/rotation = Quaternion(0.396893, 0.00172174, -0.000207674, 0.917864)
+bones/3/rotation = Quaternion(0.396893, 0.00172174, -0.000207675, 0.917864)
 bones/4/rotation = Quaternion(0.999998, 0.000490982, -0.00167575, -0.000314364)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/rotation = Quaternion(-0.0661641, 0.0537984, -0.0306003, 0.995887)
@@ -123,11 +123,11 @@ bones/6/scale = Vector3(0.999999, 1, 0.99999)
 bones/7/rotation = Quaternion(0.308686, 0.0837122, -0.0321017, 0.946929)
 bones/7/scale = Vector3(1, 1, 1)
 bones/8/rotation = Quaternion(-0.0214656, -1.30443e-08, 1.57587e-09, 0.99977)
-bones/8/scale = Vector3(1, 1, 1)
 bones/9/rotation = Quaternion(-0.0481709, -1.18066e-08, 1.34638e-09, 0.998839)
 bones/10/rotation = Quaternion(0.390797, -2.26148e-07, -9.01246e-08, 0.920477)
 bones/14/position = Vector3(1.86735e-08, 9.84623e-07, -1.04995e-07)
 bones/14/rotation = Quaternion(5.35511e-09, -6.8685e-09, -1.62981e-09, 1)
+bones/14/scale = Vector3(1, 1, 1)
 bones/18/position = Vector3(0.00722051, 0.000519619, -8.04593e-05)
 bones/18/rotation = Quaternion(-0.0767654, 0.00278539, 0.0361536, 0.99639)
 bones/20/rotation = Quaternion(5.35511e-09, -6.8685e-09, -1.62981e-09, 1)
@@ -145,6 +145,7 @@ bones/26/scale = Vector3(1, 1, 1)
 bones/27/rotation = Quaternion(0.601597, -0.409755, -0.461141, 0.507475)
 bones/28/position = Vector3(0.0889406, 0.184155, 0.112104)
 bones/28/rotation = Quaternion(0.601598, -0.409754, -0.461139, 0.507476)
+bones/28/scale = Vector3(1, 1, 1)
 bones/29/rotation = Quaternion(-0.247185, -0.184704, -0.761973, 0.569369)
 bones/30/rotation = Quaternion(0.405795, 0.570722, -0.260077, 0.664806)
 bones/31/rotation = Quaternion(0.602735, 0.332522, 0.311156, 0.655226)
@@ -196,7 +197,7 @@ bones/61/rotation = Quaternion(0.17827, -0.0253541, 0.0691141, 0.981224)
 bones/62/rotation = Quaternion(0.0816105, -0.00428435, 0.0306464, 0.996184)
 
 [node name="Head" type="BoneAttachment3D" parent="Edam Endo/Skeleton3D" index="0"]
-transform = Transform3D(0.983071, 0.0836793, 0.163003, -0.068788, 0.993102, -0.094959, -0.169825, 0.0821387, 0.982045, 0.0910042, 1.66728, 0.109876)
+transform = Transform3D(0.983071, 0.0836794, 0.163003, -0.0687881, 0.993102, -0.0949591, -0.169825, 0.0821388, 0.982045, 0.0910043, 1.66728, 0.109877)
 bone_name = "Head"
 bone_idx = 9
 
@@ -215,12 +216,13 @@ script = ExtResource("5_i806u")
 shape = SubResource("SphereShape3D_nvyh0")
 
 [node name="Neck" type="BoneAttachment3D" parent="Edam Endo/Skeleton3D" index="3"]
-transform = Transform3D(0.983071, 0.0989767, 0.154194, -0.068788, 0.979355, -0.190084, -0.169825, 0.17626, 0.969583, 0.0597774, 1.3583, 0.0542671)
+transform = Transform3D(0.983071, 0.0989769, 0.154194, -0.0687881, 0.979355, -0.190085, -0.169825, 0.17626, 0.969583, 0.0597774, 1.3583, 0.0542672)
 bone_name = "Neck"
 bone_idx = 8
 
 [node name="LookAt" type="Marker3D" parent="Edam Endo/Skeleton3D/Neck" index="0"]
-transform = Transform3D(1, 0, 0, 7.45058e-09, 1, -1.49012e-08, 0, 0, 1, -0.0300824, 0.428291, -0.0831277)
+transform = Transform3D(1, -7.45058e-09, 0, 7.45058e-09, 1, 0, 0, 0, 1, 0, 0.428, 0)
+rotation_order = 3
 
 [node name="Jumpscare" type="AudioStreamPlayer" parent="." index="2"]
 stream = ExtResource("4_72a7w")

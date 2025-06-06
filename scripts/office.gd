@@ -276,7 +276,7 @@ func _jumpscare_save(animatronic: Node3D):
 	player_cam.rotation_degrees = Vector3.ZERO
 	player_anim.play("RESET")
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
-	player_cam_anim.play("CameraAction_003")
+	player_cam_anim.play("Default")
 	if animatronic.save_voiceline_delay < animatronic.save_player_free: # Most likely
 		await get_tree().create_timer(animatronic.save_voiceline_delay).timeout
 		warning.play()
