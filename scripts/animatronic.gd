@@ -197,15 +197,15 @@ func _movement_check():
 					# Sorry, but this is going to be very hardcoded for the sake of time
 					if current_position == 8:
 						root.animatronics.get_child(4).current_position = 9
-						root.animatronics.get_child(4)._move_animatronic(9)
+						root.animatronics.get_child(4)._move_animatronic()
 						root.animatronics.get_child(4).timer = root.animatronics.get_child(4).check_frequency
 					elif current_position == 9:
 						root.animatronics.get_child(4).current_position = 12
-						root.animatronics.get_child(4)._move_animatronic(12)
+						root.animatronics.get_child(4)._move_animatronic()
 						root.animatronics.get_child(4).timer = root.animatronics.get_child(4).check_frequency
 					else:
 						root.animatronics.get_child(5).current_position = 14
-						root.animatronics.get_child(5)._move_animatronic(14)
+						root.animatronics.get_child(5)._move_animatronic()
 						root.animatronics.get_child(5).timer = root.animatronics.get_child(5).check_frequency
 			#If chica is in the office, refill the drink
 			elif drink_sensitive:

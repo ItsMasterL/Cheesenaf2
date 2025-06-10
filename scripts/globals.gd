@@ -100,7 +100,7 @@ var apps: Array[TabletApp] = [
 	TabletApp.new("Tank Trouble", "TANK_TROUBLE_DESC", "tank_trouble", load("res://textures/apps/tanktrouble.png"), 4.99, store_apps_binary.TANKTROUBLE, 1.5, false),
 	TabletApp.new("Soccer Physics", "SOCCER_PHYS_DESC", "soccer_physics", load("res://textures/apps/soccerphysics.png"), 4.99, store_apps_binary.SOCCERPHYSICS, 1.5, false),
 	TabletApp.new("Freddy's Picture Poker", "POKER_DESC", "poker", load("res://textures/apps/poker.png"), 9.99, store_apps_binary.POKER, 1.75),
-	TabletApp.new("Foxy's Paintin' Location", "DRAWING_DESC", "drawing", load("res://textures/apps/foxypaint.png"), 9.99, store_apps_binary.DRAWING, 1.75, false),
+	TabletApp.new("Foxy's Paintin' Location", "DRAWING_DESC", "drawing", load("res://textures/apps/foxypaint.png"), 9.99, store_apps_binary.DRAWING, 1.75),
 	TabletApp.new("Angry Chica", "ANGRY_CHICA_DESC", "angry_birds", load("res://textures/apps/angrychica.png"), 9.99, store_apps_binary.ANGRYCHICA, 1.75, false),
 	TabletApp.new("Bonnie's Woods", "BONNIE_WOODS_DESC", "warios_woods", load("res://textures/apps/bonnieswoods.png"), 19.99, store_apps_binary.BONNIESWOODS, 2, false),
 	TabletApp.new("Stringbonnie's Podcast", "PODCAST_DESC", "podcast", load("res://textures/apps/stringbonnie.png"), 19.99, store_apps_binary.PODCAST),
