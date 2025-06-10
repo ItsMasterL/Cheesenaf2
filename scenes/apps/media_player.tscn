@@ -36,9 +36,6 @@ offset_bottom = 699.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_blp43")
 show_percentage = false
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Home"]
-bus = &"Tablet"
-
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Home"]
 layout_mode = 0
 offset_left = 53.0
@@ -134,6 +131,32 @@ offset_bottom = 699.0
 text = "00:00:00"
 horizontal_alignment = 2
 
+[node name="Volume" type="HSlider" parent="Home"]
+layout_mode = 0
+offset_left = 614.0
+offset_top = 744.0
+offset_right = 834.0
+offset_bottom = 786.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+scrollable = false
+
+[node name="Label" type="Label" parent="Home/Volume"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.5
+offset_top = -38.0
+offset_right = 62.5
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "MEDIA_VOLUME"
+
 [connection signal="pressed" from="Home/Play_Pause" to="." method="_play_pause"]
 [connection signal="pressed" from="Home/Next" to="." method="_skip"]
 [connection signal="pressed" from="Home/Shuffle" to="." method="_shuffle"]
@@ -145,3 +168,4 @@ horizontal_alignment = 2
 [connection signal="dir_selected" from="Home/Directory" to="." method="_on_dir_selected"]
 [connection signal="file_selected" from="Home/Directory" to="." method="_on_file_selected"]
 [connection signal="files_selected" from="Home/Directory" to="." method="_on_files_selected"]
+[connection signal="value_changed" from="Home/Volume" to="." method="_set_volume"]

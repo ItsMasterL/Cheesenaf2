@@ -1,9 +1,53 @@
-[gd_scene load_steps=2 format=3 uid="uid://dwhrjracq4a3g"]
+[gd_scene load_steps=7 format=3 uid="uid://dwhrjracq4a3g"]
 
 [ext_resource type="Script" uid="uid://btrnr3bdfgaxg" path="res://scripts/drawing.gd" id="1_06gpw"]
+[ext_resource type="Texture2D" uid="uid://baek1bfvyge65" path="res://textures/suitlight1new1.png" id="2_ajen3"]
+[ext_resource type="AudioStream" uid="uid://cneksuu2c83c1" path="res://sounds/music/paint.mp3" id="2_ijp8t"]
+
+[sub_resource type="Animation" id="Animation_ijp8t"]
+resource_name = "OpenMenu"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(644, -529), Vector2(644, 169)]
+}
+
+[sub_resource type="Animation" id="Animation_75oxl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(644, -529)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bawhh"]
+_data = {
+&"OpenMenu": SubResource("Animation_ijp8t"),
+&"RESET": SubResource("Animation_75oxl")
+}
 
 [node name="Drawing App" type="Node2D"]
 script = ExtResource("1_06gpw")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ijp8t")
+volume_db = -10.0
+bus = &"Tablet"
 
 [node name="Home" type="Control" parent="."]
 clip_contents = true
@@ -18,11 +62,56 @@ layout_mode = 0
 offset_right = 1299.0
 offset_bottom = 828.0
 
-[node name="ColorRect" type="ColorRect" parent="Home/ColorRect"]
-z_index = 2
-layout_mode = 0
-offset_right = 1283.0
-offset_bottom = 128.0
-color = Color(1, 0.427451, 0.364706, 1)
+[node name="UIBar" type="Sprite2D" parent="Home"]
+z_index = 1
+position = Vector2(644, -529)
+scale = Vector2(1.27051, 1.23755)
+texture = ExtResource("2_ajen3")
+
+[node name="ColorPicker" type="ColorPicker" parent="Home/UIBar"]
+offset_left = -501.0
+offset_top = -133.0
+offset_right = -203.0
+offset_bottom = 501.0
+alignment = 2
+color = Color(0, 0, 0, 1)
+edit_alpha = false
+deferred_mode = true
+picker_shape = 1
+can_add_swatches = false
+sampler_visible = false
+
+[node name="MenuButton" type="Button" parent="Home/UIBar"]
+offset_left = 438.0
+offset_top = 452.0
+offset_right = 497.0
+offset_bottom = 506.0
+text = "Open
+Menu"
+
+[node name="MusicButton" type="Button" parent="Home/UIBar"]
+offset_left = 358.912
+offset_top = 452.0
+offset_right = 417.912
+offset_bottom = 506.0
+text = "Toggle
+Music"
+
+[node name="Undo" type="Button" parent="Home/UIBar"]
+offset_left = -184.178
+offset_top = 452.0
+offset_right = -125.178
+offset_bottom = 506.0
+text = "Undo"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Home/UIBar"]
+libraries = {
+&"": SubResource("AnimationLibrary_bawhh")
+}
 
 [node name="Lines" type="Node2D" parent="."]
+
+[connection signal="color_changed" from="Home/UIBar/ColorPicker" to="." method="_set_color"]
+[connection signal="pressed" from="Home/UIBar/MenuButton" to="." method="_toggle_menu"]
+[connection signal="pressed" from="Home/UIBar/MusicButton" to="." method="_toggle_music"]
+[connection signal="pressed" from="Home/UIBar/Undo" to="." method="_undo"]
