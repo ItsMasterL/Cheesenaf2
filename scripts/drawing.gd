@@ -12,6 +12,7 @@ var menu_open = false
 
 func _ready() -> void:
 	$Music.play()
+	$Drums.play()
 
 func _input(event: InputEvent):
 	if menu_open:
@@ -45,6 +46,7 @@ func _toggle_menu():
 
 func _toggle_music():
 	$Music.playing = !$Music.playing
+	$Drums.playing = !$Drums.playing
 
 func _undo():
 	if lines.get_child_count() > 0:

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dwhrjracq4a3g"]
+[gd_scene load_steps=8 format=3 uid="uid://dwhrjracq4a3g"]
 
 [ext_resource type="Script" uid="uid://btrnr3bdfgaxg" path="res://scripts/drawing.gd" id="1_06gpw"]
+[ext_resource type="AudioStream" uid="uid://dro60c532y60x" path="res://sounds/music/CD_Song.mp3" id="2_75oxl"]
 [ext_resource type="Texture2D" uid="uid://baek1bfvyge65" path="res://textures/suitlight1new1.png" id="2_ajen3"]
-[ext_resource type="AudioStream" uid="uid://cneksuu2c83c1" path="res://sounds/music/paint.mp3" id="2_ijp8t"]
+[ext_resource type="AudioStream" uid="uid://cot2w6lxnn3qt" path="res://sounds/music/CD_Drums.mp3" id="3_bawhh"]
 
 [sub_resource type="Animation" id="Animation_ijp8t"]
 resource_name = "OpenMenu"
@@ -45,8 +46,13 @@ _data = {
 script = ExtResource("1_06gpw")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_ijp8t")
-volume_db = -10.0
+stream = ExtResource("2_75oxl")
+volume_db = -8.0
+bus = &"Tablet"
+
+[node name="Drums" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_bawhh")
+volume_db = -8.0
 bus = &"Tablet"
 
 [node name="Home" type="Control" parent="."]
