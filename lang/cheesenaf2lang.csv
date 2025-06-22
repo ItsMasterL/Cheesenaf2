@@ -92,3 +92,8 @@ VAULT_WAIT_MESSAGE,Please do not close the application.,Do not close the program
 VAULT_OK,OK,Alright .,
 NIGHT_END_TIME,Your Time:,leave:,
 NIGHT_END_PAY,Your Pay:,I close my:,
+DRAWING_OPEN_MENU,Open\nMenu,Open\nthe menu,
+DRAWING_CLOSE_MENU,Close\nMenu,Close\nthe offer,
+DRAWING_UNDO,Undo,WORK,
+DRAWING_MUSIC,Toggle\nMusic,Change\nmusic.,
+DRAWING_EXPORT,Export as PNG...,,

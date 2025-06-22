@@ -43,8 +43,7 @@ func _connect_games():
 			var output2 = []
 			#Runs in console
 			OS.execute('pgrep', [PROCESS], output)
-			var tempstring = "/proc/%s/exe" % [output[0]]
-			OS.execute('readlink', [tempstring], output2)
+			OS.execute('readlink', ["/proc/%s/exe" % [output[0]]], output2)
 			string = output2[0]
 		var i = string.length() - 1
 		while (string[i] != '/') and (string[i] != '\\'):

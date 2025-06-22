@@ -62,7 +62,7 @@ anchors_preset = 0
 offset_right = 1280.0
 offset_bottom = 800.0
 
-[node name="ColorRect" type="ColorRect" parent="Home"]
+[node name="Canvas" type="ColorRect" parent="Home"]
 z_index = -3
 layout_mode = 0
 offset_right = 1299.0
@@ -92,23 +92,21 @@ offset_left = 438.0
 offset_top = 452.0
 offset_right = 497.0
 offset_bottom = 506.0
-text = "Open
-Menu"
+text = "DRAWING_OPEN_MENU"
 
 [node name="MusicButton" type="Button" parent="Home/UIBar"]
 offset_left = 358.912
 offset_top = 452.0
 offset_right = 417.912
 offset_bottom = 506.0
-text = "Toggle
-Music"
+text = "DRAWING_MUSIC"
 
 [node name="Undo" type="Button" parent="Home/UIBar"]
 offset_left = -184.178
 offset_top = 452.0
 offset_right = -125.178
 offset_bottom = 506.0
-text = "Undo"
+text = "DRAWING_UNDO"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Home/UIBar"]
 libraries = {
