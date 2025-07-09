@@ -1,0 +1,477 @@
+[gd_scene load_steps=22 format=3 uid="uid://bf6yukxrqcujs"]
+
+[ext_resource type="Script" uid="uid://cvxto0xs701a0" path="res://scripts/soccerphysics.gd" id="1_usnkt"]
+[ext_resource type="AudioStream" uid="uid://2j1w8q43ndjj" path="res://sounds/music/soccer.mp3" id="2_0bgv3"]
+[ext_resource type="Texture2D" uid="uid://da2k3qt4hswr7" path="res://textures/apps/soccerphysics bg.png" id="3_4letn"]
+[ext_resource type="Texture2D" uid="uid://ci6nvjmf4x5p5" path="res://textures/apps/soccerphysics sheet.png" id="4_w7p8x"]
+[ext_resource type="Script" uid="uid://0xehtodmu3ya" path="res://scripts/soccerplayer.gd" id="5_a5bi1"]
+[ext_resource type="AudioStream" uid="uid://qdpwuu05mhnk" path="res://sounds/minigame/flappybird-01.wav" id="6_agria"]
+[ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://fonts/consolas.ttf" id="7_0bgv3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_usnkt"]
+size = Vector2(132.517, 7.06454)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0bgv3"]
+radius = 29.6804
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ts8oa"]
+friction = 0.5
+bounce = 0.8
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w1vfb"]
+radius = 29.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vfwcc"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0bgv3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ts8oa"]
+radius = 18.0
+height = 202.0
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_w1vfb"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w1vfb"]
+height = 112.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w1vfb"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4letn"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_w7p8x"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_a5bi1"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0bgv3"]
+
+[node name="Soccer Physics" type="Node2D" node_paths=PackedStringArray("players", "goals", "ball")]
+script = ExtResource("1_usnkt")
+players = [NodePath("Foxy"), NodePath("Freddy"), NodePath("Bonnie"), NodePath("Chica")]
+goals = [NodePath("CPUGoal"), NodePath("PlayerGoal")]
+ball = NodePath("Ball")
+player_pos = Array[Vector2]([Vector2(914, 520), Vector2(784, 520), Vector2(471, 520), Vector2(354, 520)])
+ball_pos = Vector2(627, 58)
+
+[node name="Home" type="Control" parent="."]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 800.0
+metadata/_edit_lock_ = true
+
+[node name="Music" type="AudioStreamPlayer" parent="Home"]
+stream = ExtResource("2_0bgv3")
+volume_db = -10.0
+bus = &"Tablet"
+
+[node name="Bg" type="TextureRect" parent="Home"]
+z_index = -1
+layout_mode = 0
+offset_left = -2.0
+offset_top = -8.0
+offset_right = 1278.0
+offset_bottom = 792.0
+texture = ExtResource("3_4letn")
+metadata/_edit_lock_ = true
+
+[node name="Cover" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 800.0
+metadata/_edit_lock_ = true
+
+[node name="Cover" type="ColorRect" parent="Cover"]
+z_index = 5
+layout_mode = 0
+offset_left = -42.0
+offset_top = -42.0
+offset_right = 1335.0
+offset_bottom = 832.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="CPUGoal" type="Sprite2D" parent="."]
+z_index = 2
+texture_filter = 1
+position = Vector2(1000, 620)
+scale = Vector2(2.64972, 2.64972)
+texture = ExtResource("4_w7p8x")
+offset = Vector2(45.5, -50.5)
+region_enabled = true
+region_rect = Rect2(331, 0, 91, 101)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="CPUGoal"]
+position = Vector2(43.5, -50.5)
+rotation = 0.872665
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CPUGoal/StaticBody2D"]
+position = Vector2(11.6644, -6.46776)
+shape = SubResource("RectangleShape2D_usnkt")
+
+[node name="Score" type="Area2D" parent="CPUGoal/StaticBody2D"]
+position = Vector2(23.0622, 24.1827)
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CPUGoal/StaticBody2D/Score"]
+shape = SubResource("CircleShape2D_0bgv3")
+
+[node name="PlayerGoal" type="Sprite2D" parent="."]
+z_index = 2
+texture_filter = 1
+position = Vector2(275, 620)
+scale = Vector2(2.64972, 2.64972)
+texture = ExtResource("4_w7p8x")
+offset = Vector2(-45.5, -50.5)
+flip_h = true
+region_enabled = true
+region_rect = Rect2(331, 0, 91, 101)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="PlayerGoal"]
+position = Vector2(-58.5, -32.5)
+rotation = -0.872665
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerGoal/StaticBody2D2"]
+position = Vector2(11.6644, -6.46776)
+shape = SubResource("RectangleShape2D_usnkt")
+
+[node name="Score" type="Area2D" parent="PlayerGoal/StaticBody2D2"]
+position = Vector2(0.0335102, 24.1121)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerGoal/StaticBody2D2/Score"]
+shape = SubResource("CircleShape2D_0bgv3")
+
+[node name="Ball" type="RigidBody2D" parent="."]
+position = Vector2(627, 58)
+collision_layer = 7
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_ts8oa")
+freeze_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+shape = SubResource("CircleShape2D_w1vfb")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Ball"]
+z_index = 1
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("4_w7p8x")
+region_enabled = true
+region_rect = Rect2(52, 72, 28, 28)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(629, 610)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape2D_vfwcc")
+metadata/_edit_lock_ = true
+
+[node name="Foxy" type="RigidBody2D" parent="." node_paths=PackedStringArray("attachment")]
+position = Vector2(914, 520)
+collision_layer = 9
+collision_mask = 9
+physics_material_override = SubResource("PhysicsMaterial_0bgv3")
+contact_monitor = true
+max_contacts_reported = 1
+angular_velocity = 0.872665
+script = ExtResource("5_a5bi1")
+attachment = NodePath("Tail")
+attachment_range = Vector2(-45, 45)
+
+[node name="Sprite2D" type="Sprite2D" parent="Foxy"]
+z_index = 1
+texture_filter = 1
+position = Vector2(0, -32)
+scale = Vector2(2, 2)
+texture = ExtResource("4_w7p8x")
+region_enabled = true
+region_rect = Rect2(0, 0, 44, 101)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Foxy"]
+position = Vector2(0, -32)
+shape = SubResource("CapsuleShape2D_ts8oa")
+metadata/_edit_lock_ = true
+
+[node name="GroundCheck" type="RayCast2D" parent="Foxy"]
+target_position = Vector2(0, 85)
+
+[node name="Leg" type="RigidBody2D" parent="Foxy"]
+collision_layer = 2
+collision_mask = 2
+mass = 0.5
+physics_material_override = SubResource("PhysicsMaterial_w1vfb")
+gravity_scale = 0.0
+lock_rotation = true
+freeze_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Foxy/Leg"]
+texture_filter = 1
+position = Vector2(-1, 26)
+rotation = -1.45735
+scale = Vector2(2, 2)
+texture = ExtResource("4_w7p8x")
+region_enabled = true
+region_rect = Rect2(45, 1, 39, 15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Foxy/Leg"]
+position = Vector2(0, 27)
+shape = SubResource("CapsuleShape2D_w1vfb")
+
+[node name="Tail" type="RigidBody2D" parent="Foxy"]
+collision_layer = 0
+collision_mask = 0
+mass = 0.5
+physics_material_override = SubResource("PhysicsMaterial_w1vfb")
+gravity_scale = 0.0
+lock_rotation = true
+freeze_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Foxy/Tail"]
+texture_filter = 1
+position = Vector2(50, -7)
+scale = Vector2(2, 2)
+texture = ExtResource("4_w7p8x")
+region_enabled = true
+region_rect = Rect2(44, 18, 45, 15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Foxy/Tail"]
+shape = SubResource("RectangleShape2D_w1vfb")
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="Foxy"]
+stream = ExtResource("6_agria")
+bus = &"Tablet"
+
+[node name="Freddy" type="RigidBody2D" parent="."]
+position = Vector2(784, 520)
+collision_layer = 9
+collision_mask = 9
+physics_material_override = SubResource("PhysicsMaterial_4letn")
+contact_monitor = true
+max_contacts_reported = 1
+angular_velocity = -0.523599
+script = ExtResource("5_a5bi1")
+attachment_range = Vector2(-45, 45)
+
+[node name="Sprite2D" type="Sprite2D" parent="Freddy"]
+z_index = 1
+texture_filter = 1
+position = Vector2(0, -32)
+scale = Vector2(2, 2)
+texture = ExtResource("4_w7p8x")
+region_enabled = true
+region_rect = Rect2(90, 0, 39, 101)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Freddy"]
+position = Vector2(0, -32)
+shape = SubResource("CapsuleShape2D_ts8oa")
+metadata/_edit_lock_ = true
+
+[node name="GroundCheck" type="RayCast2D" parent="Freddy"]
+target_position = Vector2(0, 85)
+
+[node name="Leg" type="RigidBody2D" parent="Freddy"]
+collision_layer = 2
+collision_mask = 2
+mass = 0.5
+physics_material_override = SubResource("PhysicsMaterial_w1vfb")
+gravity_scale = 0.0
+lock_rotation = true
+freeze_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Freddy/Leg"]
+texture_filter = 1
+position = Vector2(-5, 37)
+rotation = -1.45735
+scale = Vector2(2, 2)
+texture = ExtResource("4_w7p8x")
+region_enabled = true
+region_rect = Rect2(129, 1, 33, 18)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Freddy/Leg"]
+position = Vector2(0, 27)
+shape = SubResource("CapsuleShape2D_w1vfb")
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="Freddy"]
+stream = ExtResource("6_agria")
+bus = &"Tablet"
+
+[node name="Bonnie" type="RigidBody2D" parent="." node_paths=PackedStringArray("attachment")]
+position = Vector2(471, 520)
+collision_layer = 9
+collision_mask = 9
+physics_material_override = SubResource("PhysicsMaterial_w7p8x")
+contact_monitor = true
+max_contacts_reported = 1
+angular_velocity = 0.785398
+script = ExtResource("5_a5bi1")
+is_player = false
+facing = -1
+attachment = NodePath("Ears")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bonnie"]
+z_index = 1
+texture_filter = 1
+position = Vector2(0, -32)
+scale = Vector2(2, 2)
+texture = ExtResource("4_w7p8x")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(165, 0, 33, 101)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bonnie"]
+position = Vector2(0, -32)
+shape = SubResource("CapsuleShape2D_ts8oa")
+metadata/_edit_lock_ = true
+
+[node name="GroundCheck" type="RayCast2D" parent="Bonnie"]
+target_position = Vector2(0, 85)
+
+[node name="Leg" type="RigidBody2D" parent="Bonnie"]
+collision_layer = 2
+collision_mask = 2
+mass = 0.5
+physics_material_override = SubResource("PhysicsMaterial_w1vfb")
+gravity_scale = 0.0
+lock_rotation = true
+freeze_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Bonnie/Leg"]
+texture_filter = 1
+position = Vector2(-1, 26)
+rotation = 1.45735
+scale = Vector2(2, 2)
+texture = ExtResource("4_w7p8x")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(199, 1, 39, 17)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bonnie/Leg"]
+position = Vector2(0, 27)
+shape = SubResource("CapsuleShape2D_w1vfb")
+
+[node name="Ears" type="RigidBody2D" parent="Bonnie"]
+collision_layer = 0
+collision_mask = 0
+mass = 0.5
+physics_material_override = SubResource("PhysicsMaterial_w1vfb")
+gravity_scale = 0.0
+lock_rotation = true
+freeze_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Bonnie/Ears"]
+texture_filter = 1
+position = Vector2(-24, -135)
+scale = Vector2(2, 2)
+texture = ExtResource("4_w7p8x")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(200, 20, 11, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bonnie/Ears"]
+shape = SubResource("RectangleShape2D_w1vfb")
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="Bonnie"]
+stream = ExtResource("6_agria")
+bus = &"Tablet"
+
+[node name="Chica" type="RigidBody2D" parent="."]
+position = Vector2(354, 520)
+collision_layer = 9
+collision_mask = 9
+physics_material_override = SubResource("PhysicsMaterial_a5bi1")
+contact_monitor = true
+max_contacts_reported = 1
+angular_velocity = -0.261799
+script = ExtResource("5_a5bi1")
+is_player = false
+facing = -1
+
+[node name="Sprite2D" type="Sprite2D" parent="Chica"]
+z_index = 1
+texture_filter = 1
+position = Vector2(0, -32)
+scale = Vector2(2, 2)
+texture = ExtResource("4_w7p8x")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(240, 0, 36, 101)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chica"]
+position = Vector2(0, -32)
+shape = SubResource("CapsuleShape2D_ts8oa")
+metadata/_edit_lock_ = true
+
+[node name="GroundCheck" type="RayCast2D" parent="Chica"]
+target_position = Vector2(0, 85)
+
+[node name="Leg" type="RigidBody2D" parent="Chica"]
+collision_layer = 2
+collision_mask = 2
+mass = 0.5
+physics_material_override = SubResource("PhysicsMaterial_w1vfb")
+gravity_scale = 0.0
+lock_rotation = true
+freeze_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Chica/Leg"]
+texture_filter = 1
+position = Vector2(-1, 30)
+rotation = 1.45735
+scale = Vector2(2, 2)
+texture = ExtResource("4_w7p8x")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(277, 0, 39, 18)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chica/Leg"]
+position = Vector2(0, 27)
+shape = SubResource("CapsuleShape2D_w1vfb")
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="Chica"]
+stream = ExtResource("6_agria")
+bus = &"Tablet"
+
+[node name="Display" type="Label" parent="."]
+offset_top = 677.0
+offset_right = 1277.0
+offset_bottom = 779.0
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("7_0bgv3")
+theme_override_font_sizes/font_size = 46
+text = "0-0
+Current Effect: INSERT TEXT HERE"
+horizontal_alignment = 1
+
+[node name="LeftBoundry" type="Area2D" parent="."]
+rotation = 1.5708
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundry"]
+shape = SubResource("WorldBoundaryShape2D_0bgv3")
+
+[node name="RightBoundry" type="Area2D" parent="."]
+position = Vector2(1280, 0)
+rotation = -1.5708
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundry"]
+shape = SubResource("WorldBoundaryShape2D_0bgv3")
+
+[connection signal="body_entered" from="CPUGoal/StaticBody2D/Score" to="." method="_cpu_scores"]
+[connection signal="body_entered" from="PlayerGoal/StaticBody2D2/Score" to="." method="_player_scores"]
+[connection signal="body_entered" from="LeftBoundry" to="." method="_out_of_bounds"]
+[connection signal="body_entered" from="RightBoundry" to="." method="_out_of_bounds"]
