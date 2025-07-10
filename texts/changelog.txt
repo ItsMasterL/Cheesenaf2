@@ -1,15 +1,22 @@
-Version 1.1.0 -- 5/15/2025
+Version 1.1.0 -- 7/12/2025
 
 Fixes:
 - Freddy Fazbear's Picture Poker no longer incorrectly scores your hand
+- Blacked-out playground now renders correctly
 
 Adjustments:
+- Upgraded engine to Godot 4.4.1
 - Reorganized most scripts and scenes
 - Moved the credits and changelog to their own files
+- Added more interesting scenery to the Pizzeria
 
 Additions:
 - Added a new option in Extras. Just how does it work, though...?
-- Added language support, with English, Spanish, and Translated available
+- Added language support, with English and Translated available
+- Added keybinds support
+- Added Foxy's Paintin' Location (Tablet)
+- Added Soccer Physics (Tablet)
+- Added Tank Trouble (Tablet)
 
 
 

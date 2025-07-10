@@ -39,10 +39,6 @@ window/stretch/aspect="keep_height"
 
 project/assembly_name="Cheesenaf 2"
 
-[filesystem]
-
-import/blender/enabled=false
-
 [input]
 
 Interact={

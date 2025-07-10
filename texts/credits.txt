@@ -7,10 +7,23 @@ Master L - Lead Developer
 Foxxicle - Optimizations, Formatting
 
 Writing
-Master L - Cheesenaf Code
+Master L - BBG Code
+
+Models
+Master L - Pizzeria adjustments
+lagesnpiet - Sink
 
 Artwork
 Master L
+
+Audio
+Total Miner - Tank Trouble sounds
+
+Music
+Groovy - Foxy's Paintin' Location music (OST!)
+FNAF 6 - Soccer Physics music
+LoZ: Majora's Mask - ???
+Keaton's 300 This is Sparta - Tank Trouble music
 
 
 [wave]Version 1.0.1[/wave]

@@ -1,10 +1,10 @@
 [gd_scene load_steps=24 format=3 uid="uid://ddnqh2fwb8i4v"]
 
 [ext_resource type="PackedScene" uid="uid://dkwim48w4bveh" path="res://models/witherchica.glb" id="1_npmwc"]
-[ext_resource type="Script" path="res://scripts/animatronic.gd" id="2_wd31q"]
+[ext_resource type="Script" uid="uid://bj1onaat51pqp" path="res://scripts/animatronic.gd" id="2_wd31q"]
 [ext_resource type="AudioStream" uid="uid://jb2c0ep1vqdm" path="res://sounds/jumpscare_withered.wav" id="3_lfvth"]
-[ext_resource type="Script" path="res://scripts/animatronic_position.gd" id="3_wo6gj"]
-[ext_resource type="Script" path="res://scripts/animatronic_entrance.gd" id="4_auoqf"]
+[ext_resource type="Script" uid="uid://4en87cf4wnfr" path="res://scripts/animatronic_position.gd" id="3_wo6gj"]
+[ext_resource type="Script" uid="uid://b7m76kqb1eco1" path="res://scripts/animatronic_entrance.gd" id="4_auoqf"]
 
 [sub_resource type="Resource" id="Resource_tss6h"]
 resource_name = "Storage"
@@ -29,7 +29,7 @@ animation_id = "WitherChicaLobby"
 [sub_resource type="Resource" id="Resource_nnpx1"]
 resource_name = "Lobby 2"
 script = ExtResource("3_wo6gj")
-position = Vector3(53.769, 0, 9.211)
+position = Vector3(52.613, 0, 6.886)
 rotation = Vector3(0, -155, 0)
 scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([8, 3, 1])
