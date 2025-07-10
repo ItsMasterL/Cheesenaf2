@@ -97,7 +97,7 @@ var apps: Array[TabletApp] = [
 	TabletApp.new("Freddy Fazbear's Media Player", "MEDIA_DESC", "media_player", load("res://textures/apps/mediaplayer.png"), 0.00, store_apps_binary.MEDIAPLAYER),
 	TabletApp.new("Flappy Foxy", "FLAPPY_FOXY_DESC", "flappy_foxy", load("res://textures/apps/flappyfoxy.png"), 0.00, store_apps_binary.FLAPPYFOXY, 1.25),
 	TabletApp.new("Chica Pop", "CHICA_POP_DESC", "chica_pop", load("res://textures/apps/chicapopicon.png"), 0.00, store_apps_binary.CHICAPOP, 1.25),
-	TabletApp.new("Tank Trouble", "TANK_TROUBLE_DESC", "tank_trouble", load("res://textures/apps/tanktrouble.png"), 4.99, store_apps_binary.TANKTROUBLE, 1.5, false),
+	TabletApp.new("Tank Trouble", "TANK_TROUBLE_DESC", "tank_trouble", load("res://textures/apps/tanktrouble.png"), 4.99, store_apps_binary.TANKTROUBLE, 1.5),
 	TabletApp.new("Soccer Physics", "SOCCER_PHYS_DESC", "soccer_physics", load("res://textures/apps/soccerphysics.png"), 4.99, store_apps_binary.SOCCERPHYSICS, 1.5),
 	TabletApp.new("Freddy's Picture Poker", "POKER_DESC", "poker", load("res://textures/apps/poker.png"), 9.99, store_apps_binary.POKER, 1.75),
 	TabletApp.new("Foxy's Paintin' Location", "DRAWING_DESC", "drawing", load("res://textures/apps/foxypaint.png"), 9.99, store_apps_binary.DRAWING, 1.75),

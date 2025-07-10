@@ -61,9 +61,10 @@ func _world_ending(delta):
 
 func _setup(random_effect = true):
 	if random_effect == true:
-		selected_effect = EFFECTS[EFFECTS.keys()[randi_range(0,EFFECTS.size() - 1)]]
+		selected_effect = EFFECTS[EFFECTS.keys()[randi_range(0,EFFECTS.size() - 2)]]
 		if randi_range(0,1792) == 1792:
 			selected_effect = EFFECTS.THE_WORLD_ENDS
+			print("It's happening.")
 	else:
 		selected_effect = EFFECTS.NONE
 
@@ -126,7 +127,7 @@ func _setup(random_effect = true):
 			b_frict = 0
 			p_frict = 0
 		EFFECTS.ANTI_GRAVITY:
-			p_grav = 0
+			p_grav = 0.1
 			b_grav = 0.1
 			b_vel = Vector2(0,-1)
 			for i in players:

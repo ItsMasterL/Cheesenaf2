@@ -1,0 +1,252 @@
+[gd_scene load_steps=14 format=3 uid="uid://dlgo40e33c22g"]
+
+[ext_resource type="Script" uid="uid://566hmj53s282" path="res://scripts/tank_trouble.gd" id="1_gakqg"]
+[ext_resource type="AudioStream" uid="uid://burohje2srbtf" path="res://sounds/music/tank_trouble.mp3" id="2_46ihu"]
+[ext_resource type="Texture2D" uid="uid://dmkhccyo0um0i" path="res://textures/apps/tank.png" id="2_okvkw"]
+[ext_resource type="Shader" uid="uid://jc0x34fe2dar" path="res://shaders/color_swap.gdshader" id="2_phh4q"]
+[ext_resource type="Script" uid="uid://bua32tw4odo7v" path="res://scripts/tank.gd" id="3_phh4q"]
+[ext_resource type="PackedScene" uid="uid://leh4l8nwcjqs" path="res://scenes/props/cannonball.tscn" id="4_okvkw"]
+[ext_resource type="AudioStream" uid="uid://b4lxb8auxsfpj" path="res://sounds/minigame/tt_fire.wav" id="7_cuvma"]
+[ext_resource type="AudioStream" uid="uid://bcf47w8rgp2mw" path="res://sounds/minigame/tt_death.wav" id="8_kyt48"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_46ihu"]
+shader = ExtResource("2_phh4q")
+shader_parameter/pal_source_1 = Color(0, 1, 0, 1)
+shader_parameter/pal_source_2 = Color(0, 0, 0, 1)
+shader_parameter/pal_swap_1 = Color(0.788235, 0, 0.196078, 1)
+shader_parameter/pal_swap_2 = Color(0.470125, 0, 0.101353, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_phh4q"]
+size = Vector2(15.2, 14)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_phh4q"]
+shader = ExtResource("2_phh4q")
+shader_parameter/pal_source_1 = Color(0, 1, 0, 1)
+shader_parameter/pal_source_2 = Color(0, 0, 0, 1)
+shader_parameter/pal_swap_1 = Color(0.788235, 0, 0.196078, 1)
+shader_parameter/pal_swap_2 = Color(0.470125, 0, 0.101353, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3670k"]
+shader = ExtResource("2_phh4q")
+shader_parameter/pal_source_1 = Color(0, 1, 0, 1)
+shader_parameter/pal_source_2 = Color(0, 0, 0, 1)
+shader_parameter/pal_swap_1 = Color(0.788235, 0, 0.196078, 1)
+shader_parameter/pal_swap_2 = Color(0.470125, 0, 0.101353, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cuvma"]
+shader = ExtResource("2_phh4q")
+shader_parameter/pal_source_1 = Color(0, 1, 0, 1)
+shader_parameter/pal_source_2 = Color(0, 0, 0, 1)
+shader_parameter/pal_swap_1 = Color(0.788235, 0, 0.196078, 1)
+shader_parameter/pal_swap_2 = Color(0.470125, 0, 0.101353, 1)
+
+[node name="Media Player" type="Node2D"]
+script = ExtResource("1_gakqg")
+
+[node name="Home" type="Control" parent="."]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 800.0
+
+[node name="Music" type="AudioStreamPlayer" parent="Home"]
+stream = ExtResource("2_46ihu")
+volume_db = -15.0
+bus = &"Tablet"
+
+[node name="ColorRect" type="ColorRect" parent="Home"]
+layout_mode = 0
+offset_left = -36.0
+offset_top = -26.0
+offset_right = 1310.0
+offset_bottom = 821.0
+
+[node name="P1" type="Label" parent="Home"]
+z_index = 2
+layout_mode = 0
+offset_left = 1.0
+offset_top = 709.0
+offset_right = 527.0
+offset_bottom = 802.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.470588, 0, 0.101961, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 32
+text = "P1: Adam
+Kills: 0 Deaths: 0"
+
+[node name="P2" type="Label" parent="Home"]
+z_index = 2
+layout_mode = 0
+offset_left = 877.0
+offset_top = 709.0
+offset_right = 1280.0
+offset_bottom = 802.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0.27451, 0.423529, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 32
+text = "P2: Bonnie
+Kills: 0 Deaths: 0"
+horizontal_alignment = 2
+
+[node name="P3" type="Label" parent="Home"]
+z_index = 2
+layout_mode = 0
+offset_left = 849.0
+offset_top = -5.0
+offset_right = 1280.0
+offset_bottom = 88.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.372549, 0.360784, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 32
+text = "P3: Chica
+Kills: 0 Deaths: 0"
+horizontal_alignment = 2
+
+[node name="P4" type="Label" parent="Home"]
+z_index = 2
+layout_mode = 0
+offset_left = 1.0
+offset_top = -5.0
+offset_right = 472.0
+offset_bottom = 88.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.34902, 0.152941, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 32
+text = "P4: Freddy
+Kills: 0 Deaths: 0"
+
+[node name="Tanks" type="Node2D" parent="."]
+
+[node name="PlayerTank" type="Sprite2D" parent="Tanks"]
+z_index = 1
+texture_filter = 1
+material = SubResource("ShaderMaterial_46ihu")
+position = Vector2(151, 659)
+scale = Vector2(5, 5)
+texture = ExtResource("2_okvkw")
+hframes = 2
+region_enabled = true
+region_rect = Rect2(0, 0, 30, 18)
+script = ExtResource("3_phh4q")
+is_player = true
+bullet = ExtResource("4_okvkw")
+body_color = Color(0.788235, 0, 0.196078, 1)
+outline_color = Color(0.470588, 0, 0.101961, 1)
+
+[node name="Area2D" type="Area2D" parent="Tanks/PlayerTank"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tanks/PlayerTank/Area2D"]
+position = Vector2(0, 2)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_phh4q")
+
+[node name="Fire" type="AudioStreamPlayer2D" parent="Tanks/PlayerTank"]
+stream = ExtResource("7_cuvma")
+bus = &"Tablet"
+
+[node name="Death" type="AudioStreamPlayer2D" parent="Tanks/PlayerTank"]
+stream = ExtResource("8_kyt48")
+bus = &"Tablet"
+
+[node name="Tank2" type="Sprite2D" parent="Tanks"]
+z_index = 1
+texture_filter = 1
+material = SubResource("ShaderMaterial_phh4q")
+position = Vector2(1093, 656)
+scale = Vector2(5, 5)
+texture = ExtResource("2_okvkw")
+hframes = 2
+region_enabled = true
+region_rect = Rect2(0, 0, 30, 18)
+script = ExtResource("3_phh4q")
+id = 1
+bullet = ExtResource("4_okvkw")
+body_color = Color(3.36915e-06, 0.44675, 0.677824, 1)
+outline_color = Color(0, 0.272745, 0.423786, 1)
+
+[node name="Area2D" type="Area2D" parent="Tanks/Tank2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tanks/Tank2/Area2D"]
+position = Vector2(0, 2)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_phh4q")
+
+[node name="Fire" type="AudioStreamPlayer2D" parent="Tanks/Tank2"]
+stream = ExtResource("7_cuvma")
+bus = &"Tablet"
+
+[node name="Death" type="AudioStreamPlayer2D" parent="Tanks/Tank2"]
+stream = ExtResource("8_kyt48")
+bus = &"Tablet"
+
+[node name="Tank3" type="Sprite2D" parent="Tanks"]
+z_index = 1
+texture_filter = 1
+material = SubResource("ShaderMaterial_3670k")
+position = Vector2(1109, 88.0001)
+scale = Vector2(5, 5)
+texture = ExtResource("2_okvkw")
+hframes = 2
+region_enabled = true
+region_rect = Rect2(0, 0, 30, 18)
+script = ExtResource("3_phh4q")
+id = 2
+bullet = ExtResource("4_okvkw")
+body_color = Color(0.817603, 0.79406, 7.70092e-07, 1)
+outline_color = Color(0.372827, 0.361265, 1.92523e-07, 1)
+
+[node name="Area2D" type="Area2D" parent="Tanks/Tank3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tanks/Tank3/Area2D"]
+position = Vector2(0, 2)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_phh4q")
+
+[node name="Fire" type="AudioStreamPlayer2D" parent="Tanks/Tank3"]
+stream = ExtResource("7_cuvma")
+bus = &"Tablet"
+
+[node name="Death" type="AudioStreamPlayer2D" parent="Tanks/Tank3"]
+stream = ExtResource("8_kyt48")
+bus = &"Tablet"
+
+[node name="Tank4" type="Sprite2D" parent="Tanks"]
+z_index = 1
+texture_filter = 1
+material = SubResource("ShaderMaterial_cuvma")
+position = Vector2(165, 96)
+scale = Vector2(5, 5)
+texture = ExtResource("2_okvkw")
+hframes = 2
+region_enabled = true
+region_rect = Rect2(0, 0, 30, 18)
+script = ExtResource("3_phh4q")
+id = 3
+bullet = ExtResource("4_okvkw")
+body_color = Color(0.815686, 0.392157, 0, 1)
+outline_color = Color(0.349143, 0.152555, 4.81308e-08, 1)
+
+[node name="Area2D" type="Area2D" parent="Tanks/Tank4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tanks/Tank4/Area2D"]
+position = Vector2(0, 2)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_phh4q")
+
+[node name="Fire" type="AudioStreamPlayer2D" parent="Tanks/Tank4"]
+stream = ExtResource("7_cuvma")
+bus = &"Tablet"
+
+[node name="Death" type="AudioStreamPlayer2D" parent="Tanks/Tank4"]
+stream = ExtResource("8_kyt48")
+bus = &"Tablet"
+
+[connection signal="body_entered" from="Tanks/PlayerTank/Area2D" to="Tanks/PlayerTank" method="_death"]
+[connection signal="body_entered" from="Tanks/Tank2/Area2D" to="Tanks/Tank2" method="_death"]
+[connection signal="body_entered" from="Tanks/Tank3/Area2D" to="Tanks/Tank3" method="_death"]
+[connection signal="body_entered" from="Tanks/Tank4/Area2D" to="Tanks/Tank4" method="_death"]

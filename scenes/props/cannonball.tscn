@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://leh4l8nwcjqs"]
+
+[ext_resource type="Texture2D" uid="uid://dmkhccyo0um0i" path="res://textures/apps/tank.png" id="1_d0co3"]
+[ext_resource type="Script" uid="uid://c6ww6mbu78ogu" path="res://scripts/cannonball.gd" id="2_lrl18"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d0co3"]
+radius = 2.0
+
+[node name="Cannonball" type="Sprite2D"]
+texture_filter = 1
+scale = Vector2(5, 5)
+texture = ExtResource("1_d0co3")
+region_enabled = true
+region_rect = Rect2(30, 0, 6, 6)
+script = ExtResource("2_lrl18")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_d0co3")
