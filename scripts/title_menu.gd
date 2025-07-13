@@ -11,7 +11,7 @@ var flicker_timer = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for b in find_children("*", "Button", false):
+	for b in find_children("*", "Button", true):
 		b.mouse_entered.connect(_on_button_hover.bind(b.get_index()))
 		b.mouse_exited.connect(_on_button_unhover.bind(b.get_index()))
 		# This can be assigned manually

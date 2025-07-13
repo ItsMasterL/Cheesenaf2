@@ -248,6 +248,7 @@ shape = SubResource("RectangleShape2D_w1vfb")
 
 [node name="Jump" type="AudioStreamPlayer2D" parent="Foxy"]
 stream = ExtResource("6_agria")
+volume_db = -5.0
 bus = &"Tablet"
 
 [node name="Freddy" type="RigidBody2D" parent="."]
@@ -303,6 +304,7 @@ shape = SubResource("CapsuleShape2D_w1vfb")
 
 [node name="Jump" type="AudioStreamPlayer2D" parent="Freddy"]
 stream = ExtResource("6_agria")
+volume_db = -5.0
 bus = &"Tablet"
 
 [node name="Bonnie" type="RigidBody2D" parent="." node_paths=PackedStringArray("attachment")]
@@ -383,6 +385,7 @@ shape = SubResource("RectangleShape2D_w1vfb")
 
 [node name="Jump" type="AudioStreamPlayer2D" parent="Bonnie"]
 stream = ExtResource("6_agria")
+volume_db = -5.0
 bus = &"Tablet"
 
 [node name="Chica" type="RigidBody2D" parent="."]
@@ -441,6 +444,7 @@ shape = SubResource("CapsuleShape2D_w1vfb")
 
 [node name="Jump" type="AudioStreamPlayer2D" parent="Chica"]
 stream = ExtResource("6_agria")
+volume_db = -5.0
 bus = &"Tablet"
 
 [node name="Display" type="Label" parent="."]

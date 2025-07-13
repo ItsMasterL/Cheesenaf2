@@ -9,6 +9,7 @@ Adjustments:
 - Reorganized most scripts and scenes
 - Moved the credits and changelog to their own files
 - Added more interesting scenery to the Pizzeria
+- The media player can now play in the background (But it's not perfect)
 
 Additions:
 - Added a new option in Extras. Just how does it work, though...?

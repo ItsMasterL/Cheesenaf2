@@ -12,7 +12,8 @@ var call_accepted
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_start_call()
+	if get_parent().standalone_mode == false:
+		_start_call()
 
 func _start_call():
 	if root.night < 7:

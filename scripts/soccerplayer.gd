@@ -31,20 +31,17 @@ func _physics_process(delta):
 		leg.rotation_degrees = clamp(leg.rotation_degrees, -105, 0)
 	if is_player:
 		if root.using_tablet:
-			if ground.is_colliding() or gravity_scale == 0:
+			if ground.is_colliding() or gravity_scale <= 0.1:
 				if gravity_scale != 0:
 					angular_velocity += (0.01 * -rotation_degrees)
 				if Input.is_action_just_pressed("Interact"):
 					sfx.play()
 					linear_velocity += Vector2(local.x,-jump_strength)
 					angular_velocity += kick * facing
-					leg.angular_velocity = 0
 			if Input.is_action_pressed("Interact"):
 				leg.angular_velocity = 18 * facing
 			else:
 				leg.angular_velocity = -7 * facing
-			if Input.is_action_just_released("Interact"):
-				leg.angular_velocity = 0
 	else:
 		if ground.is_colliding() or gravity_scale == 0:
 			if gravity_scale != 0:
@@ -54,13 +51,12 @@ func _physics_process(delta):
 				sfx.play()
 				linear_velocity += Vector2(local.x,-jump_strength)
 				angular_velocity += kick * facing
-				leg.angular_velocity = 0
 				cpu_cooldown = 10
 		else:
 			leg.angular_velocity = 18 * facing
 		cpu_cooldown = clamp(cpu_cooldown - 1, 0, 10)
 	
-	leg.angular_velocity = clamp(leg.angular_velocity, -20, 20)
+	leg.angular_velocity = clamp(leg.angular_velocity, -18, 18)
 
 
 	

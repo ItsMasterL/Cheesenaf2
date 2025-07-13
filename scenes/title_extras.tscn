@@ -65,9 +65,9 @@ scroll_active = false
 [node name="Credits" type="Button" parent="."]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 566.0
+offset_top = 559.0
 offset_right = 302.0
-offset_bottom = 595.0
+offset_bottom = 588.0
 theme_override_fonts/font = ExtResource("2_bn3vm")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2ptv6")
@@ -100,9 +100,9 @@ scroll_active = false
 [node name="Changelog" type="Button" parent="."]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 536.0
+offset_top = 521.0
 offset_right = 302.0
-offset_bottom = 565.0
+offset_bottom = 550.0
 theme_override_fonts/font = ExtResource("2_bn3vm")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2ptv6")
@@ -138,6 +138,7 @@ offset_left = 16.0
 offset_top = 52.0
 offset_right = 302.0
 offset_bottom = 81.0
+tooltip_text = "Get updates on the discord!"
 theme_override_fonts/font = ExtResource("2_bn3vm")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2ptv6")
@@ -170,9 +171,9 @@ scroll_active = false
 [node name="Discord" type="Button" parent="."]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 91.0
+offset_top = 92.0
 offset_right = 302.0
-offset_bottom = 120.0
+offset_bottom = 121.0
 theme_override_fonts/font = ExtResource("2_bn3vm")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2ptv6")
@@ -206,9 +207,9 @@ scroll_active = false
 [node name="Github" type="Button" parent="."]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 130.0
+offset_top = 134.0
 offset_right = 302.0
-offset_bottom = 159.0
+offset_bottom = 163.0
 theme_override_fonts/font = ExtResource("2_bn3vm")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2ptv6")
@@ -242,9 +243,9 @@ scroll_active = false
 [node name="Cheesenaf1" type="Button" parent="."]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 167.0
+offset_top = 176.0
 offset_right = 302.0
-offset_bottom = 196.0
+offset_bottom = 205.0
 theme_override_fonts/font = ExtResource("2_bn3vm")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2ptv6")
@@ -276,6 +277,43 @@ bbcode_enabled = true
 text = "EXTRA_CODE"
 scroll_active = false
 
+[node name="Tablet" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 16.0
+offset_top = 92.0
+offset_right = 302.0
+offset_bottom = 121.0
+theme_override_fonts/font = ExtResource("2_bn3vm")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2ptv6")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_27atk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5pxcu")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_8w5np")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_hjsyr")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rsbhx")
+alignment = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Tablet"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -9.5
+offset_right = 235.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_bn3vm")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "EXTRA_TABLET"
+scroll_active = false
+
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_64dvc")
 volume_db = -10.0
@@ -293,3 +331,4 @@ bus = &"SFX"
 [connection signal="pressed" from="Discord" to="." method="_open_url" binds= ["https://discord.com/invite/yKA3MSvvA5"]]
 [connection signal="pressed" from="Github" to="." method="_open_url" binds= ["https://github.com/ItsMasterL/Cheesenaf2"]]
 [connection signal="pressed" from="Cheesenaf1" to="Cheesenaf1" method="_connect_games"]
+[connection signal="pressed" from="Tablet" to="." method="_change_menu" binds= ["tablet"]]

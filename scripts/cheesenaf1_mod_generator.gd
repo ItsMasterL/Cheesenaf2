@@ -157,6 +157,9 @@ func _create_modpack():
 		# Get the data from the JSON object.
 			var data = json.data
 			data["enabledMods"] = ["Cheesenaf2"]
+			data["SkipModMenu"] = true
+			data["Bbg"] = data["Bbg"] as int
+			data["Night"] = data["Night"] as int
 			var data_string = JSON.stringify(data)
 			DirAccess.remove_absolute(Globals.cheesenaf1_path + "/data.json")
 			file.close()
@@ -165,7 +168,7 @@ func _create_modpack():
 	
 	var splash = FileAccess.open(Globals.cheesenaf1_path + "/mods/Cheesenaf2/text/splash.json",FileAccess.WRITE)
 	var splash_text = {
-		"splashtext":["gather the code.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "ignore their questions.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "put the code back together.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "complete the code and you will be spared.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"]
+		"splashtext":["gather the code.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "ignore their questions.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "put the code back together.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "complete the code and you will be spared.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"]
 		}
 	var splash_json = JSON.stringify(splash_text)
 	splash.store_line(splash_json)

@@ -142,15 +142,16 @@ outline_color = Color(0.470588, 0, 0.101961, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tanks/PlayerTank/Area2D"]
 position = Vector2(0, 2)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_phh4q")
 
 [node name="Fire" type="AudioStreamPlayer2D" parent="Tanks/PlayerTank"]
 stream = ExtResource("7_cuvma")
+volume_db = -10.0
 bus = &"Tablet"
 
 [node name="Death" type="AudioStreamPlayer2D" parent="Tanks/PlayerTank"]
 stream = ExtResource("8_kyt48")
+volume_db = -10.0
 bus = &"Tablet"
 
 [node name="Tank2" type="Sprite2D" parent="Tanks"]
@@ -173,15 +174,16 @@ outline_color = Color(0, 0.272745, 0.423786, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tanks/Tank2/Area2D"]
 position = Vector2(0, 2)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_phh4q")
 
 [node name="Fire" type="AudioStreamPlayer2D" parent="Tanks/Tank2"]
 stream = ExtResource("7_cuvma")
+volume_db = -10.0
 bus = &"Tablet"
 
 [node name="Death" type="AudioStreamPlayer2D" parent="Tanks/Tank2"]
 stream = ExtResource("8_kyt48")
+volume_db = -10.0
 bus = &"Tablet"
 
 [node name="Tank3" type="Sprite2D" parent="Tanks"]
@@ -204,15 +206,16 @@ outline_color = Color(0.372827, 0.361265, 1.92523e-07, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tanks/Tank3/Area2D"]
 position = Vector2(0, 2)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_phh4q")
 
 [node name="Fire" type="AudioStreamPlayer2D" parent="Tanks/Tank3"]
 stream = ExtResource("7_cuvma")
+volume_db = -10.0
 bus = &"Tablet"
 
 [node name="Death" type="AudioStreamPlayer2D" parent="Tanks/Tank3"]
 stream = ExtResource("8_kyt48")
+volume_db = -10.0
 bus = &"Tablet"
 
 [node name="Tank4" type="Sprite2D" parent="Tanks"]
@@ -235,15 +238,16 @@ outline_color = Color(0.349143, 0.152555, 4.81308e-08, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tanks/Tank4/Area2D"]
 position = Vector2(0, 2)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_phh4q")
 
 [node name="Fire" type="AudioStreamPlayer2D" parent="Tanks/Tank4"]
 stream = ExtResource("7_cuvma")
+volume_db = -10.0
 bus = &"Tablet"
 
 [node name="Death" type="AudioStreamPlayer2D" parent="Tanks/Tank4"]
 stream = ExtResource("8_kyt48")
+volume_db = -10.0
 bus = &"Tablet"
 
 [connection signal="body_entered" from="Tanks/PlayerTank/Area2D" to="Tanks/PlayerTank" method="_death"]

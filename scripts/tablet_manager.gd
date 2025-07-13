@@ -13,8 +13,9 @@ var is_media_playing = false
 var is_video = false
 var volume = 100
 var media_player_is_open = false
-var is_paused = true
+var is_paused = true # Originally used for the media player, but it loses its place so its currently used just for start/stopped states
 
+@export var standalone_mode = false # For the extras menu option
 @onready var home = $Home
 @onready var app_home = $Application
 @onready var time = $TimeUI/Clock
@@ -28,19 +29,22 @@ func _ready():
 	_populate_homescreen()
 
 func _process(_delta):
-	if root.hour == 0:
-		time.text = "12:%02d AM" % [root.minute]
+	if standalone_mode:
+		pass
 	else:
-		time.text = "%02d:%02d AM" % [root.hour, root.minute]
-	# For compatibility
-	using_tablet = root.using_tablet
-	if using_tablet:
-		root.fun_multiplier = fun_multiplier
-	else:
-		root.fun_multiplier = 1
-	#Media Player
-	if media_player_is_open == false:
-		_media_process(_delta)
+		if root.hour == 0:
+			time.text = "12:%02d AM" % [root.minute]
+		else:
+			time.text = "%02d:%02d AM" % [root.hour, root.minute]
+		# For compatibility
+		using_tablet = root.using_tablet
+		if using_tablet:
+			root.fun_multiplier = fun_multiplier
+		else:
+			root.fun_multiplier = 1
+		#Media Player
+		if media_player_is_open == false:
+			_media_process(_delta)
 
 
 func _purchase_app(app: Globals.store_apps_binary):
@@ -51,28 +55,30 @@ func _purchase_app(app: Globals.store_apps_binary):
 func _populate_homescreen():
 	for child in app_container.get_children():
 		child.queue_free()
-	#Setup default apps
-	var camsplus = app_button.instantiate()
-	camsplus.app_id = "cams_plus"
-	camsplus.text = "Cams PLUS"
-	camsplus.icon = load("res://textures/apps/camsplus.png")
-	camsplus.pressed.connect(_load_application.bind(camsplus.app_id))
-	app_container.add_child(camsplus)
 	
-	var store = app_button.instantiate()
-	store.app_id = "gameworld"
-	store.text = "Gameworld Store"
-	store.icon = load("res://textures/apps/gameworld.png")
-	store.pressed.connect(_load_application.bind(store.app_id))
-	app_container.add_child(store)
-	
-	if root.night > 1:
-		var vaultmaster = app_button.instantiate()
-		vaultmaster.app_id = "vaultmaster"
-		vaultmaster.text = "VaultMaster Door Manager"
-		vaultmaster.icon = load("res://textures/apps/vaultmaster.png")
-		vaultmaster.pressed.connect(_load_application.bind(vaultmaster.app_id))
-		app_container.add_child(vaultmaster)
+	if standalone_mode == false:
+		#Setup default apps
+		var camsplus = app_button.instantiate()
+		camsplus.app_id = "cams_plus"
+		camsplus.text = "Cams PLUS"
+		camsplus.icon = load("res://textures/apps/camsplus.png")
+		camsplus.pressed.connect(_load_application.bind(camsplus.app_id))
+		app_container.add_child(camsplus)
+
+		var store = app_button.instantiate()
+		store.app_id = "gameworld"
+		store.text = "Gameworld Store"
+		store.icon = load("res://textures/apps/gameworld.png")
+		store.pressed.connect(_load_application.bind(store.app_id))
+		app_container.add_child(store)
+
+		if root.night > 1:
+			var vaultmaster = app_button.instantiate()
+			vaultmaster.app_id = "vaultmaster"
+			vaultmaster.text = "VaultMaster Door Manager"
+			vaultmaster.icon = load("res://textures/apps/vaultmaster.png")
+			vaultmaster.pressed.connect(_load_application.bind(vaultmaster.app_id))
+			app_container.add_child(vaultmaster)
 	
 	var purchased_apps = 0
 	for app in Globals.store_apps_binary:
@@ -86,7 +92,8 @@ func _populate_homescreen():
 			button.icon = Globals.apps[value].icon
 			button.pressed.connect(_load_application.bind(button.app_id, Globals.apps[value].fun_multiplier))
 			app_container.add_child(button)
-	root.purchased_apps = purchased_apps
+	if standalone_mode == false:
+		root.purchased_apps = purchased_apps
 
 func _load_application(appscene: String, fun: float = fun_multiplier):
 	if app_home.get_child_count() > 0:
@@ -108,8 +115,9 @@ func _home():
 	if app_home.get_child_count() > 0:
 		app_home.get_child(0).queue_free()
 	home.show()
-	root.in_cams = false
-	fun_multiplier = 1
+	if standalone_mode == false:
+		root.in_cams = false
+		fun_multiplier = 1
 
 func _media_process(_delta):
 	is_media_playing = audio_player.playing
@@ -125,7 +133,7 @@ func _media_process(_delta):
 		elif queued_media.ends_with(".wav") and audio_player.stream == null:
 			queued_media = ""
 			return # They just play back static rn
-			is_video = false # TODO: Unreachable code (statement after return) in function "_process()".
+			is_video = false
 			var file = FileAccess.open(queued_media, FileAccess.READ)
 			var sound = AudioStreamWAV.new()
 			sound.data = file.get_buffer(file.get_length())

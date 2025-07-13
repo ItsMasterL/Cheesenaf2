@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://canv7r7eo3udy"]
+
+[ext_resource type="PackedScene" uid="uid://bxpmp04xt6u6q" path="res://scenes/props/tablet_os.tscn" id="1_5av2w"]
+[ext_resource type="Script" uid="uid://b34lh60hvcbt8" path="res://scripts/title_tablet.gd" id="1_50hf7"]
+
+[node name="Tablet" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_50hf7")
+
+[node name="Exit Tablet" type="Button" parent="."]
+z_index = 7
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -43.0
+offset_right = 124.0
+grow_vertical = 0
+text = "Close"
+
+[node name="Home" type="Button" parent="."]
+z_index = 7
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 511.0
+offset_top = -43.0
+offset_right = 635.0
+grow_vertical = 0
+text = "Home"
+
+[node name="TabletOS" parent="." instance=ExtResource("1_5av2w")]
+z_index = 3
+standalone_mode = true
+
+[connection signal="pressed" from="Exit Tablet" to="." method="_return"]

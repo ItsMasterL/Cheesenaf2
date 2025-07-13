@@ -82,6 +82,7 @@ func _setup(random_effect = true):
 	var b_bounc = 0.8
 	for i in players:
 		i.jump_strength = 600
+		i.kick = 1
 	for i in goals:
 		i.scale = Vector2(2.65,2.65)
 	ball.get_child(0).shape.radius = 29
@@ -132,7 +133,7 @@ func _setup(random_effect = true):
 			b_vel = Vector2(0,-1)
 			for i in players:
 				i.kick = 2
-				i.jump_strength = 10
+				i.jump_strength = 100
 		EFFECTS.THE_WORLD_ENDS:
 			$Home/Music.stop()
 			$Home/Music.stream = load("res://sounds/music/game_over.mp3")

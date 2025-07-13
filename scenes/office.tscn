@@ -1002,7 +1002,6 @@ transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -
 [node name="Animatronics" type="Node3D" parent="."]
 
 [node name="Edam Freddy" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("23_d180k")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 68.541, 1.296, 0)
 root = NodePath("../..")
 
 [node name="Edam Bonnie" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("22_fo68b")]
