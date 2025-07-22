@@ -6,8 +6,11 @@ var run_thread = true
 var thread: Thread
 
 func _ready():
-	thread = Thread.new()
-	thread.start(_passive_game_check)
+	if Globals.cheesenaf1_code != "":
+		queue_free()
+	else:
+		thread = Thread.new()
+		thread.start(_passive_game_check)
 
 func _check_for_process():
 	var output = []
@@ -28,7 +31,8 @@ func _passive_game_check():
 
 func _exit_tree() -> void:
 	run_thread = false
-	thread.wait_to_finish()
+	if Globals.cheesenaf1_code == "":
+		thread.wait_to_finish()
 
 func _connect_games():
 	if game_open:

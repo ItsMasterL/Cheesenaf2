@@ -137,7 +137,9 @@ func _save():
 		"apps" = purchased_apps,
 		"money" = money,
 		"foxy" = saw_foxy,
-		"foxyn1" = saw_foxy_night_1
+		"foxyn1" = saw_foxy_night_1,
+		"code" = cheesenaf1_code,
+		"seed" = cheesenaf1_seed
 	}
 	var file = FileAccess.open("user://data.json", FileAccess.WRITE)
 	var json_string = JSON.stringify(data)
@@ -168,6 +170,10 @@ func _load():
 			saw_foxy = data["foxy"]
 		if "foxyn1" in data and typeof(data["foxyn1"]) == TYPE_BOOL:
 			saw_foxy_night_1 = data["foxyn1"]
+		if "code" in data and typeof(data["code"]) == TYPE_STRING:
+			cheesenaf1_code = data["code"]
+		if "seed" in data and typeof(data["seed"]) in [TYPE_INT, TYPE_FLOAT]:
+			cheesenaf1_seed = data["seed"]
 		if "apps" in data and typeof(data["apps"]) == TYPE_STRING:
 			purchased_apps = data["apps"]
 			purchases = purchased_apps.hex_to_int()

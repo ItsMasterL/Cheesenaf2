@@ -49,7 +49,7 @@ var thread = Thread.new()
 func _ready():
 	$"../../../"._mute_music()
 	$"../Glitch".play()
-	if Globals.cheesenaf1_seed == 0:
+	if Globals.cheesenaf1_code == "":
 		_generate_seed()
 	_create_bbgs()
 	thread.start(_create_modpack)
@@ -71,21 +71,25 @@ func _create_bbgs():
 	alan.bbg_dialogue = ["Hey there! What's your name?", "Nice to meet you, {0}, I'm Alan!", "Oh wait... oh... that's, not right. You're not {0}.", "I've been here before. I would have known if it were {0}.", "So what brings you here, anyway?", "A code? I don't know what you're talking about but I'll come up with one anyway. It doesn't have to be like, super specific does it?", "What is it even for?", "Who's orders are you following?", "Word %s is \"%s\"" % [bbgs.find(alan) + 1,alphabet_dict[string_seed[bbgs.find(alan)]]], "Oh. okay bye", "Welcome back, {0}..."]
 	alan.color = Color(8, 140, 37)
 	freddy.name = "Freddy"
-	freddy.bbg_dialogue = ["Hey there, pal! I don't believe we've met!","Nice to meet ya, buddy!","Say, this all seems a little strange to me, wouldn't you say?","Right? I mean, there's nowhere to dance, and this music is all too calm!","Whoa- and things just change all of the sudden!","What? A code?","I'd have to scan my memory banks on that one.","Have you asked the others? They seem to- Oh wait, I've got it.","Word %s is \"%s\"" % [bbgs.find(freddy) + 1,alphabet_dict[string_seed[bbgs.find(freddy)]]],"Huh. I guess it's just me. Hey, where are you goin-","Well hey there, Adam!"]
+	freddy.bbg_dialogue = ["Hey there, pal! I don't believe we've met!","Nice to meet ya, buddy!","Say, this all seems a little strange to me, wouldn't you say so?","Right? I mean, there's nowhere to dance, and this music is all too calm!","Whoa- and things just change all of the sudden!","What? A code?","I'd have to scan my memory banks on that one.","Have you asked the others? They seem to- Oh wait, I've got it.","Word %s is \"%s\"" % [bbgs.find(freddy) + 1,alphabet_dict[string_seed[bbgs.find(freddy)]]],"Huh. I guess it's just me. Hey, where are you goin-","Well hey there, Adam!"]
 	freddy.player_dialogue = ["I guess so.","Not really.","Got a code\nfor me?","...","...","Thank you."]
 	freddy.color = Color(92, 55, 0)
+	freddy.overlay_expression = false
 	bonnie.name = "Bonnie"
-	bonnie.bbg_dialogue = ["Hey dude, what's your name?","Sick name, {0}!","So dude, do you dig this sick jacket I found? Totally 90s, right?","I like your taste.","And hey, no hard feelings on the crushing my skull thing. Luckily I'm easy to fix.","What? A code?","I don't know dude... who wants this code?","...Alright, whatever. The only guy I'd worry about doing any of this died in... wait, are we in the 90s right now, or 2014?","Word %s is \"%s\"" % [bbgs.find(bonnie) + 1,alphabet_dict[string_seed[bbgs.find(bonnie)]]],"Well. Alright then, I don't want to talk with anyone with as bad of taste as you.","Hey dude, what's up?"]
+	bonnie.bbg_dialogue = ["Hey dude, what's your name?","Sick name, {0}!","So dude, do you dig this sick jacket I found? Totally 90s, right?","I like your taste.","And hey, no hard feelings on the crushing my skull thing. Luckily I'm easy to fix.","What? A code?","I don't know dude... who wants this code?","...Alright, whatever. The only guy I'd worry about getting any of this died in... wait, are we in the 90s right now, or 2014?","Word %s is \"%s\"" % [bbgs.find(bonnie) + 1,alphabet_dict[string_seed[bbgs.find(bonnie)]]],"Well. Alright then, I don't want to talk with anyone with as bad of taste as you.","Hey dude, what's up?"]
 	bonnie.player_dialogue = ["I guess so.","Not really.","Got a code\nfor me?","...","...","Thank you."]
 	bonnie.color = Color(0, 75, 92)
+	bonnie.overlay_expression = false
 	chica.name = "Chica"
 	chica.bbg_dialogue = ["Hey there! What's your name?","Well, nice to meet you, {0}!","So, Adam, you've been staying hydrated right?","Great! Nothing's more important than staying healthy and hydrated!","So, what are we even doing here? Is this some kind of babygirl simulator?","Oh, you just need a code?","Well good, I'm not about to be someone's babygirl!","Alright, I've got the code. Remember, stay hydrated!","Word %s is \"%s\"" % [bbgs.find(chica) + 1,alphabet_dict[string_seed[bbgs.find(chica)]]],"Well! I'm not talking to you until you get some water.","Hi, Adam!"]
 	chica.player_dialogue = ["I guess so.","Not really.","Got a code\nfor me?","...","...","Thank you."]
 	chica.color = Color(176, 138, 0)
+	chica.overlay_expression = false
 	foxy.name = "Foxy"
 	foxy.bbg_dialogue = ["Yarr... What can I call ye?","Yarr, nice to meet ye","Yarr, what a fascinatin' place.","Yarrr... Gives me a nostalgic feelin'. Like I be back in the good ol' days.","Not, that, the old days were good... seeing as how the older animatronics treated ye.","Yarr, a code for ye?","Aye, I got one 'ere for ye.","Whatever this code be for... I hope I'm able to help ye, friend.","Word %s be \"%s\"" % [bbgs.find(foxy) + 1,alphabet_dict[string_seed[bbgs.find(foxy)]]],"Yarrrr... I guess I'll be goin' then.","Yar, have ye any games on ye phone? Eheh..."]
 	foxy.player_dialogue = ["I guess so.","Not really.","Got a code\nfor me?","...","...","Thank you."]
 	foxy.color = Color(92, 0, 34)
+	foxy.overlay_expression = false
 	berry.name = "Berry"
 	berry.bbg_dialogue = ["j u s t   b e c a u s e   y o u   c a n   e r a s e   y o u r      p a s t   d o e s n ' t   m e a n   n o   o n e   w i l l               r e m e m b e r .", "anyways,", "what do you hope to achieve here, adam?", "i don't have any code for you. i'm not supposed to exist.", "the others have a vessel.", "my name isn't even berry. this isn't me.", "none of us looked like this. these are just representations of the five of us.", "some chose to lean into the persona. i will not.", "we can never be free. there is no happy ending. jae- i mean, {0}, shares our fate. i can feel it. consider yourself lucky.", "y o u   c a n n o t   h i d e   f r o m   u s .", "...why are you here?"]
 	berry.player_dialogue = ["How did you\nknow?","I'm not Adam...","...","...","...","..."]
@@ -98,6 +102,11 @@ func _generate_seed():
 	if OS.is_debug_build():
 		print(string_seed + ": " + str(hash(string_seed)))
 	Globals.cheesenaf1_seed = hash(string_seed)
+	Globals._save()
+
+func _save_input():
+	Globals.cheesenaf1_code = self.text
+	Globals._save()
 
 func _create_modpack():
 	var dir = DirAccess.open(Globals.cheesenaf1_path + "/mods")
@@ -121,9 +130,9 @@ func _create_modpack():
 			"BBGDialogue": bbg.bbg_dialogue,
 			"PlayerDialogue": bbg.player_dialogue,
 			"Color": {
-				"B" = bbg.color.b,
-				"G" = bbg.color.g,
-				"R" = bbg.color.r,
+				"B" = bbg.color.b as int,
+				"G" = bbg.color.g as int,
+				"R" = bbg.color.r as int,
 				"A" = 255
 			},
 			"OverlayExpression": bbg.overlay_expression
@@ -160,6 +169,7 @@ func _create_modpack():
 			data["SkipModMenu"] = true
 			data["Bbg"] = data["Bbg"] as int
 			data["Night"] = data["Night"] as int
+			data["AltTitle"] = false
 			var data_string = JSON.stringify(data)
 			DirAccess.remove_absolute(Globals.cheesenaf1_path + "/data.json")
 			file.close()
