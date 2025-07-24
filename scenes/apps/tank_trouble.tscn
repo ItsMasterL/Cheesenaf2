@@ -120,6 +120,21 @@ theme_override_font_sizes/font_size = 32
 text = "P4: Freddy
 Kills: 0 Deaths: 0"
 
+[node name="Instruction" type="Label" parent="Home"]
+z_index = 2
+layout_mode = 0
+offset_left = 7.0
+offset_top = 763.0
+offset_right = 1278.0
+offset_bottom = 802.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "Use [WASD] to move || Press [SPACE] to shoot"
+horizontal_alignment = 1
+vertical_alignment = 2
+
 [node name="Tanks" type="Node2D" parent="."]
 
 [node name="PlayerTank" type="Sprite2D" parent="Tanks"]

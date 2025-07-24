@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqmpka1m3af6"]
+[gd_scene load_steps=6 format=3 uid="uid://dqmpka1m3af6"]
 
-[ext_resource type="Script" path="res://scripts/game_over.gd" id="1_v6fyd"]
+[ext_resource type="Script" uid="uid://ddynwhupj72ma" path="res://scripts/game_over.gd" id="1_v6fyd"]
 [ext_resource type="Texture2D" uid="uid://b1my2w4jmvnbv" path="res://textures/static.png" id="2_8i6ey"]
-[ext_resource type="Script" path="res://scripts/background.gd" id="3_w1kre"]
+[ext_resource type="Script" uid="uid://bc0tklwmfofti" path="res://scripts/background.gd" id="3_w1kre"]
 [ext_resource type="AudioStream" uid="uid://diuc1swirg8ps" path="res://sounds/static.wav" id="4_uryl7"]
+[ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://fonts/consolas.ttf" id="5_7m3ot"]
 
 [node name="Gameover" type="Control"]
 layout_mode = 3
@@ -30,3 +31,24 @@ stream = ExtResource("4_uryl7")
 volume_db = -10.0
 autoplay = true
 bus = &"SFX"
+
+[node name="Time" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -281.5
+offset_top = -151.0
+offset_right = 281.5
+offset_bottom = -96.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.685733, 3.10443e-06, 5.77569e-07, 1)
+theme_override_fonts/font = ExtResource("5_7m3ot")
+theme_override_font_sizes/font_size = 61
+text = "0:00:00"
+horizontal_alignment = 1

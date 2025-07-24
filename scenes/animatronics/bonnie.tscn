@@ -1,9 +1,9 @@
 [gd_scene load_steps=23 format=3 uid="uid://sr5bhwimbn6q"]
 
 [ext_resource type="PackedScene" uid="uid://84wrom6majx8" path="res://models/bonnie.glb" id="1_kfj2h"]
-[ext_resource type="Script" path="res://scripts/animatronic.gd" id="1_vu3bh"]
-[ext_resource type="Script" path="res://scripts/animatronic_position.gd" id="2_81imh"]
-[ext_resource type="Script" path="res://scripts/animatronic_entrance.gd" id="2_mpcjg"]
+[ext_resource type="Script" uid="uid://bj1onaat51pqp" path="res://scripts/animatronic.gd" id="1_vu3bh"]
+[ext_resource type="Script" uid="uid://4en87cf4wnfr" path="res://scripts/animatronic_position.gd" id="2_81imh"]
+[ext_resource type="Script" uid="uid://b7m76kqb1eco1" path="res://scripts/animatronic_entrance.gd" id="2_mpcjg"]
 [ext_resource type="AudioStream" uid="uid://blj2fpebqrwua" path="res://sounds/dialogue/bonnie.wav" id="7_es4hq"]
 [ext_resource type="AudioStream" uid="uid://c3n0lfpxca8e8" path="res://sounds/jumpscare_edam.wav" id="8_qwrtb"]
 
@@ -80,7 +80,7 @@ animation_id = "PartyRoomB"
 [sub_resource type="Resource" id="Resource_pebfs"]
 resource_name = "Kitchen"
 script = ExtResource("2_81imh")
-position = Vector3(25.2715, -0.0479998, -5.87571)
+position = Vector3(25.271, -0.048, -5.297)
 rotation = Vector3(0, -90, 0)
 scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([11, 5, 6, 9])

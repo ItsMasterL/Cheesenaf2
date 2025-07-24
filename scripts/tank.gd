@@ -23,6 +23,7 @@ func _process(delta):
 	var local_down = global_transform.basis_xform(Vector2.DOWN)
 	var animation_speed = 0
 	move_dir = 0
+	rotation_degrees += 0.00000001 #Unfortunately this is a hotfix to prevent invulnerability when not moving
 
 	if is_player:
 		if root.using_tablet:

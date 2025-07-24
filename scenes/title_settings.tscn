@@ -8,9 +8,9 @@
 [ext_resource type="Script" uid="uid://7mp58833s1f7" path="res://scripts/reset_settings.gd" id="6_5ukkq"]
 [ext_resource type="Script" uid="uid://bw07norw3t1sp" path="res://scripts/player_controls_test.gd" id="7_4sktf"]
 [ext_resource type="Script" uid="uid://dug22nbmuxgea" path="res://scripts/sensitivity_slider.gd" id="7_6v5l0"]
-[ext_resource type="PackedScene" uid="uid://dpn03nj1u7ol3" path="res://models/cheesenaf2.blend" id="7_pi3se"]
 [ext_resource type="Script" uid="uid://qqesfq7pj3dr" path="res://scripts/fullscreen_toggle.gd" id="8_j22wr"]
 [ext_resource type="Script" uid="uid://bnq20qahlrhng" path="res://scripts/set_language.gd" id="9_1sieu"]
+[ext_resource type="PackedScene" uid="uid://dddt68wyhyhk4" path="res://models/minimaloffice.glb" id="10_beffp"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ptv6"]
 
@@ -409,9 +409,9 @@ offset_top = -23.0
 offset_right = 281.0
 text = "SETTING_LANG"
 
-[node name="Map" parent="." instance=ExtResource("7_pi3se")]
+[node name="Map2" parent="." instance=ExtResource("10_beffp")]
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Map"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Map2"]
 transform = Transform3D(1, 0, 0, 0, -0.685463, 0.728108, 0, -0.728108, -0.685463, 0, 3.63307, -6.51262)
 light_color = Color(1, 1, 0.847059, 1)
 light_energy = 3.0
@@ -419,11 +419,11 @@ light_bake_mode = 1
 shadow_enabled = true
 spot_range = 19.2464
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Map/SpotLight3D"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Map2/SpotLight3D"]
 light_bake_mode = 1
 shadow_enabled = true
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="Map"]
+[node name="SpotLight3D2" type="SpotLight3D" parent="Map2"]
 transform = Transform3D(1, 0, 0, 0, 0.727773, 0.685818, 0, -0.685818, 0.727773, 0, 3.633, 6.513)
 light_color = Color(1, 1, 0.847059, 1)
 light_energy = 3.0
@@ -431,14 +431,8 @@ light_bake_mode = 1
 shadow_enabled = true
 spot_range = 19.2464
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Map/SpotLight3D2"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Map2/SpotLight3D2"]
 light_bake_mode = 1
-shadow_enabled = true
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
-transform = Transform3D(0.77288, 0.0557739, 0.632096, -0.634551, 0.0700509, 0.7697, -0.00134968, -0.995983, 0.0895323, 69.6845, 8.16925, 35.1654)
-light_color = Color(0.761397, 0.841342, 1, 1)
-light_energy = 0.371
 shadow_enabled = true
 
 [node name="Player" type="CharacterBody3D" parent="."]

@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://0u3o7hf0a2fl"
+path.s3tc="res://.godot/imported/minimaloffice_Wood026_1K-JPG_Color.jpg-8eee9ac7f72f4f7f5ac7d274b77c3cb4.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "35be9a0739a1c333107cb40af7ca432a"
+}
+
+[deps]
+
+source_file="res://models/minimaloffice_Wood026_1K-JPG_Color.jpg"
+dest_files=["res://.godot/imported/minimaloffice_Wood026_1K-JPG_Color.jpg-8eee9ac7f72f4f7f5ac7d274b77c3cb4.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

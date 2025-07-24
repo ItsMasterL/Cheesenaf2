@@ -11,7 +11,9 @@ Master L - BBG Code
 
 Models
 Master L - Pizzeria adjustments
-lagesnpiet - Sink
+lagesnpiet - Bathroom Sinks
+tori.cane - Brick Ovens
+Sousinho - Kitchen Sinks
 
 Artwork
 Master L
@@ -21,7 +23,7 @@ Total Miner - Tank Trouble sounds
 
 Music
 Groovy - Foxy's Paintin' Location music (OST!)
-FNAF 6 - Soccer Physics music
+FNAF 6's title music - Soccer Physics music
 LoZ: Majora's Mask - ???
 Keaton's 300 This is Sparta - Tank Trouble music
 

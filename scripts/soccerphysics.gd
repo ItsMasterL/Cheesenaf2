@@ -64,7 +64,7 @@ func _setup(random_effect = true):
 		selected_effect = EFFECTS[EFFECTS.keys()[randi_range(0,EFFECTS.size() - 2)]]
 		if randi_range(0,1792) == 1792:
 			selected_effect = EFFECTS.THE_WORLD_ENDS
-			print("It's happening.")
+			print("It's happening again.")
 	else:
 		selected_effect = EFFECTS.NONE
 
@@ -154,6 +154,7 @@ func _setup(random_effect = true):
 	var ii = 0
 	for i in players:
 		_set_phys(i,player_pos[ii],Vector2.ZERO,i.angular_velocity,p_grav,p_mass,p_frict,p_bounc)
+		i.leg.angular_velocity = 0
 		ii += 1
 	_set_phys(ball,b_pos,b_vel,0,b_grav,b_mass,b_frict,b_bounc)
 

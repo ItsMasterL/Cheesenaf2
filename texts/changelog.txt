@@ -10,11 +10,11 @@ Adjustments:
 - Moved the credits and changelog to their own files
 - Added more interesting scenery to the Pizzeria
 - The media player can now play in the background (But it's not perfect)
+- Optimized the settings background for better load times
 
 Additions:
 - Added a new option in Extras. Just how does it work, though...?
 - Added language support, with English and Translated available
-- Added keybinds support
 - Added Foxy's Paintin' Location (Tablet)
 - Added Soccer Physics (Tablet)
 - Added Tank Trouble (Tablet)

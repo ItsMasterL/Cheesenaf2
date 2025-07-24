@@ -448,14 +448,24 @@ volume_db = -5.0
 bus = &"Tablet"
 
 [node name="Display" type="Label" parent="."]
-offset_top = 677.0
+offset_top = 651.0
 offset_right = 1277.0
-offset_bottom = 779.0
+offset_bottom = 753.0
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("7_0bgv3")
 theme_override_font_sizes/font_size = 46
 text = "0-0
 Current Effect: INSERT TEXT HERE"
+horizontal_alignment = 1
+
+[node name="Instruction" type="Label" parent="."]
+offset_top = 758.0
+offset_right = 1277.0
+offset_bottom = 793.0
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("7_0bgv3")
+theme_override_font_sizes/font_size = 26
+text = "Tap to jump + kick"
 horizontal_alignment = 1
 
 [node name="LeftBoundry" type="Area2D" parent="."]
