@@ -1,4 +1,4 @@
-Version 1.1.0 -- 7/12/2025
+Version 1.1.0 -- 7/23/2025
 
 Fixes:
 - Freddy Fazbear's Picture Poker no longer incorrectly scores your hand
