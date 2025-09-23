@@ -16,6 +16,8 @@ const NIGHT_DATA = {
 	6: {"edams_friendly": false, "edam_freddy": 10, "edam_bonnie": 8, "edam_chica": 10, "edam_foxy": 7, "wither_freddy": 10, "wither_bonnie": 8, "wither_chica": 7, "wither_foxy": 8, "cheesestick": 3, "safety_time": 2},
 }
 
+const DEFAULT_NAMES = ["FredEnjoyer2", "Cheese4U", "Willy_A", "FloxOfFox", "C00L_BUN", "ChicChica", "EdamAdam", "PsyGuy", "WitherSchmither", "xX_Fweddy_Xx", "StuffedCrust", "freddy9218371924", "_Yarr_", "user19227343", "RealMarkiplier", "RealDawko", "MatPatReal", "PretendImFamous", "j", "CnafEnjoyer", "🦊", "🐻", "🐰", "🐔"]
+
 # Office
 var night = 0
 var edams_friendly = true
@@ -39,10 +41,9 @@ var cheesenaf1_code = ""
 var cheesenaf1_seed: int
 
 # Multiplayer #TODO: Actually implement multiplayer
-var local_playername = ""
-var remote_playernames: Array[String]
+var players = {}
 var is_host = false
-var host_ip = "127.0.0.1"
+var is_multiplayer = false
 
 # Save Data
 var save_night: int = 1
@@ -50,6 +51,7 @@ var purchased_apps: String = "0x0000"
 var money: float = 0
 var saw_foxy: bool = false
 var saw_foxy_night_1: bool = false
+var local_playername = DEFAULT_NAMES.pick_random()
 
 # User Settings
 var mouse_sensitivity: float = 1.0
@@ -139,7 +141,8 @@ func _save():
 		"foxy" = saw_foxy,
 		"foxyn1" = saw_foxy_night_1,
 		"code" = cheesenaf1_code,
-		"seed" = cheesenaf1_seed
+		"seed" = cheesenaf1_seed,
+		"name" = local_playername
 	}
 	var file = FileAccess.open("user://data.json", FileAccess.WRITE)
 	var json_string = JSON.stringify(data)
@@ -177,6 +180,8 @@ func _load():
 		if "apps" in data and typeof(data["apps"]) == TYPE_STRING:
 			purchased_apps = data["apps"]
 			purchases = purchased_apps.hex_to_int()
+		if "name" in data and typeof(data["name"]) == TYPE_STRING:
+			local_playername = data["name"]
 
 func _save_settings():
 	print("Saving user settings")

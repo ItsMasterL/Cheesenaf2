@@ -328,6 +328,7 @@ bus = &"SFX"
 [connection signal="pressed" from="Back" to="." method="_change_menu" binds= ["menu"]]
 [connection signal="pressed" from="Credits" to="." method="_change_menu" binds= ["credits"]]
 [connection signal="pressed" from="Changelog" to="." method="_change_menu" binds= ["changelog"]]
+[connection signal="pressed" from="Multiplayer" to="." method="_change_menu" binds= ["multiplayer"]]
 [connection signal="pressed" from="Discord" to="." method="_open_url" binds= ["https://discord.com/invite/yKA3MSvvA5"]]
 [connection signal="pressed" from="Github" to="." method="_open_url" binds= ["https://github.com/ItsMasterL/Cheesenaf2"]]
 [connection signal="pressed" from="Cheesenaf1" to="Cheesenaf1" method="_connect_games"]
