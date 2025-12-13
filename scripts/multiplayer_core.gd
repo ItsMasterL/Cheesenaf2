@@ -1,5 +1,11 @@
 extends Node
 
+
+# TODO: Use these signals for connecting to UI. Another comment below talks about what logic needs to be moved.
+signal player_connected(peer_id, player_info)
+signal player_disconnected(peer_id)
+signal server_disconnected
+
 @export var address = "127.0.0.1"
 @export var port = 17920
 @export var player_limit = 4
@@ -7,15 +13,20 @@ extends Node
 @export var player_list : Label
 @export var join_sound : AudioStreamPlayer
 
+# TODO: if this actually holds players, clean up Globals
+var players = {}
+
 # Client
 var peer
 var compression = ENetConnection.COMPRESS_RANGE_CODER
 
+
 func _ready():
-	multiplayer.peer_connected.connect(peer_connected)
-	multiplayer.peer_disconnected.connect(peer_disconnected)
-	multiplayer.connected_to_server.connect(connected_to_server)
-	multiplayer.connection_failed.connect(connection_failed)
+	multiplayer.peer_connected.connect(_on_player_connected)
+	multiplayer.peer_disconnected.connect(_on_player_disconnected)
+	multiplayer.connected_to_server.connect(_on_connected_ok)
+	multiplayer.connection_failed.connect(_on_connected_fail)
+	multiplayer.server_disconnected.connect(_on_server_disconnected)
 	
 	update_player_list(false)
 
@@ -26,20 +37,38 @@ func _set_port(input: String):
 	port = str_to_var(input)
 
 # Called on server and clients
-func peer_connected(id):
+func _on_player_connected(id):
 	print("Client %s has connected" % [str(id)])
+	_register_player.rpc_id(id, Globals.local_playername)
+
+@rpc("any_peer", "reliable")
+func _register_player(new_player_info):
+	var new_player_id = multiplayer.get_remote_sender_id()
+	players[new_player_id] = new_player_info
+	player_connected.emit(new_player_id, new_player_info)
+
 # Called on server and clients
-func peer_disconnected(id):
+func _on_player_disconnected(id):
 	print("Client %s has disconnected" % [str(id)])
-	Globals.players.erase(id)
-	update_player_list()
+	players.erase(id)
+	player_disconnected.emit(id)
+
 # Called on clients
-func connected_to_server():
+func _on_connected_ok():
 	print("Successfully connected to the host!")
-	send_info.rpc_id(1, Globals.local_playername, multiplayer.get_unique_id())
+	var peer_id = multiplayer.get_unique_id()
+	players[peer_id] = Globals.local_playername
+	player_connected.emit(peer_id, Globals.local_playername)
+
 # Called on clients
-func connection_failed():
+func _on_connected_fail():
 	print("Unable to connect to server.")
+	multiplayer.multiplayer_peer = null
+
+func _on_server_disconnected():
+	multiplayer.multiplayer_peer = null
+	players.clear()
+	server_disconnected.emit()
 
 func start_server():
 	peer = ENetMultiplayerPeer.new()
@@ -48,26 +77,28 @@ func start_server():
 		print("Unable to create server: %s" % [str(error)])
 		return
 	peer.get_host().compress(compression)
-	# Sets host to be a peer
-	multiplayer.set_multiplayer_peer(peer)
-	send_info(Globals.local_playername, multiplayer.get_unique_id())
-	Globals.is_host = true
+	multiplayer.multiplayer_peer = peer
+	
+	players[1] = Globals.local_playername
+	player_connected.emit(1, Globals.local_playername)
 	Globals.is_multiplayer = true
 	print("Server started!")
 
 func join_server():
-	peer = ENetMultiplayerPeer.new()
-	peer.create_client(address, port)
+	var peer = ENetMultiplayerPeer.new()
+	var error = peer.create_client(address, port)
+	if error != OK:
+		pass
 	peer.get_host().compress(compression)
-	multiplayer.set_multiplayer_peer(peer)
-	Globals.is_host = false
+	multiplayer.multiplayer_peer = peer
 	Globals.is_multiplayer = true
 
 func leave_server():
-	remove_player.rpc_id(1,multiplayer.get_unique_id())
-	Globals.players.clear()
+	multiplayer.multiplayer_peer = null
+	players.clear()
 	Globals.is_multiplayer = false
 
+# TODO: Move to UI and use signals from above.
 func update_player_list(playsound = true):
 	if player_list != null:
 		if playsound:
@@ -75,21 +106,6 @@ func update_player_list(playsound = true):
 		player_list.text = ""
 		for i in Globals.players:
 			player_list.text += "%s(%s)\n" % [Globals.players[i].username, Globals.players[i].id]
-
-
-@rpc("any_peer")
-func send_info(username, id):
-	if !Globals.players.has(id):
-		Globals.players[id] = {
-			"username": username,
-			"id": id
-		}
-	
-	update_player_list()
-	
-	if multiplayer.is_server():
-		for i in Globals.players:
-			send_info.rpc(Globals.players[i].username, i)
 
 @rpc("any_peer")
 func remove_player(id):
