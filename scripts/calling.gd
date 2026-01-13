@@ -36,6 +36,7 @@ func _answer():
 	else:
 		audio.stream = load("res://sounds/dialogue/c2call%s.wav" % root.night)
 	notif.visible = false
+	audio.volume_db = 10
 	audio.play()
 
 func _decline():

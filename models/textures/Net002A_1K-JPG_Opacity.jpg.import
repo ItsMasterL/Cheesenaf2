@@ -2,12 +2,13 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://y11rkodib32d"
+uid="uid://c6oi427r1tod"
 path.s3tc="res://.godot/imported/Net002A_1K-JPG_Opacity.jpg-f6a1a2f6f7daa670947f0465b2492c9a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 

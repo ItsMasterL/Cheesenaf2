@@ -88,6 +88,7 @@ signal paranormal_song
 			scale = positions[current_position].scale
 			$AnimationPlayer.play(positions[current_position].animation_id)
 			$"../../Player/Head/Eyes/AnimationPlayer".play("RESET")
+@export var enable_hologram = false
 
 # Usually used to disable movement checks during jumpscares
 var can_move = true
@@ -110,7 +111,10 @@ var rot_y = 0
 
 
 func _ready():
-	if Engine.is_editor_hint() == false:
+	if Engine.is_editor_hint():
+		var editor_selection = EditorInterface.get_selection()
+		editor_selection.selection_changed.connect(_editor_preview)
+	else:
 		safety_timer = Globals.safety_time
 		position = positions[0].position
 		rotation_degrees = positions[0].rotation
@@ -123,6 +127,11 @@ func _ready():
 		# Keep friendly dancers on stage
 		if is_friendly and music_box_sensitive:
 			can_move = false
+
+
+		if enable_hologram == false:
+			return
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -407,3 +416,32 @@ func _booped():
 			root.gamer_in_office = false
 			root._jumpscare(self)
 		$Boop.play()
+
+func _editor_preview():
+	if enable_hologram == false:
+		return
+	var selected := EditorInterface.get_selection()
+	if self in selected.get_selected_nodes():
+		print("You have selected ", animatronic, "!")
+		var container = Node3D.new()
+		container.name = "EditorContainer"
+		self.add_child(container)
+#		var holo = MeshInstance3D.new()
+#		var material = load("res://materials/hologram.tres")
+#		# holo.skeleton = get_child(0).get_child(0)
+#		holo.mesh = get_child(0).get_child(0).get_child(0).duplicate() # This should grab the mesh regardless of name
+#		var overrides = holo.get_surface_override_material_count()
+#		for i in overrides - 1:
+#				holo.set_surface_override_material(i, material)
+#		for p in positions.size() - 1:
+#			if current_position == p:
+#				continue
+#			var gram = holo.duplicate()
+#			gram.name = "hologram " + str(p)
+#			gram.position = positions[p].position
+#			gram.rotation_degrees = positions[p].rotation
+#			gram.scale = positions[p].scale
+#			get_node("EditorContainer").add_child(gram)
+	else:
+		if get_node("EditorContainer") != null:
+			get_node("EditorContainer").queue_free()

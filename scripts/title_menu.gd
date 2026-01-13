@@ -42,12 +42,13 @@ func _on_button_hover(sender: int):
 	$HoverSound.play()
 	if button.name == "Continue":
 		button.text = ">>            Night %s" % [Globals.save_night]
-	else:
+	elif "text" in button:
 		button.text = ">>"
 
 func _on_button_unhover(sender: int):
 	var button = get_child(sender)
-	button.text = String()
+	if "text" in button:
+		button.text = String()
 
 func _start_singleplayer(load_night: bool = false):
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

@@ -196,8 +196,11 @@ func _set_entrances(values: Array[int]):
 		entrance_closing.emit()
 
 func _refill_cup():
-	cup_fill = 1
-	drink.get_child(3).play()
+	if cup_fill != 1:
+		cup_fill = 1
+		drink.get_child(3).play()
+		drink.get_child(0).local_cup_fill = cup_fill
+		drink.get_child(0)._update_water()
 
 func _jumpscare(animatronic: Node3D):
 	while can_jumpscare == false:

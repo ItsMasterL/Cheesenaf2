@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ccbqd6vfps65a"]
+
+[ext_resource type="Shader" uid="uid://pb8x1qqm2qe" path="res://shaders/editor_holo.gdshader" id="1_ococj"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ococj")
+shader_parameter/opacity = 0.35
+shader_parameter/core_colour = Color(1, 1, 1, 1)
+shader_parameter/fresnel_strength = 0.0
+shader_parameter/fresnel_colour = Color(1, 1, 1, 1)
+shader_parameter/enable_scan_lines = true
+shader_parameter/scan_speed = 1.0
+shader_parameter/scan_colour = Color(0, 0.733333, 1, 1)
+shader_parameter/line_density = 100.0

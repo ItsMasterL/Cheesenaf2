@@ -16,6 +16,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([1, 2, 7, 11, 12])
 is_vent = false
 animation_id = "Stage"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_1i3n5"]
 resource_name = "Backstage"
@@ -26,6 +27,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([0, 2, 11])
 is_vent = false
 animation_id = "Backstage"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_8d38w"]
 resource_name = "Outside A"
@@ -36,6 +38,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([3, 0])
 is_vent = false
 animation_id = "OutsideA"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_bpc3w"]
 resource_name = "Outside B"
@@ -46,6 +49,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([2, 4])
 is_vent = false
 animation_id = "OutsideB"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_pmkvk"]
 resource_name = "Playroom"
@@ -56,6 +60,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([3, 5, 6, 8])
 is_vent = false
 animation_id = "Playroom"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_hcd7k"]
 resource_name = "Party Room A"
@@ -66,6 +71,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([4, 7])
 is_vent = false
 animation_id = "PartyRoomA"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_5kc1d"]
 resource_name = "Party Room B"
@@ -76,6 +82,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([4, 7, 12])
 is_vent = false
 animation_id = "PartyRoomB"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_pebfs"]
 resource_name = "Kitchen"
@@ -86,6 +93,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([11, 5, 6, 9])
 is_vent = false
 animation_id = "Kitchen"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_4wlqh"]
 script = ExtResource("2_mpcjg")
@@ -106,6 +114,7 @@ next_position_indexes = Array[int]([])
 is_vent = true
 animation_id = "Vent"
 office_entrance = SubResource("Resource_4wlqh")
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_fidsh"]
 script = ExtResource("2_mpcjg")
@@ -126,6 +135,7 @@ next_position_indexes = Array[int]([])
 is_vent = true
 animation_id = "Vent"
 office_entrance = SubResource("Resource_fidsh")
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_nkopa"]
 script = ExtResource("2_mpcjg")
@@ -146,6 +156,7 @@ next_position_indexes = Array[int]([])
 is_vent = true
 animation_id = "Vent"
 office_entrance = SubResource("Resource_nkopa")
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_0hntl"]
 resource_name = "Kitchen Ceiling Vent"
@@ -156,6 +167,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([10, 7, 1])
 is_vent = true
 animation_id = "Vent"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_wqs7m"]
 resource_name = "Lobby Vent B"
@@ -166,6 +178,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([0, 6])
 is_vent = true
 animation_id = "Vent"
+is_two_player_only = false
 
 [node name="Animatronics" instance=ExtResource("1_kfj2h")]
 script = ExtResource("1_vu3bh")
@@ -175,6 +188,7 @@ check_frequency = 3.5
 jumpscare_rotation = Vector3(0, 0, 0)
 is_edam_animatronic = true
 vent_checker = true
+enable_hologram = null
 
 [node name="Jumpscare" type="AudioStreamPlayer" parent="." index="2"]
 stream = ExtResource("8_qwrtb")

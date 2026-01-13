@@ -1,11 +1,19 @@
-Version 1.2.0 -- Started 9/23/2025
+Version 2.0.0 -- Started 1/12/2026
 Fixes:
+- Properly handled errors in certain buttons in the menus, making them usable in debug
+- The rope in the playground is now properly textured
 
 Adjustments:
 - Added missing change in previous changelog
+- Improved Boss' phone call volume
+- Darkened the moonlight
+- Cleaned up and reorganized model textures
+- Updated some animatronic descriptions for clarity
 
 Additions:
-- Multiplayer Menu
+- The cup now has a visual water level
+- Multiplayer mode. [DETAILED SUMMARY GOES HERE]
+- Added holograms to the Godot editor to make animatronic placement easier [NOT WORKING YET]
 
 Version 1.1.0 -- 7/23/2025
 

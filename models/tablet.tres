@@ -1,6 +1,6 @@
 [gd_resource type="ArrayMesh" load_steps=5 format=4 uid="uid://drtja2xn8oyq"]
 
-[ext_resource type="Texture2D" uid="uid://b72jcsehaisw6" path="res://models/tablet_Tablet.png" id="1_p273j"]
+[ext_resource type="Texture2D" uid="uid://b72jcsehaisw6" path="res://models/textures/tablet_Tablet.png" id="1_p273j"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hqxqn"]
 resource_name = "Tablet"
