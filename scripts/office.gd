@@ -20,6 +20,8 @@ const TIME_TO_HOUR = 90
 			Globals.Sabotages.NONE:
 				sabotage_name = "None"
 				sabotage_description = "All is well."
+				sabotage_end.emit()
+				return
 			Globals.Sabotages.POWER_OUTAGE:
 				sabotage_name = "Power Outage"
 				sabotage_description = "The main power to the building has been cut! The lights have gone dark and the doorways have all been opened. However, any device with a battery should still function."
