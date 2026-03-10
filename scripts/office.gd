@@ -20,7 +20,6 @@ const TIME_TO_HOUR = 90
 			Globals.Sabotages.NONE:
 				sabotage_name = "None"
 				sabotage_description = "All is well."
-				sabotage_end.emit()
 				return
 			Globals.Sabotages.POWER_OUTAGE:
 				sabotage_name = "Power Outage"
@@ -476,7 +475,11 @@ func cmd_set_level(arg1: String = "edam_freddy", arg2: int = -1):
 
 func cmd_sabotage(arg1: String = "NONE"):
 	var value = Globals.Sabotages.get(arg1.to_upper())
-	if active_sabotage != Globals.Sabotages.NONE and value != Globals.Sabotages.NONE:
+	if value == Globals.Sabotages.NONE:
+		sabotage_end.emit()
+		LimboConsole.print_line("Active sabotage set to " + sabotage_name)
+		return
+	elif value != Globals.Sabotages.NONE:
 		active_sabotage = Globals.Sabotages.NONE
 		await get_tree().create_timer(0.16).timeout
 	active_sabotage = value
