@@ -50,6 +50,8 @@ var cheesestick = 0
 var safety_time = 2.5
 var office_mode: OfficeMode = OfficeMode.SINGLEPLAYER
 var game_time = 0
+var game_over = false
+var fade_texture = null
 
 # Cheesenaf Code
 var cheesenaf1_app = ""
@@ -145,6 +147,18 @@ func _ready():
 				DisplayServer.set_native_icon("res://textures/icons/edam foxy.ico")
 			else:
 				DisplayServer.set_icon(load("res://textures/icons/edam foxy.png"))
+	
+	LimboConsole.register_command(cmd_scene, "scene", "Sets the current loaded scene.")
+	LimboConsole.add_argument_autocomplete_source("scene", 0, func(): return ["title", "office", "game_over", "victory"])
+
+	LimboConsole.register_command(cmd_mouse_mode, "showmouse", "Shows the mouse. Useful if something goes wrong in testing, especially with scene changes.")
+
+func cmd_scene(arg1: String):
+	get_tree().change_scene_to_file("res://scenes/" + arg1 + ".tscn")
+	LimboConsole.close_console()
+
+func cmd_mouse_mode():
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 #region Saving/Loading
 func _save():

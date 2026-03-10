@@ -185,6 +185,95 @@ theme_override_fonts/font = ExtResource("2_wdq0x")
 theme_override_font_sizes/font_size = 40
 text = "+"
 
+[node name="all" type="Sprite2D" parent="."]
+position = Vector2(570, 1015)
+scale = Vector2(0.257496, 0.257496)
+texture = ExtResource("4_qq7de")
+region_enabled = true
+region_rect = Rect2(334, 427, 402, 402)
+
+[node name="Name" type="Label" parent="all"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -706.0
+offset_top = -2099.11
+offset_right = 307.0
+offset_bottom = -2002.11
+grow_horizontal = 2
+grow_vertical = 0
+tooltip_text = "EDAM_FREDDY_HINT"
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("2_wdq0x")
+theme_override_font_sizes/font_size = 80
+text = "ALL"
+horizontal_alignment = 1
+
+[node name="-1" type="Button" parent="all"]
+offset_left = -159.225
+offset_top = -1705.17
+offset_right = -89.2255
+offset_bottom = -1623.17
+theme_override_fonts/font = ExtResource("2_wdq0x")
+theme_override_font_sizes/font_size = 40
+text = "-"
+
+[node name="-5" type="Button" parent="all"]
+offset_left = -240.78
+offset_top = -1705.17
+offset_right = -170.78
+offset_bottom = -1623.17
+theme_override_fonts/font = ExtResource("2_wdq0x")
+theme_override_font_sizes/font_size = 40
+text = "--"
+
+[node name="-10" type="Button" parent="all"]
+offset_left = -322.335
+offset_top = -1705.17
+offset_right = -248.335
+offset_bottom = -1623.17
+theme_override_fonts/font = ExtResource("2_wdq0x")
+theme_override_font_sizes/font_size = 40
+text = "---"
+
+[node name="+10" type="Button" parent="all"]
+offset_left = 244.664
+offset_top = -1705.17
+offset_right = 318.664
+offset_bottom = -1623.17
+theme_override_fonts/font = ExtResource("2_wdq0x")
+theme_override_font_sizes/font_size = 40
+text = "+++"
+
+[node name="+5" type="Button" parent="all"]
+offset_left = 163.11
+offset_top = -1705.17
+offset_right = 233.11
+offset_bottom = -1623.17
+theme_override_fonts/font = ExtResource("2_wdq0x")
+theme_override_font_sizes/font_size = 40
+text = "++"
+
+[node name="+1" type="Button" parent="all"]
+offset_left = 81.5547
+offset_top = -1705.17
+offset_right = 151.555
+offset_bottom = -1623.17
+theme_override_fonts/font = ExtResource("2_wdq0x")
+theme_override_font_sizes/font_size = 40
+text = "+"
+
+[node name="+2" type="Button" parent="all"]
+offset_left = -322.0
+offset_top = -1604.0
+offset_right = 318.0
+offset_bottom = -1522.0
+theme_override_fonts/font = ExtResource("2_wdq0x")
+theme_override_font_sizes/font_size = 60
+text = "RANDOMIZE LEVELS"
+
 [node name="edam_bonnie" type="Sprite2D" parent="."]
 position = Vector2(461, 238.757)
 scale = Vector2(0.257496, 0.257496)
@@ -1136,6 +1225,13 @@ text = "CUSTOM_FRIENDLY"
 [connection signal="pressed" from="edam_freddy/+10" to="." method="_change_level" binds= ["edam_freddy", 10]]
 [connection signal="pressed" from="edam_freddy/+5" to="." method="_change_level" binds= ["edam_freddy", 5]]
 [connection signal="pressed" from="edam_freddy/+1" to="." method="_change_level" binds= ["edam_freddy", 1]]
+[connection signal="pressed" from="all/-1" to="." method="_change_level" binds= ["all", -1]]
+[connection signal="pressed" from="all/-5" to="." method="_change_level" binds= ["all", -5]]
+[connection signal="pressed" from="all/-10" to="." method="_change_level" binds= ["all", -10]]
+[connection signal="pressed" from="all/+10" to="." method="_change_level" binds= ["all", 10]]
+[connection signal="pressed" from="all/+5" to="." method="_change_level" binds= ["all", 5]]
+[connection signal="pressed" from="all/+1" to="." method="_change_level" binds= ["all", 1]]
+[connection signal="pressed" from="all/+2" to="." method="_change_level" binds= ["random", 1]]
 [connection signal="pressed" from="edam_bonnie/-1" to="." method="_change_level" binds= ["edam_bonnie", -1]]
 [connection signal="pressed" from="edam_bonnie/-5" to="." method="_change_level" binds= ["edam_bonnie", -5]]
 [connection signal="pressed" from="edam_bonnie/-10" to="." method="_change_level" binds= ["edam_bonnie", -10]]

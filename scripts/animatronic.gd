@@ -165,10 +165,6 @@ func _process(delta):
 	#Look at stuff
 	if game_sensitive and guarding and object_of_interest != null:
 		_look_at_object(delta)
-	# Debug - Summon to player
-	if OS.is_debug_build() and game_sensitive and guarding == false and Input.is_key_pressed(KEY_BACKSPACE):
-		current_position = positions.size() - 2
-		_game_check()
 	
 	if timer > 0:
 		#Make it easier on lower levels when they're in the office (But they leave faster with flashlight)
@@ -460,3 +456,8 @@ func _editor_preview():
 	else:
 		if get_node("EditorContainer") != null:
 			get_node("EditorContainer").queue_free()
+
+func cmd_gamer_to_office():
+	if OS.is_debug_build() and game_sensitive and guarding == false: #Debug build check probably not necessary but you never know
+		current_position = positions.size() - 2
+		_game_check()

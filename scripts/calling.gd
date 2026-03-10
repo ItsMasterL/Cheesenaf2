@@ -7,12 +7,13 @@ var call_accepted
 @onready var accept := $Notification/Accept
 @onready var decline := $Notification/Decline
 @onready var notif = $Notification
-@onready var root = get_node(^"/root/Map")
+@onready var root
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if get_parent().standalone_mode == false:
+		root = get_node(^"/root/Map")
 		_start_call()
 
 func _start_call():

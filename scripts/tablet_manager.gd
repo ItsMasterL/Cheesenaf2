@@ -19,18 +19,29 @@ var is_paused = true # Originally used for the media player, but it loses its pl
 @onready var home = $Home
 @onready var app_home = $Application
 @onready var time = $TimeUI/Clock
-@onready var root = get_node(^"/root/Map")
+@onready var root
 @onready var app_container := $Home/GridContainer
 # Media Player
 @onready var audio_player := $MediaPlayer
 
 
 func _ready():
+	if !standalone_mode:
+		root = get_node(^"/root/Map")
+	else:
+		using_tablet = true
 	_populate_homescreen()
 
 func _process(_delta):
 	if standalone_mode:
-		pass
+		var current_time = Time.get_time_dict_from_system()
+		if current_time.hour < 12:
+			if current_time.hour == 0:
+				time.text = "12:%02d AM" % [current_time.minute]
+			else:
+				time.text = "%02d:%02d AM" % [current_time.hour, current_time.minute]
+		else:
+			time.text = "%02d:%02d PM" % [current_time.hour, current_time.minute]
 	else:
 		if root.hour == 0:
 			time.text = "12:%02d AM" % [root.minute]

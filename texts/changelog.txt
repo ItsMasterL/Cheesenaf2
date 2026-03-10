@@ -1,7 +1,8 @@
-Version 2.0.0 -- Started 1/12/2026
+Version 2.0.0 -- 4/1/2026
 Fixes:
-- Properly handled errors in certain buttons in the menus, making them usable in debug
+- Properly handled errors in certain buttons in the menus, making them usable in editor playtests
 - The rope in the playground is now properly textured
+- Fixed a softlock in the 6 AM screen when clearing a custom night (How have I never noticed this)
 
 Adjustments:
 - Added missing change in previous changelog
@@ -9,11 +10,20 @@ Adjustments:
 - Darkened the moonlight
 - Cleaned up and reorganized model textures
 - Updated some animatronic descriptions for clarity
+- Updated previous changelog for clarity
 
 Additions:
+--- OFFICE ---
 - The cup now has a visual water level
+- New fading transitions between game over/6 am
+--- MENU ---
+- Buttons to edit all animatronics in the custom night menu, as well as a button to randomize all animatronics
+- New menu option - Tablet Mode, to let you play tablet games without worrying about Freddy and the gang.
+--- MULTIPLAYER ---
 - Multiplayer mode. [DETAILED SUMMARY GOES HERE]
-- Added holograms to the Godot editor to make animatronic placement easier [NOT WORKING YET]
+--- EDITOR/DEBUG ---
+- Added holograms to the Godot editor to make animatronic placement easier
+- Added LimboConsole for debug builds
 
 Version 1.1.0 -- 7/23/2025
 
@@ -35,7 +45,7 @@ Additions:
 - Added Foxy's Paintin' Location (Tablet)
 - Added Soccer Physics (Tablet)
 - Added Tank Trouble (Tablet)
-- Your time now shows when you die
+- You now see how long you survived when you're on the game over screen.
 
 
 

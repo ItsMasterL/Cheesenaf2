@@ -1,6 +1,6 @@
 extends Node3D
 
-
+#region Variables
 signal music_box_ran_out
 signal entrance_closing
 signal sabotage_begin
@@ -23,26 +23,26 @@ const TIME_TO_HOUR = 90
 			Globals.Sabotages.POWER_OUTAGE:
 				sabotage_name = "Power Outage"
 				sabotage_description = "The main power to the building has been cut! The lights have gone dark and the doorways have all been opened. However, any device with a battery should still function."
-				sabotage_begin.emit(Globals.Sabotages.POWER_OUTAGE)
-			Globals.Sabotages.BALLOON_BOY:
-				sabotage_name = "Balloon Boy"
-				sabotage_description = "That pesky animatronic stole your flashlight batteries without even being seen! I mean, surely he exists in the game. Don't look at the source code." #He's not in the game actually
-				sabotage_begin.emit(Globals.Sabotages.BALLOON_BOY)
-			Globals.Sabotages.MUSIC_UNWOUND:
-				sabotage_name = "Music Unwound"
-				sabotage_description = "The music box malfunctioned! It's now playing twice as fast as it's supposed to! Make sure to attend to it more often!"
-				sabotage_begin.emit(Globals.Sabotages.MUSIC_UNWOUND)
+			Globals.Sabotages.CAMERA_MALFUNCTION:
+				sabotage_name = "Camera Malfunction"
+				sabotage_description = "The cameras aren't working right at the moment. Seems they'll be a bit more unreliable than usual. Thankfully this isn't a main mechanic, otherwise it might be a bit more controversial."
 			Globals.Sabotages.PIZZA_DELIVERY:
 				sabotage_name = "Pizza Delivery"
 				sabotage_description = "Congratulations! You have been delivered a fresh pizza! Unfortunately, the old animatronics love the pizza even more than you do. Expect trouble."
-				sabotage_begin.emit(Globals.Sabotages.PIZZA_DELIVERY)
 			Globals.Sabotages.EXTREME_THIRST:
 				sabotage_name = "Extreme Thirst"
 				sabotage_description = "Uh oh! Someone's getting a little too irritated about how much you've been neglecting your water cup. I mean, chugging the whole thing when they show up? Now they're checking twice as often!"
-				sabotage_begin.emit(Globals.Sabotages.EXTREME_THIRST)
+			Globals.Sabotages.BALLOON_BOY:
+				sabotage_name = "Balloon Boy"
+				sabotage_description = "That pesky animatronic stole your flashlight batteries without even being seen! I mean, surely he exists in the game. Don't look at the source code." #He's not in the game actually
+			Globals.Sabotages.MUSIC_UNWOUND:
+				sabotage_name = "Music Unwound"
+				sabotage_description = "The music box malfunctioned! It's now playing twice as fast as it's supposed to! Make sure to attend to it more often!"
 			_:
 				sabotage_name = "???"
 				sabotage_description = "Something has gone wrong, but you don't know what!"
+				return
+		sabotage_begin.emit(active_sabotage as Globals.Sabotages)
 @export var lights: Array[Node3D]
 
 var night = Globals.night
@@ -99,7 +99,7 @@ var paranormal_attacker: Node3D # What even is it?
 var paranormal_primed = false # What is it doing?
 
 @onready var blur := $BlurShader/ColorRect
-
+#endregion
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -122,6 +122,35 @@ func _ready():
 		animatronics.get_child(1).visible = false
 		animatronics.get_child(1).can_move = false
 	Globals.game_time = 0
+
+#region Command Setup
+	LimboConsole.register_command(cmd_jumpscare, "jumpscare", "Triggers a jumpscare with the specified animatronic. Defaults to Edam Freddy.")
+	LimboConsole.add_argument_autocomplete_source("jumpscare", 0, func(): return animatronics.get_children().map(func(node): return node.animatronic))
+
+	LimboConsole.register_command(cmd_gamer_to_office, "summongamer", "Summons a game-sensitive animatronic to your office. Defaults to Edam Foxy.")
+	LimboConsole.add_argument_autocomplete_source("summongamer", 0, func(): return animatronics.get_children().map(_gamer_filter).filter(func(string): return string != null))
+
+	LimboConsole.register_command(cmd_friendly_edams, "friendlyedams", "Makes Edam animatronics friendly or hostile.")
+
+	LimboConsole.register_command(cmd_set_level, "level", "Sets the level of an animatronic.")
+	LimboConsole.add_argument_autocomplete_source("level", 0, func(): return animatronics.get_children().map(func(node): return node.animatronic))
+	LimboConsole.add_argument_autocomplete_source("level", 1, func(): return animatronics.get_children().map(func(node): return node.level))
+
+	LimboConsole.register_command(cmd_sabotage, "sabotage", "Sets the active sabotage. Defaults to NONE")
+	LimboConsole.add_argument_autocomplete_source("sabotage", 0, func(): return Globals.Sabotages.keys())
+
+	LimboConsole.register_command(cmd_set_time, "time value", "Sets the time at the smallest level.")
+	LimboConsole.register_command(cmd_set_hour, "time hour", "Sets the time by the hour.")
+
+func _exit_tree():
+	LimboConsole.unregister_command("jumpscare")
+	LimboConsole.unregister_command("summongamer")
+	LimboConsole.unregister_command("friendlyedams")
+	LimboConsole.unregister_command("level")
+	LimboConsole.unregister_command("sabotage")
+	LimboConsole.unregister_command("time value")
+	LimboConsole.unregister_command("time hour")
+#endregion
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -167,47 +196,9 @@ func _process(delta):
 			night = clamp(night + 1, 1, 6)
 			Globals.save_night = night
 		#TODO: Save backbuffer for a fade transition like fnaf
+		var fade_image = get_viewport().get_texture().get_image()
+		Globals.fade_texture = ImageTexture.create_from_image(fade_image)
 		get_tree().change_scene_to_file("res://scenes/victory.tscn")
-	
-	if OS.is_debug_build():
-		# Jumpscare/6 AM test
-		if can_jumpscare:
-			if Input.is_key_pressed(KEY_F1):
-				_jumpscare(animatronics.get_child(0))
-			if Input.is_key_pressed(KEY_F2):
-				_jumpscare(animatronics.get_child(1))
-			if Input.is_key_pressed(KEY_F3):
-				_jumpscare(animatronics.get_child(2))
-			if Input.is_key_pressed(KEY_F4):
-				_jumpscare(animatronics.get_child(3))
-			if Input.is_key_pressed(KEY_F5):
-				_jumpscare(animatronics.get_child(4))
-			if Input.is_key_pressed(KEY_F6):
-				_jumpscare(animatronics.get_child(5))
-			if Input.is_key_pressed(KEY_F7):
-				_jumpscare(animatronics.get_child(6))
-			if Input.is_key_pressed(KEY_F9):
-				_jumpscare(animatronics.get_child(7))
-			if Input.is_key_pressed(KEY_F10):
-				_jumpscare(animatronics.get_child(8))
-			if Input.is_key_pressed(KEY_F11):
-				_jumpscare(animatronics.get_child(9))
-		if Input.is_key_pressed(KEY_F12):
-			time = 540
-		# Sabotage test
-		if Input.is_key_pressed(KEY_0):
-			sabotage_end.emit()
-		if Input.is_key_pressed(KEY_1):
-			active_sabotage = Globals.Sabotages.POWER_OUTAGE
-		if Input.is_key_pressed(KEY_2):
-			active_sabotage = Globals.Sabotages.BALLOON_BOY
-		if Input.is_key_pressed(KEY_3):
-			active_sabotage = Globals.Sabotages.MUSIC_UNWOUND
-		if Input.is_key_pressed(KEY_4):
-			active_sabotage = Globals.Sabotages.PIZZA_DELIVERY
-		if Input.is_key_pressed(KEY_5):
-			active_sabotage = Globals.Sabotages.EXTREME_THIRST
-
 
 func _get_ai(animatronic: String) -> int:
 	match animatronic:
@@ -373,7 +364,7 @@ func _jumpscare_save(animatronic: Node3D):
 	can_jumpscare = true
 	gamer_in_office = false
 
-### SABOTAGES ###
+#region Sabotages
 
 func _sabotage_event(event : Globals.Sabotages):
 	match event:
@@ -429,3 +420,70 @@ func _sabotage_event_end():
 			$SabotageWarning.play()
 	
 	active_sabotage = Globals.Sabotages.NONE
+#endregion
+
+#region Command Logic
+
+func _gamer_filter(node: Node3D):
+	if node.game_sensitive:
+		return node.animatronic
+			
+
+func cmd_jumpscare(arg1: String = "edam_freddy"):
+	for i in animatronics.get_children():
+		if arg1 == i.animatronic:
+			_jumpscare(i)
+			LimboConsole.close_console()
+			return
+	LimboConsole.error("Animatronic not found.")
+
+func cmd_gamer_to_office(arg1: String = "edam_foxy"):
+	for i in animatronics.get_children():
+		if arg1 == i.animatronic:
+			if i.game_sensitive:
+				i.cmd_gamer_to_office()
+				return
+			LimboConsole.error("Animatronic not game sensitive.")
+			return
+	LimboConsole.error("Animatronic not found.")
+
+func cmd_friendly_edams(arg1: bool):
+	edams_friendly = arg1
+	for i in animatronics.get_children():
+		if i.is_edam_animatronic:
+			i.is_friendly = edams_friendly
+	if edams_friendly:
+		LimboConsole.print_line("Edam animatronics are now friendly.")
+	else:
+		LimboConsole.print_line("Edam animatronics are no longer friendly.")
+
+func cmd_set_level(arg1: String = "edam_freddy", arg2: int = -1):
+	if arg2 < 0:
+		for i in animatronics.get_children():
+			if arg1 == i.animatronic:
+				LimboConsole.print_line(i.animatronic + "'s AI is level " + str(i.level))
+				return
+	arg2 = clampi(arg2, 0, 20) #Not that it matters too much tbh
+	for i in animatronics.get_children():
+		if arg1 == i.animatronic:
+			i.level = arg2
+			LimboConsole.print_line(i.animatronic + "'s AI has been set to level " + str(i.level))
+			LimboConsole.add_argument_autocomplete_source("level", 1, func(): return animatronics.get_children().map(func(node): return node.level))
+			return
+	LimboConsole.error("Animatronic not found.")
+
+func cmd_sabotage(arg1: String = "NONE"):
+	var value = Globals.Sabotages.get(arg1.to_upper())
+	if active_sabotage != Globals.Sabotages.NONE and value != Globals.Sabotages.NONE:
+		active_sabotage = Globals.Sabotages.NONE
+		await get_tree().create_timer(0.16).timeout
+	active_sabotage = value
+	LimboConsole.print_line("Active sabotage set to " + sabotage_name)
+
+func cmd_set_time(arg1: int):
+	time = clamp(arg1, 0, 6 * TIME_TO_HOUR)
+
+func cmd_set_hour(arg1: int):
+	time = clamp(arg1, 0, 6) * TIME_TO_HOUR
+
+#endregion

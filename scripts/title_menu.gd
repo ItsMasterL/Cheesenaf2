@@ -105,6 +105,25 @@ func _change_level(animatronic: String, change: int):
 			Globals.wither_chica = clamp(Globals.wither_chica + change, 0, 20)
 		"wither_foxy":
 			Globals.wither_foxy = clamp(Globals.wither_foxy + change, 0, 20)
+		"all":
+			Globals.edam_freddy = clamp(Globals.edam_freddy + change, 0, 20)
+			Globals.edam_bonnie = clamp(Globals.edam_bonnie + change, 0, 20)
+			Globals.edam_chica = clamp(Globals.edam_chica + change, 0, 20)
+			Globals.edam_foxy = clamp(Globals.edam_foxy + change, 0, 20)
+			Globals.wither_freddy = clamp(Globals.wither_freddy + change, 0, 20)
+			Globals.wither_bonnie = clamp(Globals.wither_bonnie + change, 0, 20)
+			Globals.wither_chica = clamp(Globals.wither_chica + change, 0, 20)
+			Globals.wither_foxy = clamp(Globals.wither_foxy + change, 0, 20)
+		"random":
+			Globals.edam_freddy = randi_range(0,20)
+			Globals.edam_bonnie = randi_range(0,20)
+			Globals.edam_chica = randi_range(0,20)
+			Globals.edam_foxy = randi_range(0,20)
+			Globals.wither_freddy = randi_range(0,20)
+			Globals.wither_bonnie = randi_range(0,20)
+			Globals.wither_chica = randi_range(0,20)
+			Globals.wither_foxy = randi_range(0,20)
+			Globals.edams_friendly = randi_range(0,1) == 0
 	$ClickSound.play()
 	_update_customnight_displays()
 

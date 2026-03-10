@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cs44guev8s23"]
+[gd_scene load_steps=13 format=3 uid="uid://cs44guev8s23"]
 
 [ext_resource type="Script" uid="uid://0obrlc0d57df" path="res://scripts/victory.gd" id="1_wgnha"]
 [ext_resource type="AudioStream" uid="uid://p1jvgrruejbo" path="res://sounds/Clocks_Chimes_Cl_02480702.wav" id="2_ysvoq"]
@@ -41,6 +41,59 @@ tracks/0/keys = {
 _data = {
 &"RESET": SubResource("Animation_rnwfb"),
 &"default": SubResource("Animation_rfflk")
+}
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_g6lwx"]
+
+[sub_resource type="Animation" id="Animation_g6lwx"]
+resource_name = "fade"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_unload_texture"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_5hn41"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n2k88"]
+_data = {
+&"RESET": SubResource("Animation_5hn41"),
+&"fade": SubResource("Animation_g6lwx")
 }
 
 [node name="LoadOffice" type="Control"]
@@ -152,3 +205,18 @@ theme_override_font_sizes/font_size = 36
 text = "Your Time: 00:00.00
 Your pay: $5.92"
 horizontal_alignment = 1
+
+[node name="ScreenFade" type="TextureRect" parent="."]
+z_index = 10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_g6lwx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ScreenFade"]
+libraries = {
+&"": SubResource("AnimationLibrary_n2k88")
+}

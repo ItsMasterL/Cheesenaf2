@@ -3,6 +3,8 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$ScreenFade.texture = Globals.fade_texture
+	$ScreenFade/AnimationPlayer.play("fade")
 	$"5_6/AnimationPlayer".play("default")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	await get_tree().create_timer(5.5).timeout
@@ -19,9 +21,14 @@ func _ready():
 	elif Globals.night == 5:
 		get_tree().change_scene_to_file("res://scenes/paycheck5.tscn")
 	elif Globals.night == 7:
-		if Globals.edam_bonnie == 20 and Globals.edam_chica == 20 and Globals.edam_foxy == 20 and Globals.edam_freddy == 20 and Globals.edams_friendly == false:
-			if Globals.wither_bonnie == 20 and Globals.wither_chica == 20 and Globals.wither_foxy == 20 and Globals.wither_freddy == 20:
+		if Globals.edam_bonnie == 20 and Globals.edam_chica == 20 and Globals.edam_foxy == 20 and Globals.edam_freddy == 20 and Globals.edams_friendly == false and Globals.wither_bonnie == 20 and Globals.wither_chica == 20 and Globals.wither_foxy == 20 and Globals.wither_freddy == 20:
 				get_tree().change_scene_to_file("res://scenes/paycheck820.tscn")
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			get_tree().change_scene_to_file("res://scenes/title.tscn")
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		get_tree().change_scene_to_file("res://scenes/title.tscn")
+
+func _unload_texture():
+	Globals.fade_texture = null

@@ -8,6 +8,9 @@ extends Control
 func _ready():
 	Globals._load()
 	Globals._load_settings()
+	if Globals.game_over:
+		$Foreground/AnimationPlayer.play("fade")
+		Globals.game_over = false
 
 func _load_title_screen(screen: String):
 	loaded_menu.queue_free()

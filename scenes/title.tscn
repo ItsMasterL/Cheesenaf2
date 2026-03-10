@@ -1,10 +1,47 @@
-[gd_scene load_steps=6 format=3 uid="uid://lbjqjlv5clj6"]
+[gd_scene load_steps=9 format=3 uid="uid://lbjqjlv5clj6"]
 
 [ext_resource type="Script" uid="uid://bb30x6fyrsy15" path="res://scripts/title.gd" id="1_3f131"]
 [ext_resource type="Texture2D" uid="uid://b1my2w4jmvnbv" path="res://textures/static.png" id="1_7gfe5"]
 [ext_resource type="Script" uid="uid://bc0tklwmfofti" path="res://scripts/background.gd" id="2_jc731"]
 [ext_resource type="PackedScene" uid="uid://d1ffrbutvy4e" path="res://scenes/title_menu.tscn" id="3_xhvqt"]
 [ext_resource type="AudioStream" uid="uid://b8itxrejv1wji" path="res://sounds/music/echoes_of_time.mp3" id="4_w6ovr"]
+
+[sub_resource type="Animation" id="Animation_b3w7a"]
+resource_name = "fade"
+length = 0.51
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4rr2b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yql1r"]
+_data = {
+&"RESET": SubResource("Animation_4rr2b"),
+&"fade": SubResource("Animation_b3w7a")
+}
 
 [node name="Title" type="Control"]
 layout_mode = 3
@@ -23,6 +60,21 @@ scale = Vector2(0.998316, 1.04086)
 texture = ExtResource("1_7gfe5")
 vframes = 8
 script = ExtResource("2_jc731")
+
+[node name="Foreground" type="Sprite2D" parent="." node_paths=PackedStringArray("sync")]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 10
+position = Vector2(576.078, 328.25)
+scale = Vector2(0.998316, 1.04086)
+texture = ExtResource("1_7gfe5")
+vframes = 8
+script = ExtResource("2_jc731")
+sync = NodePath("../Background")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Foreground"]
+libraries = {
+&"": SubResource("AnimationLibrary_yql1r")
+}
 
 [node name="Menu" type="Node" parent="."]
 

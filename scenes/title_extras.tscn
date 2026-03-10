@@ -278,12 +278,11 @@ text = "EXTRA_CODE"
 scroll_active = false
 
 [node name="Tablet" type="Button" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 16.0
-offset_top = 92.0
+offset_top = 220.0
 offset_right = 302.0
-offset_bottom = 121.0
+offset_bottom = 249.0
 theme_override_fonts/font = ExtResource("2_bn3vm")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2ptv6")
