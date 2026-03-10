@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://sr5bhwimbn6q"]
+[gd_scene load_steps=25 format=3 uid="uid://sr5bhwimbn6q"]
 
 [ext_resource type="PackedScene" uid="uid://84wrom6majx8" path="res://models/bonnie.glb" id="1_kfj2h"]
 [ext_resource type="Script" uid="uid://bj1onaat51pqp" path="res://scripts/animatronic.gd" id="1_vu3bh"]
@@ -175,15 +175,37 @@ script = ExtResource("2_81imh")
 position = Vector3(39.35, -0.048, 9.265)
 rotation = Vector3(0, -90, 0)
 scale = Vector3(1, 1, 1)
-next_position_indexes = Array[int]([0, 6])
+next_position_indexes = Array[int]([0, 6, 13])
 is_vent = true
 animation_id = "Vent"
 is_two_player_only = false
 
+[sub_resource type="Resource" id="Resource_yith0"]
+script = ExtResource("2_mpcjg")
+office_animatronic_limit = 2
+search_under_desk = false
+flashlight_weakness = false
+entrance = 6
+fail_position_index = 0
+check_before_entering = true
+metadata/_custom_type_script = "uid://b7m76kqb1eco1"
+
+[sub_resource type="Resource" id="Resource_eic68"]
+script = ExtResource("2_81imh")
+position = Vector3(38.5208, 3.0678, 4.77224)
+rotation = Vector3(-39.7, 180, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([])
+is_vent = true
+animation_id = "Vent"
+office_entrance = SubResource("Resource_yith0")
+is_two_player_only = true
+metadata/_custom_type_script = "uid://4en87cf4wnfr"
+
 [node name="Animatronics" instance=ExtResource("1_kfj2h")]
 script = ExtResource("1_vu3bh")
 animatronic = "edam_bonnie"
-positions = Array[ExtResource("2_81imh")]([SubResource("Resource_qvvvx"), SubResource("Resource_1i3n5"), SubResource("Resource_8d38w"), SubResource("Resource_bpc3w"), SubResource("Resource_pmkvk"), SubResource("Resource_hcd7k"), SubResource("Resource_5kc1d"), SubResource("Resource_pebfs"), SubResource("Resource_r6c4r"), SubResource("Resource_8r12v"), SubResource("Resource_sw0je"), SubResource("Resource_0hntl"), SubResource("Resource_wqs7m")])
+positions = Array[ExtResource("2_81imh")]([SubResource("Resource_qvvvx"), SubResource("Resource_1i3n5"), SubResource("Resource_8d38w"), SubResource("Resource_bpc3w"), SubResource("Resource_pmkvk"), SubResource("Resource_hcd7k"), SubResource("Resource_5kc1d"), SubResource("Resource_pebfs"), SubResource("Resource_r6c4r"), SubResource("Resource_8r12v"), SubResource("Resource_sw0je"), SubResource("Resource_0hntl"), SubResource("Resource_wqs7m"), SubResource("Resource_eic68")])
 check_frequency = 3.5
 jumpscare_rotation = Vector3(0, 0, 0)
 is_edam_animatronic = true

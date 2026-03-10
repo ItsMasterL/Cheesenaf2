@@ -1,10 +1,10 @@
 [gd_scene load_steps=19 format=3 uid="uid://dwhn6aeiuwg7x"]
 
 [ext_resource type="PackedScene" uid="uid://bclyw4a1la5s5" path="res://models/witherfreddy.glb" id="1_qsbdi"]
-[ext_resource type="Script" path="res://scripts/animatronic.gd" id="2_gsmfg"]
+[ext_resource type="Script" uid="uid://bj1onaat51pqp" path="res://scripts/animatronic.gd" id="2_gsmfg"]
 [ext_resource type="AudioStream" uid="uid://jb2c0ep1vqdm" path="res://sounds/jumpscare_withered.wav" id="3_q7pj4"]
-[ext_resource type="Script" path="res://scripts/animatronic_position.gd" id="3_q83rb"]
-[ext_resource type="Script" path="res://scripts/animatronic_entrance.gd" id="4_0dvod"]
+[ext_resource type="Script" uid="uid://4en87cf4wnfr" path="res://scripts/animatronic_position.gd" id="3_q83rb"]
+[ext_resource type="Script" uid="uid://b7m76kqb1eco1" path="res://scripts/animatronic_entrance.gd" id="4_0dvod"]
 
 [sub_resource type="Resource" id="Resource_h2keo"]
 resource_name = "Storage"
@@ -15,6 +15,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([1])
 is_vent = false
 animation_id = "Pose"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_ivh6o"]
 resource_name = "Storage Ceiling Vent"
@@ -25,6 +26,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([2, 8])
 is_vent = true
 animation_id = "WitherFreddyVent"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_n2kyc"]
 resource_name = "Restroom A"
@@ -35,6 +37,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([3, 1])
 is_vent = false
 animation_id = "WitherFreddyRestroom"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_ggpi1"]
 resource_name = "Party Room A"
@@ -45,6 +48,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([2, 4])
 is_vent = false
 animation_id = "WitherFreddyPartyRoomA"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_ynb7p"]
 script = ExtResource("4_0dvod")
@@ -65,6 +69,7 @@ next_position_indexes = Array[int]([])
 is_vent = false
 animation_id = "WitherFreddyFront"
 office_entrance = SubResource("Resource_ynb7p")
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_rj68t"]
 resource_name = "Kitchen"
@@ -75,6 +80,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([3, 6])
 is_vent = false
 animation_id = "WitherFreddyKitchen"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_fhw3c"]
 resource_name = "Party Room B"
@@ -85,6 +91,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([7])
 is_vent = false
 animation_id = "WitherFreddyPartyRoomB"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_xcx4k"]
 script = ExtResource("4_0dvod")
@@ -105,6 +112,7 @@ next_position_indexes = Array[int]([])
 is_vent = false
 animation_id = "WitherFreddyBack"
 office_entrance = SubResource("Resource_xcx4k")
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_d2oxh"]
 resource_name = "Lobby Ceiling Vent"
@@ -115,6 +123,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([9])
 is_vent = true
 animation_id = "WitherFreddyVent"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_xd6uo"]
 resource_name = "Kitchen Hall Ceiling Vent"
@@ -125,6 +134,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([5])
 is_vent = true
 animation_id = "WitherFreddyVent"
+is_two_player_only = false
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6m6pw"]
 radius = 50.3093
@@ -137,6 +147,7 @@ positions = Array[ExtResource("3_q83rb")]([SubResource("Resource_h2keo"), SubRes
 jumpscare_length = 1.217
 jumpscare_position = Vector3(0, -0.609, -3.01)
 jumpscare_rotation = Vector3(0, 0, 0)
+pizza_sensitive = true
 ignore_save = true
 save_jumpscare_id = "Interrupt"
 save_ignore_jumpscare_position = Vector3(0, -0.609, -2.25)

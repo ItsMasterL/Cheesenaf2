@@ -560,14 +560,16 @@ shader_parameter/blur_amount = 5.0
 shader_parameter/mix_amount = 0.0
 shader_parameter/color_over = Color(0, 0, 0, 1)
 
-[node name="Map" type="Node3D" node_paths=PackedStringArray("tablet", "animatronics", "doors", "drink")]
+[node name="Map" type="Node3D" node_paths=PackedStringArray("tablet", "animatronics", "doors", "drink", "lights")]
 script = ExtResource("1_a3xfx")
 tablet = NodePath("TabletOnDesk/Tablet")
 animatronics = NodePath("Animatronics")
 doors = NodePath("Doors")
 drink = NodePath("CupOnDesk/Cup")
+lights = [NodePath("Map/SpotLight3D"), NodePath("Map/SpotLight3D3"), NodePath("Map/SpotLight3D4"), NodePath("Map/SpotLight3D2")]
 
-[node name="FoxyPlush" parent="." instance=ExtResource("1_gqipk")]
+[node name="FoxyPlush" parent="." node_paths=PackedStringArray("root") instance=ExtResource("1_gqipk")]
+root = NodePath("..")
 
 [node name="CupOnDesk" type="Node3D" parent="."]
 transform = Transform3D(-0.398378, 0, 0.917221, 0, 1, 0, -0.917221, 0, -0.398378, 1.22177, 1.05015, -1.29519)
@@ -822,6 +824,7 @@ current = true
 [node name="AdamSandler" type="Sprite3D" parent="Player/Head"]
 transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, -0.374982, 0)
 layers = 4
+shaded = true
 texture = ExtResource("15_batyp")
 
 [node name="MoveUnderDesk" type="AudioStreamPlayer" parent="Player/Head"]
@@ -1012,44 +1015,52 @@ transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -
 
 [node name="Animatronics" type="Node3D" parent="."]
 
-[node name="Edam Freddy" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("23_d180k")]
+[node name="Edam Freddy" parent="Animatronics" node_paths=PackedStringArray("root", "hologram_mesh") instance=ExtResource("23_d180k")]
 root = NodePath("../..")
 enable_hologram = true
+hologram_mesh = NodePath("Edam Endo/Skeleton3D/Freddy")
 
-[node name="Edam Bonnie" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("22_fo68b")]
+[node name="Edam Bonnie" parent="Animatronics" node_paths=PackedStringArray("root", "hologram_mesh") instance=ExtResource("22_fo68b")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 68.629, 1.121, 2.956)
 root = NodePath("../..")
 check_frequency = 3.561
 enable_hologram = true
+hologram_mesh = NodePath("Edam Endoz/Skeleton3D/Bonnie")
 
-[node name="Edam Chica" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("25_m5hqu")]
+[node name="Edam Chica" parent="Animatronics" node_paths=PackedStringArray("root", "hologram_mesh") instance=ExtResource("25_m5hqu")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 68.629, 1.121, -4.064)
 root = NodePath("../..")
 enable_hologram = true
+hologram_mesh = NodePath("Edam Endo/Skeleton3D/Chica")
 
-[node name="Edam Foxy" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("26_xrtv4")]
+[node name="Edam Foxy" parent="Animatronics" node_paths=PackedStringArray("root", "hologram_mesh") instance=ExtResource("26_xrtv4")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 69.275, 1.121, 13.54)
 root = NodePath("../..")
 enable_hologram = true
+hologram_mesh = NodePath("Edam Endo/Skeleton3D/Foxy")
 
-[node name="Withered Bonnie" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("27_nd5pr")]
+[node name="Withered Bonnie" parent="Animatronics" node_paths=PackedStringArray("root", "hologram_mesh") instance=ExtResource("27_nd5pr")]
 root = NodePath("../..")
 enable_hologram = true
+hologram_mesh = NodePath("RIG_Bonnie_ao/Skeleton3D/Withered_Bonnie")
 
-[node name="Withered Chica" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("28_iw35l")]
+[node name="Withered Chica" parent="Animatronics" node_paths=PackedStringArray("root", "hologram_mesh") instance=ExtResource("28_iw35l")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 63.292, 0, -25.224)
 root = NodePath("../..")
 enable_hologram = true
+hologram_mesh = NodePath("chica_qc_skeleton_001/Skeleton3D/Withered_Chica")
 
-[node name="Withered Foxy" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("29_t0ahk")]
+[node name="Withered Foxy" parent="Animatronics" node_paths=PackedStringArray("root", "hologram_mesh") instance=ExtResource("29_t0ahk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.621, 0.599, -23.328)
 root = NodePath("../..")
 enable_hologram = true
+hologram_mesh = NodePath("Armature/Skeleton3D/Withered_Foxy")
 
-[node name="Withered Freddy" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("30_uyssn")]
+[node name="Withered Freddy" parent="Animatronics" node_paths=PackedStringArray("root", "hologram_mesh") instance=ExtResource("30_uyssn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.689, 0.555, -23.328)
 root = NodePath("../..")
 enable_hologram = true
+hologram_mesh = NodePath("RIG_Freddy_ao_001/Skeleton3D/Withered_Freddy")
 
 [node name="Cheesestick" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("31_a7pji")]
 root = NodePath("../..")
@@ -1069,6 +1080,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="SabotageWarning" type="AudioStreamPlayer" parent="."]
+volume_db = -15.0
+bus = &"SFX"
 
 [connection signal="mouse_entered" from="TabletOnDesk/Tablet/HomeButton" to="TabletOnDesk/Tablet/HomeButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="TabletOnDesk/Tablet/HomeButton" to="TabletOnDesk/Tablet/HomeButton" method="_on_mouse_exited"]

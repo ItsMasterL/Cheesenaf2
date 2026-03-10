@@ -26,6 +26,8 @@ signal paranormal_song
 @export var paranormal: bool
 ## If true, the animatronic will find the player under the desk if they have the tablet with them
 @export var sound_sensitive: bool
+## If true, the animatronic will become more active during the Pizza Delivery sabotage
+@export var pizza_sensitive: bool
 @export_subgroup("Save ignore")
 ## If true, the jumpscare will overwrite a game sensitive animatronic's save
 @export var ignore_save: bool
@@ -88,7 +90,9 @@ signal paranormal_song
 			scale = positions[current_position].scale
 			$AnimationPlayer.play(positions[current_position].animation_id)
 			$"../../Player/Head/Eyes/AnimationPlayer".play("RESET")
+			_editor_preview()
 @export var enable_hologram = false
+@export var hologram_mesh : MeshInstance3D
 
 # Usually used to disable movement checks during jumpscares
 var can_move = true
@@ -127,10 +131,8 @@ func _ready():
 		# Keep friendly dancers on stage
 		if is_friendly and music_box_sensitive:
 			can_move = false
-
-
-		if enable_hologram == false:
-			return
+		root.sabotage_begin.connect(_sabotage_event)
+		root.sabotage_end.connect(_sabotage_event_end)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -138,7 +140,7 @@ func _process(delta):
 	if Engine.is_editor_hint():
 		return
 	# Camera sensitivity
-	if root.in_cams and root.using_tablet and camera_sensitive and positions[current_position].office_entrance == null:
+	if root.p1_in_cams and root.using_tablet and camera_sensitive and positions[current_position].office_entrance == null:
 		camera_cooldown = randf_range(2, 23 - level)
 	if camera_cooldown > 0 and camera_sensitive:
 		camera_cooldown -= delta
@@ -158,7 +160,7 @@ func _process(delta):
 		flashlight = clamp(flashlight - delta / 2, 0, 5)
 	#Music Box
 	if music_box_sensitive and root.is_winding == false:
-		root.musicbox = clamp(root.musicbox - (level * delta) * root.fun_multiplier, 0, 2000)
+		root.musicbox = clamp(root.musicbox - (level * delta) * root.fun_multiplier * root.music_box_multiplier, 0, 2000)
 	
 	#Look at stuff
 	if game_sensitive and guarding and object_of_interest != null:
@@ -178,6 +180,8 @@ func _process(delta):
 			timer -= delta * root.fun_multiplier
 	else:
 		timer = check_frequency
+		if (pizza_sensitive and root.active_sabotage == Globals.Sabotages.PIZZA_DELIVERY) or (drink_sensitive and root.active_sabotage == Globals.Sabotages.EXTREME_THIRST):
+			timer /= 2
 		# After, so check_frequency can be changed by edam bonnie
 		_movement_check()
 
@@ -263,6 +267,10 @@ func _movement_check():
 		if positions[current_position].next_position_indexes.is_empty() == false:
 			# Move to the next space
 			current_position = positions[current_position].next_position_indexes.pick_random()
+			# Check if the rolled space is a co-op-only space, while only one player is in this office
+			if Globals.office_mode == Globals.OfficeMode.SINGLEPLAYER or Globals.office_mode == Globals.OfficeMode.VERSUS:
+				while positions[current_position].is_two_player_only:
+					current_position = positions[old_position].next_position_indexes.pick_random() #This can in theory hang if all positions are multiplayer only, but that shouldn't happen
 			# If the next space is an office space, but the office limit is reached, wait if not friendly. (If 0, office must be empty)
 			if positions[current_position].office_entrance != null and root.animatronics_in_office > positions[current_position].office_entrance.office_animatronic_limit and is_friendly == false:
 				current_position = old_position
@@ -417,6 +425,15 @@ func _booped():
 			root._jumpscare(self)
 		$Boop.play()
 
+func _sabotage_event(event: Globals.Sabotages):
+	match event:
+		Globals.Sabotages.MUSIC_UNWOUND:
+			if music_box_sensitive:
+				anim.speed_scale = root.music_box_multiplier
+
+func _sabotage_event_end():
+	anim.speed_scale = 1
+
 func _editor_preview():
 	if enable_hologram == false:
 		return
@@ -426,22 +443,20 @@ func _editor_preview():
 		var container = Node3D.new()
 		container.name = "EditorContainer"
 		self.add_child(container)
-#		var holo = MeshInstance3D.new()
-#		var material = load("res://materials/hologram.tres")
-#		# holo.skeleton = get_child(0).get_child(0)
-#		holo.mesh = get_child(0).get_child(0).get_child(0).duplicate() # This should grab the mesh regardless of name
-#		var overrides = holo.get_surface_override_material_count()
-#		for i in overrides - 1:
-#				holo.set_surface_override_material(i, material)
-#		for p in positions.size() - 1:
-#			if current_position == p:
-#				continue
-#			var gram = holo.duplicate()
-#			gram.name = "hologram " + str(p)
-#			gram.position = positions[p].position
-#			gram.rotation_degrees = positions[p].rotation
-#			gram.scale = positions[p].scale
-#			get_node("EditorContainer").add_child(gram)
+		var material = load("res://materials/hologram.tres")
+		for p in positions.size():
+			if current_position == p:
+				continue
+			var gram = hologram_mesh.duplicate()
+			var overrides = hologram_mesh.get_surface_override_material_count()
+			for i in overrides:
+				gram.set_surface_override_material(i, material)
+			gram.name = "hologram " + str(p)
+			gram.top_level = true
+			gram.global_position = positions[p].position
+			gram.rotation_degrees = positions[p].rotation
+			gram.scale = positions[p].scale
+			get_node("EditorContainer").add_child(gram)
 	else:
 		if get_node("EditorContainer") != null:
 			get_node("EditorContainer").queue_free()

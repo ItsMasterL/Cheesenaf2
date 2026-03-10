@@ -20,14 +20,17 @@ const SONG_COUNT = 10
 
 
 func _ready():
-	if root.p1_vent_cam:
+	root.sabotage_begin.connect(sabotage_event)
+	root.sabotage_end.connect(sabotage_event_end)
+	sabotage_event(root.active_sabotage) # For the app opening after the sabotage already happened
+	if root.is_in_vent_cam:
 		cams = $Background/SubViewport/VentCameras
 		cam_buttons = $VentCams
 		$RoomCams.visible = false
 		$VentCams.visible = true
 		vents = true
-	if root.p1_last_cam != null:
-		_change_camera(root.p1_last_cam, false)
+	if root.last_cam != null:
+		_change_camera(root.last_cam, false)
 	# Should be "Animatronics" in office.tscn
 	for animatronic in root.animatronics.get_children():
 		if animatronic.music_box_sensitive:
@@ -62,11 +65,13 @@ func _process(_delta):
 		
 func _unhandled_input(event):
 	if event.is_action_pressed(&"Flashlight") and root.using_tablet:
-		light.visible = true
+		if root.active_sabotage != Globals.Sabotages.POWER_OUTAGE:
+			light.visible = true
 		light_sound.play()
 	if event.is_action_released(&"Flashlight"):
 		light.visible = false
-		light_sound.stop()
+		if root.active_sabotage != Globals.Sabotages.POWER_OUTAGE:
+			light_sound.stop()
 
 func _change_camera(cam: int, sound: bool = true):
 	current_cam = cams.get_child(cam - 1)
@@ -81,7 +86,7 @@ func _change_camera(cam: int, sound: bool = true):
 		music_box.volume_db = -40
 	if sound:
 		cam_sound.play()
-	root.p1_last_cam = cam
+	root.last_cam = cam
 	$CameraLabel.text = str(current_cam.cam_identifier) + "\n" + str(current_cam.cam_name)
 
 func _toggle_vents():
@@ -92,14 +97,14 @@ func _toggle_vents():
 		$RoomCams.visible = false
 		$VentCams.visible = true
 		cam_sound.play()
-		root.p1_vent_cam = true
+		root.is_in_vent_cam = true
 	else:
 		cams = $Background/SubViewport/Cameras
 		cam_buttons = $RoomCams
 		$RoomCams.visible = true
 		$VentCams.visible = false
 		cam_sound.play()
-		root.p1_vent_cam = false
+		root.is_in_vent_cam = false
 	for button in cam_buttons.get_children() as Array[Button]:
 		if button.name.contains("Cam"):
 			button.pressed.connect(_change_camera.bind(button.name.trim_prefix("Cam").to_int()))
@@ -110,3 +115,13 @@ func _wind_musicbox(input: bool):
 
 func _reset_musicbox():
 	music_box.stop()
+
+func sabotage_event(event: Globals.Sabotages):
+	if event == Globals.Sabotages.POWER_OUTAGE:
+		light_sound.stream = load("res://sounds/error.wav")
+	if event == Globals.Sabotages.MUSIC_UNWOUND:
+		music_box.pitch_scale = 2
+
+func sabotage_event_end():
+	light_sound.stream = load("res://sounds/minigame/buzzlight.wav")
+	music_box.pitch_scale = 1

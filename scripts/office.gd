@@ -3,6 +3,8 @@ extends Node3D
 
 signal music_box_ran_out
 signal entrance_closing
+signal sabotage_begin
+signal sabotage_end
 
 const TIME_TO_HOUR = 90
 
@@ -10,6 +12,38 @@ const TIME_TO_HOUR = 90
 @export var animatronics: Node3D
 @export var doors: Node3D
 @export var drink: MeshInstance3D
+#Multiplayer
+@export var active_sabotage: Globals.Sabotages = Globals.Sabotages.NONE:
+	set(type):
+		active_sabotage = type
+		match active_sabotage:
+			Globals.Sabotages.NONE:
+				sabotage_name = "None"
+				sabotage_description = "All is well."
+			Globals.Sabotages.POWER_OUTAGE:
+				sabotage_name = "Power Outage"
+				sabotage_description = "The main power to the building has been cut! The lights have gone dark and the doorways have all been opened. However, any device with a battery should still function."
+				sabotage_begin.emit(Globals.Sabotages.POWER_OUTAGE)
+			Globals.Sabotages.BALLOON_BOY:
+				sabotage_name = "Balloon Boy"
+				sabotage_description = "That pesky animatronic stole your flashlight batteries without even being seen! I mean, surely he exists in the game. Don't look at the source code." #He's not in the game actually
+				sabotage_begin.emit(Globals.Sabotages.BALLOON_BOY)
+			Globals.Sabotages.MUSIC_UNWOUND:
+				sabotage_name = "Music Unwound"
+				sabotage_description = "The music box malfunctioned! It's now playing twice as fast as it's supposed to! Make sure to attend to it more often!"
+				sabotage_begin.emit(Globals.Sabotages.MUSIC_UNWOUND)
+			Globals.Sabotages.PIZZA_DELIVERY:
+				sabotage_name = "Pizza Delivery"
+				sabotage_description = "Congratulations! You have been delivered a fresh pizza! Unfortunately, the old animatronics love the pizza even more than you do. Expect trouble."
+				sabotage_begin.emit(Globals.Sabotages.PIZZA_DELIVERY)
+			Globals.Sabotages.EXTREME_THIRST:
+				sabotage_name = "Extreme Thirst"
+				sabotage_description = "Uh oh! Someone's getting a little too irritated about how much you've been neglecting your water cup. I mean, chugging the whole thing when they show up? Now they're checking twice as often!"
+				sabotage_begin.emit(Globals.Sabotages.EXTREME_THIRST)
+			_:
+				sabotage_name = "???"
+				sabotage_description = "Something has gone wrong, but you don't know what!"
+@export var lights: Array[Node3D]
 
 var night = Globals.night
 var time = 0 as float
@@ -18,15 +52,15 @@ var minute = 0
 var fun_multiplier = 1 # Set by minigames in singleplayer to make time go by faster
 var purchased_apps
 var using_tablet = false
-var in_cams = false
+var p1_in_cams = false
 var under_desk = false
-var animatronics_in_office = 0
+var animatronics_in_office = 0 # Not networked
 var closed_entrances: Array[int]
 var jammed_entrances: Array[int]
 var cup_fill = 1
 var fan_powered = true
-var p1_thirst = 0
-var p1_heat = 0
+var p1_thirst = 0 # Not networked
+var p1_heat = 0 # Not networked
 var musicbox = 2000
 var is_winding = false
 var musicbox_is_playing = true # This is true anytime the musicbox is playing
@@ -46,12 +80,20 @@ var wither_foxy = Globals.wither_foxy
 var cheesestick = Globals.cheesestick
 #Changed per night, how long the player has to hide under the desk when an animatronic gets in
 var safety_time = Globals.safety_time
+# Multiplayer specific
+var is_p1 = true # Not networked
+var sabotage_name
+var sabotage_description
+var temp_closed_entrances: Array[int]
+var music_box_multiplier = 1
+
 # Etc
-var p1_last_cam
-var p1_vent_cam = false
+var last_cam # Not networked
+var is_in_vent_cam = false # Not networked
 var game_sensitive: Array[Node3D]
 var can_jumpscare = true # If a game sensitive animatronic is saving you
 var p1_can_action = true # False if in a jumpscare
+var p2_can_action = true # False if in a jumpscare
 var paranormal_attacking = false # Why is it here?
 var paranormal_attacker: Node3D # What even is it?
 var paranormal_primed = false # What is it doing?
@@ -67,6 +109,10 @@ func _ready():
 		if animatronic.vent_checker and night == 2:
 			entrance_closing.connect(animatronic._kill_vent_checker)
 		entrance_closing.connect(animatronic._leave_doorway_check)
+	
+	sabotage_begin.connect(_sabotage_event)
+	sabotage_end.connect(_sabotage_event_end)
+
 	if night == 1:
 		$Player/Head/Eyes/Controls.visible = true
 		closed_entrances = [1, 4]
@@ -86,13 +132,14 @@ func _process(delta):
 	# Player thirst
 	p1_thirst += (delta * 0.05) * fun_multiplier
 	# Fan heat
-	if fan_powered:
-		if under_desk:
-			p1_heat = clamp(p1_heat - (delta * 0.025), -2, 5)
-		else:
-			p1_heat = clamp(p1_heat - (delta * 0.05), -2, 5)
-	else:
-		p1_heat = clamp(p1_heat + (delta * 0.015), 0, 5)
+	if active_sabotage != Globals.Sabotages.POWER_OUTAGE:
+		if fan_powered:
+			if under_desk:
+				p1_heat = clamp(p1_heat - (delta * 0.025), -2, 5)
+			else:
+				p1_heat = clamp(p1_heat - (delta * 0.05), -2, 5)
+		elif active_sabotage:
+			p1_heat = clamp(p1_heat + (delta * 0.015), 0, 5)
 	blur.material.set("shader_parameter/blur_amount", p1_heat)
 	# Music box running out
 	if musicbox == 0:
@@ -107,7 +154,7 @@ func _process(delta):
 	
 	# ????????
 	if paranormal_attacking:
-		if in_cams and using_tablet:
+		if p1_in_cams and using_tablet:
 			paranormal_primed = true
 		elif paranormal_primed:
 			paranormal_attacker._move_animatronic()
@@ -123,6 +170,7 @@ func _process(delta):
 		get_tree().change_scene_to_file("res://scenes/victory.tscn")
 	
 	if OS.is_debug_build():
+		# Jumpscare/6 AM test
 		if can_jumpscare:
 			if Input.is_key_pressed(KEY_F1):
 				_jumpscare(animatronics.get_child(0))
@@ -146,6 +194,20 @@ func _process(delta):
 				_jumpscare(animatronics.get_child(9))
 		if Input.is_key_pressed(KEY_F12):
 			time = 540
+		# Sabotage test
+		if Input.is_key_pressed(KEY_0):
+			sabotage_end.emit()
+		if Input.is_key_pressed(KEY_1):
+			active_sabotage = Globals.Sabotages.POWER_OUTAGE
+		if Input.is_key_pressed(KEY_2):
+			active_sabotage = Globals.Sabotages.BALLOON_BOY
+		if Input.is_key_pressed(KEY_3):
+			active_sabotage = Globals.Sabotages.MUSIC_UNWOUND
+		if Input.is_key_pressed(KEY_4):
+			active_sabotage = Globals.Sabotages.PIZZA_DELIVERY
+		if Input.is_key_pressed(KEY_5):
+			active_sabotage = Globals.Sabotages.EXTREME_THIRST
+
 
 func _get_ai(animatronic: String) -> int:
 	match animatronic:
@@ -173,7 +235,7 @@ func _take_tablet():
 	if using_tablet:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	using_tablet = false
-	in_cams = false
+	p1_in_cams = false
 	p1_has_tablet = false
 	$Player/Head/Eyes/Cursor.visible = true
 	tablet.queue_free() # You ain't getting that back lmao
@@ -223,7 +285,7 @@ func _jumpscare(animatronic: Node3D):
 	under_desk = false
 	animatronic.can_move = false
 	var anim: AnimationPlayer = animatronic.get_child(1)
-	var sound: AudioStreamPlayer = animatronic.get_child(2)
+	var sound: AudioStreamPlayer = animatronic.get_node("Jumpscare")
 	if gamer_in_office and animatronic.ignore_save == true and animatronic.save_jumpscare_id != animatronic.jumpscare_animation_id:
 		animatronic.position = animatronic.save_ignore_jumpscare_position
 		animatronic.rotation_degrees = animatronic.save_ignore_jumpscare_rotation
@@ -232,6 +294,7 @@ func _jumpscare(animatronic: Node3D):
 	else:
 		animatronic.position = animatronic.jumpscare_position
 		animatronic.rotation_degrees = animatronic.jumpscare_rotation
+		anim.speed_scale = 1 # For the Music Unwound sabotage
 		anim.play(animatronic.jumpscare_animation_id)
 	sound.play()
 	var player_cam_anim := $Player/Head/Eyes/AnimationPlayer
@@ -309,3 +372,60 @@ func _jumpscare_save(animatronic: Node3D):
 	animatronic.guarding = false
 	can_jumpscare = true
 	gamer_in_office = false
+
+### SABOTAGES ###
+
+func _sabotage_event(event : Globals.Sabotages):
+	match event:
+		Globals.Sabotages.POWER_OUTAGE:
+			$SabotageWarning.stream = load("res://sounds/multiplayer/powerdown.wav")
+			$SabotageWarning.play()
+			for light in lights:
+				light.visible = false
+			temp_closed_entrances = closed_entrances
+			await get_tree().create_timer(0.16).timeout #fixes a bug kind of ??
+			_set_entrances([]) # We can probably safely ignore jammed entrances
+		
+		Globals.Sabotages.BALLOON_BOY:
+			$SabotageWarning.stream = load("res://sounds/multiplayer/balloonboy.wav")
+			$SabotageWarning.play()
+		
+		Globals.Sabotages.MUSIC_UNWOUND:
+			$SabotageWarning.stream = load("res://sounds/multiplayer/jackinthebox.wav")
+			$SabotageWarning.play()
+			music_box_multiplier = 2
+
+		Globals.Sabotages.PIZZA_DELIVERY:
+			$SabotageWarning.stream = load("res://sounds/multiplayer/doorbell.mp3")
+			$SabotageWarning.play()
+
+		Globals.Sabotages.EXTREME_THIRST:
+			$SabotageWarning.stream = load("res://sounds/multiplayer/doorbell.mp3")
+			$SabotageWarning.play()
+
+
+func _sabotage_event_end():
+	match active_sabotage:
+		Globals.Sabotages.POWER_OUTAGE:
+			for light in lights:
+				light.visible = true
+			_set_entrances(temp_closed_entrances)
+
+		Globals.Sabotages.BALLOON_BOY:
+			$SabotageWarning.stream = load("res://sounds/multiplayer/gone.wav")
+			$SabotageWarning.play()
+
+		Globals.Sabotages.MUSIC_UNWOUND:
+			$SabotageWarning.stream = load("res://sounds/multiplayer/gone.wav")
+			$SabotageWarning.play()
+			music_box_multiplier = 1
+
+		Globals.Sabotages.PIZZA_DELIVERY:
+			$SabotageWarning.stream = load("res://sounds/multiplayer/gone.wav")
+			$SabotageWarning.play()
+
+		Globals.Sabotages.EXTREME_THIRST:
+			$SabotageWarning.stream = load("res://sounds/multiplayer/gone.wav")
+			$SabotageWarning.play()
+	
+	active_sabotage = Globals.Sabotages.NONE

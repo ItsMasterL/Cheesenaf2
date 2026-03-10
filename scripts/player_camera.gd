@@ -12,34 +12,41 @@ const RAY_LENGTH = 1000.0
 @onready var breathing := $Head/Breathing
 @onready var moving := $Head/MoveUnderDesk
 
+func _ready():
+	root.sabotage_begin.connect(_sabotage_event)
+	root.sabotage_end.connect(_sabotage_event_end)
 
 func _unhandled_input(event):
-	if root.p1_can_action:
-		if event.is_action_pressed(&"Flashlight") and root.using_tablet == false:
-			flashlight.visible = true
-			flashlight_sound.play()
-		if event.is_action_released(&"Flashlight"):
-			flashlight.visible = false
-			if root.using_tablet == false:
+	if root.is_p1:
+		if root.p1_can_action:
+			if event.is_action_pressed(&"Flashlight") and root.using_tablet == false:
+				if root.active_sabotage != Globals.Sabotages.BALLOON_BOY:
+					flashlight.visible = true
 				flashlight_sound.play()
-		if event.is_action_pressed(&"HideUnderDesk") and anim.is_playing() == false and root.under_desk == false:
-			anim.play(&"desk_hide")
-			moving.play()
-		if event.is_action_released(&"HideUnderDesk") and anim.is_playing() == false and root.under_desk:
-			anim.play(&"desk_hide", -1, -1, true)
-			moving.play()
-	if event.is_action_pressed(&"Interact") and root.using_tablet == false:
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	elif event.is_action_pressed(&"ui_cancel"):
+			if event.is_action_released(&"Flashlight"):
+				flashlight.visible = false
+				if root.using_tablet == false and root.active_sabotage != Globals.Sabotages.BALLOON_BOY:
+					flashlight_sound.play()
+			if event.is_action_pressed(&"HideUnderDesk") and anim.is_playing() == false and root.under_desk == false:
+				anim.play(&"desk_hide")
+				moving.play()
+			if event.is_action_released(&"HideUnderDesk") and anim.is_playing() == false and root.under_desk:
+				anim.play(&"desk_hide", -1, -1, true)
+				moving.play()
+		if event.is_action_pressed(&"Interact") and root.using_tablet == false:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		elif event.is_action_pressed(&"ui_cancel"):
+			if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			elif Input.mouse_mode == Input.MOUSE_MODE_VISIBLE and root.using_tablet == false:
+				get_tree().change_scene_to_file("res://scenes/title.tscn")
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		elif Input.mouse_mode == Input.MOUSE_MODE_VISIBLE and root.using_tablet == false:
-			get_tree().change_scene_to_file("res://scenes/title.tscn")
-	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		if event is InputEventMouseMotion:
-			head.rotate_y(-event.relative.x * (0.005 * Globals.mouse_sensitivity))
-			camera.rotate_x(-event.relative.y * (0.005 * Globals.mouse_sensitivity))
-			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+			if event is InputEventMouseMotion:
+				head.rotate_y(-event.relative.x * (0.005 * Globals.mouse_sensitivity))
+				camera.rotate_x(-event.relative.y * (0.005 * Globals.mouse_sensitivity))
+				camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+	else:
+		pass
 
 func _hidden(state: bool):
 	root.under_desk = state
@@ -49,3 +56,11 @@ func _breathe():
 
 func _stop_breathe():
 	breathing.stop()
+
+func _sabotage_event(event: Globals.Sabotages):
+	if event == Globals.Sabotages.BALLOON_BOY:
+		flashlight_sound.stream = load("res://sounds/error.wav")
+		flashlight.visible = false
+
+func _sabotage_event_end():
+	flashlight_sound.stream = load("res://sounds/flashlight.wav")

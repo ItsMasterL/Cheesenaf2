@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cmcfkb2f1r1u7"
-path="res://.godot/imported/unpop.wav-3b91d4c16b04884e0035913e9e7633af.sample"
+path="res://.godot/imported/unpop.wav-599d2e6630785a5ae15a9f6a8c98cef0.sample"
 
 [deps]
 
-source_file="res://sounds/unpop.wav"
-dest_files=["res://.godot/imported/unpop.wav-3b91d4c16b04884e0035913e9e7633af.sample"]
+source_file="res://sounds/minigame/unpop.wav"
+dest_files=["res://.godot/imported/unpop.wav-599d2e6630785a5ae15a9f6a8c98cef0.sample"]
 
 [params]
 

@@ -25,6 +25,12 @@ func _check_and_seal():
 	wait.visible = true
 	await get_tree().create_timer(3.25).timeout
 	wait.visible = false
+	if root.active_sabotage == Globals.Sabotages.POWER_OUTAGE:
+		seals = root.closed_entrances
+		jam.visible = true
+		audio.stream = load("res://sounds/minigame/vm_fail.wav")
+		audio.play()
+		return
 	if seals.size() > 2:
 		seals = root.closed_entrances
 		error.visible = true
