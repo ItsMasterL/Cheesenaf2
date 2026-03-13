@@ -85,7 +85,7 @@ func start_server():
 	print("Server started!")
 
 func join_server():
-	var peer = ENetMultiplayerPeer.new()
+	peer = ENetMultiplayerPeer.new()
 	var error = peer.create_client(address, port)
 	if error != OK:
 		pass
