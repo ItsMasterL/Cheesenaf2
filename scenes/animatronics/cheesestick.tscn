@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://davygjdeoe7pd" path="res://models/cheesestick.glb" id="1_e4tnk"]
 [ext_resource type="AudioStream" uid="uid://bfjr5ptwvi0b4" path="res://sounds/jumpscare_cheesestick.wav" id="2_8wgq6"]
-[ext_resource type="Script" path="res://scripts/animatronic.gd" id="2_qgvuu"]
-[ext_resource type="Script" path="res://scripts/animatronic_position.gd" id="3_fkq6e"]
-[ext_resource type="Script" path="res://scripts/animatronic_entrance.gd" id="4_iqhf1"]
+[ext_resource type="Script" uid="uid://bj1onaat51pqp" path="res://scripts/animatronic.gd" id="2_qgvuu"]
+[ext_resource type="Script" uid="uid://4en87cf4wnfr" path="res://scripts/animatronic_position.gd" id="3_fkq6e"]
+[ext_resource type="Script" uid="uid://b7m76kqb1eco1" path="res://scripts/animatronic_entrance.gd" id="4_iqhf1"]
 
 [sub_resource type="Resource" id="Resource_d4xl1"]
 script = ExtResource("3_fkq6e")
@@ -14,6 +14,7 @@ scale = Vector3(1.9, 1.9, 1.9)
 next_position_indexes = Array[int]([1])
 is_vent = false
 animation_id = "Pose"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_l73xa"]
 script = ExtResource("4_iqhf1")
@@ -33,6 +34,7 @@ next_position_indexes = Array[int]([1])
 is_vent = false
 animation_id = "Pose"
 office_entrance = SubResource("Resource_l73xa")
+is_two_player_only = false
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_iljfn"]
 radius = 32.8989
@@ -287,4 +289,4 @@ volume_db = -5.0
 bus = &"Jumpscare"
 
 [node name="Step" type="AudioStreamPlayer" parent="." index="3"]
-bus = &"SFX"
+bus = &"Footsteps"

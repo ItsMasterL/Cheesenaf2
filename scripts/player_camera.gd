@@ -12,6 +12,8 @@ const RAY_LENGTH = 1000.0
 @onready var breathing := $Head/Breathing
 @onready var moving := $Head/MoveUnderDesk
 
+var sensitivity_sabotage = 1
+
 func _ready():
 	root.sabotage_begin.connect(_sabotage_event)
 	root.sabotage_end.connect(_sabotage_event_end)
@@ -42,8 +44,8 @@ func _unhandled_input(event):
 				get_tree().change_scene_to_file("res://scenes/title.tscn")
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			if event is InputEventMouseMotion:
-				head.rotate_y(-event.relative.x * (0.005 * Globals.mouse_sensitivity))
-				camera.rotate_x(-event.relative.y * (0.005 * Globals.mouse_sensitivity))
+				head.rotate_y(-event.relative.x * (0.005 * Globals.mouse_sensitivity * sensitivity_sabotage))
+				camera.rotate_x(-event.relative.y * (0.005 * Globals.mouse_sensitivity * sensitivity_sabotage))
 				camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 	else:
 		pass
@@ -61,6 +63,9 @@ func _sabotage_event(event: Globals.Sabotages):
 	if event == Globals.Sabotages.BALLOON_BOY:
 		flashlight_sound.stream = load("res://sounds/error.wav")
 		flashlight.visible = false
+	if event == Globals.Sabotages.STIFF_NECK:
+		sensitivity_sabotage = 0.05
 
 func _sabotage_event_end():
 	flashlight_sound.stream = load("res://sounds/flashlight.wav")
+	sensitivity_sabotage = 1

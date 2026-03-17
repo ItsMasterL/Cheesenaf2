@@ -239,7 +239,7 @@ bus = &"Jumpscare"
 volume_db = -30.0
 unit_size = 100.0
 max_db = -10.0
-bus = &"SFX"
+bus = &"Footsteps"
 
 [node name="Warning" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource("5_3kum6")

@@ -13,37 +13,6 @@ const TIME_TO_HOUR = 90
 @export var doors: Node3D
 @export var drink: MeshInstance3D
 #Multiplayer
-@export var active_sabotage: Globals.Sabotages = Globals.Sabotages.NONE:
-	set(type):
-		active_sabotage = type
-		match active_sabotage:
-			Globals.Sabotages.NONE:
-				sabotage_name = "None"
-				sabotage_description = "All is well."
-				return
-			Globals.Sabotages.POWER_OUTAGE:
-				sabotage_name = "Power Outage"
-				sabotage_description = "The main power to the building has been cut! The lights have gone dark and the doorways have all been opened. However, any device with a battery should still function."
-			Globals.Sabotages.CAMERA_MALFUNCTION:
-				sabotage_name = "Camera Malfunction"
-				sabotage_description = "The cameras aren't working right at the moment. Seems they'll be a bit more unreliable than usual. Thankfully this isn't a main mechanic, otherwise it might be a bit more controversial."
-			Globals.Sabotages.PIZZA_DELIVERY:
-				sabotage_name = "Pizza Delivery"
-				sabotage_description = "Congratulations! You have been delivered a fresh pizza! Unfortunately, the old animatronics love the pizza even more than you do. Expect trouble."
-			Globals.Sabotages.EXTREME_THIRST:
-				sabotage_name = "Extreme Thirst"
-				sabotage_description = "Uh oh! Someone's getting a little too irritated about how much you've been neglecting your water cup. I mean, chugging the whole thing when they show up? Now they're checking twice as often!"
-			Globals.Sabotages.BALLOON_BOY:
-				sabotage_name = "Balloon Boy"
-				sabotage_description = "That pesky animatronic stole your flashlight batteries without even being seen! I mean, surely he exists in the game. Don't look at the source code." #He's not in the game actually
-			Globals.Sabotages.MUSIC_UNWOUND:
-				sabotage_name = "Music Unwound"
-				sabotage_description = "The music box malfunctioned! It's now playing twice as fast as it's supposed to! Make sure to attend to it more often!"
-			_:
-				sabotage_name = "???"
-				sabotage_description = "Something has gone wrong, but you don't know what!"
-				return
-		sabotage_begin.emit(active_sabotage as Globals.Sabotages)
 @export var lights: Array[Node3D]
 
 var night = Globals.night
@@ -87,6 +56,55 @@ var sabotage_name
 var sabotage_description
 var temp_closed_entrances: Array[int]
 var music_box_multiplier = 1
+var active_sabotage: Globals.Sabotages = Globals.Sabotages.NONE:
+	set(type):
+		active_sabotage = type
+		match active_sabotage:
+			Globals.Sabotages.NONE:
+				sabotage_name = "None"
+				sabotage_description = "All is well."
+				return
+			Globals.Sabotages.POWER_OUTAGE: #
+				sabotage_name = "Power Outage"
+				sabotage_description = "The main power to the building has been cut! The lights have gone dark and the doorways have all been opened. However, any device with a battery should still function."
+			Globals.Sabotages.TABLET_BLOCK:
+				sabotage_name = "Tablet Block"
+				sabotage_description = "Uh oh, looks like your tablet isn't functioning right now. Hope you didn't need cameras, games, or a way to close the doors around you."
+			Globals.Sabotages.STIFF_NECK: #
+				sabotage_name = "Stiff Neck"
+				sabotage_description = "Oops! Looks like your neck is a little stiff. I guess you could call this some kind of Stiff Neck. I'm sure you'll be fine."
+			Globals.Sabotages.CAMERA_MALFUNCTION:
+				sabotage_name = "Camera Malfunction"
+				sabotage_description = "The cameras aren't working right at the moment. Seems they'll be a bit more unreliable than usual. Thankfully this isn't a main mechanic, otherwise it might be a bit more controversial."
+			Globals.Sabotages.PIZZA_DELIVERY: #
+				sabotage_name = "Pizza Delivery"
+				sabotage_description = "Congratulations! You have been delivered a fresh pizza! Unfortunately, the old animatronics love the pizza even more than you do. Expect trouble."
+			Globals.Sabotages.EXTREME_THIRST: #
+				sabotage_name = "Extreme Thirst"
+				sabotage_description = "Uh oh! Someone's getting a little too irritated about how much you've been neglecting your water cup. I mean, chugging the whole thing when they show up? Now they're checking twice as often!"
+			Globals.Sabotages.BALLOON_BOY: #
+				sabotage_name = "Balloon Boy"
+				sabotage_description = "That pesky animatronic stole your flashlight batteries without even being seen! I mean, surely he exists in the game. Don't look at the source code." #He's not in the game actually
+			Globals.Sabotages.SWAP:
+				sabotage_name = "Swap"
+				sabotage_description = "Swippity Swappity your boss is now you're goppity"
+			Globals.Sabotages.DATA_CORRUPTION:
+				sabotage_name = "Data Corruption"
+				sabotage_description = "Uh oh! The games on your tablet aren't working! Now the animatronics that like watching you play them aren't gonna be so happy around you."
+			Globals.Sabotages.UNSTABLE_CONNECTION:
+				sabotage_name = "Unstable Connection"
+				sabotage_description = "Looks like Skype is having some issues connecting tonight. They really should have done something locally networked instead."
+			Globals.Sabotages.MUSIC_UNWOUND: #
+				sabotage_name = "Music Unwound"
+				sabotage_description = "The music box malfunctioned! It's now playing twice as fast as it's supposed to! Make sure to attend to it more often!"
+			Globals.Sabotages.SOFT_SLIPPERS:
+				sabotage_name = "Soft Slippers"
+				sabotage_description = "The animatronics have gotten sneakier! You won't be able to hear them nearly as well."
+			_:
+				sabotage_name = "???"
+				sabotage_description = "Something has gone wrong, but you don't know what!"
+				return
+		sabotage_begin.emit(active_sabotage as Globals.Sabotages)
 
 # Etc
 var last_cam # Not networked
@@ -98,8 +116,10 @@ var p2_can_action = true # False if in a jumpscare
 var paranormal_attacking = false # Why is it here?
 var paranormal_attacker: Node3D # What even is it?
 var paranormal_primed = false # What is it doing?
+var is_paused = false # Used to pause the gameplay without freezing the player, mainly for debug
 
 @onready var blur := $BlurShader/ColorRect
+@onready var sabotage_warning = $SabotageWarning
 #endregion
 
 # Called when the node enters the scene tree for the first time.
@@ -142,6 +162,7 @@ func _ready():
 
 	LimboConsole.register_command(cmd_set_time, "time value", "Sets the time at the smallest level.")
 	LimboConsole.register_command(cmd_set_hour, "time hour", "Sets the time by the hour.")
+	LimboConsole.register_command(cmd_pause, "time pause", "Toggles the flow of time")
 
 func _exit_tree():
 	LimboConsole.unregister_command("jumpscare")
@@ -151,10 +172,13 @@ func _exit_tree():
 	LimboConsole.unregister_command("sabotage")
 	LimboConsole.unregister_command("time value")
 	LimboConsole.unregister_command("time hour")
+	LimboConsole.unregister_command("time pause")
 #endregion
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if is_paused:
+		return
 	Globals.game_time += delta
 	time += (delta * fun_multiplier)
 	hour = floor(time / TIME_TO_HOUR)
@@ -276,7 +300,7 @@ func _jumpscare(animatronic: Node3D):
 	can_jumpscare = false
 	under_desk = false
 	animatronic.can_move = false
-	var anim: AnimationPlayer = animatronic.get_child(1)
+	var anim: AnimationPlayer = animatronic.anim
 	var sound: AudioStreamPlayer = animatronic.get_node("Jumpscare")
 	if gamer_in_office and animatronic.ignore_save == true and animatronic.save_jumpscare_id != animatronic.jumpscare_animation_id:
 		animatronic.position = animatronic.save_ignore_jumpscare_position
@@ -370,8 +394,8 @@ func _jumpscare_save(animatronic: Node3D):
 func _sabotage_event(event : Globals.Sabotages):
 	match event:
 		Globals.Sabotages.POWER_OUTAGE:
-			$SabotageWarning.stream = load("res://sounds/multiplayer/powerdown.wav")
-			$SabotageWarning.play()
+			sabotage_warning.stream = load("res://sounds/multiplayer/powerdown.wav")
+			sabotage_warning.play()
 			for light in lights:
 				light.visible = false
 			temp_closed_entrances = closed_entrances
@@ -379,21 +403,28 @@ func _sabotage_event(event : Globals.Sabotages):
 			_set_entrances([]) # We can probably safely ignore jammed entrances
 		
 		Globals.Sabotages.BALLOON_BOY:
-			$SabotageWarning.stream = load("res://sounds/multiplayer/balloonboy.wav")
-			$SabotageWarning.play()
+			sabotage_warning.stream = load("res://sounds/multiplayer/balloonboy.wav")
+			sabotage_warning.play()
 		
 		Globals.Sabotages.MUSIC_UNWOUND:
-			$SabotageWarning.stream = load("res://sounds/multiplayer/jackinthebox.wav")
-			$SabotageWarning.play()
+			sabotage_warning.stream = load("res://sounds/multiplayer/jackinthebox.wav")
+			sabotage_warning.play()
 			music_box_multiplier = 2
 
 		Globals.Sabotages.PIZZA_DELIVERY:
-			$SabotageWarning.stream = load("res://sounds/multiplayer/doorbell.mp3")
-			$SabotageWarning.play()
+			sabotage_warning.stream = load("res://sounds/multiplayer/doorbell.mp3")
+			sabotage_warning.play()
 
 		Globals.Sabotages.EXTREME_THIRST:
-			$SabotageWarning.stream = load("res://sounds/multiplayer/doorbell.mp3")
-			$SabotageWarning.play()
+			sabotage_warning.stream = load("res://sounds/multiplayer/doorbell.mp3")
+			sabotage_warning.play()
+		
+		Globals.Sabotages.STIFF_NECK:
+			sabotage_warning.stream = load("res://sounds/multiplayer/adam_stiff.wav")
+			sabotage_warning.play()
+		
+		Globals.Sabotages.SOFT_SLIPPERS:
+			AudioServer.set_bus_effect_enabled(7,0,true)
 
 
 func _sabotage_event_end():
@@ -404,21 +435,28 @@ func _sabotage_event_end():
 			_set_entrances(temp_closed_entrances)
 
 		Globals.Sabotages.BALLOON_BOY:
-			$SabotageWarning.stream = load("res://sounds/multiplayer/gone.wav")
-			$SabotageWarning.play()
+			sabotage_warning.stream = load("res://sounds/multiplayer/gone.wav")
+			sabotage_warning.play()
 
 		Globals.Sabotages.MUSIC_UNWOUND:
-			$SabotageWarning.stream = load("res://sounds/multiplayer/gone.wav")
-			$SabotageWarning.play()
+			sabotage_warning.stream = load("res://sounds/multiplayer/gone.wav")
+			sabotage_warning.play()
 			music_box_multiplier = 1
 
 		Globals.Sabotages.PIZZA_DELIVERY:
-			$SabotageWarning.stream = load("res://sounds/multiplayer/gone.wav")
-			$SabotageWarning.play()
+			sabotage_warning.stream = load("res://sounds/multiplayer/gone.wav")
+			sabotage_warning.play()
 
 		Globals.Sabotages.EXTREME_THIRST:
-			$SabotageWarning.stream = load("res://sounds/multiplayer/gone.wav")
-			$SabotageWarning.play()
+			sabotage_warning.stream = load("res://sounds/multiplayer/gone.wav")
+			sabotage_warning.play()
+		
+		Globals.Sabotages.STIFF_NECK:
+			sabotage_warning.stream = load("res://sounds/multiplayer/adam_unstiff.wav")
+			sabotage_warning.play()
+		
+		Globals.Sabotages.SOFT_SLIPPERS:
+			AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index("Footsteps"),0,false)
 	
 	active_sabotage = Globals.Sabotages.NONE
 #endregion
@@ -490,5 +528,12 @@ func cmd_set_time(arg1: int):
 
 func cmd_set_hour(arg1: int):
 	time = clamp(arg1, 0, 6) * TIME_TO_HOUR
+
+func cmd_pause():
+	is_paused = !is_paused
+	if is_paused:
+		LimboConsole.print_line("Gameplay has been paused")
+	else:
+		LimboConsole.print_line("Gameplay has resumed")
 
 #endregion

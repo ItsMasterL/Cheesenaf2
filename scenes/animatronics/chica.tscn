@@ -1,9 +1,9 @@
 [gd_scene load_steps=18 format=3 uid="uid://cuiite2xlb70y"]
 
 [ext_resource type="PackedScene" uid="uid://bhsclrk6isip3" path="res://models/chica.glb" id="1_2hjnd"]
-[ext_resource type="Script" path="res://scripts/animatronic.gd" id="2_v6h4j"]
-[ext_resource type="Script" path="res://scripts/animatronic_position.gd" id="3_r0jvk"]
-[ext_resource type="Script" path="res://scripts/animatronic_entrance.gd" id="4_v0371"]
+[ext_resource type="Script" uid="uid://bj1onaat51pqp" path="res://scripts/animatronic.gd" id="2_v6h4j"]
+[ext_resource type="Script" uid="uid://4en87cf4wnfr" path="res://scripts/animatronic_position.gd" id="3_r0jvk"]
+[ext_resource type="Script" uid="uid://b7m76kqb1eco1" path="res://scripts/animatronic_entrance.gd" id="4_v0371"]
 [ext_resource type="AudioStream" uid="uid://c3n0lfpxca8e8" path="res://sounds/jumpscare_edam.wav" id="5_ynres"]
 [ext_resource type="AudioStream" uid="uid://blj2fpebqrwua" path="res://sounds/dialogue/bonnie.wav" id="6_lmxgf"]
 
@@ -16,6 +16,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([7])
 is_vent = false
 animation_id = "Pose"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_ip6o5"]
 resource_name = "Kitchen"
@@ -26,6 +27,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([2, 3, 5, 0])
 is_vent = false
 animation_id = "EdamChicaKitchen"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_p34v3"]
 script = ExtResource("4_v0371")
@@ -46,6 +48,7 @@ next_position_indexes = Array[int]([])
 is_vent = true
 animation_id = "ChicaVent"
 office_entrance = SubResource("Resource_p34v3")
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_2iqvo"]
 resource_name = "Party Room B"
@@ -56,6 +59,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([1, 4])
 is_vent = false
 animation_id = "EdamChicaPartyRoomB"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_xixoi"]
 script = ExtResource("4_v0371")
@@ -76,6 +80,7 @@ next_position_indexes = Array[int]([])
 is_vent = false
 animation_id = "EdamChicaDrinkWater"
 office_entrance = SubResource("Resource_xixoi")
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_5yv4w"]
 resource_name = "Party Room A"
@@ -86,6 +91,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([1, 6])
 is_vent = false
 animation_id = "EdamChicaPartyRoomA"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_ao636"]
 script = ExtResource("4_v0371")
@@ -106,6 +112,7 @@ next_position_indexes = Array[int]([])
 is_vent = false
 animation_id = "EdamChicaDrinkWater"
 office_entrance = SubResource("Resource_ao636")
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_gltvf"]
 resource_name = "Lobby Vent A"
@@ -116,6 +123,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([5])
 is_vent = true
 animation_id = "ChicaVent"
+is_two_player_only = false
 
 [node name="Edam Chica" instance=ExtResource("1_2hjnd")]
 script = ExtResource("2_v6h4j")
@@ -221,7 +229,7 @@ bus = &"Jumpscare"
 volume_db = -30.0
 unit_size = 100.0
 max_db = -10.0
-bus = &"SFX"
+bus = &"Footsteps"
 
 [node name="Warning" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource("6_lmxgf")

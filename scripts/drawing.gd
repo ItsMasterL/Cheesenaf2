@@ -16,7 +16,7 @@ func _ready() -> void:
 	music.play()
 	drums.play()
 
-func _process(delta):
+func _process(_delta):
 	if menu_open:
 		drums.volume_linear = clamp(drums.volume_linear - 0.01, 0, 1)
 	else:

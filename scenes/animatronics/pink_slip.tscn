@@ -79,4 +79,4 @@ stream = ExtResource("2_0ny0a")
 bus = &"Jumpscare"
 
 [node name="Step" type="AudioStreamPlayer" parent="."]
-bus = &"SFX"
+bus = &"Footsteps"

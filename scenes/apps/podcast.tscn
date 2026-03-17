@@ -25,7 +25,8 @@ offset_bottom = 581.0
 texture = ExtResource("2_ey4dd")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Home"]
-bus = &"Tablet"
+volume_db = -5.0
+bus = &"TabletVoice"
 
 [node name="Play_Pause" type="Button" parent="Home"]
 layout_mode = 0
