@@ -158,6 +158,9 @@ func cmd_scene(arg1: String):
 func cmd_mouse_mode():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
+func set_scene(scene: String):
+	get_tree().change_scene_to_file("res://scenes/" + scene + ".tscn")
+
 #region Saving/Loading
 func _save():
 	print("Saving user data")

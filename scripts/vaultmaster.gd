@@ -45,7 +45,7 @@ func _check_and_seal():
 				return
 		dark.visible = false
 		audio.stream = load("res://sounds/minigame/vm_success.wav")
-		root._set_entrances(seals)
+		root._set_entrances.rpc(seals)
 	audio.play()
 
 func _clear_error_message():

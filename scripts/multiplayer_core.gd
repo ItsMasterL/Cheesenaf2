@@ -9,7 +9,6 @@ signal server_disconnected
 var address = "127.0.0.1"
 var port = 17920
 var player_limit = 4
-
 var players = {}
 var is_host = false
 var is_multiplayer = false
@@ -128,5 +127,19 @@ func ping_host():
 func client_info():
 	LimboConsole.print_line("Is host:" + str(is_host))
 	LimboConsole.print_line("Peer ID:" + str(multiplayer.get_unique_id()))
+
+#endregion
+
+#region Gameplay Initialization
+
+func sync_lobby_settings():
+	pass
+
+@rpc("authority","call_local","reliable")
+func start_test(rand_seed: int):
+	Globals.office_mode = Globals.OfficeMode.CO_OP
+	Globals._set_night(2)
+	seed(rand_seed)
+	Globals.set_scene("title_loadoffice")
 
 #endregion

@@ -259,6 +259,7 @@ func _get_ai(animatronic: String) -> int:
 			return cheesestick
 	return 0
 
+@rpc("authority","call_local","reliable")
 func _take_tablet():
 	if using_tablet:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -269,6 +270,7 @@ func _take_tablet():
 	tablet.queue_free() # You ain't getting that back lmao
 	$Player/Head/LoseTablet.play()
 
+@rpc("authority","call_local","reliable")
 func _set_entrances(values: Array[int]):
 	var i = 0
 	for door in doors.get_children():
@@ -404,6 +406,7 @@ func _jumpscare_save(animatronic: Node3D):
 
 #region Sabotages
 
+@rpc("authority","call_local","reliable")
 func _sabotage_event(event : Globals.Sabotages):
 	match event:
 		Globals.Sabotages.POWER_OUTAGE:
@@ -443,7 +446,7 @@ func _sabotage_event(event : Globals.Sabotages):
 			player_manager.set_active_player.emit()
 			_sabotage_event_end()
 
-
+@rpc("authority","call_local","reliable")
 func _sabotage_event_end():
 	match active_sabotage:
 		Globals.Sabotages.POWER_OUTAGE:

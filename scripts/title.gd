@@ -10,6 +10,8 @@ func _ready():
 	Globals._load_settings()
 	if Globals.game_over:
 		$Foreground/AnimationPlayer.play("fade")
+		if MultiplayerCore.is_multiplayer:
+			_load_title_screen("title_mp_lobby")
 		Globals.game_over = false
 
 func _load_title_screen(screen: String):

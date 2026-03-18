@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=4 uid="uid://kfokhb3cioir"]
+[gd_scene load_steps=90 format=4 uid="uid://kfokhb3cioir"]
 
 [ext_resource type="Script" uid="uid://bmd8ubev6prvd" path="res://scripts/office.gd" id="1_a3xfx"]
 [ext_resource type="PackedScene" uid="uid://bs378s4kwr2ux" path="res://scenes/props/foxy_plush.tscn" id="1_gqipk"]
@@ -514,6 +514,25 @@ _data = {
 &"desk_hide": SubResource("Animation_1arho")
 }
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_65uj5"]
+properties/0/path = NodePath("Head/Eyes/SpotLight3D:visible")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath("Head:rotation:y")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath("Head/Eyes/AnimationPlayer:current_animation")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath("Head/Eyes/AnimationPlayer:active")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_cqgbc"]
+properties/0/path = NodePath("Head:rotation:y")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_48d6p"]
 emission_shape_offset = Vector3(0, 5, 0)
 emission_shape = 3
@@ -860,6 +879,9 @@ libraries = {
 &"": SubResource("AnimationLibrary_3b2wx")
 }
 
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="PlayerManager/Player1"]
+replication_config = SubResource("SceneReplicationConfig_65uj5")
+
 [node name="Player2" type="CharacterBody3D" parent="PlayerManager"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 35.7349, 3.14918, 0)
 script = ExtResource("31_63unw")
@@ -970,6 +992,9 @@ bus = &"Voice"
 stream = ExtResource("21_dvkyg")
 volume_db = -10.0
 bus = &"SFX"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="PlayerManager/Player2"]
+replication_config = SubResource("SceneReplicationConfig_cqgbc")
 
 [node name="Map" parent="." instance=ExtResource("13_3pria")]
 
@@ -1140,12 +1165,10 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.22, 
 [node name="CeilingDoor" parent="Doors" instance=ExtResource("28_t03s8")]
 transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 0.5, 4.499, 0)
 
-[node name="Doors2" type="Node3D" parent="."]
-
-[node name="RightDoor2" parent="Doors2" instance=ExtResource("28_t03s8")]
+[node name="RightDoor2" parent="Doors" instance=ExtResource("28_t03s8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5104, 3.84988, 3.94902)
 
-[node name="LeftDoor2" parent="Doors2" instance=ExtResource("28_t03s8")]
+[node name="LeftDoor2" parent="Doors" instance=ExtResource("28_t03s8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.51, 3.85, -3.949)
 
 [node name="Animatronics" type="Node3D" parent="."]

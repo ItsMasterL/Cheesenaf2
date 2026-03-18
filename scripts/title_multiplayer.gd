@@ -3,6 +3,7 @@ extends Control
 @export var username_input: LineEdit
 @export var player_list: Label
 @export var join_sound: AudioStreamPlayer
+@export var hide_from_clients: Array[Node]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,6 +16,9 @@ func _ready():
 	
 	if player_list != null:
 		update_player_list()
+	
+	for i in hide_from_clients:
+		i.visible = MultiplayerCore.is_host
 	
 	MultiplayerCore.player_connected.connect(update_player_list)
 	MultiplayerCore.player_disconnected.connect(update_player_list)
@@ -59,3 +63,6 @@ func set_ip(ip: String):
 
 func set_port(port: String):
 	MultiplayerCore._set_port(port)
+
+func start_game():
+	MultiplayerCore.start_test.rpc(int(Time.get_unix_time_from_system()))
