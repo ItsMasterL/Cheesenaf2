@@ -17,7 +17,6 @@ signal server_disconnected
 var players = {}
 
 # Client
-var peer
 var compression = ENetConnection.COMPRESS_RANGE_CODER
 
 
@@ -71,7 +70,7 @@ func _on_server_disconnected():
 	server_disconnected.emit()
 
 func start_server():
-	peer = ENetMultiplayerPeer.new()
+	var peer = ENetMultiplayerPeer.new()
 	var error = peer.create_server(port, player_limit)
 	if error != OK:
 		print("Unable to create server: %s" % [str(error)])
@@ -85,7 +84,7 @@ func start_server():
 	print("Server started!")
 
 func join_server():
-	peer = ENetMultiplayerPeer.new()
+	var peer = ENetMultiplayerPeer.new()
 	var error = peer.create_client(address, port)
 	if error != OK:
 		pass
