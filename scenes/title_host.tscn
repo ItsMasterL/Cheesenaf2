@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bbkxcldj37urg"]
+[gd_scene load_steps=10 format=3 uid="uid://bbkxcldj37urg"]
 
 [ext_resource type="Script" uid="uid://hulk6v07i6pb" path="res://scripts/title_multiplayer.gd" id="1_8u2ry"]
 [ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://fonts/consolas.ttf" id="2_52mjy"]
 [ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://sounds/minigame/change_cam.wav" id="3_tdqv1"]
-[ext_resource type="Script" uid="uid://dccha4ei8ia40" path="res://scripts/multiplayer_core.gd" id="5_52mjy"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ptv6"]
 
@@ -166,14 +165,8 @@ theme_override_font_sizes/normal_font_size = 20
 text = "Port"
 scroll_active = false
 
-[node name="Core" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("5_52mjy")
-
 [connection signal="pressed" from="Back" to="." method="_change_menu" binds= ["menu"]]
-[connection signal="pressed" from="Host" to="Core" method="start_server"]
+[connection signal="pressed" from="Host" to="." method="create_passthrough"]
 [connection signal="pressed" from="Host" to="." method="_change_menu" binds= ["mp_lobby"]]
-[connection signal="text_changed" from="IP" to="Core" method="_set_ip"]
-[connection signal="text_changed" from="Port" to="Core" method="_set_port"]
+[connection signal="text_changed" from="IP" to="." method="set_ip"]
+[connection signal="text_changed" from="Port" to="." method="set_port"]

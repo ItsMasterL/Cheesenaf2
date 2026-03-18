@@ -26,10 +26,15 @@ boot_splash/show_image=false
 config/icon="res://textures/icons/edam freddy.png"
 config/windows_native_icon="res://textures/icons/edam freddy.ico"
 
+[audio]
+
+driver/enable_input=true
+
 [autoload]
 
 Globals="*res://scripts/globals.gd"
 LimboConsole="*res://addons/limbo_console/limbo_console.gd"
+MultiplayerCore="*res://scripts/multiplayer_core.gd"
 
 [display]
 

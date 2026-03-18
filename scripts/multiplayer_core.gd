@@ -6,15 +6,13 @@ signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
 signal server_disconnected
 
-@export var address = "127.0.0.1"
-@export var port = 17920
-@export var player_limit = 4
+var address = "127.0.0.1"
+var port = 17920
+var player_limit = 4
 
-@export var player_list : Label
-@export var join_sound : AudioStreamPlayer
-
-# TODO: if this actually holds players, clean up Globals
 var players = {}
+var is_host = false
+var is_multiplayer = false
 
 # Client
 var compression = ENetConnection.COMPRESS_RANGE_CODER
@@ -26,8 +24,6 @@ func _ready():
 	multiplayer.connected_to_server.connect(_on_connected_ok)
 	multiplayer.connection_failed.connect(_on_connected_fail)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
-	
-	update_player_list(false)
 
 func _set_ip(input: String):
 	address = input
@@ -68,6 +64,8 @@ func _on_server_disconnected():
 	multiplayer.multiplayer_peer = null
 	players.clear()
 	server_disconnected.emit()
+	Globals.cmd_scene("title")
+	print("Server closed!")
 
 func start_server():
 	var peer = ENetMultiplayerPeer.new()
@@ -80,7 +78,10 @@ func start_server():
 	
 	players[1] = Globals.local_playername
 	player_connected.emit(1, Globals.local_playername)
-	Globals.is_multiplayer = true
+	is_multiplayer = true
+	is_host = true
+
+	_register_admin_commands()
 	print("Server started!")
 
 func join_server():
@@ -90,22 +91,42 @@ func join_server():
 		pass
 	peer.get_host().compress(compression)
 	multiplayer.multiplayer_peer = peer
-	Globals.is_multiplayer = true
+	is_multiplayer = true
+	_register_default_commands()
 
 func leave_server():
+	if is_host:
+		for i in players:
+			multiplayer.multiplayer_peer.disconnect_peer(i)
 	multiplayer.multiplayer_peer = null
 	players.clear()
-	Globals.is_multiplayer = false
-
-# TODO: Move to UI and use signals from above.
-func update_player_list(playsound = true):
-	if player_list != null:
-		if playsound:
-			join_sound.play()
-		player_list.text = ""
-		for i in Globals.players:
-			player_list.text += "%s(%s)\n" % [Globals.players[i].username, Globals.players[i].id]
+	is_multiplayer = false
+	is_host = false
+	_unregister_commands()
+	print("Disconnected from server.")
 
 @rpc("any_peer")
 func remove_player(id):
 	multiplayer.multiplayer_peer.disconnect_peer(id)
+
+#region Commands
+
+func _register_admin_commands():
+	_register_default_commands()
+
+func _register_default_commands():
+	LimboConsole.register_command(MultiplayerCore.ping_host,"ping","Pings the server.")
+	LimboConsole.register_command(MultiplayerCore.client_info,"clientinfo","Displays your information.")
+
+func _unregister_commands():
+	LimboConsole.unregister_command("ping")
+	LimboConsole.unregister_command("clientinfo")
+
+func ping_host():
+	LimboConsole.print_line("Not implemented")
+
+func client_info():
+	LimboConsole.print_line("Is host:" + str(is_host))
+	LimboConsole.print_line("Peer ID:" + str(multiplayer.get_unique_id()))
+
+#endregion

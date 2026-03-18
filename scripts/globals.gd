@@ -60,8 +60,6 @@ var cheesenaf1_code = ""
 var cheesenaf1_seed: int
 
 # Multiplayer #TODO: Actually implement multiplayer
-var players = {}
-var is_host = false
 var is_multiplayer = false
 
 # Save Data
