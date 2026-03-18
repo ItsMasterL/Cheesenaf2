@@ -29,6 +29,7 @@ func _on_foxy_plush_nose_booped():
 		if rand < 8 and sound.playing == true:
 			jumpscare = true
 			sound.stream = load("res://sounds/sting%s.wav" % [rand + 1])
-		sound.play()
+		if root.is_p1:
+			sound.play()
 		if jumpscare == true:
 			anim.play(&"stare")

@@ -18,8 +18,9 @@ offset_bottom = 734.0
 mouse_filter = 2
 script = ExtResource("1_qo780")
 
-[node name="Call" type="AudioStreamPlayer2D" parent="."]
+[node name="Call" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_v3j7f")
+max_distance = 8.0
 bus = &"TabletVoice"
 
 [node name="Notification" type="ColorRect" parent="."]

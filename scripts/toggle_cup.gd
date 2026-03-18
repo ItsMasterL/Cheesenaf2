@@ -1,14 +1,16 @@
 extends StaticBody3D
 
 
+@onready var root = get_node(^"/root/Map")
 @onready var stand := $"../.."
-@onready var hold := $"../../../Player/Head/Eyes/CupHolder"
-@onready var root = $"../../.."
+@onready var hold = root.p1_cup_holder
 @onready var mesh = $".."
 # Made to keep cup mechanics identical to how it worked previously
 var local_cup_fill = 1
 
 func _raycast_event():
+	if !root.is_p1:
+		return
 	var tablet = get_parent_node_3d()
 	var temp_parent = tablet.get_parent_node_3d()
 	if stand == temp_parent:
@@ -16,7 +18,7 @@ func _raycast_event():
 		hold.add_child(tablet)
 		var audio := tablet.get_child(1)
 		var anim := tablet.get_child(2)
-		if (root.cup_fill > 0):
+		if root.cup_fill > 0 and root.is_p1:
 			audio.play()
 		anim.play(&"cup_drink")
 

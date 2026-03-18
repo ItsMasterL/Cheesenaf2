@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=4 uid="uid://kfokhb3cioir"]
+[gd_scene load_steps=88 format=4 uid="uid://kfokhb3cioir"]
 
 [ext_resource type="Script" uid="uid://bmd8ubev6prvd" path="res://scripts/office.gd" id="1_a3xfx"]
 [ext_resource type="PackedScene" uid="uid://bs378s4kwr2ux" path="res://scenes/props/foxy_plush.tscn" id="1_gqipk"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://1jgarnvtkmgi" path="res://textures/Hint.png" id="16_6md6q"]
 [ext_resource type="Animation" uid="uid://ds0rscx8wtpac" path="res://models/animation/camera.res" id="17_7bi74"]
 [ext_resource type="AudioStream" uid="uid://c5db7xn31angv" path="res://sounds/breathing.wav" id="17_eaqhx"]
+[ext_resource type="Script" uid="uid://dmrvo4v1aoeeh" path="res://scripts/player_manager.gd" id="18_142py"]
 [ext_resource type="Script" uid="uid://cfkykkwi1dekx" path="res://scripts/flashlight_raycast.gd" id="18_gn6u8"]
 [ext_resource type="AudioStream" uid="uid://6a8wpxqhxldr" path="res://sounds/shifting.wav" id="18_jcvyf"]
 [ext_resource type="Script" uid="uid://dvmnk5t1mvwgu" path="res://scripts/foxylook.gd" id="18_nks4h"]
@@ -40,6 +41,7 @@
 [ext_resource type="Script" uid="uid://b0l2dh2jnibqv" path="res://scripts/toggle_tablet.gd" id="29_wa4as"]
 [ext_resource type="PackedScene" uid="uid://dwhn6aeiuwg7x" path="res://scenes/animatronics/w_freddy.tscn" id="30_uyssn"]
 [ext_resource type="Script" uid="uid://kd61qln6tuf5" path="res://scripts/player_camera.gd" id="31_63unw"]
+[ext_resource type="Texture2D" uid="uid://cbv5vof723ers" path="res://textures/psy.png" id="31_65uj5"]
 [ext_resource type="PackedScene" uid="uid://b7dpymyvsicjt" path="res://scenes/animatronics/cheesestick.tscn" id="31_a7pji"]
 [ext_resource type="Script" uid="uid://qmxanvnp0xjt" path="res://scripts/player_raycast.gd" id="32_5ed2l"]
 [ext_resource type="PackedScene" uid="uid://dfe3oqrxe2jr2" path="res://scenes/animatronics/pink_slip.tscn" id="38_ry2hb"]
@@ -560,13 +562,19 @@ shader_parameter/blur_amount = 5.0
 shader_parameter/mix_amount = 0.0
 shader_parameter/color_over = Color(0, 0, 0, 1)
 
-[node name="Map" type="Node3D" node_paths=PackedStringArray("tablet", "animatronics", "doors", "drink", "lights")]
+[node name="Map" type="Node3D" node_paths=PackedStringArray("tablet", "animatronics", "doors", "drink", "lights", "player_manager", "p1", "p1_tablet_holder", "p1_cup_holder", "p1_cursor", "p2")]
 script = ExtResource("1_a3xfx")
 tablet = NodePath("TabletOnDesk/Tablet")
 animatronics = NodePath("Animatronics")
 doors = NodePath("Doors")
 drink = NodePath("CupOnDesk/Cup")
 lights = [NodePath("Map/SpotLight3D"), NodePath("Map/SpotLight3D3"), NodePath("Map/SpotLight3D4"), NodePath("Map/SpotLight3D2")]
+player_manager = NodePath("PlayerManager")
+p1 = NodePath("PlayerManager/Player1")
+p1_tablet_holder = NodePath("PlayerManager/Player1/Head/Eyes/TabletHolder")
+p1_cup_holder = NodePath("PlayerManager/Player1/Head/Eyes/CupHolder")
+p1_cursor = NodePath("PlayerManager/Player1/Head/Eyes/Cursor")
+p2 = NodePath("PlayerManager/Player2")
 
 [node name="FoxyPlush" parent="." node_paths=PackedStringArray("root") instance=ExtResource("1_gqipk")]
 root = NodePath("..")
@@ -613,6 +621,7 @@ skeleton = NodePath("")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="ENV_MOD_Desk_Fan_Fanblade_ENV_MOD_Desk_Fan_Fanblade_001"]
 stream = ExtResource("7_q4oox")
 autoplay = true
+max_distance = 8.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ENV_MOD_Desk_Fan_Fanblade_ENV_MOD_Desk_Fan_Fanblade_001"]
 libraries = {
@@ -730,49 +739,53 @@ text = "TUTORIAL_TABLET_HOME"
 autowrap_mode = 3
 width = 318.0
 
-[node name="Player" type="CharacterBody3D" parent="."]
-script = ExtResource("31_63unw")
+[node name="PlayerManager" type="Node3D" parent="."]
+script = ExtResource("18_142py")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+[node name="Player1" type="CharacterBody3D" parent="PlayerManager"]
+script = ExtResource("31_63unw")
+is_p1 = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerManager/Player1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20574, 0)
 shape = SubResource("BoxShape3D_a413t")
 
-[node name="Head" type="Node3D" parent="Player"]
+[node name="Head" type="Node3D" parent="PlayerManager/Player1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68, 0)
 
-[node name="Eyes" type="Camera3D" parent="Player/Head"]
+[node name="Eyes" type="Camera3D" parent="PlayerManager/Player1/Head"]
 keep_aspect = 0
 cull_mask = 1048571
 current = true
 far = 100.0
 
-[node name="Interaction" type="RayCast3D" parent="Player/Head/Eyes"]
+[node name="Interaction" type="RayCast3D" parent="PlayerManager/Player1/Head/Eyes"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 target_position = Vector3(0, -2, 0)
 collide_with_areas = true
 script = ExtResource("32_5ed2l")
 
-[node name="FoxyLook" type="RayCast3D" parent="Player/Head/Eyes"]
+[node name="FoxyLook" type="RayCast3D" parent="PlayerManager/Player1/Head/Eyes"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 target_position = Vector3(0, -10, 0)
 collision_mask = 8
 collide_with_areas = true
 script = ExtResource("18_nks4h")
 
-[node name="Cursor" type="Sprite3D" parent="Player/Head/Eyes"]
+[node name="Cursor" type="Sprite3D" parent="PlayerManager/Player1/Head/Eyes"]
 transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0, 0, -0.077)
 layers = 2
 modulate = Color(1, 1, 1, 0.196078)
 pixel_size = 0.0003
 texture = ExtResource("18_sa7mb")
 
-[node name="TabletHolder" type="Node3D" parent="Player/Head/Eyes"]
+[node name="TabletHolder" type="Node3D" parent="PlayerManager/Player1/Head/Eyes"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.4916e-09, -0.283598)
 
-[node name="CupHolder" type="Node3D" parent="Player/Head/Eyes"]
+[node name="CupHolder" type="Node3D" parent="PlayerManager/Player1/Head/Eyes"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, -0.25642, -0.491635)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Player/Head/Eyes"]
+[node name="SpotLight3D" type="SpotLight3D" parent="PlayerManager/Player1/Head/Eyes"]
 transform = Transform3D(0.999722, 0, 0.0235598, 0.00126423, 0.998559, -0.0536456, -0.0235258, 0.0536605, 0.998282, 0.175257, -0.154509, -0.309658)
 visible = false
 light_energy = 3.0
@@ -782,29 +795,29 @@ distance_fade_shadow = 10.0
 spot_range = 23.6456
 spot_angle = 20.4784
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Player/Head/Eyes/SpotLight3D"]
+[node name="SpotLight3D" type="SpotLight3D" parent="PlayerManager/Player1/Head/Eyes/SpotLight3D"]
 light_energy = 0.1
 spot_range = 11.8432
 spot_angle = 36.1641
 
-[node name="FlashlightClick" type="AudioStreamPlayer" parent="Player/Head/Eyes/SpotLight3D"]
+[node name="FlashlightClick" type="AudioStreamPlayer" parent="PlayerManager/Player1/Head/Eyes/SpotLight3D"]
 stream = ExtResource("15_8e4mc")
 volume_db = -20.0
 bus = &"SFX"
 
-[node name="RayCast3D" type="RayCast3D" parent="Player/Head/Eyes/SpotLight3D"]
+[node name="RayCast3D" type="RayCast3D" parent="PlayerManager/Player1/Head/Eyes/SpotLight3D"]
 transform = Transform3D(0.999702, -0.0243987, -0.00127868, 0, 0.052336, -0.99863, 0.0244322, 0.998331, 0.0523203, -0.181, 0.168, 0.236)
 target_position = Vector3(0, -23, 0)
 collision_mask = 16
 collide_with_areas = true
 script = ExtResource("18_gn6u8")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Head/Eyes"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerManager/Player1/Head/Eyes"]
 libraries = {
 &"": SubResource("AnimationLibrary_ny178")
 }
 
-[node name="Controls" type="Label3D" parent="Player/Head/Eyes"]
+[node name="Controls" type="Label3D" parent="PlayerManager/Player1/Head/Eyes"]
 transform = Transform3D(0.145, 0, 0, 0, 0.145, 0, 0, 0, 0.145, -0.058, -0.031, -0.077)
 visible = false
 pixel_size = 0.0003
@@ -817,35 +830,146 @@ horizontal_alignment = 0
 vertical_alignment = 2
 script = ExtResource("25_6djot")
 
-[node name="AudioListener3D" type="AudioListener3D" parent="Player/Head"]
+[node name="AudioListener3D" type="AudioListener3D" parent="PlayerManager/Player1/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94943, 0)
 current = true
 
-[node name="AdamSandler" type="Sprite3D" parent="Player/Head"]
+[node name="AdamSandler" type="Sprite3D" parent="PlayerManager/Player1/Head"]
 transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, -0.374982, 0)
 layers = 4
 shaded = true
 texture = ExtResource("15_batyp")
 
-[node name="MoveUnderDesk" type="AudioStreamPlayer" parent="Player/Head"]
+[node name="MoveUnderDesk" type="AudioStreamPlayer" parent="PlayerManager/Player1/Head"]
 stream = ExtResource("18_jcvyf")
 volume_db = -5.0
 bus = &"SFX"
 
-[node name="Breathing" type="AudioStreamPlayer" parent="Player/Head"]
+[node name="Breathing" type="AudioStreamPlayer" parent="PlayerManager/Player1/Head"]
 stream = ExtResource("17_eaqhx")
 volume_db = -10.0
 bus = &"Voice"
 
-[node name="LoseTablet" type="AudioStreamPlayer" parent="Player/Head"]
+[node name="LoseTablet" type="AudioStreamPlayer" parent="PlayerManager/Player1/Head"]
 stream = ExtResource("21_dvkyg")
 volume_db = -10.0
 bus = &"SFX"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerManager/Player1"]
 libraries = {
 &"": SubResource("AnimationLibrary_3b2wx")
 }
+
+[node name="Player2" type="CharacterBody3D" parent="PlayerManager"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 35.7349, 3.14918, 0)
+script = ExtResource("31_63unw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerManager/Player2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20574, 0)
+shape = SubResource("BoxShape3D_a413t")
+
+[node name="Head" type="Node3D" parent="PlayerManager/Player2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68, 0)
+
+[node name="Eyes" type="Camera3D" parent="PlayerManager/Player2/Head"]
+keep_aspect = 0
+cull_mask = 1048571
+far = 100.0
+
+[node name="Interaction" type="RayCast3D" parent="PlayerManager/Player2/Head/Eyes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+target_position = Vector3(0, -2, 0)
+collide_with_areas = true
+script = ExtResource("32_5ed2l")
+
+[node name="FoxyLook" type="RayCast3D" parent="PlayerManager/Player2/Head/Eyes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+target_position = Vector3(0, -10, 0)
+collision_mask = 8
+collide_with_areas = true
+script = ExtResource("18_nks4h")
+
+[node name="Cursor" type="Sprite3D" parent="PlayerManager/Player2/Head/Eyes"]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0, 0, -0.077)
+layers = 2
+modulate = Color(1, 1, 1, 0.196078)
+pixel_size = 0.0003
+texture = ExtResource("18_sa7mb")
+
+[node name="TabletHolder" type="Node3D" parent="PlayerManager/Player2/Head/Eyes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.4916e-09, -0.283598)
+
+[node name="CupHolder" type="Node3D" parent="PlayerManager/Player2/Head/Eyes"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, -0.25642, -0.491635)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="PlayerManager/Player2/Head/Eyes"]
+transform = Transform3D(0.999722, 0, 0.0235598, 0.00126423, 0.998559, -0.0536456, -0.0235258, 0.0536605, 0.998282, 0.175257, -0.154509, -0.309658)
+visible = false
+light_energy = 3.0
+shadow_enabled = true
+distance_fade_begin = 0.0
+distance_fade_shadow = 10.0
+spot_range = 23.6456
+spot_angle = 20.4784
+
+[node name="SpotLight3D" type="SpotLight3D" parent="PlayerManager/Player2/Head/Eyes/SpotLight3D"]
+light_energy = 0.1
+spot_range = 11.8432
+spot_angle = 36.1641
+
+[node name="FlashlightClick" type="AudioStreamPlayer" parent="PlayerManager/Player2/Head/Eyes/SpotLight3D"]
+stream = ExtResource("15_8e4mc")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="RayCast3D" type="RayCast3D" parent="PlayerManager/Player2/Head/Eyes/SpotLight3D"]
+transform = Transform3D(0.999702, -0.0243987, -0.00127868, 0, 0.052336, -0.99863, 0.0244322, 0.998331, 0.0523203, -0.181, 0.168, 0.236)
+target_position = Vector3(0, -23, 0)
+collision_mask = 16
+collide_with_areas = true
+script = ExtResource("18_gn6u8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerManager/Player2/Head/Eyes"]
+libraries = {
+&"": SubResource("AnimationLibrary_ny178")
+}
+
+[node name="Controls" type="Label3D" parent="PlayerManager/Player2/Head/Eyes"]
+transform = Transform3D(0.145, 0, 0, 0, 0.145, 0, 0, 0, 0.145, -0.058, -0.031, -0.077)
+visible = false
+pixel_size = 0.0003
+modulate = Color(0.65, 0.65, 0.65, 0.196078)
+outline_modulate = Color(0.37, 0.37, 0.37, 0.0980392)
+text = "Press or hold [SHIFT] to hide under your desk
+Hold [CTRL] to use your flashlight or camera light
+Left click to interact with objects you're looking at"
+horizontal_alignment = 0
+vertical_alignment = 2
+script = ExtResource("25_6djot")
+
+[node name="AudioListener3D" type="AudioListener3D" parent="PlayerManager/Player2/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94943, 0)
+
+[node name="PsyGangnamstyle" type="Sprite3D" parent="PlayerManager/Player2/Head"]
+transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, -0.374982, 0)
+layers = 4
+shaded = true
+texture = ExtResource("31_65uj5")
+
+[node name="MoveUnderDesk" type="AudioStreamPlayer" parent="PlayerManager/Player2/Head"]
+stream = ExtResource("18_jcvyf")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="Breathing" type="AudioStreamPlayer" parent="PlayerManager/Player2/Head"]
+stream = ExtResource("17_eaqhx")
+volume_db = -10.0
+bus = &"Voice"
+
+[node name="LoseTablet" type="AudioStreamPlayer" parent="PlayerManager/Player2/Head"]
+stream = ExtResource("21_dvkyg")
+volume_db = -10.0
+bus = &"SFX"
 
 [node name="Map" parent="." instance=ExtResource("13_3pria")]
 
@@ -996,6 +1120,9 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Interests/UpInterest"]
 shape = SubResource("BoxShape3D_t6udk")
 
+[node name="OmniLight3D" type="OmniLight3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.8491, 4.95562, 0)
+
 [node name="Doors" type="Node3D" parent="."]
 
 [node name="FrontDoor" parent="Doors" instance=ExtResource("28_t03s8")]
@@ -1012,6 +1139,14 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.22, 
 
 [node name="CeilingDoor" parent="Doors" instance=ExtResource("28_t03s8")]
 transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 0.5, 4.499, 0)
+
+[node name="Doors2" type="Node3D" parent="."]
+
+[node name="RightDoor2" parent="Doors2" instance=ExtResource("28_t03s8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5104, 3.84988, 3.94902)
+
+[node name="LeftDoor2" parent="Doors2" instance=ExtResource("28_t03s8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.51, 3.85, -3.949)
 
 [node name="Animatronics" type="Node3D" parent="."]
 

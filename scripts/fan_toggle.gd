@@ -7,7 +7,7 @@ var speed = 1
 @onready var fan_anim := $"../../ENV_MOD_Desk_Fan_Fanblade_ENV_MOD_Desk_Fan_Fanblade_001/AnimationPlayer"
 @onready var fan_sound := $"../../ENV_MOD_Desk_Fan_Fanblade_ENV_MOD_Desk_Fan_Fanblade_001/AudioStreamPlayer3D"
 @onready var click_sound := $"../../ENV_MOD_Desk_Fan_Fanblade_ENV_MOD_Desk_Fan_Fanblade_001/FanClick"
-@onready var root = $"../.."
+@onready var root = get_node(^"/root/Map")
 
 
 func _ready():
@@ -30,6 +30,8 @@ func _process(delta):
 		fan_sound.volume_db = (1 - speed) * -40
 
 func _raycast_event():
+	if !root.is_p1:
+		return
 	power = !root.fan_powered
 	if fan_sound.playing == false:
 		fan_sound.play()

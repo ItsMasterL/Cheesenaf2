@@ -1,17 +1,17 @@
 extends StaticBody3D
 
 
+@onready var root = get_node(^"/root/Map")
 @onready var stand := $"../.."
-@onready var hold := $"../../../Player/Head/Eyes/TabletHolder"
+@onready var hold = root.p1_tablet_holder
 @onready var tablet = $".."
 @onready var home_button = $"../HomeButton"
 @onready var audio := $"../AudioStreamPlayer"
-@onready var cursor := $"../../../Player/Head/Eyes/Cursor"
-@onready var root = $"../../.."
+@onready var cursor = root.p1_cursor
 @onready var anim := $"../AnimationPlayer"
 
 func _raycast_event():
-	if root.p1_has_tablet == false:
+	if root.p1_has_tablet == false or !root.is_p1:
 		return
 	var temp_parent = tablet.get_parent_node_3d()
 	if root.using_tablet == false:

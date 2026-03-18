@@ -14,6 +14,15 @@ const TIME_TO_HOUR = 90
 @export var drink: MeshInstance3D
 #Multiplayer
 @export var lights: Array[Node3D]
+@export var player_manager: Node
+
+@export_category("Player 1")
+@export var p1 : Node
+@export var p1_tablet_holder : Node
+@export var p1_cup_holder : Node
+@export var p1_cursor : Node
+@export_category("Player 2")
+@export var p2 : Node
 
 var night = Globals.night
 var time = 0 as float
@@ -22,8 +31,11 @@ var minute = 0
 var fun_multiplier = 1 # Set by minigames in singleplayer to make time go by faster
 var purchased_apps
 var using_tablet = false
+var using_laptop = false
 var p1_in_cams = false
+var p2_in_cams = false
 var under_desk = false
+var is_laptop_closed = false
 var animatronics_in_office = 0 # Not networked
 var closed_entrances: Array[int]
 var jammed_entrances: Array[int]
@@ -135,7 +147,7 @@ func _ready():
 	sabotage_end.connect(_sabotage_event_end)
 
 	if night == 1:
-		$Player/Head/Eyes/Controls.visible = true
+		p1.get_node("Head/Eyes/Controls").visible = true
 		closed_entrances = [1, 4]
 	_set_entrances(closed_entrances)
 	# Remove Bonnie when he's dead
@@ -276,9 +288,10 @@ func _set_entrances(values: Array[int]):
 func _refill_cup():
 	if cup_fill != 1:
 		cup_fill = 1
-		drink.get_child(3).play()
-		drink.get_child(0).local_cup_fill = cup_fill
-		drink.get_child(0)._update_water()
+		if is_p1:
+			drink.get_node("Refill").play()
+		drink.get_node("StaticBody3D").local_cup_fill = cup_fill
+		drink.get_node("StaticBody3D")._update_water()
 
 func _jumpscare(animatronic: Node3D):
 	while can_jumpscare == false:
@@ -313,11 +326,11 @@ func _jumpscare(animatronic: Node3D):
 		anim.speed_scale = 1 # For the Music Unwound sabotage
 		anim.play(animatronic.jumpscare_animation_id)
 	sound.play()
-	var player_cam_anim := $Player/Head/Eyes/AnimationPlayer
-	var player_head = $Player/Head
-	var player_cam = $Player/Head/Eyes
-	var player_anim := $Player/AnimationPlayer
-	var cup = $Player/Head/Eyes/CupHolder
+	var player_cam_anim := p1.get_node("Head/Eyes/AnimationPlayer")
+	var player_head = p1.get_node("Head")
+	var player_cam = p1.get_node("Head/Eyes")
+	var player_anim := p1.get_node("AnimationPlayer")
+	var cup = p1.get_node("Head/Eyes/CupHolder")
 	if tablet != null:
 		tablet.visible = false
 	cup.visible = false
@@ -345,11 +358,11 @@ func _jumpscare_save(animatronic: Node3D):
 	warning.stream = load("res://sounds/dialogue/edamfoxy-save%s.wav" % [randi_range(1, 7)])
 	anim.play(animatronic.save_animation_id)
 	sound.play()
-	var player_cam_anim := $Player/Head/Eyes/AnimationPlayer
-	var player_head = $Player/Head
-	var player_cam = $Player/Head/Eyes
-	var player_anim := $Player/AnimationPlayer
-	var cup = $Player/Head/Eyes/CupHolder
+	var player_cam_anim := p1.get_node("Head/Eyes/AnimationPlayer")
+	var player_head = p1.get_node("Head")
+	var player_cam = p1.get_node("Head/Eyes")
+	var player_anim := p1.get_node("AnimationPlayer")
+	var cup = p1.get_node("Head/Eyes/CupHolder")
 	if tablet != null:
 		tablet.visible = false
 	cup.visible = false
@@ -425,6 +438,10 @@ func _sabotage_event(event : Globals.Sabotages):
 		
 		Globals.Sabotages.SOFT_SLIPPERS:
 			AudioServer.set_bus_effect_enabled(7,0,true)
+		
+		Globals.Sabotages.SWAP:
+			player_manager.set_active_player.emit()
+			_sabotage_event_end()
 
 
 func _sabotage_event_end():
