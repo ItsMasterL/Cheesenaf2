@@ -2,9 +2,9 @@ extends Node
 
 enum OfficeMode {
 	SINGLEPLAYER,
-	CO_OP,
-	VERSUS, #This can be used for 4 player free-for-alls
-	VERSUS_TEAMS,
+	CO_OP, #2 players in office
+	VERSUS, #This can be used for 1v1 and 4 player free-for-alls
+	VERSUS_TEAMS, #2 players in office
 }
 
 enum Sabotages {

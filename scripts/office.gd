@@ -12,6 +12,8 @@ const TIME_TO_HOUR = 90
 @export var animatronics: Node3D
 @export var doors: Node3D
 @export var drink: MeshInstance3D
+@export var blur: ColorRect
+@export var sabotage_warning: AudioStreamPlayer
 #Multiplayer
 @export var lights: Array[Node3D]
 @export var player_manager: Node
@@ -117,6 +119,8 @@ var active_sabotage: Globals.Sabotages = Globals.Sabotages.NONE:
 				sabotage_description = "Something has gone wrong, but you don't know what!"
 				return
 		sabotage_begin.emit(active_sabotage as Globals.Sabotages)
+var spectating = false
+var alive_players = {}
 
 # Etc
 var last_cam # Not networked
@@ -129,9 +133,6 @@ var paranormal_attacking = false # Why is it here?
 var paranormal_attacker: Node3D # What even is it?
 var paranormal_primed = false # What is it doing?
 var is_paused = false # Used to pause the gameplay without freezing the player, mainly for debug
-
-@onready var blur := $BlurShader/ColorRect
-@onready var sabotage_warning = $SabotageWarning
 #endregion
 
 # Called when the node enters the scene tree for the first time.
@@ -236,6 +237,22 @@ func _process(delta):
 		var fade_image = get_viewport().get_texture().get_image()
 		Globals.fade_texture = ImageTexture.create_from_image(fade_image)
 		get_tree().change_scene_to_file("res://scenes/victory.tscn")
+
+# Submits variables on all clients for multiplayer
+@rpc("any_peer","call_local","reliable")
+func _register_player():
+	alive_players[multiplayer.get_unique_id()] = true
+
+@rpc("any_peer","call_local","reliable")
+func _register_spectate(id: int):
+	alive_players[id] = false
+	#Check if everyone has died, then bring up the death screen
+	#TODO: Change logic for 2v2
+	for alive in alive_players:
+		if alive_players[alive] == true:
+			print(str(MultiplayerCore.players[alive]) + " (" + str(alive) + ") is still alive!")
+			return
+	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
 
 func _get_ai(animatronic: String) -> int:
 	match animatronic:
@@ -347,7 +364,13 @@ func _jumpscare(animatronic: Node3D):
 		player_cam_anim.play("Long")
 	await get_tree().create_timer(animatronic.jumpscare_length).timeout
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
+	if MultiplayerCore.is_multiplayer and (Globals.office_mode == Globals.OfficeMode.CO_OP or Globals.office_mode == Globals.OfficeMode.VERSUS_TEAMS):
+		spectating = true
+		_register_spectate(multiplayer.get_unique_id())
+		sound.stop()
+		animatronic._fail_attack()
+	else:
+		get_tree().change_scene_to_file("res://scenes/game_over.tscn")
 
 func _jumpscare_save(animatronic: Node3D):
 	can_jumpscare = false

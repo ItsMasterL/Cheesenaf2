@@ -139,6 +139,23 @@ func _ready():
 func _process(delta):
 	if Engine.is_editor_hint() or root.is_paused:
 		return
+	#Look at stuff
+	if game_sensitive and guarding and object_of_interest != null:
+		_look_at_object(delta)
+	#Multiplayer - Host priority
+	if MultiplayerCore.is_multiplayer and (Globals.office_mode == Globals.OfficeMode.CO_OP or Globals.office_mode == Globals.OfficeMode.VERSUS_TEAMS):
+		if MultiplayerCore.is_host: 
+			# Do not execute movement logic if the animatronic is in the non-host client's office
+			if root.is_p1 and positions[current_position].office_entrance != null and positions[current_position].office_entrance.entrance >= int(EntranceProperty.Entrances.LEFT_DOOR):
+				return
+			if !root.is_p1 and positions[current_position].office_entrance != null and positions[current_position].office_entrance.entrance < int(EntranceProperty.Entrances.LEFT_DOOR):
+				return
+		else:
+			# Do not execute movement logic unless the animatronic is in this client's office
+			if root.is_p1 and (positions[current_position].office_entrance == null or positions[current_position].office_entrance.entrance >= int(EntranceProperty.Entrances.LEFT_DOOR)):
+				return
+			if !root.is_p1 and (positions[current_position].office_entrance == null or positions[current_position].office_entrance.entrance < int(EntranceProperty.Entrances.LEFT_DOOR)):
+				return
 	# Camera sensitivity
 	if root.p1_in_cams and root.using_tablet and camera_sensitive and positions[current_position].office_entrance == null:
 		camera_cooldown = randf_range(2, 23 - level)
@@ -162,9 +179,6 @@ func _process(delta):
 	if music_box_sensitive and root.is_winding == false:
 		root.musicbox = clamp(root.musicbox - (level * delta) * root.fun_multiplier * root.music_box_multiplier, 0, 2000)
 	
-	#Look at stuff
-	if game_sensitive and guarding and object_of_interest != null:
-		_look_at_object(delta)
 	
 	if timer > 0:
 		#Make it easier on lower levels when they're in the office (But they leave faster with flashlight)
@@ -192,6 +206,10 @@ func _movement_check():
 	if positions[current_position].office_entrance != null:
 		#Fail if entryway is blocked
 		if root.closed_entrances.has(positions[current_position].office_entrance.entrance):
+			_fail_attack()
+			return
+		#Fail if player is already dead and in multiplayer
+		if root.spectating:
 			_fail_attack()
 			return
 		#If friendly edams
@@ -298,6 +316,7 @@ func _movement_check():
 					timer = check_frequency * 1.75
 			_move_animatronic()
 
+
 func _move_animatronic():
 	position = positions[current_position].position
 	rotation_degrees = positions[current_position].rotation
@@ -316,6 +335,14 @@ func _move_animatronic():
 		step_sound.play()
 	if OS.is_debug_build():
 		print(str(animatronic) + " moved to " + str(current_position))
+	if MultiplayerCore.is_multiplayer and MultiplayerCore.is_host:
+		_sync_animatronic.rpc(current_position)
+
+#If I cared enough to discourage cheating in any way, this would be authority. However, considering the nature of the multiplayer (basically LAN) i don't care
+@rpc("any_peer","call_remote","reliable")
+func _sync_animatronic(pos):
+	current_position = pos
+	_move_animatronic()
 
 func _fail_attack():
 	# Friendly animatronics don't count towards this as they cannot harm you
