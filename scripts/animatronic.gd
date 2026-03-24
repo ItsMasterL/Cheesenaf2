@@ -353,7 +353,8 @@ func _fail_attack():
 		root.paranormal_primed = false
 		root.paranormal_attacker = null
 		paranormal_song.emit()
-	current_position = positions[current_position].office_entrance.fail_position_index
+	if positions[current_position].office_entrance != null: # Checked for debug manual jumpscares. Should never be true normally
+		current_position = positions[current_position].office_entrance.fail_position_index
 	_move_animatronic()
 
 func _change_dance(count: int, id: int = 0):

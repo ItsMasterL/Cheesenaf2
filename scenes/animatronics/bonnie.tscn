@@ -191,6 +191,7 @@ check_before_entering = true
 metadata/_custom_type_script = "uid://b7m76kqb1eco1"
 
 [sub_resource type="Resource" id="Resource_eic68"]
+resource_name = "Office 2 Right Vent"
 script = ExtResource("2_81imh")
 position = Vector3(38.5208, 3.0678, 4.77224)
 rotation = Vector3(-39.7, 180, 0)

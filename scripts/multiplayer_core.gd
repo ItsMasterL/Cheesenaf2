@@ -1,17 +1,43 @@
 extends Node
 
+enum ROLES {
+	ADAM_OFFICE_A,
+	PSY_OFFICE_A,
+	ADAM_OFFICE_B,
+	PSY_OFFICE_B,
+}
 
 # TODO: Use these signals for connecting to UI. Another comment below talks about what logic needs to be moved.
 signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
 signal server_disconnected
+signal settings_changed
 
 var address = "127.0.0.1"
 var port = 17920
-var player_limit = 4
 var players = {}
+var player_roles = {}
 var is_host = false
 var is_multiplayer = false
+
+# Lobby Settings
+var player_limit = 4:
+	set(limit):
+		player_limit = limit
+		if is_host:
+			sync_lobby_settings()
+
+var lobby_gamemode = Globals.OfficeMode.CO_OP:
+	set(gamemode):
+		lobby_gamemode = gamemode
+		if is_host:
+			sync_lobby_settings()
+
+var lobby_night = 2:
+	set(night):
+		lobby_night = night
+		if is_host:
+			sync_lobby_settings()
 
 # Client
 var compression = ENetConnection.COMPRESS_RANGE_CODER
@@ -61,6 +87,7 @@ func _on_connected_fail():
 
 func _on_server_disconnected():
 	multiplayer.multiplayer_peer = null
+	is_multiplayer = false
 	players.clear()
 	server_disconnected.emit()
 	Globals.cmd_scene("title")
@@ -95,12 +122,11 @@ func join_server():
 
 func leave_server():
 	if is_host:
-		for i in players:
-			multiplayer.multiplayer_peer.disconnect_peer(i)
+		is_host = false
+		multiplayer.multiplayer_peer.close()
 	multiplayer.multiplayer_peer = null
 	players.clear()
 	is_multiplayer = false
-	is_host = false
 	_unregister_commands()
 	print("Disconnected from server.")
 
@@ -132,14 +158,30 @@ func client_info():
 
 #region Gameplay Initialization
 
+@rpc("authority","call_remote","reliable")
+func send_lobby_settings(gamemode = lobby_gamemode, night = lobby_night, limit = player_limit):
+	lobby_gamemode = gamemode
+	lobby_night = night
+	player_limit = limit
+
+	settings_changed.emit()
+
 func sync_lobby_settings():
-	pass
+	send_lobby_settings.rpc(lobby_gamemode, lobby_night, player_limit)
+	#Emitted here since the other emit is remote only
+	settings_changed.emit()
 
 @rpc("authority","call_local","reliable")
 func start_test(rand_seed: int):
-	Globals.office_mode = Globals.OfficeMode.CO_OP
-	Globals._set_night(2)
+	Globals.office_mode = lobby_gamemode
+	Globals._set_night(lobby_night)
 	seed(rand_seed)
+	# EXTREMELY TEMPORARY
+	for i in players:
+		if i != 1:
+			player_roles[i] = ROLES.PSY_OFFICE_A
+		else:
+			player_roles[i] = ROLES.ADAM_OFFICE_A
 	Globals.set_scene("title_loadoffice")
 
 #endregion

@@ -5,6 +5,7 @@ signal music_box_ran_out
 signal entrance_closing
 signal sabotage_begin
 signal sabotage_end
+signal player_spectating
 
 const TIME_TO_HOUR = 90
 
@@ -137,6 +138,10 @@ var is_paused = false # Used to pause the gameplay without freezing the player, 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	_register_player.rpc()
+	if MultiplayerCore.player_roles[multiplayer.get_unique_id()] == MultiplayerCore.ROLES.PSY_OFFICE_A:
+			player_manager.set_active_player.emit()
+
 	for animatronic in animatronics.get_children():
 		if animatronic.music_box_sensitive:
 			music_box_ran_out.connect(animatronic._stop_dance)
@@ -241,7 +246,10 @@ func _process(delta):
 # Submits variables on all clients for multiplayer
 @rpc("any_peer","call_local","reliable")
 func _register_player():
-	alive_players[multiplayer.get_unique_id()] = true
+	for p in MultiplayerCore.players:
+		alive_players[p] = true
+		print(MultiplayerCore.players[p])
+	print(alive_players)
 
 @rpc("any_peer","call_local","reliable")
 func _register_spectate(id: int):
@@ -366,7 +374,9 @@ func _jumpscare(animatronic: Node3D):
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if MultiplayerCore.is_multiplayer and (Globals.office_mode == Globals.OfficeMode.CO_OP or Globals.office_mode == Globals.OfficeMode.VERSUS_TEAMS):
 		spectating = true
+		player_spectating.emit()
 		_register_spectate(multiplayer.get_unique_id())
+		player_manager.set_active_player.emit()
 		sound.stop()
 		animatronic._fail_attack()
 	else:
@@ -430,6 +440,17 @@ func _jumpscare_save(animatronic: Node3D):
 #region Sabotages
 
 @rpc("authority","call_local","reliable")
+func _send_sabotage(event: Globals.Sabotages):
+	if event == Globals.Sabotages.NONE:
+		sabotage_end.emit()
+		LimboConsole.print_line("Active sabotage set to " + sabotage_name)
+		return
+	elif event != Globals.Sabotages.NONE:
+		active_sabotage = Globals.Sabotages.NONE
+		await get_tree().create_timer(0.16).timeout
+	active_sabotage = event
+	LimboConsole.print_line("Active sabotage set to " + sabotage_name)
+
 func _sabotage_event(event : Globals.Sabotages):
 	match event:
 		Globals.Sabotages.POWER_OUTAGE:
@@ -466,10 +487,11 @@ func _sabotage_event(event : Globals.Sabotages):
 			AudioServer.set_bus_effect_enabled(7,0,true)
 		
 		Globals.Sabotages.SWAP:
+			sabotage_warning.stream = load("res://sounds/swipe.wav")
+			sabotage_warning.play()
 			player_manager.set_active_player.emit()
 			_sabotage_event_end()
 
-@rpc("authority","call_local","reliable")
 func _sabotage_event_end():
 	match active_sabotage:
 		Globals.Sabotages.POWER_OUTAGE:
@@ -556,15 +578,7 @@ func cmd_set_level(arg1: String = "edam_freddy", arg2: int = -1):
 
 func cmd_sabotage(arg1: String = "NONE"):
 	var value = Globals.Sabotages.get(arg1.to_upper())
-	if value == Globals.Sabotages.NONE:
-		sabotage_end.emit()
-		LimboConsole.print_line("Active sabotage set to " + sabotage_name)
-		return
-	elif value != Globals.Sabotages.NONE:
-		active_sabotage = Globals.Sabotages.NONE
-		await get_tree().create_timer(0.16).timeout
-	active_sabotage = value
-	LimboConsole.print_line("Active sabotage set to " + sabotage_name)
+	_send_sabotage.rpc(value)
 
 func cmd_set_time(arg1: int):
 	time = clamp(arg1, 0, 6 * TIME_TO_HOUR)

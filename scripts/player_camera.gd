@@ -20,6 +20,8 @@ func _ready():
 	root.sabotage_end.connect(_sabotage_event_end)
 
 func _unhandled_input(event):
+	if root.spectating:
+		return
 	if root.is_p1 and is_p1:
 		if root.p1_can_action:
 			if event.is_action_pressed(&"Flashlight") and root.using_tablet == false:
