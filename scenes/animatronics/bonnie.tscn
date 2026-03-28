@@ -1,11 +1,19 @@
-[gd_scene load_steps=25 format=3 uid="uid://sr5bhwimbn6q"]
+[gd_scene load_steps=33 format=3 uid="uid://sr5bhwimbn6q"]
 
 [ext_resource type="PackedScene" uid="uid://84wrom6majx8" path="res://models/bonnie.glb" id="1_kfj2h"]
 [ext_resource type="Script" uid="uid://bj1onaat51pqp" path="res://scripts/animatronic.gd" id="1_vu3bh"]
 [ext_resource type="Script" uid="uid://4en87cf4wnfr" path="res://scripts/animatronic_position.gd" id="2_81imh"]
 [ext_resource type="Script" uid="uid://b7m76kqb1eco1" path="res://scripts/animatronic_entrance.gd" id="2_mpcjg"]
+[ext_resource type="AudioStream" uid="uid://ddwknpsthq7ua" path="res://sounds/dialogue/bonnie-1.wav" id="5_an7lr"]
+[ext_resource type="AudioStream" uid="uid://calvnydqo5g8v" path="res://sounds/dialogue/bonnie-2.wav" id="6_6me2x"]
+[ext_resource type="AudioStream" uid="uid://tw2kc3h58i2u" path="res://sounds/dialogue/bonnie-3.wav" id="7_aau27"]
 [ext_resource type="AudioStream" uid="uid://blj2fpebqrwua" path="res://sounds/dialogue/bonnie.wav" id="7_es4hq"]
+[ext_resource type="AudioStream" uid="uid://cjxejfb4tt53g" path="res://sounds/dialogue/bonnie-4.wav" id="8_ec7jg"]
 [ext_resource type="AudioStream" uid="uid://c3n0lfpxca8e8" path="res://sounds/jumpscare_edam.wav" id="8_qwrtb"]
+[ext_resource type="AudioStream" uid="uid://v7sswicam4wy" path="res://sounds/dialogue/bonnie-5.wav" id="9_ppnst"]
+[ext_resource type="AudioStream" uid="uid://ckvhrmeqn3i36" path="res://sounds/dialogue/bonnie-6.wav" id="10_1w7gm"]
+[ext_resource type="AudioStream" uid="uid://1uuwk6sb0oeo" path="res://sounds/dialogue/bonnie-7.wav" id="11_fiyu7"]
+[ext_resource type="AudioStream" uid="uid://c8xaqj3rl62x2" path="res://sounds/dialogue/bonnie-8.wav" id="12_5j0ig"]
 
 [sub_resource type="Resource" id="Resource_qvvvx"]
 resource_name = "Stage"
@@ -211,6 +219,7 @@ check_frequency = 3.5
 jumpscare_rotation = Vector3(0, 0, 0)
 is_edam_animatronic = true
 vent_checker = true
+vent_warnings = Array[AudioStream]([ExtResource("5_an7lr"), ExtResource("6_6me2x"), ExtResource("7_aau27"), ExtResource("8_ec7jg"), ExtResource("9_ppnst"), ExtResource("10_1w7gm"), ExtResource("11_fiyu7"), ExtResource("12_5j0ig")])
 enable_hologram = null
 
 [node name="Jumpscare" type="AudioStreamPlayer" parent="." index="2"]

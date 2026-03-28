@@ -138,9 +138,10 @@ var is_paused = false # Used to pause the gameplay without freezing the player, 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_register_player.rpc()
-	if MultiplayerCore.player_roles[multiplayer.get_unique_id()] == MultiplayerCore.ROLES.PSY_OFFICE_A:
-			player_manager.set_active_player.emit()
+	if MultiplayerCore.is_multiplayer:
+		_register_player.rpc()
+		if MultiplayerCore.player_roles[multiplayer.get_unique_id()] == MultiplayerCore.ROLES.PSY_OFFICE_A:
+				player_manager.set_active_player.emit()
 
 	for animatronic in animatronics.get_children():
 		if animatronic.music_box_sensitive:
@@ -323,45 +324,63 @@ func _refill_cup():
 func _jumpscare(animatronic: Node3D):
 	while can_jumpscare == false:
 		return
-	p1_can_action = false
-	print("Jumpscared by %s" % animatronic.animatronic)
-	if gamer_in_office:
-		for gamer in game_sensitive:
-			if gamer.guarding == true: # Only is set to this when in the office
-				if animatronic.ignore_save == true and animatronic.save_jumpscare_id != animatronic.jumpscare_animation_id:
-					gamer.can_move = false
-					gamer.position = gamer.jumpscare_position
-					gamer.rotation_degrees = gamer.jumpscare_rotation
-					gamer.anim.play(animatronic.save_jumpscare_id)
-				elif animatronic.ignore_save == false:
-					animatronic._fail_attack()
-					_jumpscare_save(gamer)
-					return
+	var is_player_one = true
+	if animatronic.positions[animatronic.current_position].office_entrance.entrance == EntranceProperty.Entrances.LEFT_DOOR and animatronic.positions[animatronic.current_position].office_entrance.entrance == EntranceProperty.Entrances.RIGHT_DOOR:
+		is_player_one = false
+
 	can_jumpscare = false
-	under_desk = false
 	animatronic.can_move = false
 	var anim: AnimationPlayer = animatronic.anim
 	var sound: AudioStreamPlayer = animatronic.get_node("Jumpscare")
-	if gamer_in_office and animatronic.ignore_save == true and animatronic.save_jumpscare_id != animatronic.jumpscare_animation_id:
-		animatronic.position = animatronic.save_ignore_jumpscare_position
-		animatronic.rotation_degrees = animatronic.save_ignore_jumpscare_rotation
-		sound.stream = load("res://sounds/jumpscare_interrupted.wav")
-		anim.play(animatronic.save_jumpscare_id)
-	else:
-		animatronic.position = animatronic.jumpscare_position
-		animatronic.rotation_degrees = animatronic.jumpscare_rotation
-		anim.speed_scale = 1 # For the Music Unwound sabotage
-		anim.play(animatronic.jumpscare_animation_id)
-	sound.play()
 	var player_cam_anim := p1.get_node("Head/Eyes/AnimationPlayer")
 	var player_head = p1.get_node("Head")
 	var player_cam = p1.get_node("Head/Eyes")
 	var player_anim := p1.get_node("AnimationPlayer")
 	var cup = p1.get_node("Head/Eyes/CupHolder")
-	if tablet != null:
-		tablet.visible = false
-	cup.visible = false
-	p1_heat = -2
+
+	if is_player_one:
+		p1_can_action = false
+		print("Jumpscared by %s" % animatronic.animatronic)
+		if gamer_in_office:
+			for gamer in game_sensitive:
+				if gamer.guarding == true: # Only is set to this when in the office
+					if animatronic.ignore_save == true and animatronic.save_jumpscare_id != animatronic.jumpscare_animation_id:
+						gamer.can_move = false
+						gamer.position = gamer.jumpscare_position
+						gamer.rotation_degrees = gamer.jumpscare_rotation
+						gamer.anim.play(animatronic.save_jumpscare_id)
+					elif animatronic.ignore_save == false:
+						animatronic._fail_attack()
+						_jumpscare_save(gamer)
+						return
+		under_desk = false
+		if gamer_in_office and animatronic.ignore_save == true and animatronic.save_jumpscare_id != animatronic.jumpscare_animation_id:
+			animatronic.position = animatronic.save_ignore_jumpscare_position
+			animatronic.rotation_degrees = animatronic.save_ignore_jumpscare_rotation
+			sound.stream = load("res://sounds/jumpscare_interrupted.wav")
+			anim.play(animatronic.save_jumpscare_id)
+		else:
+			animatronic.position = animatronic.jumpscare_position
+			animatronic.rotation_degrees = animatronic.jumpscare_rotation
+			anim.speed_scale = 1 # For the Music Unwound sabotage
+			anim.play(animatronic.jumpscare_animation_id)
+		if tablet != null:
+			tablet.visible = false
+			cup.visible = false
+			p1_heat = -2
+	else:
+		player_cam_anim = p2.get_node("Head/Eyes/AnimationPlayer")
+		player_head = p2.get_node("Head")
+		player_cam = p2.get_node("Head/Eyes")
+		player_anim = p2.get_node("AnimationPlayer")
+		
+		animatronic.position = animatronic.jumpscare_position_2
+		animatronic.rotation_degrees = animatronic.jumpscare_rotation_2
+		anim.speed_scale = 1 # For the Music Unwound sabotage
+		anim.play(animatronic.jumpscare_animation_id)
+
+
+	sound.play()
 	player_head.rotation_degrees = Vector3.ZERO
 	player_cam.rotation_degrees = Vector3.ZERO
 	player_anim.play("RESET")

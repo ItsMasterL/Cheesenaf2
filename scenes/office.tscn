@@ -528,15 +528,21 @@ properties/1/spawn = true
 properties/1/replication_mode = 2
 properties/2/path = NodePath("Head/Eyes/AnimationPlayer:current_animation")
 properties/2/spawn = true
-properties/2/replication_mode = 2
+properties/2/replication_mode = 1
 properties/3/path = NodePath("Head/Eyes/AnimationPlayer:active")
 properties/3/spawn = true
-properties/3/replication_mode = 2
+properties/3/replication_mode = 1
+properties/4/path = NodePath("Head/Eyes:rotation:x")
+properties/4/spawn = true
+properties/4/replication_mode = 2
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_cqgbc"]
 properties/0/path = NodePath("Head:rotation:y")
 properties/0/spawn = true
 properties/0/replication_mode = 2
+properties/1/path = NodePath("Head/Eyes:rotation:x")
+properties/1/spawn = true
+properties/1/replication_mode = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jp53q"]
 shader = ExtResource("23_h042j")
@@ -1415,7 +1421,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.51, 3.85, -3.949)
 [node name="Animatronics" type="Node3D" parent="."]
 
 [node name="Edam Freddy" parent="Animatronics" node_paths=PackedStringArray("root", "hologram_mesh") instance=ExtResource("23_d180k")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 68.541, 1.296, 0)
 root = NodePath("../..")
+jumpscare_position_2 = Vector3(0, -0.719, -2.25)
+jumpscare_rotation_2 = Vector3(0, -90, 0)
+test_jumpscare_2 = null
 enable_hologram = true
 hologram_mesh = NodePath("Edam Endo/Skeleton3D/Freddy")
 
@@ -1423,34 +1433,49 @@ hologram_mesh = NodePath("Edam Endo/Skeleton3D/Freddy")
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 68.629, 1.121, 2.956)
 root = NodePath("../..")
 check_frequency = 3.561
+jumpscare_position_2 = Vector3(0, -0.719, -2.25)
+jumpscare_rotation_2 = Vector3(0, -90, 0)
+test_jumpscare_2 = null
 enable_hologram = true
 hologram_mesh = NodePath("Edam Endoz/Skeleton3D/Bonnie")
 
 [node name="Edam Chica" parent="Animatronics" node_paths=PackedStringArray("root", "hologram_mesh") instance=ExtResource("25_m5hqu")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 68.629, 1.121, -4.064)
 root = NodePath("../..")
+jumpscare_position_2 = Vector3(0, -0.719, -2.25)
+jumpscare_rotation_2 = Vector3(0, -90, 0)
+test_jumpscare_2 = null
 enable_hologram = true
 hologram_mesh = NodePath("Edam Endo/Skeleton3D/Chica")
 
 [node name="Edam Foxy" parent="Animatronics" node_paths=PackedStringArray("root", "hologram_mesh") instance=ExtResource("26_xrtv4")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 69.275, 1.121, 13.54)
 root = NodePath("../..")
+jumpscare_position_2 = Vector3(0, -0.719, -2.25)
+jumpscare_rotation_2 = Vector3(0, -90, 0)
+test_jumpscare_2 = null
 enable_hologram = true
 hologram_mesh = NodePath("Edam Endo/Skeleton3D/Foxy")
 
 [node name="Withered Bonnie" parent="Animatronics" node_paths=PackedStringArray("root", "hologram_mesh") instance=ExtResource("27_nd5pr")]
 root = NodePath("../..")
+jumpscare_position_2 = Vector3(0, -0.719, -2.25)
+jumpscare_rotation_2 = Vector3(0, -90, 0)
+test_jumpscare_2 = null
 enable_hologram = true
 hologram_mesh = NodePath("RIG_Bonnie_ao/Skeleton3D/Withered_Bonnie")
 
 [node name="Withered Chica" parent="Animatronics" node_paths=PackedStringArray("root", "hologram_mesh") instance=ExtResource("28_iw35l")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 63.292, 0, -25.224)
 root = NodePath("../..")
+jumpscare_position_2 = Vector3(0, -0.719, -2.25)
+jumpscare_rotation_2 = Vector3(0, -90, 0)
+test_jumpscare_2 = null
 enable_hologram = true
 hologram_mesh = NodePath("chica_qc_skeleton_001/Skeleton3D/Withered_Chica")
 
 [node name="Withered Foxy" parent="Animatronics" node_paths=PackedStringArray("root", "hologram_mesh") instance=ExtResource("29_t0ahk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.621, 0.599, -23.328)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 38.073, 2.239, 0)
 root = NodePath("../..")
 enable_hologram = true
 hologram_mesh = NodePath("Armature/Skeleton3D/Withered_Foxy")
@@ -1458,15 +1483,24 @@ hologram_mesh = NodePath("Armature/Skeleton3D/Withered_Foxy")
 [node name="Withered Freddy" parent="Animatronics" node_paths=PackedStringArray("root", "hologram_mesh") instance=ExtResource("30_uyssn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.689, 0.555, -23.328)
 root = NodePath("../..")
+jumpscare_position_2 = Vector3(0, -0.719, -2.25)
+jumpscare_rotation_2 = Vector3(0, -90, 0)
+test_jumpscare_2 = null
 enable_hologram = true
 hologram_mesh = NodePath("RIG_Freddy_ao_001/Skeleton3D/Withered_Freddy")
 
 [node name="Cheesestick" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("31_a7pji")]
 root = NodePath("../..")
+jumpscare_position_2 = Vector3(0, -0.719, -2.25)
+jumpscare_rotation_2 = Vector3(0, -90, 0)
+test_jumpscare_2 = null
 
 [node name="PinkSlip" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("38_ry2hb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
 root = NodePath("../..")
+jumpscare_position_2 = Vector3(0, -0.719, -2.25)
+jumpscare_rotation_2 = Vector3(0, -90, 0)
+test_jumpscare_2 = null
 
 [connection signal="mouse_entered" from="TabletOnDesk/Tablet/HomeButton" to="TabletOnDesk/Tablet/HomeButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="TabletOnDesk/Tablet/HomeButton" to="TabletOnDesk/Tablet/HomeButton" method="_on_mouse_exited"]

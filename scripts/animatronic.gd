@@ -17,6 +17,9 @@ signal paranormal_song
 @export var jumpscare_animation_id: String = "Jumpscare"
 @export var jumpscare_position: Vector3 = Vector3(0, -0.719, -2.25)
 @export var jumpscare_rotation: Vector3 = Vector3(0, -90, 0)
+# Player 2
+@export var jumpscare_position_2: Vector3 = Vector3(38.073, 3.434, 0)
+@export var jumpscare_rotation_2: Vector3 = Vector3(0, -180, 0)
 @export_category("Special Animatronics")
 ## If true, the animatronic will be stunned if the cameras are looked at.
 @export var camera_sensitive: bool
@@ -56,6 +59,7 @@ signal paranormal_song
 ## If true, the animatronic will warn of other animatronics entering the office vents when friendly, and will be killed on night 2 in singleplayer/co-op.
 @export var vent_checker: bool
 ## Set by combo of is_edam_animatronic and office's edams_friendly. Can be set in the editor. These animatronics will never jumpscare the player.
+@export var vent_warnings: Array[AudioStream]
 @export var is_friendly: bool
 
 @export_category("Editor")
@@ -67,9 +71,20 @@ signal paranormal_song
 			rotation_degrees = jumpscare_rotation
 			$AnimationPlayer.play(jumpscare_animation_id)
 			if jumpscare_length > 0.7:
-				$"../../Player/Head/Eyes/AnimationPlayer".play("Long")
+				$"../../PlayerManager/Player1/Head/Eyes/AnimationPlayer".play("Long")
 			else:
-				$"../../Player/Head/Eyes/AnimationPlayer".play("Default")
+				$"../../PlayerManager/Player1/Head/Eyes/AnimationPlayer".play("Default")
+@export var test_jumpscare_2 = false:
+	set(jumpscare_test):
+		if jumpscare_test == true and Engine.is_editor_hint():
+			test_jumpscare_2 = false
+			position = jumpscare_position_2
+			rotation_degrees = jumpscare_rotation_2
+			$AnimationPlayer.play(jumpscare_animation_id)
+			if jumpscare_length > 0.7:
+				$"../../PlayerManager/Player2/Head/Eyes/AnimationPlayer".play("Long")
+			else:
+				$"../../PlayerManager/Player2/Head/Eyes/AnimationPlayer".play("Default")
 @export var test_save_ignore_jumpscare = false:
 	set(jumpscare_test):
 		if jumpscare_test == true and Engine.is_editor_hint():
@@ -107,6 +122,8 @@ var object_of_interest
 var new_rotation = Vector3.ZERO
 var rot_x = 0
 var rot_y = 0
+# How many times a vent sensitive animatronic has warned you
+var vent_warning_count = 0
 
 @onready var timer = check_frequency
 @onready var level = root._get_ai(animatronic)
@@ -217,6 +234,8 @@ func _movement_check():
 			#If bonnie is in the office, play the warning and teleport Withered Bonnie/Chica to the vent
 			if vent_checker and root.night == 2:
 				var warning := $Warning
+				warning.stream = vent_warnings[vent_warning_count]
+				vent_warning_count = clamp(vent_warning_count + 1, 0, vent_warnings.size() - 1)
 				warning.play()
 				timer = check_frequency * 2 # Wait 3 checks before repeating (Including below line)
 				await get_tree().create_timer(check_frequency).timeout
