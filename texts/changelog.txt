@@ -16,6 +16,7 @@ Additions:
 --- OFFICE ---
 - The cup now has a visual water level
 - New fading transitions between game over/6 am
+- Visible camera for the YOU cam
 --- MENU ---
 - Buttons to edit all animatronics in the custom night menu, as well as a button to randomize all animatronics
 - New menu option - Tablet Mode, to let you play tablet games without worrying about Freddy and the gang.

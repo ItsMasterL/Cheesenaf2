@@ -6,6 +6,9 @@ signal paranormal_dance
 
 const SONG_COUNT = 10
 
+@export var singleplayer_only : Array[Node]
+@export var multiplayer_only : Array[Node]
+
 @onready var cams = $Background/SubViewport/Cameras
 @onready var current_cam := $Background/SubViewport/Cameras/Camera4
 @onready var light := $Background/SubViewport/Cameras/Camera4/SpotLight3D
@@ -22,15 +25,25 @@ const SONG_COUNT = 10
 func _ready():
 	root.sabotage_begin.connect(sabotage_event)
 	root.sabotage_end.connect(sabotage_event_end)
+	if Globals.office_mode == Globals.OfficeMode.SINGLEPLAYER or Globals.office_mode == Globals.OfficeMode.VERSUS:
+		for item in multiplayer_only:
+			item.visible = false
+	else:
+		for item in singleplayer_only:
+			item.visible = false
+
 	sabotage_event(root.active_sabotage) # For the app opening after the sabotage already happened
+	
 	if root.is_in_vent_cam:
 		cams = $Background/SubViewport/VentCameras
 		cam_buttons = $VentCams
 		$RoomCams.visible = false
 		$VentCams.visible = true
 		vents = true
+
 	if root.last_cam != null:
 		_change_camera(root.last_cam, false)
+
 	# Should be "Animatronics" in office.tscn
 	for animatronic in root.animatronics.get_children():
 		if animatronic.music_box_sensitive:

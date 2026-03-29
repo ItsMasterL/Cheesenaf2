@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=4 uid="uid://kfokhb3cioir"]
+[gd_scene load_steps=103 format=4 uid="uid://kfokhb3cioir"]
 
 [ext_resource type="Script" uid="uid://bmd8ubev6prvd" path="res://scripts/office.gd" id="1_a3xfx"]
 [ext_resource type="PackedScene" uid="uid://bs378s4kwr2ux" path="res://scenes/props/foxy_plush.tscn" id="1_gqipk"]
@@ -50,6 +50,9 @@
 [ext_resource type="Texture2D" uid="uid://b1my2w4jmvnbv" path="res://textures/static.png" id="36_pjxyp"]
 [ext_resource type="Script" uid="uid://bc0tklwmfofti" path="res://scripts/background.gd" id="37_nygyx"]
 [ext_resource type="PackedScene" uid="uid://dfe3oqrxe2jr2" path="res://scenes/animatronics/pink_slip.tscn" id="38_ry2hb"]
+[ext_resource type="PackedScene" uid="uid://westby04v8dv" path="res://models/camera.glb" id="39_vilxk"]
+[ext_resource type="PackedScene" uid="uid://d1kidycetm6rq" path="res://scenes/animatronics/pink_slip_2.tscn" id="51_70iqj"]
+[ext_resource type="PackedScene" uid="uid://dgwg8boisksc1" path="res://scenes/props/laptop.tscn" id="51_nygyx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_icaau"]
 resource_name = "cup"
@@ -366,7 +369,7 @@ _data = {
 
 [sub_resource type="QuadMesh" id="QuadMesh_xv7s7"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_8e1bu"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_nygyx"]
 viewport_path = NodePath("TabletOnDesk/Tablet/ScreenQuad/TabletScreen")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h4p0u"]
@@ -379,7 +382,7 @@ roughness = 0.255906
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_operator = 1
-emission_texture = SubResource("ViewportTexture_8e1bu")
+emission_texture = SubResource("ViewportTexture_nygyx")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j1onk"]
 size = Vector3(1, 1, 0.0298462)
@@ -676,6 +679,8 @@ _data = {
 &"spectate_begin": SubResource("Animation_pjxyp")
 }
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_12wqr"]
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_48d6p"]
 emission_shape_offset = Vector3(0, 5, 0)
 emission_shape = 3
@@ -718,7 +723,7 @@ size = Vector3(1.88637, 3.00232, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_t6udk"]
 size = Vector3(1.3164, 1.40643, 1.23035)
 
-[node name="Map" type="Node3D" node_paths=PackedStringArray("tablet", "animatronics", "doors", "drink", "blur", "sabotage_warning", "lights", "player_manager", "p1", "p1_tablet_holder", "p1_cup_holder", "p1_cursor", "p2")]
+[node name="Map" type="Node3D" node_paths=PackedStringArray("tablet", "animatronics", "doors", "drink", "blur", "sabotage_warning", "lights", "player_manager", "laptop", "p1", "p1_tablet_holder", "p1_cup_holder", "p1_cursor", "p2", "p2_laptop_holder", "p2_cursor")]
 script = ExtResource("1_a3xfx")
 tablet = NodePath("TabletOnDesk/Tablet")
 animatronics = NodePath("Animatronics")
@@ -728,11 +733,14 @@ blur = NodePath("PlayerManager/Universal UI/BlurShader/ColorRect")
 sabotage_warning = NodePath("PlayerManager/Universal UI/SabotageWarning")
 lights = [NodePath("Map/SpotLight3D"), NodePath("Map/SpotLight3D3"), NodePath("Map/SpotLight3D4"), NodePath("Map/SpotLight3D2")]
 player_manager = NodePath("PlayerManager")
+laptop = NodePath("LaptopOnFloor/laptop")
 p1 = NodePath("PlayerManager/Player1")
 p1_tablet_holder = NodePath("PlayerManager/Player1/Head/Eyes/TabletHolder")
 p1_cup_holder = NodePath("PlayerManager/Player1/Head/Eyes/CupHolder")
 p1_cursor = NodePath("PlayerManager/Player1/Head/Eyes/Cursor")
 p2 = NodePath("PlayerManager/Player2")
+p2_laptop_holder = NodePath("PlayerManager/Player2/Head/Eyes/LaptopHolder")
+p2_cursor = NodePath("PlayerManager/Player2/Head/Eyes/Cursor")
 
 [node name="FoxyPlush" parent="." node_paths=PackedStringArray("root") instance=ExtResource("1_gqipk")]
 root = NodePath("..")
@@ -807,10 +815,13 @@ shape = SubResource("BoxShape3D_pn76a")
 [node name="TabletOnDesk" type="Node3D" parent="."]
 transform = Transform3D(0.958323, 0, -0.285688, 0, 1, 0, 0.285688, 0, 0.958323, 0.765, 1.048, -0.739)
 
-[node name="Tablet" type="MeshInstance3D" parent="TabletOnDesk"]
+[node name="Tablet" type="MeshInstance3D" parent="TabletOnDesk" node_paths=PackedStringArray("node_viewport", "node_quad", "node_area")]
 mesh = ExtResource("10_vek4i")
 skeleton = NodePath("")
 script = ExtResource("7_g7jux")
+node_viewport = NodePath("ScreenQuad/TabletScreen")
+node_quad = NodePath("ScreenQuad")
+node_area = NodePath("ScreenQuad/Area3D")
 
 [node name="TabletBody" type="StaticBody3D" parent="TabletOnDesk/Tablet"]
 transform = Transform3D(0.145326, 0, 0, 0, 0.145326, 0, 0, 0, 0.145326, 0, 0, 0)
@@ -1039,12 +1050,13 @@ far = 100.0
 
 [node name="Interaction" type="RayCast3D" parent="PlayerManager/Player2/Head/Eyes"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-target_position = Vector3(0, -2, 0)
+target_position = Vector3(0, -3, 0)
 collide_with_areas = true
 script = ExtResource("32_5ed2l")
 
 [node name="FoxyLook" type="RayCast3D" parent="PlayerManager/Player2/Head/Eyes"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+visible = false
 target_position = Vector3(0, -10, 0)
 collision_mask = 8
 collide_with_areas = true
@@ -1057,38 +1069,8 @@ modulate = Color(1, 1, 1, 0.196078)
 pixel_size = 0.0003
 texture = ExtResource("18_sa7mb")
 
-[node name="TabletHolder" type="Node3D" parent="PlayerManager/Player2/Head/Eyes"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.4916e-09, -0.283598)
-
-[node name="CupHolder" type="Node3D" parent="PlayerManager/Player2/Head/Eyes"]
-transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, -0.25642, -0.491635)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="PlayerManager/Player2/Head/Eyes"]
-transform = Transform3D(0.999722, 0, 0.0235598, 0.00126423, 0.998559, -0.0536456, -0.0235258, 0.0536605, 0.998282, 0.175257, -0.154509, -0.309658)
-visible = false
-light_energy = 3.0
-shadow_enabled = true
-distance_fade_begin = 0.0
-distance_fade_shadow = 10.0
-spot_range = 23.6456
-spot_angle = 20.4784
-
-[node name="SpotLight3D" type="SpotLight3D" parent="PlayerManager/Player2/Head/Eyes/SpotLight3D"]
-light_energy = 0.1
-spot_range = 11.8432
-spot_angle = 36.1641
-
-[node name="FlashlightClick" type="AudioStreamPlayer" parent="PlayerManager/Player2/Head/Eyes/SpotLight3D"]
-stream = ExtResource("15_8e4mc")
-volume_db = -20.0
-bus = &"SFX"
-
-[node name="RayCast3D" type="RayCast3D" parent="PlayerManager/Player2/Head/Eyes/SpotLight3D"]
-transform = Transform3D(0.999702, -0.0243987, -0.00127868, 0, 0.052336, -0.99863, 0.0244322, 0.998331, 0.0523203, -0.181, 0.168, 0.236)
-target_position = Vector3(0, -23, 0)
-collision_mask = 16
-collide_with_areas = true
-script = ExtResource("18_gn6u8")
+[node name="LaptopHolder" type="Node3D" parent="PlayerManager/Player2/Head/Eyes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.82986e-08, -0.305512, -0.702209)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerManager/Player2/Head/Eyes"]
 libraries = {
@@ -1131,6 +1113,11 @@ bus = &"Voice"
 stream = ExtResource("21_dvkyg")
 volume_db = -10.0
 bus = &"SFX"
+
+[node name="JumpscareLight" type="OmniLight3D" parent="PlayerManager/Player2/Head"]
+visible = false
+light_color = Color(0.678431, 0.890196, 1, 1)
+omni_range = 3.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="PlayerManager/Player2"]
 replication_config = SubResource("SceneReplicationConfig_cqgbc")
@@ -1244,6 +1231,26 @@ theme_override_font_sizes/font_size = 146
 text = "SPECTATING"
 
 [node name="Map" parent="." instance=ExtResource("13_3pria")]
+
+[node name="adamcamera" parent="Map" instance=ExtResource("39_vilxk")]
+transform = Transform3D(-0.697165, -0.222727, 0.681435, 0, 0.950516, 0.310676, -0.716911, 0.216593, -0.662666, 6.87939, 4.19935, -6.911)
+
+[node name="Cube" parent="Map/adamcamera" index="0"]
+layers = 524288
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/adamcamera"]
+transform = Transform3D(0.04, 0, 0, 0, 0.0950516, -0.0124271, 0, 0.0310676, 0.0380206, 0, 0.115327, -0.0129672)
+mesh = SubResource("CylinderMesh_12wqr")
+
+[node name="psycamera" parent="Map" instance=ExtResource("39_vilxk")]
+transform = Transform3D(0.75471, -0.309012, 0.578727, 0, 0.882127, 0.471012, -0.656059, -0.355477, 0.66575, 38.0286, 6.29748, 2.326)
+
+[node name="Cube" parent="Map/psycamera" index="0"]
+layers = 524288
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/psycamera"]
+transform = Transform3D(0.04, 0, 0, 0, 0.0882127, -0.0188405, 0, 0.0471012, 0.0352851, 1.19209e-09, 0.100816, 0.0142088)
+mesh = SubResource("CylinderMesh_12wqr")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, -0.685463, 0.728108, 0, -0.728108, -0.685463, 0, 3.63307, -6.51262)
@@ -1392,9 +1399,6 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Interests/UpInterest"]
 shape = SubResource("BoxShape3D_t6udk")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.8491, 4.95562, 0)
-
 [node name="Doors" type="Node3D" parent="."]
 
 [node name="FrontDoor" parent="Doors" instance=ExtResource("28_t03s8")]
@@ -1421,11 +1425,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.51, 3.85, -3.949)
 [node name="Animatronics" type="Node3D" parent="."]
 
 [node name="Edam Freddy" parent="Animatronics" node_paths=PackedStringArray("root", "hologram_mesh") instance=ExtResource("23_d180k")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 68.541, 1.296, 0)
 root = NodePath("../..")
-jumpscare_position_2 = Vector3(0, -0.719, -2.25)
-jumpscare_rotation_2 = Vector3(0, -90, 0)
-test_jumpscare_2 = null
 enable_hologram = true
 hologram_mesh = NodePath("Edam Endo/Skeleton3D/Freddy")
 
@@ -1433,49 +1433,34 @@ hologram_mesh = NodePath("Edam Endo/Skeleton3D/Freddy")
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 68.629, 1.121, 2.956)
 root = NodePath("../..")
 check_frequency = 3.561
-jumpscare_position_2 = Vector3(0, -0.719, -2.25)
-jumpscare_rotation_2 = Vector3(0, -90, 0)
-test_jumpscare_2 = null
 enable_hologram = true
 hologram_mesh = NodePath("Edam Endoz/Skeleton3D/Bonnie")
 
 [node name="Edam Chica" parent="Animatronics" node_paths=PackedStringArray("root", "hologram_mesh") instance=ExtResource("25_m5hqu")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 68.629, 1.121, -4.064)
 root = NodePath("../..")
-jumpscare_position_2 = Vector3(0, -0.719, -2.25)
-jumpscare_rotation_2 = Vector3(0, -90, 0)
-test_jumpscare_2 = null
 enable_hologram = true
 hologram_mesh = NodePath("Edam Endo/Skeleton3D/Chica")
 
 [node name="Edam Foxy" parent="Animatronics" node_paths=PackedStringArray("root", "hologram_mesh") instance=ExtResource("26_xrtv4")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 69.275, 1.121, 13.54)
 root = NodePath("../..")
-jumpscare_position_2 = Vector3(0, -0.719, -2.25)
-jumpscare_rotation_2 = Vector3(0, -90, 0)
-test_jumpscare_2 = null
 enable_hologram = true
 hologram_mesh = NodePath("Edam Endo/Skeleton3D/Foxy")
 
 [node name="Withered Bonnie" parent="Animatronics" node_paths=PackedStringArray("root", "hologram_mesh") instance=ExtResource("27_nd5pr")]
 root = NodePath("../..")
-jumpscare_position_2 = Vector3(0, -0.719, -2.25)
-jumpscare_rotation_2 = Vector3(0, -90, 0)
-test_jumpscare_2 = null
 enable_hologram = true
 hologram_mesh = NodePath("RIG_Bonnie_ao/Skeleton3D/Withered_Bonnie")
 
 [node name="Withered Chica" parent="Animatronics" node_paths=PackedStringArray("root", "hologram_mesh") instance=ExtResource("28_iw35l")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 63.292, 0, -25.224)
 root = NodePath("../..")
-jumpscare_position_2 = Vector3(0, -0.719, -2.25)
-jumpscare_rotation_2 = Vector3(0, -90, 0)
-test_jumpscare_2 = null
 enable_hologram = true
 hologram_mesh = NodePath("chica_qc_skeleton_001/Skeleton3D/Withered_Chica")
 
 [node name="Withered Foxy" parent="Animatronics" node_paths=PackedStringArray("root", "hologram_mesh") instance=ExtResource("29_t0ahk")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 38.073, 2.239, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.621, 0.599, -23.328)
 root = NodePath("../..")
 enable_hologram = true
 hologram_mesh = NodePath("Armature/Skeleton3D/Withered_Foxy")
@@ -1483,24 +1468,28 @@ hologram_mesh = NodePath("Armature/Skeleton3D/Withered_Foxy")
 [node name="Withered Freddy" parent="Animatronics" node_paths=PackedStringArray("root", "hologram_mesh") instance=ExtResource("30_uyssn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.689, 0.555, -23.328)
 root = NodePath("../..")
-jumpscare_position_2 = Vector3(0, -0.719, -2.25)
-jumpscare_rotation_2 = Vector3(0, -90, 0)
-test_jumpscare_2 = null
 enable_hologram = true
 hologram_mesh = NodePath("RIG_Freddy_ao_001/Skeleton3D/Withered_Freddy")
 
 [node name="Cheesestick" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("31_a7pji")]
 root = NodePath("../..")
-jumpscare_position_2 = Vector3(0, -0.719, -2.25)
-jumpscare_rotation_2 = Vector3(0, -90, 0)
-test_jumpscare_2 = null
 
 [node name="PinkSlip" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("38_ry2hb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
 root = NodePath("../..")
-jumpscare_position_2 = Vector3(0, -0.719, -2.25)
-jumpscare_rotation_2 = Vector3(0, -90, 0)
-test_jumpscare_2 = null
+
+[node name="PinkSlip2" parent="Animatronics" node_paths=PackedStringArray("root") instance=ExtResource("51_70iqj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
+root = NodePath("../..")
+jumpscare_position_2 = Vector3(37, 4.736, 0)
+
+[node name="LaptopOnFloor" type="Node3D" parent="."]
+transform = Transform3D(0.701308, 0, -0.712859, 0, 1, 0, 0.712859, 0, 0.701308, 37.4922, 3.4684, -0.965872)
+
+[node name="laptop" parent="LaptopOnFloor" instance=ExtResource("51_nygyx")]
 
 [connection signal="mouse_entered" from="TabletOnDesk/Tablet/HomeButton" to="TabletOnDesk/Tablet/HomeButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="TabletOnDesk/Tablet/HomeButton" to="TabletOnDesk/Tablet/HomeButton" method="_on_mouse_exited"]
+
+[editable path="Map/adamcamera"]
+[editable path="Map/psycamera"]

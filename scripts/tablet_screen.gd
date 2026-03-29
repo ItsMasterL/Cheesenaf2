@@ -8,9 +8,9 @@ var last_event_pos2D = null
 # The time of the last event in seconds since engine start.
 var last_event_time: float = -1.0
 
-@onready var node_viewport = $ScreenQuad/TabletScreen
-@onready var node_quad = $ScreenQuad
-@onready var node_area = $ScreenQuad/Area3D
+@export var node_viewport : Viewport
+@export var node_quad : MeshInstance3D
+@export var node_area : Area3D
 
 
 func _ready():

@@ -18,6 +18,7 @@ const TIME_TO_HOUR = 90
 #Multiplayer
 @export var lights: Array[Node3D]
 @export var player_manager: Node
+@export var laptop: Node3D
 
 @export_category("Player 1")
 @export var p1 : Node
@@ -26,6 +27,8 @@ const TIME_TO_HOUR = 90
 @export var p1_cursor : Node
 @export_category("Player 2")
 @export var p2 : Node
+@export var p2_laptop_holder : Node
+@export var p2_cursor : Node
 
 var night = Globals.night
 var time = 0 as float
@@ -33,8 +36,8 @@ var hour = 0
 var minute = 0
 var fun_multiplier = 1 # Set by minigames in singleplayer to make time go by faster
 var purchased_apps
-var using_tablet = false
-var using_laptop = false
+var using_tablet = false #p1 only
+var using_laptop = false #p2 only
 var p1_in_cams = false
 var p2_in_cams = false
 var under_desk = false
@@ -142,6 +145,10 @@ func _ready():
 		_register_player.rpc()
 		if MultiplayerCore.player_roles[multiplayer.get_unique_id()] == MultiplayerCore.ROLES.PSY_OFFICE_A:
 				player_manager.set_active_player.emit()
+	else:
+		p2.queue_free()
+		laptop.queue_free()
+		
 
 	for animatronic in animatronics.get_children():
 		if animatronic.music_box_sensitive:
@@ -321,12 +328,9 @@ func _refill_cup():
 		drink.get_node("StaticBody3D").local_cup_fill = cup_fill
 		drink.get_node("StaticBody3D")._update_water()
 
-func _jumpscare(animatronic: Node3D):
+func _jumpscare(animatronic: Node3D, is_player_one = true):
 	while can_jumpscare == false:
 		return
-	var is_player_one = true
-	if animatronic.positions[animatronic.current_position].office_entrance.entrance == EntranceProperty.Entrances.LEFT_DOOR and animatronic.positions[animatronic.current_position].office_entrance.entrance == EntranceProperty.Entrances.RIGHT_DOOR:
-		is_player_one = false
 
 	can_jumpscare = false
 	animatronic.can_move = false
@@ -372,18 +376,22 @@ func _jumpscare(animatronic: Node3D):
 		player_cam_anim = p2.get_node("Head/Eyes/AnimationPlayer")
 		player_head = p2.get_node("Head")
 		player_cam = p2.get_node("Head/Eyes")
-		player_anim = p2.get_node("AnimationPlayer")
+		player_anim = null
 		
 		animatronic.position = animatronic.jumpscare_position_2
 		animatronic.rotation_degrees = animatronic.jumpscare_rotation_2
 		anim.speed_scale = 1 # For the Music Unwound sabotage
 		anim.play(animatronic.jumpscare_animation_id)
+		
+		p2.get_node("Head/JumpscareLight").visible = true
+		laptop.visible = false
 
 
 	sound.play()
 	player_head.rotation_degrees = Vector3.ZERO
 	player_cam.rotation_degrees = Vector3.ZERO
-	player_anim.play("RESET")
+	if player_anim != null:
+		player_anim.play("RESET")
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 	if animatronic.jumpscare_length < 0.7:
 		player_cam_anim.play("Default")
@@ -555,7 +563,7 @@ func _gamer_filter(node: Node3D):
 func cmd_jumpscare(arg1: String = "edam_freddy"):
 	for i in animatronics.get_children():
 		if arg1 == i.animatronic:
-			_jumpscare(i)
+			_jumpscare(i, is_p1)
 			LimboConsole.close_console()
 			return
 	LimboConsole.error("Animatronic not found.")

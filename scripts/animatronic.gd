@@ -99,7 +99,7 @@ signal paranormal_song
 @export var current_position = 0: # Also used normally
 	set(new_position):
 		current_position = new_position
-		if Engine.is_editor_hint():
+		if Engine.is_editor_hint() and OS.has_feature("Editor"):
 			position = positions[current_position].position
 			rotation_degrees = positions[current_position].rotation
 			scale = positions[current_position].scale
@@ -132,7 +132,7 @@ var vent_warning_count = 0
 
 
 func _ready():
-	if Engine.is_editor_hint():
+	if Engine.is_editor_hint() and !OS.has_feature("Editor"):
 		var editor_selection = EditorInterface.get_selection()
 		editor_selection.selection_changed.connect(_editor_preview)
 	else:
@@ -291,7 +291,7 @@ func _movement_check():
 			_fail_attack()
 		#All jumpscare exceptions/defenses are down. game over :3
 		else:
-			root._jumpscare(self)
+			root._jumpscare(self, positions[current_position].office_entrance.entrance != EntranceProperty.Entrances.LEFT_DOOR and positions[current_position].office_entrance.entrance != EntranceProperty.Entrances.RIGHT_DOOR)
 	
 	#AI check
 	elif randi_range(1, 20) <= level:
@@ -478,7 +478,7 @@ func _sabotage_event_end():
 	anim.speed_scale = 1
 
 func _editor_preview():
-	if enable_hologram == false:
+	if enable_hologram == false or !OS.has_feature("Editor"):
 		return
 	var selected := EditorInterface.get_selection()
 	if self in selected.get_selected_nodes():

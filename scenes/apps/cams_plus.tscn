@@ -17,7 +17,7 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_q747j"]
 viewport_path = NodePath("Background/SubViewport")
 
-[node name="CamsPlus" type="Control"]
+[node name="CamsPlus" type="Control" node_paths=PackedStringArray("multiplayer_only")]
 clip_contents = true
 custom_minimum_size = Vector2(1280, 800)
 layout_mode = 3
@@ -25,6 +25,7 @@ anchors_preset = 0
 offset_right = 1185.0
 offset_bottom = 734.0
 script = ExtResource("1_cfdmu")
+multiplayer_only = [NodePath("VentCams/Cam10")]
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -1
@@ -441,6 +442,22 @@ theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_cc4t8")
 theme_override_font_sizes/font_size = 10
 text = "CAM7"
+
+[node name="Cam10" type="Button" parent="VentCams"]
+layout_mode = 0
+offset_left = 990.0
+offset_top = 540.0
+offset_right = 1021.0
+offset_bottom = 576.0
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_cc4t8")
+theme_override_font_sizes/font_size = 10
+text = "YOU
+."
 
 [node name="WindMusicbox" type="Button" parent="."]
 layout_mode = 0

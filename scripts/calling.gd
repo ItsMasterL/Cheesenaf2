@@ -16,8 +16,11 @@ func _ready():
 		root = get_node(^"/root/Map")
 		_start_call()
 
+func _process(_delta):
+	audio.position = root.tablet.position
+
 func _start_call():
-	if root.night < 7:
+	if root.night < 7 and Globals.office_mode == Globals.OfficeMode.SINGLEPLAYER:
 		await get_tree().create_timer(randf_range(3, 7)).timeout
 		audio.play()
 		notif.visible = true

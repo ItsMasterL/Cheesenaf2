@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://dlitwdu3r57re"]
 
-[ext_resource type="Script" path="res://scripts/camera_master.gd" id="1_6fsxl"]
-[ext_resource type="Script" path="res://scripts/camera.gd" id="2_r7jj3"]
+[ext_resource type="Script" uid="uid://cu5ju0xkklvii" path="res://scripts/camera_master.gd" id="1_6fsxl"]
+[ext_resource type="Script" uid="uid://cfm4tb636ceeb" path="res://scripts/camera.gd" id="2_r7jj3"]
 
 [node name="VentCameras" type="Node3D"]
 script = ExtResource("1_6fsxl")
 
 [node name="Camera1" type="Camera3D" parent="."]
-transform = Transform3D(-0.813101, 0.140828, -0.564831, 0, 0.970296, 0.241922, 0.582123, 0.196707, -0.788948, 9.307, 6.011, -0.444)
+transform = Transform3D(-0.68962, -0.175193, 0.702661, 0, 0.970296, 0.241922, -0.724172, 0.166834, -0.669135, 9.307, 6.011, -0.444)
 cull_mask = 1048573
 script = ExtResource("2_r7jj3")
 first_rotation = Vector3(-14, 133.6, 0)
@@ -30,7 +30,7 @@ spot_range = 37.0843
 spot_attenuation = 0.0
 
 [node name="Camera2" type="Camera3D" parent="."]
-transform = Transform3D(0.714473, 0.328472, -0.617766, 0, 0.882948, 0.469472, 0.699663, -0.335425, 0.630842, 34.967, 6.011, 0.444)
+transform = Transform3D(0.842452, -0.252938, 0.475706, 0, 0.882948, 0.469472, -0.538771, -0.395508, 0.743841, 34.967, 6.011, 0.444)
 script = ExtResource("2_r7jj3")
 first_rotation = Vector3(-28, 32.6, 0)
 second_rotation = Vector3(-28, -40.9, 0)
@@ -52,7 +52,7 @@ spot_range = 37.0843
 spot_attenuation = 0.0
 
 [node name="Camera3" type="Camera3D" parent="."]
-transform = Transform3D(-0.712026, 0.412715, -0.568054, 0, 0.809017, 0.587785, 0.702153, 0.418518, -0.576041, 47.082, 6.076, -0.444)
+transform = Transform3D(0.70834, 0.414901, -0.571062, 0, 0.809017, 0.587785, 0.705871, -0.416352, 0.573059, 47.082, 6.076, -0.444)
 script = ExtResource("2_r7jj3")
 first_rotation = Vector3(-36, 315.1, 0)
 second_rotation = Vector3(-36, 224.6, 0)
@@ -74,7 +74,7 @@ spot_range = 37.0843
 spot_attenuation = 0.0
 
 [node name="Camera4" type="Camera3D" parent="."]
-transform = Transform3D(-0.884581, 0.0889907, 0.457818, 0, 0.981627, -0.190809, -0.466387, -0.168786, -0.868329, 74.822, 5.176, -0.444)
+transform = Transform3D(-0.607376, -0.151581, -0.779819, 0, 0.981627, -0.190809, 0.794415, -0.115893, -0.596217, 74.822, 5.176, -0.444)
 script = ExtResource("2_r7jj3")
 first_rotation = Vector3(11, -127.4, 0)
 second_rotation = Vector3(11, -207.8, 0)
@@ -96,7 +96,7 @@ spot_range = 37.0843
 spot_attenuation = 0.0
 
 [node name="Camera5" type="Camera3D" parent="."]
-transform = Transform3D(0.752415, -0.161581, 0.638563, 0, 0.969445, 0.245307, -0.658689, -0.184573, 0.729425, 27.6647, 1.00169, -8.40752)
+transform = Transform3D(0.768283, 0.157024, -0.620551, 0, 0.969445, 0.245307, 0.640109, -0.188466, 0.744809, 27.6647, 1.00169, -8.40752)
 script = ExtResource("2_r7jj3")
 first_rotation = Vector3(-14.2, -39.8, 0)
 second_rotation = Vector3(-14.2, 39.8, 0)
@@ -118,7 +118,7 @@ spot_range = 37.0843
 spot_attenuation = 0.0
 
 [node name="Camera6" type="Camera3D" parent="."]
-transform = Transform3D(-0.618408, -0.192777, 0.761845, 0, 0.969445, 0.245307, -0.785857, 0.1517, -0.599513, 38.925, 0.982, 8.718)
+transform = Transform3D(-0.904827, 0.104447, -0.41277, 0, 0.969445, 0.245307, 0.425779, 0.221961, -0.87718, 38.925, 0.982, 8.718)
 script = ExtResource("2_r7jj3")
 first_rotation = Vector3(-14.2, 205.2, 0)
 second_rotation = Vector3(-14.2, 128.2, 0)
@@ -140,7 +140,7 @@ spot_range = 37.0843
 spot_attenuation = 0.0
 
 [node name="Camera7" type="Camera3D" parent="."]
-transform = Transform3D(-0.2706, -0.337142, 0.901727, 0, 0.936672, 0.350207, -0.962692, 0.0947663, -0.253464, 80.505, 0.81, -22.006)
+transform = Transform3D(-0.867766, -0.0519479, 0.494252, 0, 0.994522, 0.104528, -0.496974, 0.0907062, -0.863012, 80.505, 0.81, -22.006)
 script = ExtResource("2_r7jj3")
 first_rotation = Vector3(-6, 150.2, 0)
 second_rotation = Vector3(-20.5, 105.7, 0)
@@ -162,7 +162,7 @@ spot_range = 37.0843
 spot_attenuation = 0.0
 
 [node name="Camera8" type="Camera3D" parent="."]
-transform = Transform3D(0.919135, -0.0411781, 0.391784, 0, 0.994522, 0.104528, -0.393942, -0.0960758, 0.9141, 80.505, 0.81, 22.006)
+transform = Transform3D(0.195946, -0.343419, 0.918514, 0, 0.936672, 0.350207, -0.980614, -0.0686218, 0.183537, 80.505, 0.81, 22.006)
 script = ExtResource("2_r7jj3")
 first_rotation = Vector3(-20.5, 78.7, 0)
 second_rotation = Vector3(-6, 23.2, 0)
@@ -184,7 +184,7 @@ spot_range = 37.0843
 spot_attenuation = 0.0
 
 [node name="Camera9" type="Camera3D" parent="."]
-transform = Transform3D(-0.34366, 0.321189, -0.88246, 0, 0.939693, 0.34202, 0.939094, 0.117539, -0.322934, 47.151, 6.089, -22.257)
+transform = Transform3D(-0.252069, 0.330976, -0.909349, 0, 0.939693, 0.34202, 0.967709, 0.0862128, -0.236868, 47.151, 6.089, -22.257)
 script = ExtResource("2_r7jj3")
 first_rotation = Vector3(-20, -104.6, 0)
 second_rotation = Vector3(-20, -157.1, 0)
@@ -202,5 +202,30 @@ omni_range = 48.9831
 visible = false
 layers = 4
 light_energy = 0.25
+spot_range = 37.0843
+spot_attenuation = 0.0
+
+[node name="Camera14" type="Camera3D" parent="."]
+transform = Transform3D(0.5, -0.433013, 0.75, 0, 0.866025, 0.5, -0.866025, -0.25, 0.433013, 37.8462, 6.16652, 2.10658)
+cull_mask = 524287
+fov = 34.8673
+script = ExtResource("2_r7jj3")
+first_rotation = Vector3(-30, 60, 0)
+second_rotation = Vector3(-30, 40, 0)
+cam_name = "Vent Office"
+cam_identifier = "Camera 8"
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera14"]
+layers = 4
+light_energy = 0.04
+light_indirect_energy = 0.0
+light_bake_mode = 1
+omni_range = 48.9831
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera14"]
+visible = false
+layers = 5
+light_energy = 0.25
+shadow_enabled = true
 spot_range = 37.0843
 spot_attenuation = 0.0
