@@ -12,11 +12,14 @@ signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
 signal server_disconnected
 signal settings_changed
+signal all_players_loaded
+signal player_loaded
 
 var address = "127.0.0.1"
 var port = 17920
 var players = {}
 var player_roles = {}
+var players_ready = {}
 var is_host = false
 var is_multiplayer = false
 
@@ -70,8 +73,8 @@ func _register_player(new_player_info):
 # Called on server and clients
 func _on_player_disconnected(id):
 	print("Client %s has disconnected" % [str(id)])
+	player_disconnected.emit(id, players[id])
 	players.erase(id)
-	player_disconnected.emit(id)
 
 # Called on clients
 func _on_connected_ok():
@@ -173,8 +176,8 @@ func sync_lobby_settings():
 
 @rpc("authority","call_local","reliable")
 func start_test(rand_seed: int):
-	Globals.office_mode = lobby_gamemode
 	Globals._set_night(lobby_night)
+	Globals.office_mode = lobby_gamemode
 	seed(rand_seed)
 	# EXTREMELY TEMPORARY
 	for i in players:
@@ -184,4 +187,31 @@ func start_test(rand_seed: int):
 			player_roles[i] = ROLES.ADAM_OFFICE_A
 	Globals.set_scene("title_loadoffice")
 
+@rpc("any_peer","call_local","reliable")
+func player_ready(id: int):
+	players_ready[id] = true
+	if players_ready.size() == players.size():
+		all_players_loaded.emit()
+	else:
+		player_loaded.emit()
+
 #endregion
+
+func set_authority(node, id: int):
+	var array: Array
+	for i in node:
+		array.append(i.get_path())
+	_sync_authority.rpc(array, id)
+
+@rpc("any_peer","call_local","reliable")
+func _sync_authority(node_names: Array, id: int):
+	# Hardcoded loading check for now
+	while not is_instance_valid(get_node(^"/root/Map")):
+		await get_tree().process_frame
+		if is_instance_valid(get_node(^"/root/Map")):
+			break
+	if get_node(^"/root/Map").is_node_ready() == false:
+		await get_node(^"/root/Map").ready
+	for item in node_names:
+		var node = get_node(item)
+		node.set_multiplayer_authority(id, true)

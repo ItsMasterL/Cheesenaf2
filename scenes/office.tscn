@@ -529,15 +529,9 @@ properties/0/replication_mode = 2
 properties/1/path = NodePath("Head:rotation:y")
 properties/1/spawn = true
 properties/1/replication_mode = 2
-properties/2/path = NodePath("Head/Eyes/AnimationPlayer:current_animation")
+properties/2/path = NodePath("Head/Eyes:rotation:x")
 properties/2/spawn = true
-properties/2/replication_mode = 1
-properties/3/path = NodePath("Head/Eyes/AnimationPlayer:active")
-properties/3/spawn = true
-properties/3/replication_mode = 1
-properties/4/path = NodePath("Head/Eyes:rotation:x")
-properties/4/spawn = true
-properties/4/replication_mode = 2
+properties/2/replication_mode = 2
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_cqgbc"]
 properties/0/path = NodePath("Head:rotation:y")
@@ -911,9 +905,10 @@ width = 318.0
 [node name="PlayerManager" type="Node3D" parent="."]
 script = ExtResource("18_142py")
 
-[node name="Player1" type="CharacterBody3D" parent="PlayerManager"]
+[node name="Player1" type="CharacterBody3D" parent="PlayerManager" node_paths=PackedStringArray("authority_items")]
 script = ExtResource("31_63unw")
 is_p1 = true
+authority_items = [NodePath("../../CupOnDesk/Cup"), NodePath("../../TabletOnDesk/Tablet")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerManager/Player1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20574, 0)
@@ -1032,9 +1027,10 @@ libraries = {
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="PlayerManager/Player1"]
 replication_config = SubResource("SceneReplicationConfig_65uj5")
 
-[node name="Player2" type="CharacterBody3D" parent="PlayerManager"]
+[node name="Player2" type="CharacterBody3D" parent="PlayerManager" node_paths=PackedStringArray("authority_items")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 35.7349, 3.14918, 0)
 script = ExtResource("31_63unw")
+authority_items = [NodePath("../../LaptopOnFloor/laptop")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerManager/Player2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20574, 0)

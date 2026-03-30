@@ -124,7 +124,7 @@ func _toggle_vents():
 	_change_camera(1, false)
 
 func _wind_musicbox(input: bool):
-	root.is_winding = input
+	root.music_box_winding.emit(input)
 
 func _reset_musicbox():
 	music_box.stop()

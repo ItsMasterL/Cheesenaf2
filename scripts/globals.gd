@@ -61,9 +61,6 @@ var cheesenaf1_path = ""
 var cheesenaf1_code = ""
 var cheesenaf1_seed: int
 
-# Multiplayer #TODO: Actually implement multiplayer
-var is_multiplayer = false
-
 # Save Data
 var save_night: int = 1
 var purchased_apps: String = "0x0000"
@@ -296,6 +293,10 @@ func _load_settings():
 				event.keycode = int(keybind_overrides[item].erase(0,1))
 			else:
 				print("Keybind invalid!")
+				continue
+			if InputMap.action_get_events(item)[0] == event:
+				print("Keybind " + item + " matches default. Clearing!")
+				keybind_overrides.erase(item)
 				continue
 			InputMap.action_erase_events(item)
 			InputMap.action_add_event(item, event)

@@ -11,6 +11,10 @@ var local_cup_fill = 1
 func _raycast_event():
 	if !root.is_p1:
 		return
+	_sync_drink.rpc()
+	
+@rpc("authority","call_local","unreliable")
+func _sync_drink():
 	var tablet = get_parent_node_3d()
 	var temp_parent = tablet.get_parent_node_3d()
 	if stand == temp_parent:
@@ -21,6 +25,7 @@ func _raycast_event():
 		if root.cup_fill > 0 and root.is_p1:
 			audio.play()
 		anim.play(&"cup_drink")
+	
 
 func _drink_water():
 	local_cup_fill = clamp(local_cup_fill - root.p1_thirst, 0, 1)

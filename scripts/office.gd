@@ -6,6 +6,7 @@ signal entrance_closing
 signal sabotage_begin
 signal sabotage_end
 signal player_spectating
+signal music_box_winding
 
 const TIME_TO_HOUR = 90
 
@@ -34,12 +35,12 @@ var night = Globals.night
 var time = 0 as float
 var hour = 0
 var minute = 0
-var fun_multiplier = 1: # Set by minigames in singleplayer to make time go by faster
+var fun_multiplier: float = 1: # Set by minigames in singleplayer to make time go by faster
 	set(multiplier):
 		if Globals.office_mode != Globals.OfficeMode.SINGLEPLAYER:
 			fun_multiplier = 1
 		else:
-			fun_multiplier = multiplayer
+			fun_multiplier = multiplier
 var purchased_apps
 var using_tablet = false #p1 only
 var using_laptop = false #p2 only
@@ -146,13 +147,6 @@ var is_paused = false # Used to pause the gameplay without freezing the player, 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if MultiplayerCore.is_multiplayer:
-		_register_player.rpc()
-		if MultiplayerCore.player_roles[multiplayer.get_unique_id()] == MultiplayerCore.ROLES.PSY_OFFICE_A:
-				player_manager.set_active_player.emit()
-	else:
-		p2.queue_free()
-		laptop.queue_free()
 		
 
 	for animatronic in animatronics.get_children():
@@ -164,6 +158,7 @@ func _ready():
 	
 	sabotage_begin.connect(_sabotage_event)
 	sabotage_end.connect(_sabotage_event_end)
+	music_box_winding.connect(_music_box_wind_sync)
 
 	if night == 1:
 		p1.get_node("Head/Eyes/Controls").visible = true
@@ -175,6 +170,29 @@ func _ready():
 		animatronics.get_child(1).can_move = false
 	Globals.game_time = 0
 
+	if MultiplayerCore.is_multiplayer:
+		is_paused = true
+		_register_player.rpc()
+		if MultiplayerCore.player_roles[multiplayer.get_unique_id()] == MultiplayerCore.ROLES.ADAM_OFFICE_A:
+			var sync_items: Array
+			sync_items.append(p1)
+			for i in p1.authority_items:
+				sync_items.append(i)
+			MultiplayerCore.set_authority(sync_items, multiplayer.get_unique_id())
+		if MultiplayerCore.player_roles[multiplayer.get_unique_id()] == MultiplayerCore.ROLES.PSY_OFFICE_A:
+				player_manager.init_player.rpc_id(multiplayer.get_unique_id())
+				var sync_items: Array
+				sync_items.append(p2)
+				for i in p2.authority_items:
+					sync_items.append(i)
+				MultiplayerCore.set_authority(sync_items, multiplayer.get_unique_id())
+		
+		MultiplayerCore.all_players_loaded.connect(_begin_multiplayer)
+
+		MultiplayerCore.player_ready.rpc(multiplayer.get_unique_id())
+	else:
+		p2.queue_free()
+		laptop.queue_free()
 #region Command Setup
 	LimboConsole.register_command(cmd_jumpscare, "jumpscare", "Triggers a jumpscare with the specified animatronic. Defaults to Edam Freddy.")
 	LimboConsole.add_argument_autocomplete_source("jumpscare", 0, func(): return animatronics.get_children().map(func(node): return node.animatronic))
@@ -204,6 +222,14 @@ func _exit_tree():
 	LimboConsole.unregister_command("time value")
 	LimboConsole.unregister_command("time hour")
 	LimboConsole.unregister_command("time pause")
+
+	if MultiplayerCore.is_multiplayer:
+		if MultiplayerCore.is_host:
+			_end_session.rpc()
+		else:
+			_quit_early.rpc()
+
+
 #endregion
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -223,7 +249,7 @@ func _process(delta):
 				p1_heat = clamp(p1_heat - (delta * 0.025), -2, 5)
 			else:
 				p1_heat = clamp(p1_heat - (delta * 0.05), -2, 5)
-		elif active_sabotage:
+		else:
 			p1_heat = clamp(p1_heat + (delta * 0.015), 0, 5)
 	blur.material.set("shader_parameter/blur_amount", p1_heat)
 	# Music box running out
@@ -251,7 +277,7 @@ func _process(delta):
 		if night < 7:
 			night = clamp(night + 1, 1, 6)
 			Globals.save_night = night
-		#TODO: Save backbuffer for a fade transition like fnaf
+		#Save backbuffer for a fade transitions
 		var fade_image = get_viewport().get_texture().get_image()
 		Globals.fade_texture = ImageTexture.create_from_image(fade_image)
 		get_tree().change_scene_to_file("res://scenes/victory.tscn")
@@ -262,7 +288,6 @@ func _register_player():
 	for p in MultiplayerCore.players:
 		alive_players[p] = true
 		print(MultiplayerCore.players[p])
-	print(alive_players)
 
 @rpc("any_peer","call_local","reliable")
 func _register_spectate(id: int):
@@ -274,6 +299,11 @@ func _register_spectate(id: int):
 			print(str(MultiplayerCore.players[alive]) + " (" + str(alive) + ") is still alive!")
 			return
 	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
+
+func _begin_multiplayer():
+	is_paused = false
+	if MultiplayerCore.is_host:
+		_music_box_sync_loop()
 
 func _get_ai(animatronic: String) -> int:
 	match animatronic:
@@ -333,6 +363,13 @@ func _refill_cup():
 		drink.get_node("StaticBody3D").local_cup_fill = cup_fill
 		drink.get_node("StaticBody3D")._update_water()
 
+func _music_box_wind(winding: bool):
+	if MultiplayerCore.is_multiplayer:
+		_music_box_wind_sync.rpc(winding)
+	else:
+		is_winding = winding
+
+
 func _jumpscare(animatronic: Node3D, is_player_one = true):
 	while can_jumpscare == false:
 		return
@@ -375,8 +412,9 @@ func _jumpscare(animatronic: Node3D, is_player_one = true):
 			anim.play(animatronic.jumpscare_animation_id)
 		if tablet != null:
 			tablet.visible = false
-			cup.visible = false
-			p1_heat = -2
+		cup.visible = false
+		p1_heat = -2
+		_jumpscare_sync.rpc(animatronic.get_path(),true)
 	else:
 		player_cam_anim = p2.get_node("Head/Eyes/AnimationPlayer")
 		player_head = p2.get_node("Head")
@@ -390,6 +428,7 @@ func _jumpscare(animatronic: Node3D, is_player_one = true):
 		
 		p2.get_node("Head/JumpscareLight").visible = true
 		laptop.visible = false
+		_jumpscare_sync.rpc(animatronic.get_path(),false)
 
 
 	sound.play()
@@ -408,7 +447,7 @@ func _jumpscare(animatronic: Node3D, is_player_one = true):
 		spectating = true
 		player_spectating.emit()
 		_register_spectate(multiplayer.get_unique_id())
-		player_manager.set_active_player.emit()
+		player_manager.spectate_switch()
 		sound.stop()
 		animatronic._fail_attack()
 	else:
@@ -469,6 +508,52 @@ func _jumpscare_save(animatronic: Node3D):
 	can_jumpscare = true
 	gamer_in_office = false
 
+#region Sync
+
+@rpc("any_peer","call_remote","reliable")
+func _jumpscare_sync(animatronic_path: String, is_player_one: bool):
+	var animatronic = get_node(animatronic_path)
+	var anim: AnimationPlayer = animatronic.anim
+	if is_player_one:
+		animatronic.position = animatronic.jumpscare_position
+		animatronic.rotation_degrees = animatronic.jumpscare_rotation
+	else:
+		animatronic.position = animatronic.jumpscare_position_2
+		animatronic.rotation_degrees = animatronic.jumpscare_rotation_2
+	anim.speed_scale = 1 # For the Music Unwound sabotage
+	anim.play(animatronic.jumpscare_animation_id)
+	if tablet != null:
+		tablet.visible = false
+	# Animatronic should still sync from host
+	#await get_tree().create_timer(animatronic.jumpscare_length).timeout
+	#animatronic._fail_attack()
+
+func _music_box_sync_loop():
+	if MultiplayerCore.is_host:
+		_music_box_sync.rpc(musicbox)
+		await get_tree().create_timer(1).timeout
+		_music_box_sync_loop()
+
+@rpc("authority","unreliable","call_remote")
+func _music_box_sync(val: float):
+	musicbox = val
+
+@rpc("any_peer","reliable","call_local")
+func _music_box_wind_sync(winding: bool):
+	is_winding = winding
+	print("WIND GOD DAMN YOU")
+
+@rpc("authority","call_remote","reliable")
+func _end_session():
+	get_tree().change_scene_to_file("res://scenes/title.tscn")
+
+@rpc("any_peer","reliable","call_remote")
+func _quit_early():
+	alive_players[multiplayer.get_unique_id()] = false
+
+
+#endregion
+
 #region Sabotages
 
 @rpc("authority","call_local","reliable")
@@ -521,7 +606,7 @@ func _sabotage_event(event : Globals.Sabotages):
 		Globals.Sabotages.SWAP:
 			sabotage_warning.stream = load("res://sounds/swipe.wav")
 			sabotage_warning.play()
-			player_manager.set_active_player.emit()
+			player_manager.switch_players.emit()
 			_sabotage_event_end()
 
 func _sabotage_event_end():
