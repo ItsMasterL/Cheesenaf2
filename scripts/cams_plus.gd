@@ -77,7 +77,7 @@ func _process(_delta):
 		music_box.play()
 		
 func _unhandled_input(event):
-	if event.is_action_pressed(&"Flashlight") and root.using_tablet:
+	if event.is_action_pressed(&"Flashlight") and ((root.is_p1 and root.using_tablet) or (!root.is_p1 and root.using_laptop)):
 		if root.active_sabotage != Globals.Sabotages.POWER_OUTAGE:
 			light.visible = true
 		light_sound.play()

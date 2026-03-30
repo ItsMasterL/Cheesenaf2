@@ -24,6 +24,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 1185.0
 offset_bottom = 734.0
+mouse_filter = 1
 script = ExtResource("1_cfdmu")
 multiplayer_only = [NodePath("VentCams/Cam10")]
 
@@ -92,6 +93,7 @@ offset_left = 67.0
 offset_top = 85.0
 offset_right = 1349.0
 offset_bottom = 886.0
+mouse_filter = 1
 
 [node name="Cheesenaf2Map" type="Sprite2D" parent="RoomCams"]
 position = Vector2(961, 563)
@@ -302,6 +304,7 @@ offset_left = 67.0
 offset_top = 85.0
 offset_right = 1349.0
 offset_bottom = 886.0
+mouse_filter = 1
 
 [node name="Cheesenaf2Map" type="Sprite2D" parent="VentCams"]
 position = Vector2(961, 563)

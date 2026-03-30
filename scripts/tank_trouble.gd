@@ -9,6 +9,10 @@ var deaths = [0, 0, 0, 0]
 func _ready():
 	$Home/Music.play()
 	$Home/Instruction.text = tr("TANK_TROUBLE_INSTRUCTION").format({"up_key": InputMap.action_get_events("TankForward")[0].as_text().trim_suffix(" (Physical)").to_upper(), "left_key": InputMap.action_get_events("TankLeft")[0].as_text().trim_suffix(" (Physical)").to_upper(), "down_key": InputMap.action_get_events("TankBackward")[0].as_text().trim_suffix(" (Physical)").to_upper(), "right_key": InputMap.action_get_events("TankRight")[0].as_text().trim_suffix(" (Physical)").to_upper(), "shoot_key": InputMap.action_get_events("TankFire")[0].as_text().trim_suffix(" (Physical)").to_upper()})
+	if root.is_p1:
+		$Home/P1.text = "P1: Adam\nKills: %s Deaths: %s" % [kills[0], deaths[0]]
+	else:
+		$Home/P1.text = "P1: Psy\nKills: %s Deaths: %s" % [kills[0], deaths[0]]
 
 func _update_scores(this: int, attacker: int):
 	deaths[this] += 1

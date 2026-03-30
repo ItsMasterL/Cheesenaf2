@@ -65,49 +65,54 @@ signal paranormal_song
 @export_category("Editor")
 @export var test_jumpscare = false:
 	set(jumpscare_test):
-		if jumpscare_test == true and Engine.is_editor_hint():
-			test_jumpscare = false
-			position = jumpscare_position
-			rotation_degrees = jumpscare_rotation
-			$AnimationPlayer.play(jumpscare_animation_id)
-			if jumpscare_length > 0.7:
-				$"../../PlayerManager/Player1/Head/Eyes/AnimationPlayer".play("Long")
-			else:
-				$"../../PlayerManager/Player1/Head/Eyes/AnimationPlayer".play("Default")
+		if OS.has_feature("Editor"):
+			if jumpscare_test == true and Engine.is_editor_hint():
+				test_jumpscare = false
+				position = jumpscare_position
+				rotation_degrees = jumpscare_rotation
+				$AnimationPlayer.play(jumpscare_animation_id)
+				if jumpscare_length > 0.7:
+					$"../../PlayerManager/Player1/Head/Eyes/AnimationPlayer".play("Long")
+				else:
+					$"../../PlayerManager/Player1/Head/Eyes/AnimationPlayer".play("Default")
 @export var test_jumpscare_2 = false:
 	set(jumpscare_test):
-		if jumpscare_test == true and Engine.is_editor_hint():
-			test_jumpscare_2 = false
-			position = jumpscare_position_2
-			rotation_degrees = jumpscare_rotation_2
-			$AnimationPlayer.play(jumpscare_animation_id)
-			if jumpscare_length > 0.7:
-				$"../../PlayerManager/Player2/Head/Eyes/AnimationPlayer".play("Long")
-			else:
-				$"../../PlayerManager/Player2/Head/Eyes/AnimationPlayer".play("Default")
+		if OS.has_feature("Editor"):
+			if jumpscare_test == true and Engine.is_editor_hint():
+				test_jumpscare_2 = false
+				position = jumpscare_position_2
+				rotation_degrees = jumpscare_rotation_2
+				$AnimationPlayer.play(jumpscare_animation_id)
+				if jumpscare_length > 0.7:
+					$"../../PlayerManager/Player2/Head/Eyes/AnimationPlayer".play("Long")
+				else:
+					$"../../PlayerManager/Player2/Head/Eyes/AnimationPlayer".play("Default")
 @export var test_save_ignore_jumpscare = false:
 	set(jumpscare_test):
-		if jumpscare_test == true and Engine.is_editor_hint():
-			test_save_ignore_jumpscare = false
-			position = save_ignore_jumpscare_position
-			rotation_degrees = save_ignore_jumpscare_rotation
-			$AnimationPlayer.play(save_jumpscare_id)
-			if jumpscare_length > 0.7:
-				$"../../Player/Head/Eyes/AnimationPlayer".play("Long")
-			else:
-				$"../../Player/Head/Eyes/AnimationPlayer".play("Default")
+		if OS.has_feature("Editor"):
+			if jumpscare_test == true and Engine.is_editor_hint():
+				test_save_ignore_jumpscare = false
+				position = save_ignore_jumpscare_position
+				rotation_degrees = save_ignore_jumpscare_rotation
+				$AnimationPlayer.play(save_jumpscare_id)
+				if jumpscare_length > 0.7:
+					$"../../Player/Head/Eyes/AnimationPlayer".play("Long")
+				else:
+					$"../../Player/Head/Eyes/AnimationPlayer".play("Default")
 @export var current_position = 0: # Also used normally
 	set(new_position):
 		current_position = new_position
-		if Engine.is_editor_hint() and OS.has_feature("Editor"):
-			position = positions[current_position].position
-			rotation_degrees = positions[current_position].rotation
-			scale = positions[current_position].scale
-			$AnimationPlayer.play(positions[current_position].animation_id)
-			$"../../Player/Head/Eyes/AnimationPlayer".play("RESET")
-			_editor_preview()
+		if !OS.has_feature("Template"):
+			if Engine.is_editor_hint():
+				position = positions[current_position].position
+				rotation_degrees = positions[current_position].rotation
+				scale = positions[current_position].scale
+				$AnimationPlayer.play(positions[current_position].animation_id)
+				$"../../Player/Head/Eyes/AnimationPlayer".play("RESET")
+				_editor_preview()
 @export var enable_hologram = false
 @export var hologram_mesh : MeshInstance3D
+var editor_interface
 
 # Usually used to disable movement checks during jumpscares
 var can_move = true
@@ -132,8 +137,9 @@ var vent_warning_count = 0
 
 
 func _ready():
-	if Engine.is_editor_hint() and !OS.has_feature("Editor"):
-		var editor_selection = EditorInterface.get_selection()
+	if Engine.is_editor_hint():
+		editor_interface = Engine.get_singleton("EditorInterface")
+		var editor_selection = editor_interface.get_selection()
 		editor_selection.selection_changed.connect(_editor_preview)
 	else:
 		safety_timer = Globals.safety_time
@@ -480,7 +486,7 @@ func _sabotage_event_end():
 func _editor_preview():
 	if enable_hologram == false or !OS.has_feature("Editor"):
 		return
-	var selected := EditorInterface.get_selection()
+	var selected = editor_interface.get_selection()
 	if self in selected.get_selected_nodes():
 		print("You have selected ", animatronic, "!")
 		var container = Node3D.new()

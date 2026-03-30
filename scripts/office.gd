@@ -34,7 +34,12 @@ var night = Globals.night
 var time = 0 as float
 var hour = 0
 var minute = 0
-var fun_multiplier = 1 # Set by minigames in singleplayer to make time go by faster
+var fun_multiplier = 1: # Set by minigames in singleplayer to make time go by faster
+	set(multiplier):
+		if Globals.office_mode != Globals.OfficeMode.SINGLEPLAYER:
+			fun_multiplier = 1
+		else:
+			fun_multiplier = multiplayer
 var purchased_apps
 var using_tablet = false #p1 only
 var using_laptop = false #p2 only
