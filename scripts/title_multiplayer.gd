@@ -76,7 +76,8 @@ func disconnect_passthrough():
 	MultiplayerCore.leave_server()
 
 func set_ip(ip: String):
-	MultiplayerCore._set_ip(ip)
+	if ip.is_valid_ip_address():
+		MultiplayerCore._set_ip(ip)
 
 func set_port(port: String):
 	MultiplayerCore._set_port(port)

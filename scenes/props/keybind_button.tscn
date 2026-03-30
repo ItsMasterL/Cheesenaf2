@@ -21,6 +21,7 @@ anchors_preset = 0
 offset_bottom = 20.0
 
 [node name="BindButton" type="Button" parent="."]
+layout_mode = 0
 offset_right = 229.0
 offset_bottom = 29.0
 focus_mode = 0

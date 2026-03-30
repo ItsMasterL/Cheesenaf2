@@ -168,3 +168,5 @@ scroll_active = false
 [connection signal="pressed" from="Back" to="." method="_change_menu" binds= ["menu"]]
 [connection signal="pressed" from="Join" to="." method="join_passthrough"]
 [connection signal="pressed" from="Join" to="." method="_change_menu" binds= ["mp_lobby"]]
+[connection signal="text_changed" from="IP" to="." method="set_ip"]
+[connection signal="text_changed" from="Port" to="." method="set_port"]
