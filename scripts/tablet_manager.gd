@@ -6,6 +6,7 @@ extends Node2D
 var current_process
 var using_tablet = false
 var fun_multiplier = 1
+var is_p1 = true
 # Media Player
 var playlist: Array[String]
 var queued_media: String = ""
@@ -48,7 +49,11 @@ func _process(_delta):
 		else:
 			time.text = "%02d:%02d AM" % [root.hour, root.minute]
 		# For compatibility
-		using_tablet = root.using_tablet
+		if root.is_p1:
+			using_tablet = root.using_tablet
+		else:
+			using_tablet = root.using_laptop
+		is_p1 = root.is_p1
 		if using_tablet:
 			root.fun_multiplier = fun_multiplier
 		else:

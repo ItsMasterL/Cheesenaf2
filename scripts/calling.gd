@@ -15,6 +15,8 @@ func _ready():
 	if get_parent().standalone_mode == false:
 		root = get_node(^"/root/Map")
 		_start_call()
+	else:
+		set_process(false)
 
 func _process(_delta):
 	audio.position = root.tablet.position

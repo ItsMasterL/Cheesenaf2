@@ -35,6 +35,8 @@ const NIGHT_DATA = {
 
 const DEFAULT_NAMES = ["FredEnjoyer2", "Cheese4U", "Willy_A", "FloxOfFox", "C00L_BUN", "ChicChica", "EdamAdam", "PsyGuy", "WitherSchmither", "xX_Fweddy_Xx", "StuffedCrust", "freddy9218371924", "_Yarr_", "user19227343", "RealMarkiplier", "RealDawko", "MatPatReal", "PretendImFamous", "j", "CnafEnjoyer", "🦊", "🐻", "🐰", "🐔"]
 
+const LANGUAGES = ["en", "es", "tr"]
+
 # Office
 var night = 0
 var edams_friendly = true
@@ -81,7 +83,7 @@ var ambient_volume: float = 1
 var jumpscare_volume: float = 1
 var fullscreen = false
 var language = 0
-var languages = ["en", "es", "tr"]
+var keybind_overrides = {}
 
 #region Applications
 enum store_apps {
@@ -227,7 +229,8 @@ func _save_settings():
 		"ambient_volume" = ambient_volume,
 		"jumpscare_volume" = jumpscare_volume,
 		"fullscreen" = fullscreen,
-		"language" = language
+		"language" = language,
+		"keybind_overrides" = keybind_overrides
 	}
 	var file = FileAccess.open("user://settings.json", FileAccess.WRITE)
 	var json_string = JSON.stringify(data)
@@ -269,6 +272,8 @@ func _load_settings():
 				self.fullscreen = data["fullscreen"]
 			if "language" in data and typeof(data["language"]) == TYPE_INT or typeof(data["language"]) == TYPE_FLOAT:
 				self.language = clamp(floor(data["language"]), 0, 2)
+			if "keybind_overrides" in data and typeof(data["keybind_overrides"]) == TYPE_DICTIONARY:
+				self.keybind_overrides = data["keybind_overrides"]
 		AudioServer.set_bus_volume_db(0, linear_to_db(self.master_volume))
 		AudioServer.set_bus_volume_db(1, linear_to_db(self.sfx_volume))
 		AudioServer.set_bus_volume_db(2, linear_to_db(self.voice_volume))
@@ -280,7 +285,20 @@ func _load_settings():
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		elif DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-		TranslationServer.set_locale(languages[language])
+		TranslationServer.set_locale(LANGUAGES[language])
+		for item in keybind_overrides:
+			var event
+			if "m" in keybind_overrides[item]:
+				event = InputEventMouseButton.new()
+				event.button_index = int(keybind_overrides[item].erase(0,1))
+			elif "k" in keybind_overrides[item]:
+				event = InputEventKey.new()
+				event.keycode = int(keybind_overrides[item].erase(0,1))
+			else:
+				print("Keybind invalid!")
+				continue
+			InputMap.action_erase_events(item)
+			InputMap.action_add_event(item, event)
 #endregion
 
 func _set_night(night_number: int):

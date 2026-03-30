@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://dtnsmim8wv4a6"]
+
+[ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://fonts/consolas.ttf" id="1_lt6qk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jsly0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k5h5j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ojbqf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o3wjp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vdb44"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s1xn2"]
+
+[node name="Control" type="Control"]
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 3
+anchors_preset = 0
+offset_bottom = 20.0
+
+[node name="BindButton" type="Button" parent="."]
+offset_right = 229.0
+offset_bottom = 29.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_lt6qk")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jsly0")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_k5h5j")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ojbqf")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_o3wjp")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vdb44")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_s1xn2")
+alignment = 0
+
+[node name="BindName" type="RichTextLabel" parent="BindButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.5
+offset_top = -9.5
+offset_right = 82.5
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("1_lt6qk")
+theme_override_font_sizes/normal_font_size = 20
+text = "Bind"
+scroll_active = false
+
+[node name="Key" type="Label" parent="BindButton"]
+layout_mode = 0
+offset_left = 209.0
+offset_top = 5.0
+offset_right = 300.0
+offset_bottom = 26.0
+theme_override_fonts/font = ExtResource("1_lt6qk")
+theme_override_font_sizes/font_size = 20
+text = "A"

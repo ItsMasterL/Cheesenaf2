@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c0spfq78wftov"]
+[gd_scene load_steps=21 format=3 uid="uid://c0spfq78wftov"]
 
 [ext_resource type="Script" uid="uid://d1yaj1ed4fml" path="res://scripts/title_menu.gd" id="1_gen20"]
 [ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://fonts/consolas.ttf" id="2_dmw46"]
@@ -8,8 +8,10 @@
 [ext_resource type="Script" uid="uid://7mp58833s1f7" path="res://scripts/reset_settings.gd" id="6_5ukkq"]
 [ext_resource type="Script" uid="uid://bw07norw3t1sp" path="res://scripts/player_controls_test.gd" id="7_4sktf"]
 [ext_resource type="Script" uid="uid://dug22nbmuxgea" path="res://scripts/sensitivity_slider.gd" id="7_6v5l0"]
+[ext_resource type="Script" uid="uid://b46axd6l60ssi" path="res://scripts/keybinds.gd" id="8_bvw11"]
 [ext_resource type="Script" uid="uid://qqesfq7pj3dr" path="res://scripts/fullscreen_toggle.gd" id="8_j22wr"]
 [ext_resource type="Script" uid="uid://bnq20qahlrhng" path="res://scripts/set_language.gd" id="9_1sieu"]
+[ext_resource type="PackedScene" uid="uid://dtnsmim8wv4a6" path="res://scenes/props/keybind_button.tscn" id="9_feaqd"]
 [ext_resource type="PackedScene" uid="uid://dddt68wyhyhk4" path="res://models/minimaloffice.glb" id="10_beffp"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ptv6"]
@@ -27,7 +29,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_h1hx3"]
 size = Vector3(1, 2.37891, 1)
 
-[node name="CustomNight" type="Control"]
+[node name="Settings" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -370,6 +372,35 @@ offset_right = 713.0
 offset_bottom = 123.0
 text = "SETTING_MOUSE_RESET"
 script = ExtResource("6_5ukkq")
+
+[node name="Keybinds" type="Control" parent="." node_paths=PackedStringArray("button_continer", "hoversound")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("8_bvw11")
+keybind_button = ExtResource("9_feaqd")
+button_continer = NodePath("ScrollContainer/VBoxContainer")
+hoversound = NodePath("../HoverSound")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Keybinds"]
+layout_mode = 0
+offset_left = 412.0
+offset_top = 182.0
+offset_right = 984.0
+offset_bottom = 434.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Keybinds/ScrollContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Keybinds"]
+layout_mode = 0
+offset_left = 412.0
+offset_top = 160.0
+offset_right = 577.0
+offset_bottom = 183.0
+theme_override_fonts/font = ExtResource("2_dmw46")
+theme_override_font_sizes/font_size = 20
+text = "SETTING_KEYBIND"
 
 [node name="Misc" type="Control" parent="."]
 anchors_preset = 0
