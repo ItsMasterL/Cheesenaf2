@@ -24,6 +24,15 @@ enum Sabotages {
 	DOOR_JAM,
 }
 
+enum SabotageClearRequirements {
+	SCORE_FLAPPY_FOXY,
+	SCORE_TANK_TROUBLE,
+	SCORE_SOCCER_PHYSICS,
+	SCORE_CHICA_POP,
+	SCORE_POKER,
+	HAND_POKER,
+}
+
 const NIGHT_DATA = {
 	1: {"edams_friendly": true, "edam_freddy": 3, "edam_bonnie": 7, "edam_chica": 7, "edam_foxy": 7, "wither_freddy": 0, "wither_bonnie": 0, "wither_chica": 0, "wither_foxy": 0, "cheesestick": 0, "safety_time": 5},
 	2: {"edams_friendly": true, "edam_freddy": 5, "edam_bonnie": 15, "edam_chica": 5, "edam_foxy": 8, "wither_freddy": 2, "wither_bonnie": 3, "wither_chica": 0, "wither_foxy": 0, "cheesestick": 0, "safety_time": 5},

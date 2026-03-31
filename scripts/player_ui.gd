@@ -3,6 +3,7 @@ extends Control
 @export var info_label: Control
 @export var sabotage_name: Control
 @export var sabotage_description: Control
+@export var sabotage_solution: Control
 @export var spectate_overlay: Node
 @export var anim: AnimationPlayer
 
@@ -29,6 +30,7 @@ func _process(delta):
 func _sabotage_notif(_sabotage = null):
 	sabotage_name.text = "[wave]" + root.sabotage_name
 	sabotage_description.text = root.sabotage_description
+	sabotage_solution.text = root.sabotage_clear_description
 	anim.play("sabotage_notification")
 
 func _spectate():

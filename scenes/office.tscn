@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=4 uid="uid://kfokhb3cioir"]
+[gd_scene load_steps=106 format=4 uid="uid://kfokhb3cioir"]
 
 [ext_resource type="Script" uid="uid://bmd8ubev6prvd" path="res://scripts/office.gd" id="1_a3xfx"]
 [ext_resource type="PackedScene" uid="uid://bs378s4kwr2ux" path="res://scenes/props/foxy_plush.tscn" id="1_gqipk"]
@@ -51,6 +51,8 @@
 [ext_resource type="Script" uid="uid://bc0tklwmfofti" path="res://scripts/background.gd" id="37_nygyx"]
 [ext_resource type="PackedScene" uid="uid://dfe3oqrxe2jr2" path="res://scenes/animatronics/pink_slip.tscn" id="38_ry2hb"]
 [ext_resource type="PackedScene" uid="uid://westby04v8dv" path="res://models/camera.glb" id="39_vilxk"]
+[ext_resource type="Script" uid="uid://w3w4ipuswafy" path="res://scripts/door_button.gd" id="41_12wqr"]
+[ext_resource type="AudioStream" uid="uid://8n3q5bsykdh4" path="res://sounds/error.wav" id="42_y13nk"]
 [ext_resource type="PackedScene" uid="uid://d1kidycetm6rq" path="res://scenes/animatronics/pink_slip_2.tscn" id="51_70iqj"]
 [ext_resource type="PackedScene" uid="uid://dgwg8boisksc1" path="res://scenes/props/laptop.tscn" id="51_nygyx"]
 
@@ -649,6 +651,30 @@ tracks/3/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SabotageSolution:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5, 2.5),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(208, 700), Vector2(208, 600)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SabotageSolution:self_modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.866667, 2.76667, 6.36667, 8),
+"transitions": PackedFloat32Array(0.25, 1, 1, 0.25),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_pjxyp"]
 resource_name = "spectate_begin"
@@ -716,6 +742,9 @@ size = Vector3(1.88637, 3.00232, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t6udk"]
 size = Vector3(1.3164, 1.40643, 1.23035)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y13nk"]
+size = Vector3(0.249023, 0.263397, 0.0942383)
 
 [node name="Map" type="Node3D" node_paths=PackedStringArray("tablet", "animatronics", "doors", "drink", "blur", "sabotage_warning", "lights", "player_manager", "laptop", "p1", "p1_tablet_holder", "p1_cup_holder", "p1_cursor", "p2", "p2_laptop_holder", "p2_cursor")]
 script = ExtResource("1_a3xfx")
@@ -1046,7 +1075,7 @@ far = 100.0
 
 [node name="Interaction" type="RayCast3D" parent="PlayerManager/Player2/Head/Eyes"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-target_position = Vector3(0, -3, 0)
+target_position = Vector3(0, -4.4, 0)
 collide_with_areas = true
 script = ExtResource("32_5ed2l")
 
@@ -1118,7 +1147,7 @@ omni_range = 3.0
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="PlayerManager/Player2"]
 replication_config = SubResource("SceneReplicationConfig_cqgbc")
 
-[node name="Universal UI" type="Control" parent="PlayerManager" node_paths=PackedStringArray("info_label", "sabotage_name", "sabotage_description", "spectate_overlay", "anim")]
+[node name="Universal UI" type="Control" parent="PlayerManager" node_paths=PackedStringArray("info_label", "sabotage_name", "sabotage_description", "sabotage_solution", "spectate_overlay", "anim")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1130,6 +1159,7 @@ script = ExtResource("32_ak7v7")
 info_label = NodePath("Info")
 sabotage_name = NodePath("SabotageName")
 sabotage_description = NodePath("SabotageDesc")
+sabotage_solution = NodePath("SabotageSolution")
 spectate_overlay = NodePath("TextureRect")
 anim = NodePath("UIAnim")
 
@@ -1197,6 +1227,27 @@ grow_horizontal = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("35_likdn")
 text = "DESCRIPTION"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="SabotageSolution" type="Label" parent="PlayerManager/Universal UI"]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 100
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -368.0
+offset_top = 52.0
+offset_right = 371.0
+offset_bottom = 169.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("35_likdn")
+text = "SOLUTION"
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -1298,6 +1349,7 @@ shadow_enabled = true
 stream = ExtResource("21_h77es")
 volume_db = -20.0
 autoplay = true
+bus = &"Ambient"
 
 [node name="GPUParticles3D2" type="GPUParticles3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.2918, 4.57161, 34.101)
@@ -1395,6 +1447,38 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Interests/UpInterest"]
 shape = SubResource("BoxShape3D_t6udk")
 
+[node name="RightDoorButton" type="Area3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.6946, 4.34143, 3.77767)
+script = ExtResource("41_12wqr")
+affected_door = 6
+opposing_door = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/RightDoorButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00927734, -0.0037384, 0.0461426)
+shape = SubResource("BoxShape3D_y13nk")
+
+[node name="DoorButtonError" type="AudioStreamPlayer3D" parent="Map/RightDoorButton"]
+stream = ExtResource("42_y13nk")
+volume_db = -20.0
+max_distance = 10.0
+bus = &"SFX"
+
+[node name="LeftDoorButton" type="Area3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.695, 4.341, -3.87069)
+script = ExtResource("41_12wqr")
+affected_door = 5
+opposing_door = 6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/LeftDoorButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00927734, -0.0037384, 0.0461426)
+shape = SubResource("BoxShape3D_y13nk")
+
+[node name="DoorButtonError" type="AudioStreamPlayer3D" parent="Map/LeftDoorButton"]
+stream = ExtResource("42_y13nk")
+volume_db = -20.0
+max_distance = 10.0
+bus = &"SFX"
+
 [node name="Doors" type="Node3D" parent="."]
 
 [node name="FrontDoor" parent="Doors" instance=ExtResource("28_t03s8")]
@@ -1412,11 +1496,11 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.22, 
 [node name="CeilingDoor" parent="Doors" instance=ExtResource("28_t03s8")]
 transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 0.5, 4.499, 0)
 
-[node name="RightDoor2" parent="Doors" instance=ExtResource("28_t03s8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5104, 3.84988, 3.94902)
-
 [node name="LeftDoor2" parent="Doors" instance=ExtResource("28_t03s8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.51, 3.85, -3.949)
+
+[node name="RightDoor2" parent="Doors" instance=ExtResource("28_t03s8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5104, 3.84988, 3.94902)
 
 [node name="Animatronics" type="Node3D" parent="."]
 

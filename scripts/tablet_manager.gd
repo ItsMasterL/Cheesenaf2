@@ -121,7 +121,11 @@ func _load_application(appscene: String, fun: float = fun_multiplier):
 		app_home.get_child(0).queue_free()
 	current_process = load("res://scenes/apps/%s.tscn" % [appscene])
 	if appscene == "cams_plus":
-		root.p1_in_cams = true
+		if standalone_mode == false:
+			if root.is_p1:
+				root._p1_sync_cams.rpc(true)
+			else:
+				root._p2_sync_cams.rpc(true)
 	var instance = current_process.instantiate()
 	app_home.add_child(instance)
 	fun_multiplier = fun
@@ -132,7 +136,10 @@ func _home():
 		app_home.get_child(0).queue_free()
 	home.show()
 	if standalone_mode == false:
-		root.p1_in_cams = false
+		if root.is_p1:
+			root._p1_sync_cams.rpc(false)
+		else:
+			root._p2_sync_cams.rpc(false)
 		fun_multiplier = 1
 
 func _media_process(_delta):

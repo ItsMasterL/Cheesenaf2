@@ -10,7 +10,13 @@ func _ready():
 	switch_players.connect(_switch_player)
 
 func _switch_player():
+	var adam
 	var sync_items: Array
+	
+	adam = root.adam
+	root.adam = root.psy
+	root.psy = adam
+
 	root.is_p1 = !root.is_p1
 	root.p1.get_node("Head/Eyes").current = root.is_p1
 	root.p1.get_node("Head/AudioListener3D").current = root.is_p1

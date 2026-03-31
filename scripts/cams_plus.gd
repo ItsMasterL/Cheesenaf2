@@ -26,6 +26,7 @@ func _ready():
 	root.sabotage_begin.connect(sabotage_event)
 	root.sabotage_end.connect(sabotage_event_end)
 	if Globals.office_mode == Globals.OfficeMode.SINGLEPLAYER or Globals.office_mode == Globals.OfficeMode.VERSUS:
+		print(Globals.office_mode)
 		for item in multiplayer_only:
 			item.visible = false
 	else:

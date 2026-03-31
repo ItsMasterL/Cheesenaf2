@@ -17,7 +17,11 @@ func _ready():
 	await get_tree().create_timer(7.5).timeout
 	if Globals.night < 5:
 		Globals._set_night(Globals.save_night)
-		get_tree().change_scene_to_file("res://scenes/title_loadoffice.tscn")
+		if MultiplayerCore.is_multiplayer:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			get_tree().change_scene_to_file("res://scenes/title.tscn")
+		else:
+			get_tree().change_scene_to_file("res://scenes/title_loadoffice.tscn")
 	elif Globals.night == 5:
 		get_tree().change_scene_to_file("res://scenes/paycheck5.tscn")
 	elif Globals.night == 7:

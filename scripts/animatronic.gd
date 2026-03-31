@@ -167,20 +167,25 @@ func _process(delta):
 		_look_at_object(delta)
 	#Multiplayer - Host priority
 	if MultiplayerCore.is_multiplayer and (Globals.office_mode == Globals.OfficeMode.CO_OP or Globals.office_mode == Globals.OfficeMode.VERSUS_TEAMS):
-		if MultiplayerCore.is_host: 
+		if MultiplayerCore.is_host:
+			#TODO: Stop animatronics from freezing up at office if person is dead
 			# Do not execute movement logic if the animatronic is in the non-host client's office
 			if root.is_p1 and positions[current_position].office_entrance != null and positions[current_position].office_entrance.entrance >= int(EntranceProperty.Entrances.LEFT_DOOR):
-				return
+				if root.adam in root.alive_players:
+					return
 			if !root.is_p1 and positions[current_position].office_entrance != null and positions[current_position].office_entrance.entrance < int(EntranceProperty.Entrances.LEFT_DOOR):
-				return
+				if root.psy in root.alive_players:
+					return
 		else:
 			# Do not execute movement logic unless the animatronic is in this client's office
 			if root.is_p1 and (positions[current_position].office_entrance == null or positions[current_position].office_entrance.entrance >= int(EntranceProperty.Entrances.LEFT_DOOR)):
-				return
+				if root.adam in root.alive_players:
+					return
 			if !root.is_p1 and (positions[current_position].office_entrance == null or positions[current_position].office_entrance.entrance < int(EntranceProperty.Entrances.LEFT_DOOR)):
-				return
+				if root.psy in root.alive_players:
+					return
 	# Camera sensitivity
-	if root.p1_in_cams and root.using_tablet and camera_sensitive and positions[current_position].office_entrance == null:
+	if ((root.p1_in_cams and root.using_tablet) or (root.p2_in_cams and root.using_laptop)) and camera_sensitive and positions[current_position].office_entrance == null:
 		camera_cooldown = randf_range(2, 23 - level)
 	if camera_cooldown > 0 and camera_sensitive:
 		camera_cooldown -= delta
@@ -191,7 +196,7 @@ func _process(delta):
 	# Safety Timer
 	if positions[current_position].office_entrance != null and root.under_desk == false:
 		safety_timer = clamp(safety_timer - delta, 0, safety_timer)
-		if OS.is_debug_build():
+		if OS.is_debug_build() and root.is_p1:
 			print(animatronic + ": " + str(safety_timer))
 	else:
 		safety_timer = clamp(safety_timer + delta, 0, root.safety_time)
@@ -295,9 +300,20 @@ func _movement_check():
 		# Flashlight sensitivity
 		elif positions[current_position].office_entrance.flashlight_weakness and flashlight > 0:
 			_fail_attack()
+		# Laptop sensitivity
+		elif positions[current_position].office_entrance.laptop_weakness and root.is_laptop_closed and !root.is_p1:
+			if randi_range(0,30) < level:
+				_fail_attack()
+				if OS.is_debug_build():
+					print("Lucky!")
+			else:
+				if OS.is_debug_build():
+					print("Unlucky...")
 		#All jumpscare exceptions/defenses are down. game over :3
 		else:
-			root._jumpscare(self, positions[current_position].office_entrance.entrance != EntranceProperty.Entrances.LEFT_DOOR and positions[current_position].office_entrance.entrance != EntranceProperty.Entrances.RIGHT_DOOR)
+			#root._jumpscare(self, positions[current_position].office_entrance.entrance != EntranceProperty.Entrances.LEFT_DOOR and positions[current_position].office_entrance.entrance != EntranceProperty.Entrances.RIGHT_DOOR)
+			#Jumpscares should in theory be handled by the client that needs them
+			root._jumpscare(self, root.is_p1)
 	
 	#AI check
 	elif randi_range(1, 20) <= level:

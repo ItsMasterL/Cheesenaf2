@@ -12,7 +12,8 @@ extends Control
 
 func _ready():
 	for i in root.closed_entrances:
-		door_buttons.get_child(i).button_pressed = true
+		if i < EntranceProperty.Entrances.LEFT_DOOR:
+			door_buttons.get_child(i).button_pressed = true
 
 func _check_and_seal():
 	var seals: Array[int]
@@ -45,6 +46,10 @@ func _check_and_seal():
 				return
 		dark.visible = false
 		audio.stream = load("res://sounds/minigame/vm_success.wav")
+		if EntranceProperty.Entrances.LEFT_DOOR in root.closed_entrances:
+			seals.append(EntranceProperty.Entrances.LEFT_DOOR)
+		if EntranceProperty.Entrances.RIGHT_DOOR in root.closed_entrances:
+			seals.append(EntranceProperty.Entrances.RIGHT_DOOR)
 		root._set_entrances.rpc(seals)
 	audio.play()
 

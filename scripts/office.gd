@@ -76,8 +76,9 @@ var cheesestick = Globals.cheesestick
 var safety_time = Globals.safety_time
 # Multiplayer specific
 var is_p1 = true # Not networked
-var sabotage_name
-var sabotage_description
+var sabotage_name: String = ""
+var sabotage_description: String = ""
+var sabotage_clear_description: String = ""
 var temp_closed_entrances: Array[int]
 var music_box_multiplier = 1
 var active_sabotage: Globals.Sabotages = Globals.Sabotages.NONE:
@@ -131,6 +132,9 @@ var active_sabotage: Globals.Sabotages = Globals.Sabotages.NONE:
 		sabotage_begin.emit(active_sabotage as Globals.Sabotages)
 var spectating = false
 var alive_players = {}
+var adam
+var psy
+var sabotage_clear_requirements = {}
 
 # Etc
 var last_cam # Not networked
@@ -158,7 +162,7 @@ func _ready():
 	
 	sabotage_begin.connect(_sabotage_event)
 	sabotage_end.connect(_sabotage_event_end)
-	music_box_winding.connect(_music_box_wind_sync)
+	music_box_winding.connect(_music_box_wind)
 
 	if night == 1:
 		p1.get_node("Head/Eyes/Controls").visible = true
@@ -172,7 +176,7 @@ func _ready():
 
 	if MultiplayerCore.is_multiplayer:
 		is_paused = true
-		_register_player.rpc()
+		_register_player.rpc(multiplayer.get_unique_id())
 		if MultiplayerCore.player_roles[multiplayer.get_unique_id()] == MultiplayerCore.ROLES.ADAM_OFFICE_A:
 			var sync_items: Array
 			sync_items.append(p1)
@@ -190,6 +194,9 @@ func _ready():
 		MultiplayerCore.all_players_loaded.connect(_begin_multiplayer)
 
 		MultiplayerCore.player_ready.rpc(multiplayer.get_unique_id())
+
+		if MultiplayerCore.is_host and Globals.office_mode == Globals.OfficeMode.CO_OP:
+			_random_sabotage()
 	else:
 		p2.queue_free()
 		laptop.queue_free()
@@ -227,7 +234,7 @@ func _exit_tree():
 		if MultiplayerCore.is_host:
 			_end_session.rpc()
 		else:
-			_quit_early.rpc()
+			_register_spectate.rpc(multiplayer.get_unique_id())
 
 
 #endregion
@@ -284,10 +291,12 @@ func _process(delta):
 
 # Submits variables on all clients for multiplayer
 @rpc("any_peer","call_local","reliable")
-func _register_player():
-	for p in MultiplayerCore.players:
-		alive_players[p] = true
-		print(MultiplayerCore.players[p])
+func _register_player(id):
+	alive_players[id] = true
+	if MultiplayerCore.player_roles[id] == MultiplayerCore.ROLES.ADAM_OFFICE_A or MultiplayerCore.player_roles[id] == MultiplayerCore.ROLES.ADAM_OFFICE_B:
+		adam = id
+	else:
+		psy = id
 
 @rpc("any_peer","call_local","reliable")
 func _register_spectate(id: int):
@@ -338,18 +347,18 @@ func _take_tablet():
 	tablet.queue_free() # You ain't getting that back lmao
 	$Player/Head/LoseTablet.play()
 
-@rpc("authority","call_local","reliable")
+@rpc("any_peer","call_local","reliable")
 func _set_entrances(values: Array[int]):
 	var i = 0
 	for door in doors.get_children():
 		if values.has(i) and closed_entrances.has(i) == false:
-			door.get_child(1).play(&"close")
-			door.get_child(2).play()
+			door.get_node("AnimationPlayer").play(&"close")
+			door.get_node("Close").play()
 		elif values.has(i) == false and closed_entrances.has(i):
-			door.get_child(1).play(&"close", -1, -1, true)
-			door.get_child(2).play()
+			door.get_node("AnimationPlayer").play(&"close", -1, -1, true)
+			door.get_node("Close").play()
 		elif values.has(i) == false and closed_entrances.has(i) == false:
-			door.get_child(1).play(&"opened", -1, -1, true)
+			door.get_node("AnimationPlayer").play(&"opened", -1, -1, true)
 		i += 1
 	closed_entrances = values
 	if time > 0.2:
@@ -410,7 +419,7 @@ func _jumpscare(animatronic: Node3D, is_player_one = true):
 			animatronic.rotation_degrees = animatronic.jumpscare_rotation
 			anim.speed_scale = 1 # For the Music Unwound sabotage
 			anim.play(animatronic.jumpscare_animation_id)
-		if tablet != null:
+		if tablet != null and using_tablet:
 			tablet.visible = false
 		cup.visible = false
 		p1_heat = -2
@@ -446,7 +455,7 @@ func _jumpscare(animatronic: Node3D, is_player_one = true):
 	if MultiplayerCore.is_multiplayer and (Globals.office_mode == Globals.OfficeMode.CO_OP or Globals.office_mode == Globals.OfficeMode.VERSUS_TEAMS):
 		spectating = true
 		player_spectating.emit()
-		_register_spectate(multiplayer.get_unique_id())
+		_register_spectate.rpc(multiplayer.get_unique_id())
 		player_manager.spectate_switch()
 		sound.stop()
 		animatronic._fail_attack()
@@ -541,23 +550,25 @@ func _music_box_sync(val: float):
 @rpc("any_peer","reliable","call_local")
 func _music_box_wind_sync(winding: bool):
 	is_winding = winding
-	print("WIND GOD DAMN YOU")
 
 @rpc("authority","call_remote","reliable")
 func _end_session():
 	get_tree().change_scene_to_file("res://scenes/title.tscn")
 
-@rpc("any_peer","reliable","call_remote")
-func _quit_early():
-	alive_players[multiplayer.get_unique_id()] = false
+@rpc("any_peer","call_local","reliable")
+func _p1_sync_cams(val: bool):
+	p1_in_cams = val
 
+@rpc("any_peer","call_local","reliable")
+func _p2_sync_cams(val: bool):
+	p2_in_cams = val
 
 #endregion
 
 #region Sabotages
 
 @rpc("authority","call_local","reliable")
-func _send_sabotage(event: Globals.Sabotages):
+func _send_sabotage(event: Globals.Sabotages, solution: Dictionary = {}, desc: String = ""):
 	if event == Globals.Sabotages.NONE:
 		sabotage_end.emit()
 		LimboConsole.print_line("Active sabotage set to " + sabotage_name)
@@ -565,8 +576,43 @@ func _send_sabotage(event: Globals.Sabotages):
 	elif event != Globals.Sabotages.NONE:
 		active_sabotage = Globals.Sabotages.NONE
 		await get_tree().create_timer(0.16).timeout
+	sabotage_clear_requirements = solution
+	sabotage_clear_description = desc
 	active_sabotage = event
 	LimboConsole.print_line("Active sabotage set to " + sabotage_name)
+
+func _random_sabotage():
+	await get_tree().create_timer(randf_range(15,320)).timeout
+	if adam in alive_players:
+		if active_sabotage == Globals.Sabotages.NONE:
+			var clear_type = Globals.SabotageClearRequirements.keys().pick_random()
+			var app = ""
+			var req = 0
+			match clear_type:
+				Globals.SabotageClearRequirements.SCORE_FLAPPY_FOXY:
+					app = "Flappy Foxy"
+					req = randi_range(2,6)
+					sabotage_clear_requirements[req] = Globals.SabotageClearRequirements.SCORE_FLAPPY_FOXY
+				Globals.SabotageClearRequirements.SCORE_TANK_TROUBLE:
+					app = "Tank Trouble"
+					req = randi_range(8,20)
+					sabotage_clear_requirements[req] = Globals.SabotageClearRequirements.SCORE_TANK_TROUBLE
+				Globals.SabotageClearRequirements.SCORE_SOCCER_PHYSICS:
+					app = "Soccer Physics"
+					req = randi_range(4,9)
+					sabotage_clear_requirements[req] = Globals.SabotageClearRequirements.SCORE_SOCCER_PHYSICS
+				Globals.SabotageClearRequirements.SCORE_CHICA_POP:
+					app = "Chica Pop"
+					req = randi_range(40,100)
+					sabotage_clear_requirements[req] = Globals.SabotageClearRequirements.SCORE_CHICA_POP
+				Globals.SabotageClearRequirements.SCORE_POKER:
+					app = "Freddy's Picture Poker"
+					req = randi_range(40,100)
+					sabotage_clear_requirements[req] = Globals.SabotageClearRequirements.SCORE_POKER
+
+			sabotage_clear_description = "Get a score of " + str(req) + " in " + app + " to fix this!"
+			_send_sabotage.rpc(Globals.Sabotages.values().pick_random(), sabotage_clear_requirements, sabotage_clear_description)
+		_random_sabotage()
 
 func _sabotage_event(event : Globals.Sabotages):
 	match event:
@@ -597,8 +643,9 @@ func _sabotage_event(event : Globals.Sabotages):
 			sabotage_warning.play()
 		
 		Globals.Sabotages.STIFF_NECK:
-			sabotage_warning.stream = load("res://sounds/multiplayer/adam_stiff.wav")
-			sabotage_warning.play()
+			if is_p1:
+				sabotage_warning.stream = load("res://sounds/multiplayer/adam_stiff.wav")
+				sabotage_warning.play()
 		
 		Globals.Sabotages.SOFT_SLIPPERS:
 			AudioServer.set_bus_effect_enabled(7,0,true)
@@ -634,8 +681,9 @@ func _sabotage_event_end():
 			sabotage_warning.play()
 		
 		Globals.Sabotages.STIFF_NECK:
-			sabotage_warning.stream = load("res://sounds/multiplayer/adam_unstiff.wav")
-			sabotage_warning.play()
+			if is_p1:
+				sabotage_warning.stream = load("res://sounds/multiplayer/adam_unstiff.wav")
+				sabotage_warning.play()
 		
 		Globals.Sabotages.SOFT_SLIPPERS:
 			AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index("Footsteps"),0,false)

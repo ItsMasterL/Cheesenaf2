@@ -27,6 +27,8 @@ func _ready():
 
 func _unhandled_input(event):
 	if root.spectating:
+		if event.is_action_pressed(&"ui_cancel"):
+			get_tree().change_scene_to_file("res://scenes/title.tscn")
 		return
 	if root.is_p1 and is_p1:
 		if root.p1_can_action:
@@ -93,8 +95,10 @@ func _sabotage_event(event: Globals.Sabotages):
 		flashlight_sound.stream = load("res://sounds/error.wav")
 		flashlight.visible = false
 	if event == Globals.Sabotages.STIFF_NECK:
-		sensitivity_sabotage = 0.05
+		if root.is_p1:
+			sensitivity_sabotage = 0.05
 
 func _sabotage_event_end():
-	flashlight_sound.stream = load("res://sounds/flashlight.wav")
+	if flashlight_sound != null:
+		flashlight_sound.stream = load("res://sounds/flashlight.wav")
 	sensitivity_sabotage = 1

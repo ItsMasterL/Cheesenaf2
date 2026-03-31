@@ -63,6 +63,8 @@ func _set_port(input: String):
 func _on_player_connected(id):
 	print("Client %s has connected" % [str(id)])
 	_register_player.rpc_id(id, Globals.local_playername)
+	if is_host:
+		send_lobby_settings.rpc(lobby_gamemode, lobby_night, player_limit)
 
 @rpc("any_peer", "reliable")
 func _register_player(new_player_info):
@@ -176,7 +178,10 @@ func sync_lobby_settings():
 
 @rpc("authority","call_local","reliable")
 func start_test(rand_seed: int):
-	Globals._set_night(lobby_night)
+	if lobby_night < 7:
+		Globals._set_night(lobby_night)
+	else:
+		Globals.night = 7
 	Globals.office_mode = lobby_gamemode
 	seed(rand_seed)
 	# EXTREMELY TEMPORARY
@@ -199,8 +204,11 @@ func player_ready(id: int):
 
 func set_authority(node, id: int):
 	var array: Array
-	for i in node:
-		array.append(i.get_path())
+	if node is Array:
+		for i in node:
+			array.append(i.get_path())
+	else:
+		array.append(node.get_path())
 	_sync_authority.rpc(array, id)
 
 @rpc("any_peer","call_local","reliable")
