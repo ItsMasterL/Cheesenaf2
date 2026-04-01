@@ -122,10 +122,10 @@ var active_sabotage: Globals.Sabotages = Globals.Sabotages.NONE:
 			Globals.Sabotages.BALLOON_BOY: #
 				sabotage_name = "Balloon Boy"
 				sabotage_description = "That pesky animatronic stole your flashlight batteries without even being seen! I mean, surely he exists in the game. Don't look at the source code." #He's not in the game actually
-			Globals.Sabotages.SWAP:
+			Globals.Sabotages.SWAP: #
 				sabotage_name = "Swap"
 				sabotage_description = "Swippity Swappity your boss is now you're goppity"
-			Globals.Sabotages.DATA_CORRUPTION:
+			Globals.Sabotages.DATA_CORRUPTION: #
 				sabotage_name = "Data Corruption"
 				sabotage_description = "Uh oh! The games on your tablet aren't working! Now the animatronics that like watching you play them aren't gonna be so happy around you."
 			Globals.Sabotages.UNSTABLE_CONNECTION:
@@ -134,7 +134,7 @@ var active_sabotage: Globals.Sabotages = Globals.Sabotages.NONE:
 			Globals.Sabotages.MUSIC_UNWOUND: #
 				sabotage_name = "Music Unwound"
 				sabotage_description = "The music box malfunctioned! It's now playing twice as fast as it's supposed to! Make sure to attend to it more often!"
-			Globals.Sabotages.SOFT_SLIPPERS:
+			Globals.Sabotages.SOFT_SLIPPERS: #
 				sabotage_name = "Soft Slippers"
 				sabotage_description = "The animatronics have gotten sneakier! You won't be able to hear them nearly as well."
 			_:
@@ -354,9 +354,15 @@ func _take_tablet():
 	using_tablet = false
 	p1_in_cams = false
 	p1_has_tablet = false
-	$Player/Head/Eyes/Cursor.visible = true
+	p1_cursor.visible = true
 	tablet.queue_free() # You ain't getting that back lmao
-	$Player/Head/LoseTablet.play()
+	if gamer_in_office and !edams_friendly:
+			for gamer in game_sensitive:
+				if gamer.guarding == true:
+					gamer.current_position = 0
+					gamer._move_animatronic()
+
+	p1.get_node("Head/LoseTablet").play()
 
 @rpc("any_peer","call_local","reliable")
 func _set_entrances(values: Array[int]):

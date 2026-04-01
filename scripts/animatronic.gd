@@ -113,6 +113,8 @@ signal paranormal_song
 @export var enable_hologram = false
 @export var hologram_mesh : MeshInstance3D
 var editor_interface
+# Moved from local variable to lerp footsteps
+var old_position = current_position
 
 # Usually used to disable movement checks during jumpscares
 var can_move = true
@@ -206,6 +208,9 @@ func _process(delta):
 	#Music Box
 	if music_box_sensitive and root.is_winding == false:
 		root.musicbox = clamp(root.musicbox - (level * delta) * root.fun_multiplier * root.music_box_multiplier, 0, 2000)
+	#Walk lerping
+	if step_sound.stream != null and Globals.original_walk == false:
+		step_sound.global_position = lerp(positions[old_position].position, positions[current_position].position, step_sound.get_playback_position()/step_sound.stream.get_length())
 	
 	
 	if timer > 0:
@@ -318,7 +323,7 @@ func _movement_check():
 	#AI check
 	elif randi_range(1, 20) <= level:
 		# Move to one of the next spaces if it exists
-		var old_position = current_position
+		old_position = current_position
 		if positions[current_position].next_position_indexes.is_empty() == false:
 			# Move to the next space
 			current_position = positions[current_position].next_position_indexes.pick_random()
@@ -368,9 +373,11 @@ func _move_animatronic():
 			if check_frequency < 1.5:
 				step_sound.stream = load("res://sounds/ventwalk_run.wav")
 			else:
-				step_sound.stream = load("res://sounds/ventwalk" + str(randi_range(1, 2)) + ".wav")
+				step_sound.stream = load("res://sounds/ventwalk" + str(randi_range(1, 3)) + ".wav")
 		elif check_frequency < 1.5:
 			step_sound.stream = load("res://sounds/walk_run.wav")
+		elif positions[old_position].is_vent and Globals.original_walk == false:
+			step_sound.stream = load("res://sounds/vent_emerge.wav")
 		else:
 			step_sound.stream = load("res://sounds/walk" + str(randi_range(1, 5)) + ".wav")
 		step_sound.play()
@@ -440,7 +447,7 @@ func _leave_doorway_check():
 				_fail_attack()
 
 func _game_check():
-	if root.p1_has_tablet and root.purchased_apps > 0:
+	if root.p1_has_tablet and root.purchased_apps > 0 and root.active_sabotage != Globals.Sabotages.DATA_CORRUPTION:
 		root.gamer_in_office = true
 		current_position = positions[current_position].next_position_indexes.pick_random()
 		_move_animatronic()
@@ -495,6 +502,10 @@ func _sabotage_event(event: Globals.Sabotages):
 		Globals.Sabotages.MUSIC_UNWOUND:
 			if music_box_sensitive:
 				anim.speed_scale = root.music_box_multiplier
+		Globals.Sabotages.DATA_CORRUPTION:
+			if guarding == true and is_friendly == false:
+				current_position = 0
+				_move_animatronic()
 
 func _sabotage_event_end():
 	anim.speed_scale = 1

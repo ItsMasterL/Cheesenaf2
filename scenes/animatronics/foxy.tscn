@@ -69,6 +69,7 @@ script = ExtResource("4_gx0gv")
 office_animatronic_limit = 10
 search_under_desk = false
 flashlight_weakness = false
+laptop_weakness = false
 entrance = 0
 fail_position_index = 2
 check_before_entering = false

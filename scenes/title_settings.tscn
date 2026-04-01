@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c0spfq78wftov"]
+[gd_scene load_steps=22 format=3 uid="uid://c0spfq78wftov"]
 
 [ext_resource type="Script" uid="uid://d1yaj1ed4fml" path="res://scripts/title_menu.gd" id="1_gen20"]
 [ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://fonts/consolas.ttf" id="2_dmw46"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://bnq20qahlrhng" path="res://scripts/set_language.gd" id="9_1sieu"]
 [ext_resource type="PackedScene" uid="uid://dtnsmim8wv4a6" path="res://scenes/props/keybind_button.tscn" id="9_feaqd"]
 [ext_resource type="PackedScene" uid="uid://dddt68wyhyhk4" path="res://models/minimaloffice.glb" id="10_beffp"]
+[ext_resource type="Script" uid="uid://cbmdc7ibtw82p" path="res://scripts/original_walk_toggle.gd" id="12_aoka0"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ptv6"]
 
@@ -439,6 +440,16 @@ layout_mode = 0
 offset_top = -23.0
 offset_right = 281.0
 text = "SETTING_LANG"
+
+[node name="OriginalWalk" type="CheckBox" parent="Misc"]
+layout_mode = 0
+offset_left = 778.0
+offset_top = 132.0
+offset_right = 965.0
+offset_bottom = 163.0
+theme_override_fonts/font = ExtResource("2_dmw46")
+text = "SETTING_WALK"
+script = ExtResource("12_aoka0")
 
 [node name="Map2" parent="." instance=ExtResource("10_beffp")]
 

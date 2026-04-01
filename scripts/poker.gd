@@ -41,7 +41,7 @@ var player_card_coords: Array
 var cpu_card_coords: Array
 var phase = 0
 var player_cheese_count = 10
-var player_cheese_winnings: # Used to judge your score for sabotages
+var player_cheese_winnings = 0: # Used to judge your score for sabotages
 	set(win):
 		player_cheese_winnings = win
 		root.sabotage_clear_check.emit(player_cheese_winnings, Globals.SabotageClearRequirements.SCORE_POKER)

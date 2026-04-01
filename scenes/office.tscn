@@ -1114,6 +1114,7 @@ Left click to interact with objects you're looking at"
 horizontal_alignment = 0
 vertical_alignment = 2
 script = ExtResource("25_6djot")
+p1 = false
 
 [node name="AudioListener3D" type="AudioListener3D" parent="PlayerManager/Player2/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94943, 0)
@@ -1459,7 +1460,9 @@ shape = SubResource("BoxShape3D_y13nk")
 
 [node name="DoorButtonError" type="AudioStreamPlayer3D" parent="Map/RightDoorButton"]
 stream = ExtResource("42_y13nk")
+attenuation_model = 3
 volume_db = -20.0
+unit_size = 100.0
 max_distance = 10.0
 bus = &"SFX"
 
@@ -1475,7 +1478,9 @@ shape = SubResource("BoxShape3D_y13nk")
 
 [node name="DoorButtonError" type="AudioStreamPlayer3D" parent="Map/LeftDoorButton"]
 stream = ExtResource("42_y13nk")
+attenuation_model = 3
 volume_db = -20.0
+unit_size = 100.0
 max_distance = 10.0
 bus = &"SFX"
 

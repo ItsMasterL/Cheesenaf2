@@ -30,6 +30,7 @@ var is_paused = true # Originally used for the media player, but it loses its pl
 func _ready():
 	if !standalone_mode:
 		root = get_node(^"/root/Map")
+		root.sabotage_begin.connect(_sabotage_event)
 		sabotage_clear_check.connect(_score_reached)
 	else:
 		using_tablet = true
@@ -114,6 +115,10 @@ func _populate_homescreen():
 		root.purchased_apps = purchased_apps
 
 func _load_application(appscene: String, fun: float = fun_multiplier):
+	if !standalone_mode:
+		if root.active_sabotage == Globals.Sabotages.DATA_CORRUPTION and root.is_p1:
+			if appscene != "cams_plus" and appscene != "vaultmaster" and appscene != "gameworld":
+				return
 	if app_home.get_child_count() > 0:
 		app_home.get_child(0).queue_free()
 	if ResourceLoader.exists("res://scenes/apps/%s.tscn" % [appscene]) == false:
@@ -182,3 +187,10 @@ func _media_process(_delta):
 
 func _score_reached(val, req_type: Globals.SabotageClearRequirements):
 	root.sabotage_clear_check.emit(val, req_type)
+
+func _sabotage_event(event: Globals.Sabotages):
+	match event:
+		Globals.Sabotages.DATA_CORRUPTION:
+			if app_home.get_child_count() > 0:
+				if app_home.get_child(0).name != "CamsPlus" and app_home.get_child(0).name != "VaultMaster" and app_home.get_child(0).name != "Gameworld":
+					_home()

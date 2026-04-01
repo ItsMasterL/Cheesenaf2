@@ -87,9 +87,10 @@ var music_volume: float = 1
 var tablet_volume: float = 1
 var ambient_volume: float = 1
 var jumpscare_volume: float = 1
-var fullscreen = false
+var fullscreen: bool = false
 var language = 0
 var keybind_overrides = {}
+var original_walk: bool = false
 
 #region Applications
 enum store_apps {
@@ -236,7 +237,8 @@ func _save_settings():
 		"jumpscare_volume" = jumpscare_volume,
 		"fullscreen" = fullscreen,
 		"language" = language,
-		"keybind_overrides" = keybind_overrides
+		"keybind_overrides" = keybind_overrides,
+		"original_walk" = original_walk,
 	}
 	var file = FileAccess.open("user://settings.json", FileAccess.WRITE)
 	var json_string = JSON.stringify(data)
@@ -280,6 +282,8 @@ func _load_settings():
 				self.language = clamp(floor(data["language"]), 0, 2)
 			if "keybind_overrides" in data and typeof(data["keybind_overrides"]) == TYPE_DICTIONARY:
 				self.keybind_overrides = data["keybind_overrides"]
+			if "original_walk" in data and typeof(data["original_walk"]) == TYPE_BOOL:
+				self.original_walk = data["original_walk"]
 		AudioServer.set_bus_volume_db(0, linear_to_db(self.master_volume))
 		AudioServer.set_bus_volume_db(1, linear_to_db(self.sfx_volume))
 		AudioServer.set_bus_volume_db(2, linear_to_db(self.voice_volume))

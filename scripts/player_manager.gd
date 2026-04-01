@@ -41,6 +41,9 @@ func init_player():
 	root.p2.get_node("Head/Eyes").current = !root.is_p1
 	root.p2.get_node("Head/AudioListener3D").current = !root.is_p1
 
+	if root.night == 1:
+		p2.get_node("Head/Eyes/Controls").visible = true
+
 func spectate_switch():
 	root.is_p1 = !root.is_p1
 	root.p1.get_node("Head/Eyes").current = root.is_p1

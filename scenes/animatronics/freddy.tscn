@@ -63,6 +63,7 @@ script = ExtResource("4_fjdqn")
 office_animatronic_limit = 0
 search_under_desk = true
 flashlight_weakness = false
+laptop_weakness = false
 entrance = 0
 fail_position_index = 0
 check_before_entering = false
