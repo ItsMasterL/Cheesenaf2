@@ -7,8 +7,20 @@ signal sabotage_begin
 signal sabotage_end
 signal player_spectating
 signal music_box_winding
+signal sabotage_clear_check
 
 const TIME_TO_HOUR = 90
+
+# Used for sabotages
+enum HandRanking {
+	JUNK = 0,
+	ONE_PAIR = 2,
+	TWO_PAIR = 3,
+	THREE_OF_A_KIND = 4,
+	FULL_HOUSE = 6,
+	FOUR_OF_A_KIND = 8,
+	FIVE_OF_A_KIND = 16,
+}
 
 @export var tablet: MeshInstance3D
 @export var animatronics: Node3D
@@ -151,8 +163,6 @@ var is_paused = false # Used to pause the gameplay without freezing the player, 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-		
-
 	for animatronic in animatronics.get_children():
 		if animatronic.music_box_sensitive:
 			music_box_ran_out.connect(animatronic._stop_dance)
@@ -191,6 +201,7 @@ func _ready():
 					sync_items.append(i)
 				MultiplayerCore.set_authority(sync_items, multiplayer.get_unique_id())
 		
+		sabotage_clear_check.connect(_check_sabotage_clear)
 		MultiplayerCore.all_players_loaded.connect(_begin_multiplayer)
 
 		MultiplayerCore.player_ready.rpc(multiplayer.get_unique_id())
@@ -567,7 +578,7 @@ func _p2_sync_cams(val: bool):
 
 #region Sabotages
 
-@rpc("authority","call_local","reliable")
+@rpc("any_peer","call_local","reliable")
 func _send_sabotage(event: Globals.Sabotages, solution: Dictionary = {}, desc: String = ""):
 	if event == Globals.Sabotages.NONE:
 		sabotage_end.emit()
@@ -585,9 +596,11 @@ func _random_sabotage():
 	await get_tree().create_timer(randf_range(15,320)).timeout
 	if adam in alive_players:
 		if active_sabotage == Globals.Sabotages.NONE:
-			var clear_type = Globals.SabotageClearRequirements.keys().pick_random()
+			var clear_type = Globals.SabotageClearRequirements.values().pick_random() as Globals.SabotageClearRequirements
+			var intro = "Get a score of "
 			var app = ""
 			var req = 0
+			var req_key
 			match clear_type:
 				Globals.SabotageClearRequirements.SCORE_FLAPPY_FOXY:
 					app = "Flappy Foxy"
@@ -609,10 +622,24 @@ func _random_sabotage():
 					app = "Freddy's Picture Poker"
 					req = randi_range(40,100)
 					sabotage_clear_requirements[req] = Globals.SabotageClearRequirements.SCORE_POKER
-
-			sabotage_clear_description = "Get a score of " + str(req) + " in " + app + " to fix this!"
+				Globals.SabotageClearRequirements.HAND_POKER:
+					app = "Freddy's Picture Poker"
+					req = clamp(HandRanking.values().pick_random(), 0, HandRanking.FULL_HOUSE)
+					req_key = HandRanking.keys()[req]
+					intro = "Get a "
+					sabotage_clear_requirements[req] = Globals.SabotageClearRequirements.HAND_POKER
+			if intro == "Get a score of ":
+				sabotage_clear_description = intro + str(req) + " in " + app + " to fix this!"
+			else:
+				sabotage_clear_description = intro + req_key + " in " + app + " to fix this!"
 			_send_sabotage.rpc(Globals.Sabotages.values().pick_random(), sabotage_clear_requirements, sabotage_clear_description)
 		_random_sabotage()
+
+func _check_sabotage_clear(val, req_type: Globals.SabotageClearRequirements):
+	if active_sabotage != Globals.Sabotages.NONE:
+		if val in sabotage_clear_requirements:
+			if req_type == sabotage_clear_requirements[val] as Globals.SabotageClearRequirements:
+				_send_sabotage.rpc(Globals.Sabotages.NONE)
 
 func _sabotage_event(event : Globals.Sabotages):
 	match event:
@@ -689,6 +716,7 @@ func _sabotage_event_end():
 			AudioServer.set_bus_effect_enabled(AudioServer.get_bus_index("Footsteps"),0,false)
 	
 	active_sabotage = Globals.Sabotages.NONE
+	sabotage_clear_requirements = {}
 #endregion
 
 #region Command Logic

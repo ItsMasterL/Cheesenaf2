@@ -28,6 +28,7 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("Interact") and root.using_tablet:
 		score += 1
+		root.sabotage_clear_check.emit(score, Globals.SabotageClearRequirements.SCORE_CHICA_POP)
 		$Pop.play()
 		score_display.text = str(score)
 	if Input.is_action_just_released("Interact") and root.using_tablet:

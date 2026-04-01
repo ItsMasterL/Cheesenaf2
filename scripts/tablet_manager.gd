@@ -1,5 +1,6 @@
 extends Node2D
 
+signal sabotage_clear_check
 
 @export var app_button: PackedScene
 
@@ -29,6 +30,7 @@ var is_paused = true # Originally used for the media player, but it loses its pl
 func _ready():
 	if !standalone_mode:
 		root = get_node(^"/root/Map")
+		sabotage_clear_check.connect(_score_reached)
 	else:
 		using_tablet = true
 	_populate_homescreen()
@@ -177,3 +179,6 @@ func _media_process(_delta):
 		#if root.is_paused == false:
 		#	audio_player.stop()
 		#	audio_player.stream = null
+
+func _score_reached(val, req_type: Globals.SabotageClearRequirements):
+	root.sabotage_clear_check.emit(val, req_type)

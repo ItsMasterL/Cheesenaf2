@@ -37,6 +37,7 @@ func _process(delta):
 		if died == false:
 			$"Pass sound".play()
 			score += 1
+			root.sabotage_clear_check.emit(score, Globals.SabotageClearRequirements.SCORE_FLAPPY_FOXY)
 			$Home/Score.text = str(score)
 
 func _reset():

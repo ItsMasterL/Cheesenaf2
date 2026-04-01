@@ -24,3 +24,4 @@ func _update_scores(this: int, attacker: int):
 	$Home/P2.text = "P2: Bonnie\nKills: %s Deaths: %s" % [kills[1], deaths[1]]
 	$Home/P3.text = "Kills: %s Deaths: %s\nP3: Chica" % [kills[2], deaths[2]]
 	$Home/P4.text = "Kills: %s Deaths: %s\nP4: Freddy" % [kills[3], deaths[3]]
+	root.sabotage_clear_check.emit(kills[0], Globals.SabotageClearRequirements.SCORE_TANK_TROUBLE)

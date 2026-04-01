@@ -196,7 +196,7 @@ func _process(delta):
 	# Safety Timer
 	if positions[current_position].office_entrance != null and root.under_desk == false:
 		safety_timer = clamp(safety_timer - delta, 0, safety_timer)
-		if OS.is_debug_build() and root.is_p1:
+		if OS.is_debug_build() and root.is_p1 and safety_timer > 0:
 			print(animatronic + ": " + str(safety_timer))
 	else:
 		safety_timer = clamp(safety_timer + delta, 0, root.safety_time)
