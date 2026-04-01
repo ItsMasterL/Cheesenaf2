@@ -25,10 +25,6 @@ func _physics_process(delta):
 	var local = global_transform.basis_xform(Vector2.UP)
 	ground.rotation_degrees = -rotation_degrees
 	leg.global_position = global_position
-	if facing == DIRECTION.LEFT:
-		leg.rotation_degrees = clamp(leg.rotation_degrees, 0, 105)
-	else:
-		leg.rotation_degrees = clamp(leg.rotation_degrees, -105, 0)
 	if is_player:
 		if root.using_tablet:
 			if ground.is_colliding() or gravity_scale <= 0.2:
