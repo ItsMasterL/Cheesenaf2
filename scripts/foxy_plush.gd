@@ -1,5 +1,6 @@
 extends Node3D
 
+@export var root : Node3D
 
 var rng = RandomNumberGenerator.new()
 var jumpscare = false
@@ -15,6 +16,12 @@ func _process(_delta):
 		sound.stream = load("res://sounds/boop.wav")
 		anim.play(&"stare", -1, -1, true)
 		jumpscare = false
+	# Stares at you in the dark
+	if root.active_sabotage == Globals.Sabotages.POWER_OUTAGE and jumpscare == false:
+		if Input.is_action_just_pressed("Flashlight") and root.using_tablet == false:
+			var rand = rng.randi() % chance
+			if rand < 50:
+				anim.play(&"stare", -1, -1, true)
 
 func _on_foxy_plush_nose_booped():
 	if jumpscare == false:
@@ -22,6 +29,7 @@ func _on_foxy_plush_nose_booped():
 		if rand < 8 and sound.playing == true:
 			jumpscare = true
 			sound.stream = load("res://sounds/sting%s.wav" % [rand + 1])
-		sound.play()
+		if root.is_p1:
+			sound.play()
 		if jumpscare == true:
 			anim.play(&"stare")

@@ -1,3 +1,40 @@
+Version 2.0.0 -- 4/1/2026
+Message from Master L:
+- To those of you who were waiting for this update, thank you. I apologize for the incomplete state
+- of the update, but I'm unfortunately very burnt out on Cheesenaf 2. I may or may not come back later
+- to finish this update, but it mostly depends on if Cheesenaf 2 gets enough attention to warrant my
+- time and energy being spent on this. Thank you for playing, and feel free to show your support by
+- leaving a comment on the game page you downloaded this from, on any of my trailers, or join the Discord.
+
+Fixes:
+- Properly handled errors in certain buttons in the menus, making them usable in editor playtests
+- The rope in the playground is now properly textured
+- Fixed a softlock in the 6 AM screen when clearing a custom night (How have I never noticed this)
+- Fixed the no-collision spinning leg bug in Soccer Physics
+
+Adjustments:
+- Added missing change in previous changelog
+- Improved Boss' phone call volume
+- Darkened the moonlight
+- Cleaned up and reorganized model textures
+- Updated some animatronic descriptions for clarity
+- Updated previous changelog for clarity
+
+Additions:
+--- OFFICE ---
+- The cup now has a visual water level
+- New fading transitions between game over/6 am
+- Visible camera for the YOU cam
+- Added new voice lines for Edam Bonnie, to make the instructions more clear
+--- MENU ---
+- Buttons to edit all animatronics in the custom night menu, as well as a button to randomize all animatronics
+- New menu option - Tablet Mode, to let you play tablet games without worrying about Freddy and the gang.
+--- MULTIPLAYER ---
+- Multiplayer mode. Currently only one barely-functional mode. LAN only.
+--- EDITOR/DEBUG ---
+- Added holograms to the Godot editor to make animatronic placement easier
+- Added LimboConsole for debug builds
+
 Version 1.1.0 -- 7/23/2025
 
 Fixes:
@@ -18,6 +55,7 @@ Additions:
 - Added Foxy's Paintin' Location (Tablet)
 - Added Soccer Physics (Tablet)
 - Added Tank Trouble (Tablet)
+- You now see how long you survived when you're on the game over screen.
 
 
 

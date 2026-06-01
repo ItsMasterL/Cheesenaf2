@@ -1,0 +1,216 @@
+[gd_scene load_steps=10 format=3 uid="uid://dyixailj3groj"]
+
+[ext_resource type="Script" uid="uid://hulk6v07i6pb" path="res://scripts/title_multiplayer.gd" id="1_c5qqe"]
+[ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://fonts/consolas.ttf" id="2_645qg"]
+[ext_resource type="AudioStream" uid="uid://c0p4ukecy1cjj" path="res://sounds/minigame/change_cam.wav" id="4_yjc11"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ptv6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_27atk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5pxcu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8w5np"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hjsyr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rsbhx"]
+
+[node name="Multiplayer" type="Control" node_paths=PackedStringArray("username_input")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c5qqe")
+username_input = NodePath("Username")
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 598.0
+offset_right = 302.0
+offset_bottom = 627.0
+theme_override_fonts/font = ExtResource("2_645qg")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2ptv6")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_27atk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5pxcu")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_8w5np")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_hjsyr")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rsbhx")
+alignment = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Back"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -9.5
+offset_right = 126.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_645qg")
+theme_override_font_sizes/normal_font_size = 20
+text = "MENU_TOMAIN"
+scroll_active = false
+
+[node name="Host" type="Button" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 174.0
+offset_right = 302.0
+offset_bottom = 203.0
+tooltip_text = "Get updates on the discord!"
+theme_override_fonts/font = ExtResource("2_645qg")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2ptv6")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_27atk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5pxcu")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_8w5np")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_hjsyr")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rsbhx")
+alignment = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Host"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -9.5
+offset_right = 267.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_645qg")
+theme_override_font_sizes/normal_font_size = 20
+text = "Host Game"
+scroll_active = false
+
+[node name="Info" type="RichTextLabel" parent="Host"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = 11.5
+offset_right = 301.0
+offset_bottom = 86.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.47788, 0.47788, 0.47788, 1)
+theme_override_fonts/normal_font = ExtResource("2_645qg")
+theme_override_font_sizes/normal_font_size = 16
+text = "The host controls the game's settings, gamemode, and the roles of each player."
+scroll_active = false
+
+[node name="Join" type="Button" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 289.0
+offset_right = 302.0
+offset_bottom = 318.0
+theme_override_fonts/font = ExtResource("2_645qg")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2ptv6")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_27atk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5pxcu")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_8w5np")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_hjsyr")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rsbhx")
+alignment = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Join"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -9.5
+offset_right = 126.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_645qg")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "Join Game"
+scroll_active = false
+
+[node name="Info2" type="RichTextLabel" parent="Join"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = 12.5
+offset_right = 264.0
+offset_bottom = 87.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.47788, 0.47788, 0.47788, 1)
+theme_override_fonts/normal_font = ExtResource("2_645qg")
+theme_override_font_sizes/normal_font_size = 16
+text = "All non-host clients are at the host's mercy. Have fun!!!"
+scroll_active = false
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_yjc11")
+volume_db = -10.0
+autoplay = true
+bus = &"SFX"
+
+[node name="Username" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 73.0
+offset_top = 46.0
+offset_right = 417.0
+offset_bottom = 90.0
+theme_override_fonts/font = ExtResource("2_645qg")
+theme_override_font_sizes/font_size = 20
+placeholder_text = "Be nice about it, now..."
+max_length = 24
+caret_blink = true
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Username"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -168.0
+offset_top = -40.0
+offset_right = 81.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_645qg")
+theme_override_font_sizes/normal_font_size = 20
+text = "Multiplayer Username"
+scroll_active = false
+
+[connection signal="pressed" from="Back" to="." method="_change_menu" binds= ["menu"]]
+[connection signal="pressed" from="Host" to="." method="_change_menu" binds= ["host"]]
+[connection signal="pressed" from="Join" to="." method="_change_menu" binds= ["join"]]
+[connection signal="text_changed" from="Username" to="." method="_update_username"]

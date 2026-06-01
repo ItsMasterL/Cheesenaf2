@@ -7,11 +7,13 @@ var speed = 1
 @onready var fan_anim := $"../../ENV_MOD_Desk_Fan_Fanblade_ENV_MOD_Desk_Fan_Fanblade_001/AnimationPlayer"
 @onready var fan_sound := $"../../ENV_MOD_Desk_Fan_Fanblade_ENV_MOD_Desk_Fan_Fanblade_001/AudioStreamPlayer3D"
 @onready var click_sound := $"../../ENV_MOD_Desk_Fan_Fanblade_ENV_MOD_Desk_Fan_Fanblade_001/FanClick"
-@onready var root = $"../.."
+@onready var root = get_node(^"/root/Map")
 
 
 func _ready():
 	fan_anim.play(&"spin")
+	root.sabotage_begin.connect(_sabotage_event)
+	root.sabotage_end.connect(_sabotage_event_end)
 
 func _process(delta):
 	if power:
@@ -28,8 +30,21 @@ func _process(delta):
 		fan_sound.volume_db = (1 - speed) * -40
 
 func _raycast_event():
-	power = !power
+	if !root.is_p1:
+		return
+	power = !root.fan_powered
 	if fan_sound.playing == false:
 		fan_sound.play()
 	click_sound.play()
 	root.fan_powered = power
+	if root.active_sabotage == Globals.Sabotages.POWER_OUTAGE:
+		power = false
+
+func _sabotage_event(event: Globals.Sabotages):
+	if event == Globals.Sabotages.POWER_OUTAGE:
+		power = false
+
+func _sabotage_event_end():
+	if fan_sound.playing == false:
+		fan_sound.play()
+	power = root.fan_powered

@@ -1,10 +1,10 @@
-[gd_scene load_steps=39 format=3 uid="uid://cgejnvievuxf8"]
+[gd_scene load_steps=41 format=3 uid="uid://cgejnvievuxf8"]
 
 [ext_resource type="PackedScene" uid="uid://dn18h3r3cb5vl" path="res://models/witherfoxy.glb" id="1_im5kl"]
-[ext_resource type="Script" path="res://scripts/animatronic.gd" id="2_lvs2i"]
-[ext_resource type="Script" path="res://scripts/animatronic_position.gd" id="3_gnh15"]
+[ext_resource type="Script" uid="uid://bj1onaat51pqp" path="res://scripts/animatronic.gd" id="2_lvs2i"]
+[ext_resource type="Script" uid="uid://4en87cf4wnfr" path="res://scripts/animatronic_position.gd" id="3_gnh15"]
 [ext_resource type="AudioStream" uid="uid://jb2c0ep1vqdm" path="res://sounds/jumpscare_withered.wav" id="3_ii7cv"]
-[ext_resource type="Script" path="res://scripts/animatronic_entrance.gd" id="4_xywb7"]
+[ext_resource type="Script" uid="uid://b7m76kqb1eco1" path="res://scripts/animatronic_entrance.gd" id="4_xywb7"]
 
 [sub_resource type="Resource" id="Resource_jxetc"]
 resource_name = "Storage"
@@ -15,6 +15,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([13, 1, 17])
 is_vent = false
 animation_id = "Pose"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_2eefl"]
 resource_name = "Lobby 1"
@@ -25,6 +26,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([2, 0, 15])
 is_vent = false
 animation_id = "WitherFoxySquidward"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_77xik"]
 resource_name = "Lobby 2"
@@ -35,6 +37,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([1, 3, 11])
 is_vent = false
 animation_id = "WitherFoxyTails"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_p5o58"]
 resource_name = "Entrance"
@@ -45,6 +48,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([14, 2, 4])
 is_vent = false
 animation_id = "WitherFoxyThisGuy"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_koarc"]
 resource_name = "Outside A"
@@ -55,6 +59,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([3, 5])
 is_vent = false
 animation_id = "WitherFoxyShirtless"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_t8umf"]
 resource_name = "Outside B"
@@ -65,6 +70,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([4, 6, 26])
 is_vent = false
 animation_id = "WitherFoxyShirtless"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_0ahgt"]
 resource_name = "Playroom 1"
@@ -75,6 +81,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([5, 7, 23])
 is_vent = false
 animation_id = "WitherFoxyTotk"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_61oc4"]
 resource_name = "Playroom 2"
@@ -85,6 +92,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([6, 23, 25])
 is_vent = false
 animation_id = "WitherFoxyFBI"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_vmxrt"]
 resource_name = "Party Room A"
@@ -95,6 +103,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([25, 15, 9])
 is_vent = false
 animation_id = "WitherFoxyTails"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_n0pjq"]
 resource_name = "Kitchen"
@@ -105,6 +114,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([8, 10, 21, 22, 24])
 is_vent = false
 animation_id = "WitherFoxyFBI"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_sksc0"]
 resource_name = "Party Room B"
@@ -115,6 +125,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([9, 11, 16, 26])
 is_vent = false
 animation_id = "WitherFoxyTotk"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_d0p40"]
 resource_name = "Restroom B"
@@ -125,6 +136,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([10, 2, 19])
 is_vent = false
 animation_id = "WitherFoxyVentLook"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_uu7nn"]
 resource_name = "Backstage"
@@ -135,6 +147,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([13, 14, 18])
 is_vent = false
 animation_id = "WitherFoxyThisGuy"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_e686b"]
 resource_name = "Storage Vent"
@@ -145,6 +158,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([0, 12])
 is_vent = true
 animation_id = "WitherFoxyVent"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_4d5gq"]
 resource_name = "Entrance Vent"
@@ -155,6 +169,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([3, 12])
 is_vent = true
 animation_id = "WitherFoxyVent"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_vlvi8"]
 resource_name = "Lobby Vent A"
@@ -165,6 +180,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([1, 8])
 is_vent = true
 animation_id = "WitherFoxyVent"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_iukih"]
 resource_name = "Lobby Vent B"
@@ -172,9 +188,10 @@ script = ExtResource("3_gnh15")
 position = Vector3(34.849, 0, -8.87)
 rotation = Vector3(0, 180, 0)
 scale = Vector3(1, 1, 1)
-next_position_indexes = Array[int]([2, 10])
+next_position_indexes = Array[int]([2, 10, 27])
 is_vent = true
 animation_id = "WitherFoxyVent"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_nprmr"]
 resource_name = "Storage Ceiling Vent"
@@ -185,6 +202,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([0, 18])
 is_vent = true
 animation_id = "WitherFoxyVent"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_f8afl"]
 resource_name = "Lobby Ceiling Vent 1"
@@ -195,6 +213,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([17, 19, 20, 21])
 is_vent = true
 animation_id = "WitherFoxyVent"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_o6xbs"]
 resource_name = "Lobby Ceiling Vent 2"
@@ -205,6 +224,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([18, 20, 21, 11])
 is_vent = true
 animation_id = "WitherFoxyVent"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_3dy1d"]
 resource_name = "Lobby Ceiling Vent 3"
@@ -215,6 +235,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([12, 21, 19, 18])
 is_vent = true
 animation_id = "WitherFoxyVent"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_xrsb3"]
 resource_name = "Kitchen Hall Ceiling Vent"
@@ -225,12 +246,14 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([20, 22, 9, 18, 19])
 is_vent = true
 animation_id = "WitherFoxyVent"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_rnsa2"]
 script = ExtResource("4_xywb7")
 office_animatronic_limit = 1
 search_under_desk = true
 flashlight_weakness = true
+laptop_weakness = false
 entrance = 4
 fail_position_index = 0
 check_before_entering = true
@@ -245,12 +268,14 @@ next_position_indexes = Array[int]([])
 is_vent = true
 animation_id = "WitherFoxyVent"
 office_entrance = SubResource("Resource_rnsa2")
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_qm8nx"]
 script = ExtResource("4_xywb7")
 office_animatronic_limit = 1
 search_under_desk = true
 flashlight_weakness = true
+laptop_weakness = false
 entrance = 2
 fail_position_index = 0
 check_before_entering = false
@@ -265,12 +290,14 @@ next_position_indexes = Array[int]([])
 is_vent = true
 animation_id = "WitherFoxyVent"
 office_entrance = SubResource("Resource_qm8nx")
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_dm8ci"]
 script = ExtResource("4_xywb7")
 office_animatronic_limit = 1
 search_under_desk = true
 flashlight_weakness = true
+laptop_weakness = false
 entrance = 3
 fail_position_index = 0
 check_before_entering = false
@@ -285,12 +312,14 @@ next_position_indexes = Array[int]([])
 is_vent = true
 animation_id = "WitherFoxyVent"
 office_entrance = SubResource("Resource_dm8ci")
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_b5jr3"]
 script = ExtResource("4_xywb7")
 office_animatronic_limit = 1
 search_under_desk = true
 flashlight_weakness = true
+laptop_weakness = false
 entrance = 0
 fail_position_index = 0
 check_before_entering = false
@@ -305,12 +334,14 @@ next_position_indexes = Array[int]([])
 is_vent = false
 animation_id = "WitherFoxySquidward"
 office_entrance = SubResource("Resource_b5jr3")
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_8bmpn"]
 script = ExtResource("4_xywb7")
 office_animatronic_limit = 1
 search_under_desk = true
 flashlight_weakness = true
+laptop_weakness = false
 entrance = 1
 fail_position_index = 0
 check_before_entering = false
@@ -325,6 +356,31 @@ next_position_indexes = Array[int]([])
 is_vent = false
 animation_id = "WitherFoxyFBI"
 office_entrance = SubResource("Resource_8bmpn")
+is_two_player_only = false
+
+[sub_resource type="Resource" id="Resource_ower7"]
+script = ExtResource("4_xywb7")
+office_animatronic_limit = 2
+search_under_desk = false
+flashlight_weakness = false
+laptop_weakness = true
+entrance = 5
+fail_position_index = 0
+check_before_entering = false
+metadata/_custom_type_script = "uid://b7m76kqb1eco1"
+
+[sub_resource type="Resource" id="Resource_m4vle"]
+resource_name = "P2 Office"
+script = ExtResource("3_gnh15")
+position = Vector3(38.5523, 3.91818, -3.82545)
+rotation = Vector3(0, -90, 40)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([])
+is_vent = true
+animation_id = "WitherFoxyVent"
+office_entrance = SubResource("Resource_ower7")
+is_two_player_only = true
+metadata/_custom_type_script = "uid://4en87cf4wnfr"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_o8aoc"]
 radius = 50.39
@@ -333,11 +389,12 @@ radius = 50.39
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 61.292, 0, -23.328)
 script = ExtResource("2_lvs2i")
 animatronic = "wither_foxy"
-positions = Array[ExtResource("3_gnh15")]([SubResource("Resource_jxetc"), SubResource("Resource_2eefl"), SubResource("Resource_77xik"), SubResource("Resource_p5o58"), SubResource("Resource_koarc"), SubResource("Resource_t8umf"), SubResource("Resource_0ahgt"), SubResource("Resource_61oc4"), SubResource("Resource_vmxrt"), SubResource("Resource_n0pjq"), SubResource("Resource_sksc0"), SubResource("Resource_d0p40"), SubResource("Resource_uu7nn"), SubResource("Resource_e686b"), SubResource("Resource_4d5gq"), SubResource("Resource_vlvi8"), SubResource("Resource_iukih"), SubResource("Resource_nprmr"), SubResource("Resource_f8afl"), SubResource("Resource_o6xbs"), SubResource("Resource_3dy1d"), SubResource("Resource_xrsb3"), SubResource("Resource_3ats0"), SubResource("Resource_881gf"), SubResource("Resource_5rqb3"), SubResource("Resource_kun70"), SubResource("Resource_62n35")])
+positions = Array[ExtResource("3_gnh15")]([SubResource("Resource_jxetc"), SubResource("Resource_2eefl"), SubResource("Resource_77xik"), SubResource("Resource_p5o58"), SubResource("Resource_koarc"), SubResource("Resource_t8umf"), SubResource("Resource_0ahgt"), SubResource("Resource_61oc4"), SubResource("Resource_vmxrt"), SubResource("Resource_n0pjq"), SubResource("Resource_sksc0"), SubResource("Resource_d0p40"), SubResource("Resource_uu7nn"), SubResource("Resource_e686b"), SubResource("Resource_4d5gq"), SubResource("Resource_vlvi8"), SubResource("Resource_iukih"), SubResource("Resource_nprmr"), SubResource("Resource_f8afl"), SubResource("Resource_o6xbs"), SubResource("Resource_3dy1d"), SubResource("Resource_xrsb3"), SubResource("Resource_3ats0"), SubResource("Resource_881gf"), SubResource("Resource_5rqb3"), SubResource("Resource_kun70"), SubResource("Resource_62n35"), SubResource("Resource_m4vle")])
 check_frequency = 1.356
 jumpscare_length = 1.217
 jumpscare_position = Vector3(0, -0.561, -2.75)
 camera_sensitive = true
+pizza_sensitive = true
 
 [node name="Skeleton3D" parent="Armature" index="0"]
 bones/0/position = Vector3(0, 0.00955629, 0)
@@ -468,4 +525,4 @@ bus = &"Jumpscare"
 volume_db = -30.0
 unit_size = 100.0
 max_db = -10.0
-bus = &"SFX"
+bus = &"Footsteps"

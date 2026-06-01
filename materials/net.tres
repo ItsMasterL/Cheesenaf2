@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://ce0rucc4kn2sm"]
+
+[ext_resource type="Texture2D" uid="uid://cs46tw42dmf0y" path="res://models/textures/Net002A_1K-JPG_Color.png" id="1_huprv"]
+
+[resource]
+transparency = 4
+albedo_texture = ExtResource("1_huprv")

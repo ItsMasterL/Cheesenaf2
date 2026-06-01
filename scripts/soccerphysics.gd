@@ -37,6 +37,7 @@ func _process(delta):
 
 func _player_scores(_area):
 	player_score += 1
+	root.sabotage_clear_check.emit(player_score, Globals.SabotageClearRequirements.SCORE_SOCCER_PHYSICS)
 	_setup()
 
 func _cpu_scores(_area):

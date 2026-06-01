@@ -1,10 +1,10 @@
 [gd_scene load_steps=23 format=3 uid="uid://e4xdtpwnnrts"]
 
 [ext_resource type="PackedScene" uid="uid://cwmmmphcm55t7" path="res://models/witherbonnie.glb" id="1_vgcyo"]
-[ext_resource type="Script" path="res://scripts/animatronic.gd" id="2_w6tca"]
-[ext_resource type="Script" path="res://scripts/animatronic_position.gd" id="3_028d0"]
+[ext_resource type="Script" uid="uid://bj1onaat51pqp" path="res://scripts/animatronic.gd" id="2_w6tca"]
+[ext_resource type="Script" uid="uid://4en87cf4wnfr" path="res://scripts/animatronic_position.gd" id="3_028d0"]
 [ext_resource type="AudioStream" uid="uid://jb2c0ep1vqdm" path="res://sounds/jumpscare_withered.wav" id="3_rlb82"]
-[ext_resource type="Script" path="res://scripts/animatronic_entrance.gd" id="4_k5bue"]
+[ext_resource type="Script" uid="uid://b7m76kqb1eco1" path="res://scripts/animatronic_entrance.gd" id="4_k5bue"]
 [ext_resource type="Texture2D" uid="uid://bjpqs78oh50h2" path="res://textures/decline.png" id="5_dt2g6"]
 
 [sub_resource type="Resource" id="Resource_p1ed8"]
@@ -16,6 +16,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([1])
 is_vent = false
 animation_id = "Pose"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_vogyr"]
 resource_name = "Storage Vent"
@@ -26,6 +27,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([2])
 is_vent = true
 animation_id = "WitherBonnieVent"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_k1eiu"]
 resource_name = "Backstage"
@@ -36,6 +38,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([3, 10])
 is_vent = false
 animation_id = "WitherBonnieBackstage"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_u6v7f"]
 resource_name = "Entrance Vent"
@@ -46,6 +49,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([2, 4])
 is_vent = true
 animation_id = "WitherBonnieVent"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_tc3v3"]
 resource_name = "Entrance"
@@ -56,6 +60,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([5, 3])
 is_vent = false
 animation_id = "WitherBonnieEntrance"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_633v8"]
 resource_name = "Outside A"
@@ -66,6 +71,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([6])
 is_vent = false
 animation_id = "WitherBonnieOutsideA"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_nnrya"]
 resource_name = "Outside B"
@@ -76,6 +82,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([7, 8])
 is_vent = false
 animation_id = "WitherBonnieOutsideB"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_5tg6x"]
 script = ExtResource("4_k5bue")
@@ -96,6 +103,7 @@ next_position_indexes = Array[int]([])
 is_vent = false
 animation_id = "WitherBonnieBackDoor"
 office_entrance = SubResource("Resource_5tg6x")
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_iesub"]
 resource_name = "Playroom"
@@ -106,6 +114,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([6, 9])
 is_vent = false
 animation_id = "WitherBonniePlayroom"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_3kmxh"]
 script = ExtResource("4_k5bue")
@@ -126,6 +135,7 @@ next_position_indexes = Array[int]([])
 is_vent = true
 animation_id = "WitherBonnieVent"
 office_entrance = SubResource("Resource_3kmxh")
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_xlram"]
 resource_name = "Backstage Ceiling Vent"
@@ -136,6 +146,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([11])
 is_vent = true
 animation_id = "WitherBonnieVent"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_teaug"]
 resource_name = "Kitchen"
@@ -146,6 +157,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([12])
 is_vent = false
 animation_id = "WitherBonnieKitchen"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_isyl4"]
 script = ExtResource("4_k5bue")
@@ -166,6 +178,7 @@ next_position_indexes = Array[int]([])
 is_vent = true
 animation_id = "WitherBonnieVent"
 office_entrance = SubResource("Resource_isyl4")
+is_two_player_only = false
 
 [node name="Withered Bonnie" instance=ExtResource("1_vgcyo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.36, 0.592, -21.684)
@@ -176,6 +189,7 @@ jumpscare_length = 1.217
 jumpscare_position = Vector3(0, -0.604, -2.5)
 jumpscare_rotation = Vector3(0, 0, 0)
 sound_sensitive = true
+pizza_sensitive = true
 
 [node name="Skeleton3D" parent="RIG_Bonnie_ao" index="0"]
 bones/0/position = Vector3(-0.0217551, 1.29885, -0.740393)
@@ -258,4 +272,4 @@ bus = &"Jumpscare"
 volume_db = -30.0
 unit_size = 100.0
 max_db = -10.0
-bus = &"SFX"
+bus = &"Footsteps"

@@ -13,3 +13,5 @@ extends Resource
 @export var animation_id: String
 ## Is this position considered within the office; Succeeding a check on one of these spaces will jumpscare the player. Failing will either stall or send back to a specific defined space, depending on the scenario.
 @export var office_entrance: EntranceProperty
+## Does this position only exist when there's a second player in the same pizzeria? (Co-Op or 2v2)
+@export var is_two_player_only = false

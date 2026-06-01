@@ -278,12 +278,11 @@ text = "EXTRA_CODE"
 scroll_active = false
 
 [node name="Tablet" type="Button" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 16.0
-offset_top = 92.0
+offset_top = 220.0
 offset_right = 302.0
-offset_bottom = 121.0
+offset_bottom = 249.0
 theme_override_fonts/font = ExtResource("2_bn3vm")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2ptv6")
@@ -328,6 +327,7 @@ bus = &"SFX"
 [connection signal="pressed" from="Back" to="." method="_change_menu" binds= ["menu"]]
 [connection signal="pressed" from="Credits" to="." method="_change_menu" binds= ["credits"]]
 [connection signal="pressed" from="Changelog" to="." method="_change_menu" binds= ["changelog"]]
+[connection signal="pressed" from="Multiplayer" to="." method="_change_menu" binds= ["multiplayer"]]
 [connection signal="pressed" from="Discord" to="." method="_open_url" binds= ["https://discord.com/invite/yKA3MSvvA5"]]
 [connection signal="pressed" from="Github" to="." method="_open_url" binds= ["https://github.com/ItsMasterL/Cheesenaf2"]]
 [connection signal="pressed" from="Cheesenaf1" to="Cheesenaf1" method="_connect_games"]

@@ -1,11 +1,13 @@
 extends Node2D
 
+signal sabotage_clear_check
 
 @export var app_button: PackedScene
 
 var current_process
 var using_tablet = false
 var fun_multiplier = 1
+var is_p1 = true
 # Media Player
 var playlist: Array[String]
 var queued_media: String = ""
@@ -19,25 +21,42 @@ var is_paused = true # Originally used for the media player, but it loses its pl
 @onready var home = $Home
 @onready var app_home = $Application
 @onready var time = $TimeUI/Clock
-@onready var root = get_node(^"/root/Map")
+@onready var root
 @onready var app_container := $Home/GridContainer
 # Media Player
 @onready var audio_player := $MediaPlayer
 
 
 func _ready():
+	if !standalone_mode:
+		root = get_node(^"/root/Map")
+		root.sabotage_begin.connect(_sabotage_event)
+		sabotage_clear_check.connect(_score_reached)
+	else:
+		using_tablet = true
 	_populate_homescreen()
 
 func _process(_delta):
 	if standalone_mode:
-		pass
+		var current_time = Time.get_time_dict_from_system()
+		if current_time.hour < 12:
+			if current_time.hour == 0:
+				time.text = "12:%02d AM" % [current_time.minute]
+			else:
+				time.text = "%02d:%02d AM" % [current_time.hour, current_time.minute]
+		else:
+			time.text = "%02d:%02d PM" % [current_time.hour, current_time.minute]
 	else:
 		if root.hour == 0:
 			time.text = "12:%02d AM" % [root.minute]
 		else:
 			time.text = "%02d:%02d AM" % [root.hour, root.minute]
 		# For compatibility
-		using_tablet = root.using_tablet
+		if root.is_p1:
+			using_tablet = root.using_tablet
+		else:
+			using_tablet = root.using_laptop
+		is_p1 = root.is_p1
 		if using_tablet:
 			root.fun_multiplier = fun_multiplier
 		else:
@@ -96,6 +115,10 @@ func _populate_homescreen():
 		root.purchased_apps = purchased_apps
 
 func _load_application(appscene: String, fun: float = fun_multiplier):
+	if !standalone_mode:
+		if root.active_sabotage == Globals.Sabotages.DATA_CORRUPTION and root.is_p1:
+			if appscene != "cams_plus" and appscene != "vaultmaster" and appscene != "gameworld":
+				return
 	if app_home.get_child_count() > 0:
 		app_home.get_child(0).queue_free()
 	if ResourceLoader.exists("res://scenes/apps/%s.tscn" % [appscene]) == false:
@@ -105,7 +128,11 @@ func _load_application(appscene: String, fun: float = fun_multiplier):
 		app_home.get_child(0).queue_free()
 	current_process = load("res://scenes/apps/%s.tscn" % [appscene])
 	if appscene == "cams_plus":
-		root.in_cams = true
+		if standalone_mode == false:
+			if root.is_p1:
+				root._p1_sync_cams.rpc(true)
+			else:
+				root._p2_sync_cams.rpc(true)
 	var instance = current_process.instantiate()
 	app_home.add_child(instance)
 	fun_multiplier = fun
@@ -116,7 +143,10 @@ func _home():
 		app_home.get_child(0).queue_free()
 	home.show()
 	if standalone_mode == false:
-		root.in_cams = false
+		if root.is_p1:
+			root._p1_sync_cams.rpc(false)
+		else:
+			root._p2_sync_cams.rpc(false)
 		fun_multiplier = 1
 
 func _media_process(_delta):
@@ -154,3 +184,13 @@ func _media_process(_delta):
 		#if root.is_paused == false:
 		#	audio_player.stop()
 		#	audio_player.stream = null
+
+func _score_reached(val, req_type: Globals.SabotageClearRequirements):
+	root.sabotage_clear_check.emit(val, req_type)
+
+func _sabotage_event(event: Globals.Sabotages):
+	match event:
+		Globals.Sabotages.DATA_CORRUPTION:
+			if app_home.get_child_count() > 0:
+				if app_home.get_child(0).name != "CamsPlus" and app_home.get_child(0).name != "VaultMaster" and app_home.get_child(0).name != "Gameworld":
+					_home()

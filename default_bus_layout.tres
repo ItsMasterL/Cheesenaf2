@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://cluf4hf316551"]
+[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://cluf4hf316551"]
 
 [sub_resource type="AudioEffectEQ" id="AudioEffectEQ_j3pel"]
 resource_name = "EQ"
@@ -6,6 +6,16 @@ band_db/32_hz = -23.5
 band_db/100_hz = -17.3
 band_db/320_hz = -9.4
 band_db/10000_hz = -8.5
+
+[sub_resource type="AudioEffectFilter" id="AudioEffectFilter_j3pel"]
+resource_name = "Filter"
+resonance = 0.05
+
+[sub_resource type="AudioEffectEQ" id="AudioEffectEQ_g28q7"]
+resource_name = "EQ"
+band_db/32_hz = -23.5
+band_db/100_hz = -17.3
+band_db/320_hz = -9.4
 
 [resource]
 bus/1/name = &"SFX"
@@ -46,3 +56,19 @@ bus/6/volume_db = 0.0
 bus/6/send = &"Master"
 bus/6/effect/0/effect = SubResource("AudioEffectEQ_j3pel")
 bus/6/effect/0/enabled = true
+bus/7/name = &"Footsteps"
+bus/7/solo = false
+bus/7/mute = false
+bus/7/bypass_fx = false
+bus/7/volume_db = 0.0
+bus/7/send = &"SFX"
+bus/7/effect/0/effect = SubResource("AudioEffectFilter_j3pel")
+bus/7/effect/0/enabled = false
+bus/8/name = &"TabletVoice"
+bus/8/solo = false
+bus/8/mute = false
+bus/8/bypass_fx = false
+bus/8/volume_db = 0.0
+bus/8/send = &"Voice"
+bus/8/effect/0/effect = SubResource("AudioEffectEQ_g28q7")
+bus/8/effect/0/enabled = true

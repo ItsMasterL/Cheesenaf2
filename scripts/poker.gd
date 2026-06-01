@@ -41,6 +41,10 @@ var player_card_coords: Array
 var cpu_card_coords: Array
 var phase = 0
 var player_cheese_count = 10
+var player_cheese_winnings = 0: # Used to judge your score for sabotages
+	set(win):
+		player_cheese_winnings = win
+		root.sabotage_clear_check.emit(player_cheese_winnings, Globals.SabotageClearRequirements.SCORE_POKER)
 var player_bet = 1
 var winstreak = 0
 
@@ -48,6 +52,7 @@ var winstreak = 0
 @onready var cpu_cards = $CPUCards
 @onready var betting_icon = $Table/CheeseBet
 @onready var cheese_count_icon = $Table/CheeseCount/Label
+@onready var root = $"../.."
 
 
 # Called when the node enters the scene tree for the first time.
@@ -172,6 +177,9 @@ func _evaluate():
 	_flip_cards(cpu_cards, true)
 	await get_tree().create_timer(1.5).timeout
 	var player_hand = _rank(player_score)
+	# For sabotage fixing
+	root.sabotage_clear_check.emit(player_hand, Globals.SabotageClearRequirements.HAND_POKER)
+	# Back to your regularly scheduled poker hand grading
 	var cpu_hand = _rank(cpu_score)
 	$Table/Result.visible = true
 	if player_hand > cpu_hand or (player_hand == cpu_hand and _tie_break(player_hand) == 1):
@@ -183,6 +191,7 @@ func _evaluate():
 		else:
 			$CardSounds.stream = load("res://sounds/yay.wav")
 		player_cheese_count += player_bet * player_hand
+		player_cheese_winnings += player_bet * player_hand
 		winstreak += 1
 		_save()
 	elif cpu_hand > player_hand or (player_hand == cpu_hand and _tie_break(player_hand) == 2):
@@ -191,6 +200,7 @@ func _evaluate():
 		$Table/Type.text = "[shake]-%s cheese" % [str(player_bet * cpu_hand)]
 		$CardSounds.stream = load("res://sounds/minigame/aww.wav")
 		player_cheese_count = clamp(player_cheese_count - player_bet * cpu_hand, 0, INF)
+		player_cheese_winnings = player_cheese_count - player_bet * cpu_hand
 		winstreak = 0
 		# Remove this early to prevent cheating/bugs
 		if player_cheese_count == 0 and FileAccess.file_exists("user://poker.json"):

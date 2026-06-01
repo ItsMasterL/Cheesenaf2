@@ -2,9 +2,35 @@ extends Node
 
 enum OfficeMode {
 	SINGLEPLAYER,
-	CO_OP,
-	ONE_VS_ONE,
-	TWO_VS_TWO,
+	CO_OP, #2 players in office
+	VERSUS, #This can be used for 1v1 and 4 player free-for-alls
+	VERSUS_TEAMS, #2 players in office
+}
+
+enum Sabotages {
+	NONE,
+	POWER_OUTAGE,
+	TABLET_BLOCK,
+	STIFF_NECK,
+	CAMERA_MALFUNCTION,
+	PIZZA_DELIVERY,
+	EXTREME_THIRST,
+	BALLOON_BOY,
+	SWAP,
+	DATA_CORRUPTION,
+	UNSTABLE_CONNECTION,
+	MUSIC_UNWOUND,
+	SOFT_SLIPPERS,
+	DOOR_JAM,
+}
+
+enum SabotageClearRequirements {
+	SCORE_FLAPPY_FOXY,
+	SCORE_TANK_TROUBLE,
+	SCORE_SOCCER_PHYSICS,
+	SCORE_CHICA_POP,
+	SCORE_POKER,
+	HAND_POKER,
 }
 
 const NIGHT_DATA = {
@@ -15,6 +41,10 @@ const NIGHT_DATA = {
 	5: {"edams_friendly": false, "edam_freddy": 9, "edam_bonnie": 0, "edam_chica": 9, "edam_foxy": 2, "wither_freddy": 9, "wither_bonnie": 8, "wither_chica": 6, "wither_foxy": 7, "cheesestick": 1, "safety_time": 2.5},
 	6: {"edams_friendly": false, "edam_freddy": 10, "edam_bonnie": 8, "edam_chica": 10, "edam_foxy": 7, "wither_freddy": 10, "wither_bonnie": 8, "wither_chica": 7, "wither_foxy": 8, "cheesestick": 3, "safety_time": 2},
 }
+
+const DEFAULT_NAMES = ["FredEnjoyer2", "Cheese4U", "Willy_A", "FloxOfFox", "C00L_BUN", "ChicChica", "EdamAdam", "PsyGuy", "WitherSchmither", "xX_Fweddy_Xx", "StuffedCrust", "freddy9218371924", "_Yarr_", "user19227343", "RealMarkiplier", "RealDawko", "MatPatReal", "PretendImFamous", "j", "CnafEnjoyer", "🦊", "🐻", "🐰", "🐔"]
+
+const LANGUAGES = ["en", "es", "tr"]
 
 # Office
 var night = 0
@@ -31,6 +61,8 @@ var cheesestick = 0
 var safety_time = 2.5
 var office_mode: OfficeMode = OfficeMode.SINGLEPLAYER
 var game_time = 0
+var game_over = false
+var fade_texture = null
 
 # Cheesenaf Code
 var cheesenaf1_app = ""
@@ -38,18 +70,13 @@ var cheesenaf1_path = ""
 var cheesenaf1_code = ""
 var cheesenaf1_seed: int
 
-# Multiplayer #TODO: Actually implement multiplayer
-var local_playername = ""
-var remote_playernames: Array[String]
-var is_host = false
-var host_ip = "127.0.0.1"
-
 # Save Data
 var save_night: int = 1
 var purchased_apps: String = "0x0000"
 var money: float = 0
 var saw_foxy: bool = false
 var saw_foxy_night_1: bool = false
+var local_playername = DEFAULT_NAMES.pick_random()
 
 # User Settings
 var mouse_sensitivity: float = 1.0
@@ -60,9 +87,10 @@ var music_volume: float = 1
 var tablet_volume: float = 1
 var ambient_volume: float = 1
 var jumpscare_volume: float = 1
-var fullscreen = false
+var fullscreen: bool = false
 var language = 0
-var languages = ["en", "es", "tr"]
+var keybind_overrides = {}
+var original_walk: bool = false
 
 #region Applications
 enum store_apps {
@@ -126,6 +154,21 @@ func _ready():
 				DisplayServer.set_native_icon("res://textures/icons/edam foxy.ico")
 			else:
 				DisplayServer.set_icon(load("res://textures/icons/edam foxy.png"))
+	
+	LimboConsole.register_command(cmd_scene, "scene", "Sets the current loaded scene.")
+	LimboConsole.add_argument_autocomplete_source("scene", 0, func(): return ["title", "office", "game_over", "victory"])
+
+	LimboConsole.register_command(cmd_mouse_mode, "showmouse", "Shows the mouse. Useful if something goes wrong in testing, especially with scene changes.")
+
+func cmd_scene(arg1: String):
+	get_tree().change_scene_to_file("res://scenes/" + arg1 + ".tscn")
+	LimboConsole.close_console()
+
+func cmd_mouse_mode():
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+func set_scene(scene: String):
+	get_tree().change_scene_to_file("res://scenes/" + scene + ".tscn")
 
 #region Saving/Loading
 func _save():
@@ -139,7 +182,8 @@ func _save():
 		"foxy" = saw_foxy,
 		"foxyn1" = saw_foxy_night_1,
 		"code" = cheesenaf1_code,
-		"seed" = cheesenaf1_seed
+		"seed" = cheesenaf1_seed,
+		"name" = local_playername
 	}
 	var file = FileAccess.open("user://data.json", FileAccess.WRITE)
 	var json_string = JSON.stringify(data)
@@ -177,6 +221,8 @@ func _load():
 		if "apps" in data and typeof(data["apps"]) == TYPE_STRING:
 			purchased_apps = data["apps"]
 			purchases = purchased_apps.hex_to_int()
+		if "name" in data and typeof(data["name"]) == TYPE_STRING:
+			local_playername = data["name"]
 
 func _save_settings():
 	print("Saving user settings")
@@ -190,7 +236,9 @@ func _save_settings():
 		"ambient_volume" = ambient_volume,
 		"jumpscare_volume" = jumpscare_volume,
 		"fullscreen" = fullscreen,
-		"language" = language
+		"language" = language,
+		"keybind_overrides" = keybind_overrides,
+		"original_walk" = original_walk,
 	}
 	var file = FileAccess.open("user://settings.json", FileAccess.WRITE)
 	var json_string = JSON.stringify(data)
@@ -232,6 +280,10 @@ func _load_settings():
 				self.fullscreen = data["fullscreen"]
 			if "language" in data and typeof(data["language"]) == TYPE_INT or typeof(data["language"]) == TYPE_FLOAT:
 				self.language = clamp(floor(data["language"]), 0, 2)
+			if "keybind_overrides" in data and typeof(data["keybind_overrides"]) == TYPE_DICTIONARY:
+				self.keybind_overrides = data["keybind_overrides"]
+			if "original_walk" in data and typeof(data["original_walk"]) == TYPE_BOOL:
+				self.original_walk = data["original_walk"]
 		AudioServer.set_bus_volume_db(0, linear_to_db(self.master_volume))
 		AudioServer.set_bus_volume_db(1, linear_to_db(self.sfx_volume))
 		AudioServer.set_bus_volume_db(2, linear_to_db(self.voice_volume))
@@ -243,7 +295,24 @@ func _load_settings():
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		elif DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-		TranslationServer.set_locale(languages[language])
+		TranslationServer.set_locale(LANGUAGES[language])
+		for item in keybind_overrides:
+			var event
+			if "m" in keybind_overrides[item]:
+				event = InputEventMouseButton.new()
+				event.button_index = int(keybind_overrides[item].erase(0,1))
+			elif "k" in keybind_overrides[item]:
+				event = InputEventKey.new()
+				event.keycode = int(keybind_overrides[item].erase(0,1))
+			else:
+				print("Keybind invalid!")
+				continue
+			if InputMap.action_get_events(item)[0] == event:
+				print("Keybind " + item + " matches default. Clearing!")
+				keybind_overrides.erase(item)
+				continue
+			InputMap.action_erase_events(item)
+			InputMap.action_add_event(item, event)
 #endregion
 
 func _set_night(night_number: int):

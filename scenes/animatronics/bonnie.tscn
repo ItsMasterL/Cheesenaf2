@@ -1,11 +1,19 @@
-[gd_scene load_steps=23 format=3 uid="uid://sr5bhwimbn6q"]
+[gd_scene load_steps=33 format=3 uid="uid://sr5bhwimbn6q"]
 
 [ext_resource type="PackedScene" uid="uid://84wrom6majx8" path="res://models/bonnie.glb" id="1_kfj2h"]
 [ext_resource type="Script" uid="uid://bj1onaat51pqp" path="res://scripts/animatronic.gd" id="1_vu3bh"]
 [ext_resource type="Script" uid="uid://4en87cf4wnfr" path="res://scripts/animatronic_position.gd" id="2_81imh"]
 [ext_resource type="Script" uid="uid://b7m76kqb1eco1" path="res://scripts/animatronic_entrance.gd" id="2_mpcjg"]
+[ext_resource type="AudioStream" uid="uid://ddwknpsthq7ua" path="res://sounds/dialogue/bonnie-1.wav" id="5_an7lr"]
+[ext_resource type="AudioStream" uid="uid://calvnydqo5g8v" path="res://sounds/dialogue/bonnie-2.wav" id="6_6me2x"]
+[ext_resource type="AudioStream" uid="uid://tw2kc3h58i2u" path="res://sounds/dialogue/bonnie-3.wav" id="7_aau27"]
 [ext_resource type="AudioStream" uid="uid://blj2fpebqrwua" path="res://sounds/dialogue/bonnie.wav" id="7_es4hq"]
+[ext_resource type="AudioStream" uid="uid://cjxejfb4tt53g" path="res://sounds/dialogue/bonnie-4.wav" id="8_ec7jg"]
 [ext_resource type="AudioStream" uid="uid://c3n0lfpxca8e8" path="res://sounds/jumpscare_edam.wav" id="8_qwrtb"]
+[ext_resource type="AudioStream" uid="uid://v7sswicam4wy" path="res://sounds/dialogue/bonnie-5.wav" id="9_ppnst"]
+[ext_resource type="AudioStream" uid="uid://ckvhrmeqn3i36" path="res://sounds/dialogue/bonnie-6.wav" id="10_1w7gm"]
+[ext_resource type="AudioStream" uid="uid://1uuwk6sb0oeo" path="res://sounds/dialogue/bonnie-7.wav" id="11_fiyu7"]
+[ext_resource type="AudioStream" uid="uid://c8xaqj3rl62x2" path="res://sounds/dialogue/bonnie-8.wav" id="12_5j0ig"]
 
 [sub_resource type="Resource" id="Resource_qvvvx"]
 resource_name = "Stage"
@@ -16,6 +24,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([1, 2, 7, 11, 12])
 is_vent = false
 animation_id = "Stage"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_1i3n5"]
 resource_name = "Backstage"
@@ -26,6 +35,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([0, 2, 11])
 is_vent = false
 animation_id = "Backstage"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_8d38w"]
 resource_name = "Outside A"
@@ -36,6 +46,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([3, 0])
 is_vent = false
 animation_id = "OutsideA"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_bpc3w"]
 resource_name = "Outside B"
@@ -46,6 +57,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([2, 4])
 is_vent = false
 animation_id = "OutsideB"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_pmkvk"]
 resource_name = "Playroom"
@@ -56,6 +68,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([3, 5, 6, 8])
 is_vent = false
 animation_id = "Playroom"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_hcd7k"]
 resource_name = "Party Room A"
@@ -66,6 +79,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([4, 7])
 is_vent = false
 animation_id = "PartyRoomA"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_5kc1d"]
 resource_name = "Party Room B"
@@ -76,6 +90,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([4, 7, 12])
 is_vent = false
 animation_id = "PartyRoomB"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_pebfs"]
 resource_name = "Kitchen"
@@ -86,6 +101,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([11, 5, 6, 9])
 is_vent = false
 animation_id = "Kitchen"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_4wlqh"]
 script = ExtResource("2_mpcjg")
@@ -106,6 +122,7 @@ next_position_indexes = Array[int]([])
 is_vent = true
 animation_id = "Vent"
 office_entrance = SubResource("Resource_4wlqh")
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_fidsh"]
 script = ExtResource("2_mpcjg")
@@ -126,6 +143,7 @@ next_position_indexes = Array[int]([])
 is_vent = true
 animation_id = "Vent"
 office_entrance = SubResource("Resource_fidsh")
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_nkopa"]
 script = ExtResource("2_mpcjg")
@@ -146,6 +164,7 @@ next_position_indexes = Array[int]([])
 is_vent = true
 animation_id = "Vent"
 office_entrance = SubResource("Resource_nkopa")
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_0hntl"]
 resource_name = "Kitchen Ceiling Vent"
@@ -156,6 +175,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([10, 7, 1])
 is_vent = true
 animation_id = "Vent"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_wqs7m"]
 resource_name = "Lobby Vent B"
@@ -163,18 +183,44 @@ script = ExtResource("2_81imh")
 position = Vector3(39.35, -0.048, 9.265)
 rotation = Vector3(0, -90, 0)
 scale = Vector3(1, 1, 1)
-next_position_indexes = Array[int]([0, 6])
+next_position_indexes = Array[int]([0, 6, 13])
 is_vent = true
 animation_id = "Vent"
+is_two_player_only = false
+
+[sub_resource type="Resource" id="Resource_yith0"]
+script = ExtResource("2_mpcjg")
+office_animatronic_limit = 2
+search_under_desk = false
+flashlight_weakness = false
+entrance = 6
+fail_position_index = 0
+check_before_entering = true
+metadata/_custom_type_script = "uid://b7m76kqb1eco1"
+
+[sub_resource type="Resource" id="Resource_eic68"]
+resource_name = "Office 2 Right Vent"
+script = ExtResource("2_81imh")
+position = Vector3(38.5208, 3.0678, 4.77224)
+rotation = Vector3(-39.7, 180, 0)
+scale = Vector3(1, 1, 1)
+next_position_indexes = Array[int]([])
+is_vent = true
+animation_id = "Vent"
+office_entrance = SubResource("Resource_yith0")
+is_two_player_only = true
+metadata/_custom_type_script = "uid://4en87cf4wnfr"
 
 [node name="Animatronics" instance=ExtResource("1_kfj2h")]
 script = ExtResource("1_vu3bh")
 animatronic = "edam_bonnie"
-positions = Array[ExtResource("2_81imh")]([SubResource("Resource_qvvvx"), SubResource("Resource_1i3n5"), SubResource("Resource_8d38w"), SubResource("Resource_bpc3w"), SubResource("Resource_pmkvk"), SubResource("Resource_hcd7k"), SubResource("Resource_5kc1d"), SubResource("Resource_pebfs"), SubResource("Resource_r6c4r"), SubResource("Resource_8r12v"), SubResource("Resource_sw0je"), SubResource("Resource_0hntl"), SubResource("Resource_wqs7m")])
+positions = Array[ExtResource("2_81imh")]([SubResource("Resource_qvvvx"), SubResource("Resource_1i3n5"), SubResource("Resource_8d38w"), SubResource("Resource_bpc3w"), SubResource("Resource_pmkvk"), SubResource("Resource_hcd7k"), SubResource("Resource_5kc1d"), SubResource("Resource_pebfs"), SubResource("Resource_r6c4r"), SubResource("Resource_8r12v"), SubResource("Resource_sw0je"), SubResource("Resource_0hntl"), SubResource("Resource_wqs7m"), SubResource("Resource_eic68")])
 check_frequency = 3.5
 jumpscare_rotation = Vector3(0, 0, 0)
 is_edam_animatronic = true
 vent_checker = true
+vent_warnings = Array[AudioStream]([ExtResource("5_an7lr"), ExtResource("6_6me2x"), ExtResource("7_aau27"), ExtResource("8_ec7jg"), ExtResource("9_ppnst"), ExtResource("10_1w7gm"), ExtResource("11_fiyu7"), ExtResource("12_5j0ig")])
+enable_hologram = null
 
 [node name="Jumpscare" type="AudioStreamPlayer" parent="." index="2"]
 stream = ExtResource("8_qwrtb")
@@ -184,7 +230,7 @@ bus = &"Jumpscare"
 volume_db = -30.0
 unit_size = 100.0
 max_db = -10.0
-bus = &"SFX"
+bus = &"Footsteps"
 
 [node name="Warning" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource("7_es4hq")

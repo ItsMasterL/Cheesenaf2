@@ -17,6 +17,9 @@ signal paranormal_song
 @export var jumpscare_animation_id: String = "Jumpscare"
 @export var jumpscare_position: Vector3 = Vector3(0, -0.719, -2.25)
 @export var jumpscare_rotation: Vector3 = Vector3(0, -90, 0)
+# Player 2
+@export var jumpscare_position_2: Vector3 = Vector3(38.073, 3.434, 0)
+@export var jumpscare_rotation_2: Vector3 = Vector3(0, -180, 0)
 @export_category("Special Animatronics")
 ## If true, the animatronic will be stunned if the cameras are looked at.
 @export var camera_sensitive: bool
@@ -26,6 +29,8 @@ signal paranormal_song
 @export var paranormal: bool
 ## If true, the animatronic will find the player under the desk if they have the tablet with them
 @export var sound_sensitive: bool
+## If true, the animatronic will become more active during the Pizza Delivery sabotage
+@export var pizza_sensitive: bool
 @export_subgroup("Save ignore")
 ## If true, the jumpscare will overwrite a game sensitive animatronic's save
 @export var ignore_save: bool
@@ -54,40 +59,62 @@ signal paranormal_song
 ## If true, the animatronic will warn of other animatronics entering the office vents when friendly, and will be killed on night 2 in singleplayer/co-op.
 @export var vent_checker: bool
 ## Set by combo of is_edam_animatronic and office's edams_friendly. Can be set in the editor. These animatronics will never jumpscare the player.
+@export var vent_warnings: Array[AudioStream]
 @export var is_friendly: bool
 
 @export_category("Editor")
 @export var test_jumpscare = false:
 	set(jumpscare_test):
-		if jumpscare_test == true and Engine.is_editor_hint():
-			test_jumpscare = false
-			position = jumpscare_position
-			rotation_degrees = jumpscare_rotation
-			$AnimationPlayer.play(jumpscare_animation_id)
-			if jumpscare_length > 0.7:
-				$"../../Player/Head/Eyes/AnimationPlayer".play("Long")
-			else:
-				$"../../Player/Head/Eyes/AnimationPlayer".play("Default")
+		if OS.has_feature("Editor"):
+			if jumpscare_test == true and Engine.is_editor_hint():
+				test_jumpscare = false
+				position = jumpscare_position
+				rotation_degrees = jumpscare_rotation
+				$AnimationPlayer.play(jumpscare_animation_id)
+				if jumpscare_length > 0.7:
+					$"../../PlayerManager/Player1/Head/Eyes/AnimationPlayer".play("Long")
+				else:
+					$"../../PlayerManager/Player1/Head/Eyes/AnimationPlayer".play("Default")
+@export var test_jumpscare_2 = false:
+	set(jumpscare_test):
+		if OS.has_feature("Editor"):
+			if jumpscare_test == true and Engine.is_editor_hint():
+				test_jumpscare_2 = false
+				position = jumpscare_position_2
+				rotation_degrees = jumpscare_rotation_2
+				$AnimationPlayer.play(jumpscare_animation_id)
+				if jumpscare_length > 0.7:
+					$"../../PlayerManager/Player2/Head/Eyes/AnimationPlayer".play("Long")
+				else:
+					$"../../PlayerManager/Player2/Head/Eyes/AnimationPlayer".play("Default")
 @export var test_save_ignore_jumpscare = false:
 	set(jumpscare_test):
-		if jumpscare_test == true and Engine.is_editor_hint():
-			test_save_ignore_jumpscare = false
-			position = save_ignore_jumpscare_position
-			rotation_degrees = save_ignore_jumpscare_rotation
-			$AnimationPlayer.play(save_jumpscare_id)
-			if jumpscare_length > 0.7:
-				$"../../Player/Head/Eyes/AnimationPlayer".play("Long")
-			else:
-				$"../../Player/Head/Eyes/AnimationPlayer".play("Default")
+		if OS.has_feature("Editor"):
+			if jumpscare_test == true and Engine.is_editor_hint():
+				test_save_ignore_jumpscare = false
+				position = save_ignore_jumpscare_position
+				rotation_degrees = save_ignore_jumpscare_rotation
+				$AnimationPlayer.play(save_jumpscare_id)
+				if jumpscare_length > 0.7:
+					$"../../Player/Head/Eyes/AnimationPlayer".play("Long")
+				else:
+					$"../../Player/Head/Eyes/AnimationPlayer".play("Default")
 @export var current_position = 0: # Also used normally
 	set(new_position):
 		current_position = new_position
-		if Engine.is_editor_hint():
-			position = positions[current_position].position
-			rotation_degrees = positions[current_position].rotation
-			scale = positions[current_position].scale
-			$AnimationPlayer.play(positions[current_position].animation_id)
-			$"../../Player/Head/Eyes/AnimationPlayer".play("RESET")
+		if !OS.has_feature("Template"):
+			if Engine.is_editor_hint():
+				position = positions[current_position].position
+				rotation_degrees = positions[current_position].rotation
+				scale = positions[current_position].scale
+				$AnimationPlayer.play(positions[current_position].animation_id)
+				$"../../Player/Head/Eyes/AnimationPlayer".play("RESET")
+				_editor_preview()
+@export var enable_hologram = false
+@export var hologram_mesh : MeshInstance3D
+var editor_interface
+# Moved from local variable to lerp footsteps
+var old_position = current_position
 
 # Usually used to disable movement checks during jumpscares
 var can_move = true
@@ -102,6 +129,8 @@ var object_of_interest
 var new_rotation = Vector3.ZERO
 var rot_x = 0
 var rot_y = 0
+# How many times a vent sensitive animatronic has warned you
+var vent_warning_count = 0
 
 @onready var timer = check_frequency
 @onready var level = root._get_ai(animatronic)
@@ -110,7 +139,11 @@ var rot_y = 0
 
 
 func _ready():
-	if Engine.is_editor_hint() == false:
+	if Engine.is_editor_hint():
+		editor_interface = Engine.get_singleton("EditorInterface")
+		var editor_selection = editor_interface.get_selection()
+		editor_selection.selection_changed.connect(_editor_preview)
+	else:
 		safety_timer = Globals.safety_time
 		position = positions[0].position
 		rotation_degrees = positions[0].rotation
@@ -123,13 +156,38 @@ func _ready():
 		# Keep friendly dancers on stage
 		if is_friendly and music_box_sensitive:
 			can_move = false
+		root.sabotage_begin.connect(_sabotage_event)
+		root.sabotage_end.connect(_sabotage_event_end)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Engine.is_editor_hint():
+	if Engine.is_editor_hint() or root.is_paused:
 		return
+	#Look at stuff
+	if game_sensitive and guarding and object_of_interest != null:
+		_look_at_object(delta)
+	#Multiplayer - Host priority
+	if MultiplayerCore.is_multiplayer and (Globals.office_mode == Globals.OfficeMode.CO_OP or Globals.office_mode == Globals.OfficeMode.VERSUS_TEAMS):
+		if MultiplayerCore.is_host:
+			#TODO: Stop animatronics from freezing up at office if person is dead
+			# Do not execute movement logic if the animatronic is in the non-host client's office
+			if root.is_p1 and positions[current_position].office_entrance != null and positions[current_position].office_entrance.entrance >= int(EntranceProperty.Entrances.LEFT_DOOR):
+				if root.adam in root.alive_players:
+					return
+			if !root.is_p1 and positions[current_position].office_entrance != null and positions[current_position].office_entrance.entrance < int(EntranceProperty.Entrances.LEFT_DOOR):
+				if root.psy in root.alive_players:
+					return
+		else:
+			# Do not execute movement logic unless the animatronic is in this client's office
+			if root.is_p1 and (positions[current_position].office_entrance == null or positions[current_position].office_entrance.entrance >= int(EntranceProperty.Entrances.LEFT_DOOR)):
+				if root.adam in root.alive_players:
+					return
+			if !root.is_p1 and (positions[current_position].office_entrance == null or positions[current_position].office_entrance.entrance < int(EntranceProperty.Entrances.LEFT_DOOR)):
+				if root.psy in root.alive_players:
+					return
 	# Camera sensitivity
-	if root.in_cams and root.using_tablet and camera_sensitive and positions[current_position].office_entrance == null:
+	if ((root.p1_in_cams and root.using_tablet) or (root.p2_in_cams and root.using_laptop)) and camera_sensitive and positions[current_position].office_entrance == null:
 		camera_cooldown = randf_range(2, 23 - level)
 	if camera_cooldown > 0 and camera_sensitive:
 		camera_cooldown -= delta
@@ -140,7 +198,7 @@ func _process(delta):
 	# Safety Timer
 	if positions[current_position].office_entrance != null and root.under_desk == false:
 		safety_timer = clamp(safety_timer - delta, 0, safety_timer)
-		if OS.is_debug_build():
+		if OS.is_debug_build() and root.is_p1 and safety_timer > 0:
 			print(animatronic + ": " + str(safety_timer))
 	else:
 		safety_timer = clamp(safety_timer + delta, 0, root.safety_time)
@@ -149,15 +207,11 @@ func _process(delta):
 		flashlight = clamp(flashlight - delta / 2, 0, 5)
 	#Music Box
 	if music_box_sensitive and root.is_winding == false:
-		root.musicbox = clamp(root.musicbox - (level * delta) * root.fun_multiplier, 0, 2000)
+		root.musicbox = clamp(root.musicbox - (level * delta) * root.fun_multiplier * root.music_box_multiplier, 0, 2000)
+	#Walk lerping
+	if step_sound.stream != null and Globals.original_walk == false:
+		step_sound.global_position = lerp(positions[old_position].position, positions[current_position].position, step_sound.get_playback_position()/step_sound.stream.get_length())
 	
-	#Look at stuff
-	if game_sensitive and guarding and object_of_interest != null:
-		_look_at_object(delta)
-	# Debug - Summon to player
-	if OS.is_debug_build() and game_sensitive and guarding == false and Input.is_key_pressed(KEY_BACKSPACE):
-		current_position = positions.size() - 2
-		_game_check()
 	
 	if timer > 0:
 		#Make it easier on lower levels when they're in the office (But they leave faster with flashlight)
@@ -169,6 +223,8 @@ func _process(delta):
 			timer -= delta * root.fun_multiplier
 	else:
 		timer = check_frequency
+		if (pizza_sensitive and root.active_sabotage == Globals.Sabotages.PIZZA_DELIVERY) or (drink_sensitive and root.active_sabotage == Globals.Sabotages.EXTREME_THIRST):
+			timer /= 2
 		# After, so check_frequency can be changed by edam bonnie
 		_movement_check()
 
@@ -185,11 +241,17 @@ func _movement_check():
 		if root.closed_entrances.has(positions[current_position].office_entrance.entrance):
 			_fail_attack()
 			return
+		#Fail if player is already dead and in multiplayer
+		if root.spectating:
+			_fail_attack()
+			return
 		#If friendly edams
 		if is_edam_animatronic and is_friendly:
 			#If bonnie is in the office, play the warning and teleport Withered Bonnie/Chica to the vent
 			if vent_checker and root.night == 2:
 				var warning := $Warning
+				warning.stream = vent_warnings[vent_warning_count]
+				vent_warning_count = clamp(vent_warning_count + 1, 0, vent_warnings.size() - 1)
 				warning.play()
 				timer = check_frequency * 2 # Wait 3 checks before repeating (Including below line)
 				await get_tree().create_timer(check_frequency).timeout
@@ -243,17 +305,32 @@ func _movement_check():
 		# Flashlight sensitivity
 		elif positions[current_position].office_entrance.flashlight_weakness and flashlight > 0:
 			_fail_attack()
+		# Laptop sensitivity
+		elif positions[current_position].office_entrance.laptop_weakness and root.is_laptop_closed and !root.is_p1:
+			if randi_range(0,30) < level:
+				_fail_attack()
+				if OS.is_debug_build():
+					print("Lucky!")
+			else:
+				if OS.is_debug_build():
+					print("Unlucky...")
 		#All jumpscare exceptions/defenses are down. game over :3
 		else:
-			root._jumpscare(self)
+			#root._jumpscare(self, positions[current_position].office_entrance.entrance != EntranceProperty.Entrances.LEFT_DOOR and positions[current_position].office_entrance.entrance != EntranceProperty.Entrances.RIGHT_DOOR)
+			#Jumpscares should in theory be handled by the client that needs them
+			root._jumpscare(self, root.is_p1)
 	
 	#AI check
 	elif randi_range(1, 20) <= level:
 		# Move to one of the next spaces if it exists
-		var old_position = current_position
+		old_position = current_position
 		if positions[current_position].next_position_indexes.is_empty() == false:
 			# Move to the next space
 			current_position = positions[current_position].next_position_indexes.pick_random()
+			# Check if the rolled space is a co-op-only space, while only one player is in this office
+			if Globals.office_mode == Globals.OfficeMode.SINGLEPLAYER or Globals.office_mode == Globals.OfficeMode.VERSUS:
+				while positions[current_position].is_two_player_only:
+					current_position = positions[old_position].next_position_indexes.pick_random() #This can in theory hang if all positions are multiplayer only, but that shouldn't happen
 			# If the next space is an office space, but the office limit is reached, wait if not friendly. (If 0, office must be empty)
 			if positions[current_position].office_entrance != null and root.animatronics_in_office > positions[current_position].office_entrance.office_animatronic_limit and is_friendly == false:
 				current_position = old_position
@@ -285,6 +362,7 @@ func _movement_check():
 					timer = check_frequency * 1.75
 			_move_animatronic()
 
+
 func _move_animatronic():
 	position = positions[current_position].position
 	rotation_degrees = positions[current_position].rotation
@@ -295,14 +373,24 @@ func _move_animatronic():
 			if check_frequency < 1.5:
 				step_sound.stream = load("res://sounds/ventwalk_run.wav")
 			else:
-				step_sound.stream = load("res://sounds/ventwalk" + str(randi_range(1, 2)) + ".wav")
+				step_sound.stream = load("res://sounds/ventwalk" + str(randi_range(1, 3)) + ".wav")
 		elif check_frequency < 1.5:
 			step_sound.stream = load("res://sounds/walk_run.wav")
+		elif positions[old_position].is_vent and Globals.original_walk == false:
+			step_sound.stream = load("res://sounds/vent_emerge.wav")
 		else:
 			step_sound.stream = load("res://sounds/walk" + str(randi_range(1, 5)) + ".wav")
 		step_sound.play()
 	if OS.is_debug_build():
 		print(str(animatronic) + " moved to " + str(current_position))
+	if MultiplayerCore.is_multiplayer and MultiplayerCore.is_host:
+		_sync_animatronic.rpc(current_position)
+
+#If I cared enough to discourage cheating in any way, this would be authority. However, considering the nature of the multiplayer (basically LAN) i don't care
+@rpc("any_peer","call_remote","reliable")
+func _sync_animatronic(pos):
+	current_position = pos
+	_move_animatronic()
 
 func _fail_attack():
 	# Friendly animatronics don't count towards this as they cannot harm you
@@ -313,7 +401,8 @@ func _fail_attack():
 		root.paranormal_primed = false
 		root.paranormal_attacker = null
 		paranormal_song.emit()
-	current_position = positions[current_position].office_entrance.fail_position_index
+	if positions[current_position].office_entrance != null: # Checked for debug manual jumpscares. Should never be true normally
+		current_position = positions[current_position].office_entrance.fail_position_index
 	_move_animatronic()
 
 func _change_dance(count: int, id: int = 0):
@@ -358,7 +447,7 @@ func _leave_doorway_check():
 				_fail_attack()
 
 func _game_check():
-	if root.p1_has_tablet and root.purchased_apps > 0:
+	if root.p1_has_tablet and root.purchased_apps > 0 and root.active_sabotage != Globals.Sabotages.DATA_CORRUPTION:
 		root.gamer_in_office = true
 		current_position = positions[current_position].next_position_indexes.pick_random()
 		_move_animatronic()
@@ -407,3 +496,48 @@ func _booped():
 			root.gamer_in_office = false
 			root._jumpscare(self)
 		$Boop.play()
+
+func _sabotage_event(event: Globals.Sabotages):
+	match event:
+		Globals.Sabotages.MUSIC_UNWOUND:
+			if music_box_sensitive:
+				anim.speed_scale = root.music_box_multiplier
+		Globals.Sabotages.DATA_CORRUPTION:
+			if guarding == true and is_friendly == false:
+				current_position = 0
+				_move_animatronic()
+
+func _sabotage_event_end():
+	anim.speed_scale = 1
+
+func _editor_preview():
+	if enable_hologram == false or !OS.has_feature("Editor"):
+		return
+	var selected = editor_interface.get_selection()
+	if self in selected.get_selected_nodes():
+		print("You have selected ", animatronic, "!")
+		var container = Node3D.new()
+		container.name = "EditorContainer"
+		self.add_child(container)
+		var material = load("res://materials/hologram.tres")
+		for p in positions.size():
+			if current_position == p:
+				continue
+			var gram = hologram_mesh.duplicate()
+			var overrides = hologram_mesh.get_surface_override_material_count()
+			for i in overrides:
+				gram.set_surface_override_material(i, material)
+			gram.name = "hologram " + str(p)
+			gram.top_level = true
+			gram.global_position = positions[p].position
+			gram.rotation_degrees = positions[p].rotation
+			gram.scale = positions[p].scale
+			get_node("EditorContainer").add_child(gram)
+	else:
+		if get_node("EditorContainer") != null:
+			get_node("EditorContainer").queue_free()
+
+func cmd_gamer_to_office():
+	if OS.is_debug_build() and game_sensitive and guarding == false: #Debug build check probably not necessary but you never know
+		current_position = positions.size() - 2
+		_game_check()

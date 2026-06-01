@@ -1,10 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://bf6yukxrqcujs"]
+[gd_scene load_steps=23 format=3 uid="uid://bf6yukxrqcujs"]
 
 [ext_resource type="Script" uid="uid://cvxto0xs701a0" path="res://scripts/soccerphysics.gd" id="1_usnkt"]
 [ext_resource type="AudioStream" uid="uid://2j1w8q43ndjj" path="res://sounds/music/soccer.mp3" id="2_0bgv3"]
 [ext_resource type="Texture2D" uid="uid://da2k3qt4hswr7" path="res://textures/apps/soccerphysics bg.png" id="3_4letn"]
 [ext_resource type="Texture2D" uid="uid://ci6nvjmf4x5p5" path="res://textures/apps/soccerphysics sheet.png" id="4_w7p8x"]
 [ext_resource type="Script" uid="uid://0xehtodmu3ya" path="res://scripts/soccerplayer.gd" id="5_a5bi1"]
+[ext_resource type="Script" uid="uid://oy4huqhimmeo" path="res://scripts/soccerplayer_leg.gd" id="6_4letn"]
 [ext_resource type="AudioStream" uid="uid://qdpwuu05mhnk" path="res://sounds/minigame/flappybird-01.wav" id="6_agria"]
 [ext_resource type="FontFile" uid="uid://jvtdvd72wv06" path="res://fonts/consolas.ttf" id="7_0bgv3"]
 
@@ -212,6 +213,7 @@ physics_material_override = SubResource("PhysicsMaterial_w1vfb")
 gravity_scale = 0.0
 lock_rotation = true
 freeze_mode = 1
+script = ExtResource("6_4letn")
 
 [node name="Sprite2D" type="Sprite2D" parent="Foxy/Leg"]
 texture_filter = 1
@@ -288,6 +290,7 @@ physics_material_override = SubResource("PhysicsMaterial_w1vfb")
 gravity_scale = 0.0
 lock_rotation = true
 freeze_mode = 1
+script = ExtResource("6_4letn")
 
 [node name="Sprite2D" type="Sprite2D" parent="Freddy/Leg"]
 texture_filter = 1
@@ -347,6 +350,7 @@ physics_material_override = SubResource("PhysicsMaterial_w1vfb")
 gravity_scale = 0.0
 lock_rotation = true
 freeze_mode = 1
+script = ExtResource("6_4letn")
 
 [node name="Sprite2D" type="Sprite2D" parent="Bonnie/Leg"]
 texture_filter = 1
@@ -427,6 +431,7 @@ physics_material_override = SubResource("PhysicsMaterial_w1vfb")
 gravity_scale = 0.0
 lock_rotation = true
 freeze_mode = 1
+script = ExtResource("6_4letn")
 
 [node name="Sprite2D" type="Sprite2D" parent="Chica/Leg"]
 texture_filter = 1

@@ -18,6 +18,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([1, 3])
 is_vent = false
 animation_id = "Pose"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_qxlvi"]
 resource_name = "Lobby 1"
@@ -28,6 +29,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([2, 0])
 is_vent = false
 animation_id = "EdamFoxyLobby1"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_t34ru"]
 resource_name = "Lobby 2"
@@ -38,6 +40,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([1, 3])
 is_vent = false
 animation_id = "EdamFoxyLobby2"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_e4c0a"]
 resource_name = "Restroom A"
@@ -48,6 +51,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([4, 2])
 is_vent = false
 animation_id = "EdamFoxyRestroom"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_op77r"]
 resource_name = "Party Room A"
@@ -58,12 +62,14 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([5, 3])
 is_vent = false
 animation_id = "EdamFoxyPartyRoom"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_1xllt"]
 script = ExtResource("4_gx0gv")
 office_animatronic_limit = 10
 search_under_desk = false
 flashlight_weakness = false
+laptop_weakness = false
 entrance = 0
 fail_position_index = 2
 check_before_entering = false
@@ -78,6 +84,7 @@ next_position_indexes = Array[int]([6])
 is_vent = false
 animation_id = "EdamFoxyDoorway"
 office_entrance = SubResource("Resource_1xllt")
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_3vlub"]
 resource_name = "next to my desk :3"
@@ -88,6 +95,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([])
 is_vent = false
 animation_id = "EdamFoxyChair"
+is_two_player_only = false
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jexas"]
 
@@ -105,6 +113,7 @@ save_animation_id = "Save"
 save_voiceline_delay = 2.35
 save_player_free = 5.3
 is_edam_animatronic = true
+enable_hologram = null
 
 [node name="Skeleton3D" parent="Edam Endo" index="0"]
 bones/0/position = Vector3(-0.00104446, 0.72536, -0.0413671)
@@ -194,8 +203,8 @@ bones/60/rotation = Quaternion(0.257114, -0.0625671, 0.0991239, 0.959246)
 bones/61/rotation = Quaternion(0.17827, -0.0253541, 0.0691141, 0.981224)
 bones/62/rotation = Quaternion(0.0816105, -0.00428435, 0.0306464, 0.996184)
 
-[node name="Head" type="BoneAttachment3D" parent="Edam Endo/Skeleton3D" index="0"]
-transform = Transform3D(0.983071, 0.0836794, 0.163003, -0.0687881, 0.993102, -0.0949591, -0.169825, 0.0821388, 0.982045, 0.0910043, 1.66728, 0.109877)
+[node name="Head" type="BoneAttachment3D" parent="Edam Endo/Skeleton3D" index="2"]
+transform = Transform3D(0.983071, 0.0836793, 0.163003, -0.068788, 0.993102, -0.094959, -0.169825, 0.0821387, 0.982045, 0.0910042, 1.66728, 0.109876)
 bone_name = "Head"
 bone_idx = 9
 
@@ -214,7 +223,7 @@ script = ExtResource("5_i806u")
 shape = SubResource("SphereShape3D_nvyh0")
 
 [node name="Neck" type="BoneAttachment3D" parent="Edam Endo/Skeleton3D" index="3"]
-transform = Transform3D(0.983071, 0.0989769, 0.154194, -0.0687881, 0.979355, -0.190085, -0.169825, 0.17626, 0.969583, 0.0597774, 1.3583, 0.0542672)
+transform = Transform3D(0.983071, 0.0989767, 0.154194, -0.068788, 0.979355, -0.190084, -0.169825, 0.17626, 0.969583, 0.0597774, 1.3583, 0.0542671)
 bone_name = "Neck"
 bone_idx = 8
 
@@ -231,7 +240,7 @@ bus = &"Jumpscare"
 volume_db = -30.0
 unit_size = 100.0
 max_db = -10.0
-bus = &"SFX"
+bus = &"Footsteps"
 
 [node name="Warning" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource("5_3kum6")

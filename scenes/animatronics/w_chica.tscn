@@ -15,6 +15,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([9, 1])
 is_vent = false
 animation_id = "Pose"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_im4pd"]
 resource_name = "Lobby 1"
@@ -25,6 +26,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([2, 7, 0])
 is_vent = false
 animation_id = "WitherChicaLobby"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_nnpx1"]
 resource_name = "Lobby 2"
@@ -35,6 +37,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([8, 3, 1])
 is_vent = false
 animation_id = "WitherChicaLobby"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_numyj"]
 resource_name = "Restroom B"
@@ -45,6 +48,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([11, 2])
 is_vent = false
 animation_id = "WitherChicaRestroom"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_l7ixp"]
 resource_name = "Party Room B"
@@ -55,6 +59,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([3])
 is_vent = false
 animation_id = "WitherChicaPartyRoomB"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_na145"]
 resource_name = "Party Room A"
@@ -65,6 +70,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([6])
 is_vent = false
 animation_id = "WitherChicaPartyRoomA"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_hfjlm"]
 script = ExtResource("4_auoqf")
@@ -85,6 +91,7 @@ next_position_indexes = Array[int]([])
 is_vent = false
 animation_id = "WitherChicaDoorway"
 office_entrance = SubResource("Resource_hfjlm")
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_ucnr4"]
 resource_name = "Lobby Vent A"
@@ -95,6 +102,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([5])
 is_vent = true
 animation_id = "WitherChicaVent"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_5jbou"]
 resource_name = "Lobby Vent B"
@@ -105,6 +113,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([4])
 is_vent = true
 animation_id = "WitherChicaVent"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_cioj8"]
 resource_name = "Storage Ceiling Vent"
@@ -115,6 +124,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([10])
 is_vent = true
 animation_id = "WitherChicaVent"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_7bfeg"]
 resource_name = "Lobby Ceiling Vent 1"
@@ -125,6 +135,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([12])
 is_vent = true
 animation_id = "WitherChicaVent"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_2u5ki"]
 resource_name = "Lobby Ceiling Vent 2"
@@ -135,6 +146,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([12])
 is_vent = true
 animation_id = "WitherChicaVent"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_6llw3"]
 resource_name = "Kitchen Hall Ceiling Vent"
@@ -145,6 +157,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([13])
 is_vent = true
 animation_id = "WitherChicaVent"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_hjgli"]
 resource_name = "Kitchen Ceiling Vent"
@@ -155,6 +168,7 @@ scale = Vector3(1, 1, 1)
 next_position_indexes = Array[int]([14])
 is_vent = true
 animation_id = "WitherChicaVent"
+is_two_player_only = false
 
 [sub_resource type="Resource" id="Resource_201m6"]
 script = ExtResource("4_auoqf")
@@ -175,6 +189,7 @@ next_position_indexes = Array[int]([])
 is_vent = true
 animation_id = "WitherChicaCeilingVent"
 office_entrance = SubResource("Resource_201m6")
+is_two_player_only = false
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_nf5j4"]
 radius = 17.6752
@@ -186,6 +201,7 @@ animatronic = "wither_chica"
 positions = Array[ExtResource("3_wo6gj")]([SubResource("Resource_tss6h"), SubResource("Resource_im4pd"), SubResource("Resource_nnpx1"), SubResource("Resource_numyj"), SubResource("Resource_l7ixp"), SubResource("Resource_na145"), SubResource("Resource_v5eg8"), SubResource("Resource_ucnr4"), SubResource("Resource_5jbou"), SubResource("Resource_cioj8"), SubResource("Resource_7bfeg"), SubResource("Resource_2u5ki"), SubResource("Resource_6llw3"), SubResource("Resource_hjgli"), SubResource("Resource_6tpff")])
 jumpscare_length = 1.217
 jumpscare_position = Vector3(0, -1.259, -2.75)
+pizza_sensitive = true
 
 [node name="Skeleton3D" parent="chica_qc_skeleton_001" index="0"]
 bones/0/position = Vector3(3.52366e-19, -22.1166, -7.27596e-12)
@@ -289,4 +305,4 @@ bus = &"Jumpscare"
 volume_db = -30.0
 unit_size = 100.0
 max_db = -10.0
-bus = &"SFX"
+bus = &"Footsteps"
