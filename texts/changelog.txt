@@ -1,4 +1,11 @@
 Version 2.0.0 -- 4/1/2026
+Message from Master L:
+- To those of you who were waiting for this update, thank you. I apologize for the incomplete state
+- of the update, but I'm unfortunately very burnt out on Cheesenaf 2. I may or may not come back later
+- to finish this update, but it mostly depends on if Cheesenaf 2 gets enough attention to warrant my
+- time and energy being spent on this. Thank you for playing, and feel free to show your support by
+- leaving a comment on the game page you downloaded this from, on any of my trailers, or join the Discord.
+
 Fixes:
 - Properly handled errors in certain buttons in the menus, making them usable in editor playtests
 - The rope in the playground is now properly textured
@@ -21,7 +28,7 @@ Additions:
 - Buttons to edit all animatronics in the custom night menu, as well as a button to randomize all animatronics
 - New menu option - Tablet Mode, to let you play tablet games without worrying about Freddy and the gang.
 --- MULTIPLAYER ---
-- Multiplayer mode. [DETAILED SUMMARY GOES HERE]
+- Multiplayer mode. Currently only one barely-functional mode
 --- EDITOR/DEBUG ---
 - Added holograms to the Godot editor to make animatronic placement easier
 - Added LimboConsole for debug builds
